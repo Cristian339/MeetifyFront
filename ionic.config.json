@@ -1,0 +1,7 @@
+{
+  "name": "Meetify",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
