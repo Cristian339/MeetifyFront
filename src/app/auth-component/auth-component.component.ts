@@ -17,7 +17,10 @@ import { CommonModule } from '@angular/common';
 })
 export class AuthComponentComponent implements OnInit {
   authForm: FormGroup = {} as FormGroup;
-  isLogin = true; // Controla si el usuario está en la vista de inicio de sesión o registro
+  Logeado = true;
+  Registrado = false;
+  Recuperado = false;
+  Confirmado = false;
 
   constructor(private fb: FormBuilder) {}
 
@@ -25,36 +28,46 @@ export class AuthComponentComponent implements OnInit {
     this.initializeForm();
   }
 
-  // Inicializa el formulario según si está en login o registro
+  // Inicializa el formulario según si está en login, registro, recuperación o confirmación
   initializeForm() {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      // El campo confirmPassword solo se valida en modo registro
-      confirmPassword: ['']
+      contrasena: [''],
+      confirmarContrasena: [''],
+      codigo: ['']
     });
 
-    if (!this.isLogin) {
-      this.authForm.get('confirmPassword')?.setValidators([
-        Validators.required,
-        this.matchPasswords.bind(this)
-      ]);
+    if (this.Registrado) {
+      this.authForm.get('contraseña')?.setValidators([Validators.required, Validators.minLength(6)]);
+      this.authForm.get('confirmarContrasena')?.setValidators([Validators.required, this.matchPasswords.bind(this)]);
     } else {
-      this.authForm.get('confirmPassword')?.clearValidators();
+      this.authForm.get('contraseña')?.clearValidators();
+      this.authForm.get('confirmarContrasena')?.clearValidators();
     }
 
-    this.authForm.get('confirmPassword')?.updateValueAndValidity();
+    if (this.Confirmado) {
+      this.authForm.get('codigo')?.setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
+    } else {
+      this.authForm.get('codigo')?.clearValidators();
+    }
+
+    this.authForm.get('contrasena')?.updateValueAndValidity();
+    this.authForm.get('confirmarContrasena')?.updateValueAndValidity();
+    this.authForm.get('v')?.updateValueAndValidity();
   }
 
-  // Alterna entre las vistas de login y registro
-  toggleAuthMode() {
-    this.isLogin = !this.isLogin;
+  // Alterna entre las vistas de login, registro, recuperación y confirmación
+  toggleAuthMode(mode: string) {
+    this.Logeado = mode === 'login';
+    this.Registrado = mode === 'registro';
+    this.Recuperado = mode === 'recuperacion';
+    this.Confirmado = mode === 'confirmar';
     this.initializeForm();
   }
 
   // Valida que las contraseñas coincidan
   matchPasswords(control: any): { [key: string]: boolean } | null {
-    if (this.authForm && control.value !== this.authForm.get('password')?.value) {
+    if (this.authForm && control.value !== this.authForm.get('contrasena')?.value) {
       return { mismatch: true };
     }
     return null;
@@ -63,15 +76,26 @@ export class AuthComponentComponent implements OnInit {
   // Maneja el envío del formulario
   onSubmit() {
     if (this.authForm.valid) {
-      if (this.isLogin) {
+      if (this.Logeado) {
         console.log('Inicio de sesión:', this.authForm.value);
         // Implementa la lógica de inicio de sesión
-      } else {
+      } else if (this.Registrado) {
         console.log('Registro:', this.authForm.value);
         // Implementa la lógica de registro
+      } else if (this.Recuperado) {
+        console.log('Recuperación de cuenta:', this.authForm.value);
+        // Implementa la lógica de recuperación de cuenta
+      } else if (this.Confirmado) {
+        console.log('Confirmación de cuenta:', this.authForm.value);
+        // Implementa la lógica de confirmación de cuenta
       }
     } else {
       console.log('Formulario no válido');
     }
+  }
+
+  reenviarCodigo() {
+    console.log('Código reenviado');
+    // Implementa la lógica para reenviar el código de confirmación
   }
 }
