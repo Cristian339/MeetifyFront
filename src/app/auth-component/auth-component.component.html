@@ -1,0 +1,77 @@
+<div class="auth-container">
+  <div class="logo">
+    <img src="assets/icon/Logo.png" alt="Meetify Logo" />
+  </div>
+
+  <h1>{{ isLogin ? 'Inicio sesión' : 'Registro' }}</h1>
+
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <ng-container *ngIf="isLogin; else registerForm">
+
+      <!-- Inicio de sesión -->
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-item>
+        <ion-input
+          type="email"
+          placeholder="Introduce tu correo"
+          formControlName="email"
+          style="--background: #5497A7;"
+        ></ion-input>
+      </ion-item>
+
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-item>
+        <ion-input
+          type="password"
+          placeholder="Introduce tu contraseña"
+          formControlName="password"
+          style="--background: #5497A7;"
+        ></ion-input>
+      </ion-item>
+      <div class="switch-auth">
+        <p>¿No tienes cuenta? <a (click)="toggleAuthMode()">REGÍSTRATE</a></p>
+      </div>
+      <ion-button expand="block" type="submit" style="--background: #19323C" >Iniciar sesión</ion-button>
+      <div class="forgot-password">
+        <p>¿Has olvidado tu contraseña?</p>
+      </div>
+    </ng-container>
+
+    <ng-template #registerForm>
+      <!-- Registro -->
+      <ion-item>
+        <ion-label position="floating">Nombres</ion-label>
+        <ion-input
+          type="text"
+          formControlName="firstName"
+          style="--background: #d1ecf1;"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input
+          type="text"
+          formControlName="lastName"
+          style="--background: #d1ecf1;"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input
+          type="email"
+          formControlName="email"
+          style="--background: #d1ecf1;"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input
+          type="password"
+          formControlName="password"
+          style="--background: #d1ecf1;"
+        ></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit" color="dark">Registrarse</ion-button>
+    </ng-template>
+  </form>
+</div>
