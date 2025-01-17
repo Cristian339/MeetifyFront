@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicModule, IonModal } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-component',
@@ -16,33 +17,38 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class AuthComponentComponent implements OnInit {
+  @ViewChild('changePasswordModal') changePasswordModal!: IonModal;
   authForm: FormGroup = {} as FormGroup;
   Logeado = true;
   Registrado = false;
   Recuperado = false;
   Confirmado = false;
+  modalAbierto = false;
+  mensajeModal = '';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.initializeForm();
   }
 
-  // Inicializa el formulario según si está en login, registro, recuperación o confirmación
   initializeForm() {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      contrasena: [''],
-      confirmarContrasena: [''],
-      codigo: ['']
+      contrasena: ['', Validators.required],
+      firstName: [''],
+      lastName: [''],
+      codigo: [''],
+      nuevaContra: ['', Validators.required],
+      repitenuevaContra: ['', Validators.required]
     });
 
     if (this.Registrado) {
-      this.authForm.get('contraseña')?.setValidators([Validators.required, Validators.minLength(6)]);
-      this.authForm.get('confirmarContrasena')?.setValidators([Validators.required, this.matchPasswords.bind(this)]);
+      this.authForm.get('contrasena')?.setValidators([Validators.required, Validators.minLength(6)]);
+      this.authForm.get('repitenuevaContra')?.setValidators([Validators.required, this.matchPasswords.bind(this)]);
     } else {
-      this.authForm.get('contraseña')?.clearValidators();
-      this.authForm.get('confirmarContrasena')?.clearValidators();
+      this.authForm.get('contrasena')?.clearValidators();
+      this.authForm.get('repitenuevaContra')?.clearValidators();
     }
 
     if (this.Confirmado) {
@@ -52,11 +58,10 @@ export class AuthComponentComponent implements OnInit {
     }
 
     this.authForm.get('contrasena')?.updateValueAndValidity();
-    this.authForm.get('confirmarContrasena')?.updateValueAndValidity();
-    this.authForm.get('v')?.updateValueAndValidity();
+    this.authForm.get('repitenuevaContra')?.updateValueAndValidity();
+    this.authForm.get('codigo')?.updateValueAndValidity();
   }
 
-  // Alterna entre las vistas de login, registro, recuperación y confirmación
   toggleAuthMode(mode: string) {
     this.Logeado = mode === 'login';
     this.Registrado = mode === 'registro';
@@ -65,37 +70,108 @@ export class AuthComponentComponent implements OnInit {
     this.initializeForm();
   }
 
-  // Valida que las contraseñas coincidan
   matchPasswords(control: any): { [key: string]: boolean } | null {
-    if (this.authForm && control.value !== this.authForm.get('contrasena')?.value) {
+    if (this.authForm && control.value !== this.authForm.get('nuevaContra')?.value) {
       return { mismatch: true };
     }
     return null;
   }
 
-  // Maneja el envío del formulario
   onSubmit() {
     if (this.authForm.valid) {
       if (this.Logeado) {
         console.log('Inicio de sesión:', this.authForm.value);
-        // Implementa la lógica de inicio de sesión
       } else if (this.Registrado) {
         console.log('Registro:', this.authForm.value);
-        // Implementa la lógica de registro
       } else if (this.Recuperado) {
         console.log('Recuperación de cuenta:', this.authForm.value);
-        // Implementa la lógica de recuperación de cuenta
       } else if (this.Confirmado) {
         console.log('Confirmación de cuenta:', this.authForm.value);
-        // Implementa la lógica de confirmación de cuenta
+      } else {
+        this.verificarContrasenas();
       }
     } else {
       console.log('Formulario no válido');
     }
   }
 
+  verificarCamposLogin() {
+    const email = this.authForm.get('email')?.value;
+    const contrasena = this.authForm.get('contrasena')?.value;
+
+    if (!email || !contrasena) {
+      this.mensajeModal = 'Por favor, ingrese su correo electrónico y contraseña';
+      this.modalAbierto = true;
+    } else {
+      console.log('Inicio de sesión:', this.authForm.value);
+    }
+  }
+
+  verificarCamposRegistro() {
+    const firstName = this.authForm.get('firstName')?.value;
+    const lastName = this.authForm.get('lastName')?.value;
+    const email = this.authForm.get('email')?.value;
+    const contrasena = this.authForm.get('contrasena')?.value;
+    const username = this.authForm.get('username')?.value;
+    const fechaNacimiento = this.authForm.get('fecha')?.value;
+    const nuevaContra = this.authForm.get('nuevaContra')?.value;
+    const repitenuevaContra = this.authForm.get('repitenuevaContra')?.value;
+
+    if (!firstName || !lastName || !email || !contrasena || !nuevaContra || !repitenuevaContra || !username || !fechaNacimiento) {
+      this.mensajeModal = 'Por favor, complete todos los campos';
+      this.modalAbierto = true;
+    } else if (nuevaContra !== repitenuevaContra) {
+      this.mensajeModal = 'Las contraseñas no coinciden';
+      this.modalAbierto = true;
+    } else {
+      console.log('Registro:', this.authForm.value);
+    }
+  }
+
+  verificarCamposRecuperacion() {
+    const email = this.authForm.get('email')?.value;
+
+    if (!email) {
+      this.mensajeModal = 'Por favor, ingrese su correo electrónico';
+      this.modalAbierto = true;
+    } else {
+      console.log('Recuperación de cuenta:', this.authForm.value);
+      this.toggleAuthMode('confirmar');
+    }
+  }
+
+  verificarCamposConfirmacion() {
+    const codigo = this.authForm.get('codigo')?.value;
+
+    if (!codigo) {
+      this.mensajeModal = 'Por favor, ingrese el código de confirmación';
+      this.modalAbierto = true;
+    } else {
+      console.log('Confirmación de cuenta:', this.authForm.value);
+      this.toggleAuthMode('nuevaContra')
+    }
+  }
+
+  verificarContrasenas() {
+    const nuevaContra = this.authForm.get('nuevaContra')?.value;
+    const repitenuevaContra = this.authForm.get('repitenuevaContra')?.value;
+
+    if (!nuevaContra || !repitenuevaContra) {
+      this.mensajeModal = 'Por favor, ingrese ambas contraseñas';
+      this.modalAbierto = true;
+    } else if (nuevaContra === repitenuevaContra) {
+      this.toggleAuthMode('login');
+    } else {
+      this.mensajeModal = 'Las contraseñas no coinciden';
+      this.modalAbierto = true;
+    }
+  }
+
+  cerrarModal() {
+    this.modalAbierto = false;
+  }
+
   reenviarCodigo() {
     console.log('Código reenviado');
-    // Implementa la lógica para reenviar el código de confirmación
   }
 }

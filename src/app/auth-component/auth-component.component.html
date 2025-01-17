@@ -9,12 +9,12 @@
 <div class="container auth-container">
   <div class="row justify-content-center">
     <div class="col-12 col-md-12 col-lg-12 col-sm-12 text-center">
-      <div class="auth-box" style="background-color: #ffffff; border-radius: 20px; padding: 50px; max-width: 800px; margin: auto;">
+      <div class="auth-box" style="background-color: #ffffff; border-radius: 20px; padding: 30px; max-width: 800px; margin: auto;">
         <div class="logo">
-          <img src="assets/icon/Logo.png" alt="Meetify Logo" class="img-fluid" width="100" height="100">
+          <img src="assets/icon/Logo.png" alt="Meetify Logo" class="img-fluid" width="260" height="260">
         </div>
 
-        <h1>{{ Logeado ? 'Inicio sesión' : Registrado ? 'Registro' : Recuperado ? 'Recupera tu cuenta' : 'Confirmar tu cuenta' }}</h1>
+        <h1>{{ Logeado ? 'Inicio sesión' : Registrado ? 'Registro' : Recuperado ? 'Recupera tu cuenta' : Confirmado ? 'Confirmar tu cuenta' : 'Cambio de contraseña' }}</h1>
 
         <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
           <ng-container *ngIf="Logeado; else otherForms">
@@ -22,28 +22,36 @@
             <div class="form-group">
               <ion-label position="floating">Correo electrónico</ion-label>
               <ion-item class="w-100">
-                <ion-input
-                  type="email"
-                  placeholder="Introduce tu correo"
-                  formControlName="email"
-                  class="form-control"
-                ></ion-input>
+                <ion-input type="email" placeholder="Introduce tu correo" formControlName="email" class="form-control" required></ion-input>
               </ion-item>
             </div>
 
             <div class="form-group">
               <ion-label position="floating">Contraseña</ion-label>
               <ion-item class="w-100">
-                <ion-input
-                  type="password"
-                  placeholder="Introduce tu contraseña"
-                  formControlName="contrasena"
-                  class="form-control"
-                ></ion-input>
+                <ion-input type="password" placeholder="Introduce tu contraseña" formControlName="contrasena" class="form-control" required></ion-input>
               </ion-item>
             </div>
 
-            <ion-button expand="block" type="submit" class="btn btn-primary w-100">Iniciar sesión</ion-button>
+            <ion-button expand="block" type="submit" class="btn btn-primary w-100" (click)="verificarCamposLogin()">Iniciar sesión</ion-button>
+
+            <ion-modal
+              trigger="open-modal"
+              [initialBreakpoint]="0.15"
+              [breakpoints]="[0, 0.25, 0.5, 0.75]"
+              handleBehavior="cycle"
+              [isOpen]="modalAbierto"
+              (didDismiss)="cerrarModal()"
+            >
+              <ng-template>
+                <ion-content class="ion-padding center-content">
+                  <div class="ion-margin-top" style="text-align: center; color: red;">
+                    <ion-label>{{ mensajeModal }}</ion-label>
+                  </div>
+                </ion-content>
+              </ng-template>
+            </ion-modal>
+
             <div class="forgot-password mt-3">
               <p>¿Olvidaste tu contraseña? <a (click)="toggleAuthMode('recuperacion')">RECUPERALA</a></p>
             </div>
@@ -56,55 +64,68 @@
             <ng-container *ngIf="Registrado; else recoverOrConfirmForm">
 
               <!-- Registro -->
+
+              <div class="form-group">
+                <ion-label position="floating">Nombre de usuario:</ion-label>
+                <ion-item class="w-100">
+                  <ion-input type="text" formControlName="username" class="form-control" placeholder="Pon tu nombre de usuario" required></ion-input>
+                </ion-item>
+              </div>
+
               <div class="form-group">
                 <ion-label position="floating">Nombres</ion-label>
                 <ion-item class="w-100">
-                  <ion-input
-                    type="text"
-                    formControlName="firstName"
-                    class="form-control"
-                    placeholder="Pon tu nombre"
-                  ></ion-input>
+                  <ion-input type="text" formControlName="firstName" class="form-control" placeholder="Pon tu nombre" required></ion-input>
                 </ion-item>
               </div>
 
               <div class="form-group">
                 <ion-label position="floating">Apellidos</ion-label>
                 <ion-item class="w-100">
-                  <ion-input
-                    type="text"
-                    formControlName="lastName"
-                    class="form-control"
-                    placeholder="Pon tus apellidos"
-                  ></ion-input>
+                  <ion-input type="text" formControlName="lastName" class="form-control" placeholder="Pon tus apellidos" required></ion-input>
+                </ion-item>
+              </div>
+
+              <div class="form-group">
+                <ion-label position="floating">Fecha de nacimiento:</ion-label>
+                <ion-item class="w-100">
+                  <ion-input type="date" formControlName="fecha" class="form-control" placeholder="Pon tu fecha de nacimiento" required></ion-input>
                 </ion-item>
               </div>
 
               <div class="form-group">
                 <ion-label position="floating">Correo electrónico:</ion-label>
                 <ion-item class="w-100">
-                  <ion-input
-                    type="email"
-                    formControlName="email"
-                    class="form-control"
-                    placeholder="Pon tu correo"
-                  ></ion-input>
+                  <ion-input type="email" formControlName="email" class="form-control" placeholder="Pon tu correo" required></ion-input>
                 </ion-item>
               </div>
 
               <div class="form-group">
                 <ion-label position="floating">Contraseña:</ion-label>
                 <ion-item class="w-100">
-                  <ion-input
-                    type="password"
-                    formControlName="contrasena"
-                    class="form-control"
-                    placeholder="Pon tu contraseña"
-                  ></ion-input>
+                  <ion-input type="password" formControlName="contrasena" class="form-control" placeholder="Pon tu contraseña" required></ion-input>
                 </ion-item>
               </div>
 
-              <ion-button expand="block" type="submit" class="btn btn-dark w-100">Registrarse</ion-button>
+              <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="verificarCamposRegistro()">Registrarse</ion-button>
+
+              <ion-modal
+                trigger="open-modal"
+                [initialBreakpoint]="0.10"
+                [breakpoints]="[0, 0.25, 0.5, 0.75]"
+                handleBehavior="cycle"
+                [isOpen]="modalAbierto"
+                (didDismiss)="cerrarModal()"
+              >
+                <ng-template>
+                  <ion-content class="ion-padding center-content">
+                    <div class="ion-margin-top center-content" style="text-align: center; color: red;">
+                      <ion-label>{{ mensajeModal }}</ion-label>
+                    </div>
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+
             </ng-container>
 
             <ng-template #recoverOrConfirmForm>
@@ -113,37 +134,99 @@
                 <div class="form-group">
                   <ion-label position="floating">Correo electrónico:</ion-label>
                   <ion-item class="w-100">
-                    <ion-input
-                      type="email"
-                      formControlName="email"
-                      class="form-control"
-                      placeholder="Introduce tu correo"
-                    ></ion-input>
+                    <ion-input type="email" formControlName="email" class="form-control" placeholder="Introduce tu correo" required></ion-input>
                   </ion-item>
                 </div>
 
-                <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="toggleAuthMode('confirmar')">Continuar</ion-button>
+                <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="verificarCamposRecuperacion()">Continuar</ion-button>
+
+                <ion-modal
+                  trigger="open-modal"
+                  [initialBreakpoint]="0.10"
+                  [breakpoints]="[0, 0.25, 0.5, 0.75]"
+                  handleBehavior="cycle"
+                  [isOpen]="modalAbierto"
+                  (didDismiss)="cerrarModal()"
+                >
+                  <ng-template>
+                    <ion-content class="ion-padding center-content">
+                      <div class="ion-margin-top" style="text-align: center; color: red;">
+                        <ion-label>{{ mensajeModal }}</ion-label>
+                      </div>
+                    </ion-content>
+                  </ng-template>
+                </ion-modal>
 
                 <p style="color: black">* Recibirás un correo con un número PIN que tendrás que poner</p>
               </ng-container>
 
               <ng-template #confirmForm>
-                <!-- Confirmar tu cuenta -->
-                <div class="form-group">
-                  <ion-label position="floating">Hemos enviado un codigo a tu direccion de correo electrónico. <br>Introdúcelo para confirmar tu cuenta</ion-label>
-                  <ion-item class="w-100">
-                    <ion-input
-                      type="text"
-                      formControlName="codigo"
-                      class="form-control"
-                      placeholder="Introduce el código de 6 dígitos"
-                    ></ion-input>
-                  </ion-item>
-                </div>
+                <ng-container *ngIf="Confirmado; else changePasswordForm">
+                  <!-- Confirmar tu cuenta -->
+                  <div class="form-group">
+                    <ion-label position="floating">Hemos enviado un codigo a tu direccion de correo electrónico. <br>Introdúcelo para confirmar tu cuenta</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="number" min="0" max="999999" formControlName="codigo" class="form-control" placeholder="Introduce el código de 6 dígitos" required></ion-input>
+                    </ion-item>
+                  </div>
 
-                <ion-button expand="block" type="submit" class="btn btn-dark w-100">Continuar</ion-button>
+                  <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="verificarCamposConfirmacion()">Continuar</ion-button>
 
-                <p style="color: red; text-align: center; cursor: pointer;" (click)="reenviarCodigo()">Volver a enviar código</p>
+                  <ion-modal
+                    trigger="open-modal"
+                    [initialBreakpoint]="0.10"
+                    [breakpoints]="[0, 0.25, 0.5, 0.75]"
+                    handleBehavior="cycle"
+                    [isOpen]="modalAbierto"
+                    (didDismiss)="cerrarModal()"
+                  >
+                    <ng-template>
+                      <ion-content class="ion-padding center-content">
+                        <div class="ion-margin-top" style="text-align: center; color: red;">
+                          <ion-label>{{ mensajeModal }}</ion-label>
+                        </div>
+                      </ion-content>
+                    </ng-template>
+                  </ion-modal>
+
+                  <p style="color: red; text-align: center; cursor: pointer;" (click)="reenviarCodigo()">Volver a enviar código</p>
+                </ng-container>
+
+                <ng-template #changePasswordForm>
+                  <!-- Cambio de contraseña -->
+                  <div class="form-group">
+                    <ion-label position="floating">Nueva contraseña:</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="password" formControlName="nuevaContra" class="form-control" placeholder="Introduce tu nueva contraseña" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="form-group">
+                    <ion-label position="floating">Repite la nueva contraseña:</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="password" formControlName="repitenuevaContra" class="form-control" placeholder="Repite tu nueva contraseña" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="(verificarContrasenas())">Cambiar la contraseña</ion-button>
+
+                  <ion-modal
+                    trigger="open-modal"
+                    [initialBreakpoint]="0.10"
+                    [breakpoints]="[0, 0.25, 0.5, 0.75]"
+                    handleBehavior="cycle"
+                    [isOpen]="modalAbierto"
+                    (didDismiss)="cerrarModal()"
+                  >
+                    <ng-template>
+                      <ion-content class="ion-padding center-content">
+                        <div class="ion-margin-top" style="text-align: center; color: red;">
+                          <ion-label>{{ mensajeModal }}</ion-label>
+                        </div>
+                      </ion-content>
+                    </ng-template>
+                  </ion-modal>
+                </ng-template>
               </ng-template>
             </ng-template>
           </ng-template>
