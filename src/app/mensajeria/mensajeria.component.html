@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-img src="/assets/icon/Meetify.svg" class="logo-image" slot="start"></ion-img>
+    </ion-buttons>
+    <ion-title class="header-title">CHATS</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="arrow-back-circle" slot="end"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-searchbar placeholder="Buscar el mensaje"></ion-searchbar>
+
+  <ion-list>
+    <ion-item lines="none" id="open-modal">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>Pedro</h2>
+        <p>Hola Bro</p>
+      </ion-label>
+      <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
+
+      <ion-modal #modal trigger="open-modal" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-avatar slot="start">
+                <ion-icon name="person-circle"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <h2>Pedro</h2>
+                <p>Conectado por última vez 11:44 AM</p>
+              </ion-label>
+              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal.dismiss"></ion-icon>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <ion-list>
+              <ion-item>
+                <ion-avatar slot="start">
+                  <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+                </ion-avatar>
+                <ion-label>
+                  <h2>Connor Smith</h2>
+                  <p>Sales Rep</p>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-avatar slot="start">
+                  <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
+                </ion-avatar>
+                <ion-label>
+                  <h2>Daniel Smith</h2>
+                  <p>Product Designer</p>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-avatar slot="start">
+                  <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
+                </ion-avatar>
+                <ion-label>
+                  <h2>Greg Smith</h2>
+                  <p>Director of Operations</p>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-avatar slot="start">
+                  <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
+                </ion-avatar>
+                <ion-label>
+                  <h2>Zoey Smith</h2>
+                  <p>CEO</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>Manuel</h2>
+        <p>códigos123</p>
+      </ion-label>
+      <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>Sofía</h2>
+        <p>te espero abajo</p>
+      </ion-label>
+      <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
