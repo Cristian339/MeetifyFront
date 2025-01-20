@@ -21,6 +21,8 @@ export const routes: Routes = [
   },
   {
     path: 'publicacion',
-    loadComponent: () => import('./publicacion/publicacion.component').then((m) => m.PublicacionComponent),  // Usando loadComponent
+    loadComponent: () =>
+      import('./publicacion/publicacion.component').then((m) => m.PublicacionComponent),
   },
+
 ];

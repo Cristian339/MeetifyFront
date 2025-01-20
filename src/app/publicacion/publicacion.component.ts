@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {PiePaginaComponent} from "../pie-pagina/pie-pagina.component";
+import {addIcons} from "ionicons";
+import {
+  calendarOutline,
+  ellipsisVerticalOutline, golfOutline,
+  peopleCircleOutline,
+  personCircleOutline,
+  ribbonOutline,
+  shareSocialOutline
+} from "ionicons/icons";
 
 @Component({
   selector: 'app-publicacion',
@@ -11,12 +20,14 @@ import {PiePaginaComponent} from "../pie-pagina/pie-pagina.component";
   imports: [
     IonicModule,
     NavbarComponent,
-    PiePaginaComponent
+    PiePaginaComponent,
   ]
 })
 export class PublicacionComponent  implements OnInit {
 
-  constructor() { }
+  constructor() {
+    addIcons({personCircleOutline,ribbonOutline,peopleCircleOutline,shareSocialOutline,ellipsisVerticalOutline,calendarOutline,golfOutline});
+  }
 
   ngOnInit() {}
 

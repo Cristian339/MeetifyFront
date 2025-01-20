@@ -1,4 +1,40 @@
+
 <ion-content>
   <app-navbar></app-navbar>
-  <app-pie-pagina></app-pie-pagina>
+  <ion-segment value="default">
+    <ion-segment-button value="default">
+      <ion-label>General</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="segment">
+      <ion-label>Amigos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+
+  <ion-card style="margin-top: 20px;">
+    <ion-icon name="ellipsis-vertical-outline" style="float: right;margin-right: 10px;margin-top: 10px"></ion-icon>
+    <ion-card-header>
+
+      <ion-icon name="person-circle-outline" style="float: left" size="large"></ion-icon>
+      Federico
+    </ion-card-header>
+    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <ion-title style="color: black"> Reunion </ion-title>
+    <ion-card-content>
+      Reunion en mi casa
+    </ion-card-content>
+    <p style="padding-left: 15px;"><ion-icon name="calendar-outline"></ion-icon>10/10/2025</p>
+    <p style="padding-left: 15px;"><ion-icon name="golf-outline"></ion-icon>Calle a atras</p>
+    <ion-grid style="padding-left: 45px">
+      <ion-row>
+         <ion-col size="4"><ion-icon name="ribbon-outline" class="medium-icon"></ion-icon></ion-col>
+        <ion-col size="4"><ion-icon name="people-circle-outline" class="medium-icon"></ion-icon></ion-col>
+        <ion-col size="4"><ion-icon name="share-social-outline" class="medium-icon"></ion-icon></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
 </ion-content>
+
+<app-pie-pagina></app-pie-pagina>

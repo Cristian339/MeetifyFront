@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IonicModule} from "@ionic/angular";
+import {addIcons} from "ionicons";
+import {chatbubbleEllipsesOutline, homeOutline, notificationsOutline, personOutline} from "ionicons/icons";
 
 @Component({
   selector: 'app-pie-pagina',
@@ -12,7 +14,9 @@ import {IonicModule} from "@ionic/angular";
 })
 export class PiePaginaComponent  implements OnInit {
 
-  constructor() { }
+  constructor() {
+    addIcons({chatbubbleEllipsesOutline,homeOutline,notificationsOutline,personOutline});
+  }
 
   ngOnInit() {}
 
