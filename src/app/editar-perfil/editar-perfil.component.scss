@@ -1,0 +1,43 @@
+:host {
+  ion-toolbar {
+    --background: var(--ion-color-terciario);
+    --color: var(--ion-color-primario);
+  }
+
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border: 4px solid var(--ion-color-secundario);
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .change-photo {
+      font-size: 0.9rem;
+      --color: var(--ion-color-secundario);
+    }
+  }
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+
+    ion-chip {
+      --background: var(--ion-color-secundario);
+      --color: var(--ion-color-secundario-contrast);
+    }
+
+    .add-categories {
+      --background: var(--ion-color-cuarto);
+      --color: var(--ion-color-cuarto-contrast);
+    }
+  }
+}

@@ -99,6 +99,7 @@ export class AuthComponentComponent implements OnInit {
   }
 
   verificarCamposLogin() {
+    this.router.navigate(['/editar-perfil']);
     const email = this.authForm.get('email')?.value;
     const contrasena = this.authForm.get('contrasena')?.value;
 
