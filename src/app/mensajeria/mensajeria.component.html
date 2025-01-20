@@ -36,54 +36,41 @@
                 <h2>Pedro</h2>
                 <p>Conectado por última vez 11:44 AM</p>
               </ion-label>
-              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal.dismiss"></ion-icon>
+              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal.dismiss()"></ion-icon>
             </ion-toolbar>
           </ion-header>
+
           <ion-content>
-            <ion-list>
-              <ion-item>
-                <ion-avatar slot="start">
-                  <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
-                </ion-avatar>
-                <ion-label>
-                  <h2>Connor Smith</h2>
-                  <p>Sales Rep</p>
-                </ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-avatar slot="start">
-                  <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
-                </ion-avatar>
-                <ion-label>
-                  <h2>Daniel Smith</h2>
-                  <p>Product Designer</p>
-                </ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-avatar slot="start">
-                  <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
-                </ion-avatar>
-                <ion-label>
-                  <h2>Greg Smith</h2>
-                  <p>Director of Operations</p>
-                </ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-avatar slot="start">
-                  <ion-img src="https://i.pravatar.cc/300?u=e"></ion-img>
-                </ion-avatar>
-                <ion-label>
-                  <h2>Zoey Smith</h2>
-                  <p>CEO</p>
-                </ion-label>
-              </ion-item>
-            </ion-list>
+            <div class="chat-container">
+              <div class="date-label">25 de Noviembre del 2020</div>
+              <div class="message message-sent">Hola que tal?</div>
+              <div class="message message-received">Bien gracias y tú?</div>
+              <div class="message message-sent">Estoy muy bien, ¿qué haces?</div>
+              <div class="date-label">Ayer</div>
+              <div class="message message-received">Perdón la demora, estaba ocupado</div>
+              <div class="message message-received">¿Qué tal estuvo tu día?</div>
+              <div class="date-label">Justo Ahora</div>
+              <div class="message message-sent">
+                Pero estaba trabajando y ahora salí, estoy cansado, pero bien gracias por preguntar.
+              </div>
+            </div>
           </ion-content>
+
+          <ion-footer style="background-color: #FFFFFF">
+            <ion-toolbar style="background-color: #FFFFFF">
+              <ion-item lines="none">
+                <ion-input type="text" placeholder="Escribe un mensaje"></ion-input>
+                <ion-icon slot="end" name="mic-outline"></ion-icon>
+                <ion-icon slot="end" name="happy-outline"></ion-icon>
+                <ion-icon slot="end" name="camera-outline"></ion-icon>
+              </ion-item>
+            </ion-toolbar>
+          </ion-footer>
         </ng-template>
       </ion-modal>
     </ion-item>
 
-    <ion-item lines="none">
+    <ion-item lines="none" id="open-modal-2">
       <ion-avatar slot="start">
         <ion-icon name="person-circle"></ion-icon>
       </ion-avatar>
@@ -92,9 +79,54 @@
         <p>códigos123</p>
       </ion-label>
       <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
+
+      <ion-modal #modal2 trigger="open-modal-2" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-avatar slot="start">
+                <ion-icon name="person-circle"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <h2>Manuel</h2>
+                <p>Conectado por última vez 16:56 PM</p>
+              </ion-label>
+              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal2.dismiss()"></ion-icon>
+            </ion-toolbar>
+          </ion-header>
+
+          <ion-content>
+            <div class="chat-container">
+              <div class="date-label">15 de Agosto del 2024</div>
+              <div class="message message-sent">Hola que te cuentas crack</div>
+              <div class="message message-received">Bien,tú?</div>
+              <div class="message message-sent">Estoy de puta madre, ¿qué te cuentas?</div>
+              <div class="date-label">Hace 5 dias</div>
+              <div class="message message-received">Illo illo que locura de tik tok xulo</div>
+              <div class="message message-received">Mandatelo, hijo de la gran puta</div>
+              <div class="date-label">Hace 3 dias</div>
+              <div class="message message-sent">A mi me parece una puta mierda xD</div>
+              <div class="date-label">Ayer</div>
+              <div class="message message-received">Me voy a tu keli hermanito</div>
+            </div>
+          </ion-content>
+
+          <ion-footer style="background-color: #FFFFFF">
+            <ion-toolbar style="background-color: #FFFFFF">
+              <ion-item lines="none">
+                <ion-input type="text" placeholder="Escribe un mensaje"></ion-input>
+                <ion-icon slot="end" name="mic-outline"></ion-icon>
+                <ion-icon slot="end" name="happy-outline"></ion-icon>
+                <ion-icon slot="end" name="camera-outline"></ion-icon>
+              </ion-item>
+            </ion-toolbar>
+          </ion-footer>
+        </ng-template>
+      </ion-modal>
+
     </ion-item>
 
-    <ion-item lines="none">
+    <ion-item lines="none" id="open-modal-3">
       <ion-avatar slot="start">
         <ion-icon name="person-circle"></ion-icon>
       </ion-avatar>
@@ -103,6 +135,54 @@
         <p>te espero abajo</p>
       </ion-label>
       <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
+
+      <ion-modal #modal3 trigger="open-modal-3" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-avatar slot="start">
+                <ion-icon name="person-circle"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <h2>Sofia</h2>
+                <p>Conectado por última vez 11:30 PM</p>
+              </ion-label>
+              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal3.dismiss()"></ion-icon>
+            </ion-toolbar>
+          </ion-header>
+
+          <ion-content>
+            <div class="chat-container">
+              <div class="date-label">10 de Enero del 2025</div>
+              <div class="message message-sent">Hey, ¿qué tal todo?</div>
+              <div class="message message-received">¡Hola! Todo bien, ¿y tú?</div>
+              <div class="message message-sent">Muy bien, gracias. ¿Has visto la nueva serie de Netflix?</div>
+              <div class="message message-received">Sí, la empecé ayer. ¿Tú?</div>
+              <div class="date-label">Hace 2 días</div>
+              <div class="message message-sent">¡Sí! Está increíble, especialmente el segundo episodio.</div>
+              <div class="message message-received">Totalmente, no podía dejar de verla. ¿Ya terminaste?</div>
+              <div class="date-label">Ayer</div>
+              <div class="message message-sent">Sí, me la terminé de una sola sentada 😅</div>
+              <div class="message message-received">Jajaja, típico de ti. ¿Me recomiendas algo similar?</div>
+              <div class="date-label">Justo Ahora</div>
+              <div class="message message-sent">Claro, "Dark" es perfecta si no la has visto aún. ¡Te va a encantar!</div>
+            </div>
+          </ion-content>
+
+
+          <ion-footer style="background-color: #FFFFFF">
+            <ion-toolbar style="background-color: #FFFFFF">
+              <ion-item lines="none">
+                <ion-input type="text" placeholder="Escribe un mensaje"></ion-input>
+                <ion-icon slot="end" name="mic-outline"></ion-icon>
+                <ion-icon slot="end" name="happy-outline"></ion-icon>
+                <ion-icon slot="end" name="camera-outline"></ion-icon>
+              </ion-item>
+            </ion-toolbar>
+          </ion-footer>
+        </ng-template>
+      </ion-modal>
+
     </ion-item>
   </ion-list>
 </ion-content>
