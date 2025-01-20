@@ -11,4 +11,16 @@ export const routes: Routes = [
     redirectTo: 'autentificación',
     pathMatch: 'full',
   },
+  {
+    path: 'navbar',
+    loadComponent: () => import('./navbar/navbar.component').then((m) => m.NavbarComponent),  // Usando loadComponent
+  },
+  {
+    path: 'pie-pagina',
+    loadComponent: () => import('./pie-pagina/pie-pagina.component').then((m) => m.PiePaginaComponent),  // Usando loadComponent
+  },
+  {
+    path: 'publicacion',
+    loadComponent: () => import('./publicacion/publicacion.component').then((m) => m.PublicacionComponent),  // Usando loadComponent
+  },
 ];
