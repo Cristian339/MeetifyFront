@@ -20,17 +20,20 @@ ion-toolbar ion-icon {
 
 ion-toolbar ion-title, {
   margin-top: 2%;
-  margin-left: 5%;
+  margin-left: 1%;
 }
 
 ion-toolbar ion-img {
-  margin-top: 12px;
+  margin-top: 5%;
 }
 
 .logo-image {
   width: 25%;
   height: 25%;
-  margin-left: 10px;
+}
+
+.Atras {
+  margin-top: 10%;
 }
 
 /* Estilo del contenido principal */
@@ -38,7 +41,7 @@ ion-toolbar ion-img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 5%;
   background-color: #f8fdfc;
   height: 100%;
 }
@@ -48,70 +51,61 @@ ion-list {
 }
 
 ion-item {
-  --background: #f8fdfc;
-  --border-color: transparent;
-  border-radius: 10px;
-  margin: 10px 0;
-}
-
-ion-item:hover {
-  --background: #e8f5f4;
+  border-radius: 20%;
+  margin: 3%;
 }
 
 .icon {
-  font-size: 24px;
-  color: #16353F;
+  background-color: #5497A7;
+  padding: 2%;
+  border-radius: 50%;
 }
 
 ion-label {
   font-family: 'Arial', sans-serif;
-  font-size: 16px;
+  font-size: 50%;
   font-weight: 500;
 }
 
 .logout {
-  margin-top: 20px;
+  margin-top: 5%;
   width: 90%;
 }
 
 p {
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
   font-weight: bold;
   color: red;
   text-align: center;
 }
 
 .perfil {
-  font-size: 50px;
+  font-size: 3em;
 }
 
 .user-label {
   font-family: 'Inter', sans-serif;
-  font-size: 18px;
+  font-size: 100%;
   font-weight: 500;
   color: #000;
   margin-right: 10%;
 }
 
 ion-item {
-  border-radius: 10px;
-  width: 105%;
+  border-radius: 25%;
+  width: 100%;
 }
 
 .boton {
   display: flex;
-  gap: 10px;
   justify-content: flex-end;
   align-items: center;
 }
 
-ion-button.baneo, ion-button.Ver {
+ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
   font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  border-radius: 20px;
-  padding: 10px 20px;
-  min-width: 100px;
+  border-radius: 50%;
+  max-width: 100%;
   color: white;
 }
 
@@ -124,6 +118,25 @@ ion-button.Ver {
   --background: #5497A7;
   --background-hover: #5497A7;
 }
+
+ion-button.Desbanear {
+  --background: #19323C;
+  --background-hover: #19323C;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 30px;
+  font-family: "Amatic SC", sans-serif;
+  color: black;
+  text-align: center;
+}
+
+ion-modal p {
+  color: black;
+}
+
+
 
 
 

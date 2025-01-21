@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {IonicModule} from "@ionic/angular";
-import { settingsOutline, banOutline, arrowBackCircle, personCircleOutline} from "ionicons/icons";
+import {IonicModule, ModalController} from "@ionic/angular";
+import { settingsOutline, banOutline, arrowBackCircle, personCircleOutline, caretUpOutline} from "ionicons/icons";
 import {addIcons} from "ionicons";
 import { CommonModule} from "@angular/common";
+import { FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-administracion',
@@ -11,14 +12,17 @@ import { CommonModule} from "@angular/common";
     standalone: true,
     imports: [
         IonicModule,
-        CommonModule
+        CommonModule,
+        FormsModule
     ]
 })
 export class AdministracionComponent  implements OnInit {
 
+  diasBaneo: number = 0;
+
   constructor() {
 
-    addIcons( { settingsOutline, banOutline, personCircleOutline, arrowBackCircle } );
+    addIcons( { settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline } );
   }
 
   ngOnInit() {}
@@ -41,5 +45,10 @@ export class AdministracionComponent  implements OnInit {
         return '';
     }
   }
+
+  aceptarBaneo() {
+    console.log("Baneo temporal de " + this.diasBaneo + " días");
+  }
+
 }
 
