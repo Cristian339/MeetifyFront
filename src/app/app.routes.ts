@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthComponentComponent} from "./auth-component/auth-component.component";
 import { MensajeriaComponent} from "./mensajeria/mensajeria.component";
 import { NavbarComponent} from "./navbar/navbar.component";
+import { AdministracionComponent} from "./administracion/administracion.component";
 
 export const routes: Routes = [
   {
@@ -17,8 +18,12 @@ export const routes: Routes = [
     pathMatch: "full", component: NavbarComponent
   },
   {
+    path: 'administración',
+    pathMatch: "full", component: AdministracionComponent
+  },
+  {
     path: '',
-    redirectTo: 'mensajeria',
+    redirectTo: 'administración',
     pathMatch: 'full',
   },
 ];
