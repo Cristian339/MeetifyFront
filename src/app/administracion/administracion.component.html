@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-img src="/assets/icon/4.svg" class="logo-image" slot="start"></ion-img>
+    </ion-buttons>
+    <ion-title class="header-title" style="text-align: center">
+      {{ cambiarTitulo() }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon class="Atras"
+        name="arrow-back-circle"
+        slot="end"
+        (click)="viajarA('admin')"
+        *ngIf="vistaActual !== 'admin'"
+      ></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Vista principal: Panel de administración -->
+  <div class="admin-panel" *ngIf="vistaActual === 'admin'">
+    <ion-list lines="none">
+      <ion-item button (click)="viajarA('users')">
+        <ion-icon name="settings-outline" slot="start" class="icon"></ion-icon>
+        <ion-label>Revisar perfiles</ion-label>
+      </ion-item>
+      <ion-item button (click)="viajarA('baneados')">
+        <ion-icon name="ban-outline" slot="start" class="icon"></ion-icon>
+        <ion-label>Lista de baneos</ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="logout">
+      <p>Cerrar Sesión</p>
+    </div>
+  </div>
+
+  <!-- Vista de usuarios -->
+  <div *ngIf="vistaActual === 'users'">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Pedro
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" color="danger" class="baneo" (click)="modal.present()">Banear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Manuel
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" color="danger" class="baneo" (click)="modal.present()">Banear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Marcos
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" color="danger" class="baneo" (click)="modal.present()">Banear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Ana
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" color="danger" class="baneo" (click)="modal.present()">Banear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Modal para banear usuarios -->
+  <ion-modal #modal style="--height: 25%; --width: 70%; --border-radius: 16px; --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);">
+    <ng-template>
+      <ion-content>
+        <ion-list style="text-align: center; margin-left: 3.5%" >
+          <ion-item>
+            <ion-label>
+              <h2>BANEO PERMANENTE</h2>
+            </ion-label>
+          </ion-item>
+          <p style="text-align: center; margin: 0">---------------------------</p>
+          <ion-item>
+            <ion-label>
+              <h2>BANEO TEMPORAL</h2>
+            </ion-label>
+            <ion-icon name="caret-up-outline" slot="end" style="margin-left: 1%;"></ion-icon>
+          </ion-item>
+
+          <!-- Deslizador para banear temporalmente -->
+          <ion-item style="text-align: center; margin-right: 5%">
+            <ion-range min="0" max="100" step="1" [(ngModel)]="diasBaneo" snaps="true">
+              <ion-label slot="start" style="font-family: 'Amatic SC', sans-serif; font-size: 25px">0 días</ion-label>
+              <ion-label slot="end" style="font-family: 'Amatic SC', sans-serif; font-size: 25px">{{ diasBaneo }} días</ion-label>
+            </ion-range>
+          </ion-item>
+
+          <!-- Botón Aceptar -->
+          <ion-item style="display: flex; justify-content: center; margin-top: 5%; margin-left: 30%">
+            <ion-button expand="full" style="background-color: #19323C; border-radius: 30px;" (click)="aceptarBaneo()">Aceptar</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+
+  <!-- Vista de baneados -->
+  <div *ngIf="vistaActual === 'baneados'">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Pedro <br />
+          <span style="font-size: medium; font-family: 'Amatic SC', sans-serif; color: red;">Falta: 3 días</span>
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" class="Desbanear">Desbanear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Manuel <br />
+          <span style="font-size: medium; font-family: 'Amatic SC', sans-serif; color: red;">Falta: 5 días</span>
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" class="Desbanear">Desbanear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Manolo <br />
+          <span style="font-size: medium; font-family: 'Amatic SC', sans-serif; color: red;">Falta: 34 dias</span>
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" class="Desbanear">Desbanear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+        <ion-label class="user-label">
+          Anita <br />
+          <span style="font-size: medium; font-family: 'Amatic SC', sans-serif; color: red;">Falta: 47 días</span>
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" class="Desbanear">Desbanear</ion-button>
+          <ion-button fill="solid" class="Ver">Ver</ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
