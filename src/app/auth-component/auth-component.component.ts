@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonicModule, IonModal } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {Router, RouterLink} from '@angular/router';
-import {NavbarComponent} from "../navbar/navbar.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-component',
