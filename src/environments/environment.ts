@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: '/api',
+  // apiUrl: 'http://localhost:3000/api', // Esto permite que las solicitudes pasen por el proxy
 };
 
 /*
