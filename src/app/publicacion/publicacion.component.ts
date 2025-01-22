@@ -11,16 +11,6 @@ import {
   ribbonOutline,
   shareSocialOutline
 } from "ionicons/icons";
-import {
-  IonCard,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonIcon,
-  IonLabel,
-  IonRow,
-  IonSegmentButton
-} from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-publicacion',
@@ -30,8 +20,7 @@ import {
   imports: [
     IonicModule,
     NavbarComponent,
-    PiePaginaComponent
-
+    PiePaginaComponent,
   ]
 })
 export class PublicacionComponent  implements OnInit {

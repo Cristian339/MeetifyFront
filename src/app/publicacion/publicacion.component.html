@@ -1,59 +1,36 @@
 
-<ion-content color="terciario">
+<ion-content>
   <app-navbar></app-navbar>
-  <ion-segment value="default" color="secundario">
+  <ion-segment value="default">
     <ion-segment-button value="default">
       <ion-label>General</ion-label>
     </ion-segment-button>
     <ion-segment-button value="segment">
-      <ion-label>Siguiendo</ion-label>
+      <ion-label>Amigos</ion-label>
     </ion-segment-button>
   </ion-segment>
 
 
 
-  <ion-card style="margin-top: 20px;  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
-    <ion-icon name="ellipsis-vertical-outline" style="float: right;margin-right: 5px;margin-top: 15px" class="medium-icon"></ion-icon>
+  <ion-card style="margin-top: 20px;">
+    <ion-icon name="ellipsis-vertical-outline" style="float: right;margin-right: 10px;margin-top: 10px"></ion-icon>
+    <ion-card-header>
 
-    <ion-grid style="float: left">
-      <ion-row >
-        <ion-col>
-          <ion-icon name="person-circle-outline" style="float: left" size="large"></ion-icon>
-        </ion-col>
-        <ion-row style="display: block">
-          <p style="color: #19323C">Federico</p>
-          <p>Ciclismo</p>
-        </ion-row>
-      </ion-row>
-    </ion-grid>
-
+      <ion-icon name="person-circle-outline" style="float: left" size="large"></ion-icon>
+      Federico
+    </ion-card-header>
     <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-    <ion-title style="margin-top: 10px;" color="primario">Reunion </ion-title>
-    <ion-card-content style="margin-left: 4px">
+    <ion-title style="color: black"> Reunion </ion-title>
+    <ion-card-content>
       Reunion en mi casa
     </ion-card-content>
     <p style="padding-left: 15px;"><ion-icon name="calendar-outline"></ion-icon>10/10/2025</p>
     <p style="padding-left: 15px;"><ion-icon name="golf-outline"></ion-icon>Calle a atras</p>
-    <ion-grid>
+    <ion-grid style="padding-left: 45px">
       <ion-row>
-        <ion-col size="4">
-          <div class="icon-text-container">
-            <ion-icon name="ribbon-outline" class="medium-icon" color="primario"></ion-icon>
-            Puntuar
-          </div>
-        </ion-col>
-        <ion-col size="4">
-          <div class="icon-text-container">
-            <ion-icon name="people-circle-outline" class="medium-icon" color="primario"></ion-icon>
-            Unirse
-          </div>
-        </ion-col>
-        <ion-col size="4">
-          <div class="icon-text-container">
-            <ion-icon name="share-social-outline" class="medium-icon" color="primario"></ion-icon>
-            Compartir
-          </div>
-        </ion-col>
+         <ion-col size="4"><ion-icon name="ribbon-outline" class="medium-icon"></ion-icon></ion-col>
+        <ion-col size="4"><ion-icon name="people-circle-outline" class="medium-icon"></ion-icon></ion-col>
+        <ion-col size="4"><ion-icon name="share-social-outline" class="medium-icon"></ion-icon></ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
