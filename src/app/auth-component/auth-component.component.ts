@@ -14,9 +14,7 @@ import {NavbarComponent} from "../navbar/navbar.component";
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
-    NavbarComponent,
-    RouterLink
+    CommonModule
   ]
 })
 export class AuthComponentComponent implements OnInit {
@@ -108,6 +106,7 @@ export class AuthComponentComponent implements OnInit {
       this.modalAbierto = true;
     } else {
       console.log('Inicio de sesión:', this.authForm.value);
+      this.router.navigate(['/publicacion']);
     }
   }
 

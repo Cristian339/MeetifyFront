@@ -6,7 +6,7 @@ import {PiePaginaComponent} from "./pie-pagina/pie-pagina.component";
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet, NavbarComponent, PiePaginaComponent],
+  imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
   constructor() {
