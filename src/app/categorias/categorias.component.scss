@@ -1,0 +1,25 @@
+ion-toolbar {
+  --background: #16353F;
+  --color: #fff;
+  padding: 5%;
+  display: flex;
+  align-items: center;
+}
+
+ion-toolbar ion-title {
+  font-family: 'Amatic SC', cursive;
+  font-weight: 700;
+  font-size: 2rem;
+  color: white;
+  margin-top: 2%;
+  margin-left: 1%;
+}
+
+ion-toolbar ion-img {
+  margin-top: 5%;
+}
+
+.logo-image {
+  width: 25%;
+  height: 25%;
+}
