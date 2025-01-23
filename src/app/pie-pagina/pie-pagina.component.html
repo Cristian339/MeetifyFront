@@ -1,18 +1,31 @@
 <ion-footer>
   <ion-toolbar color="primario">
-    <ion-grid style="margin-left: 30px">
+    <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-icon name="home-outline" class="medium-icon"></ion-icon>
+          <ion-button fill="clear">
+            <ion-icon name="home-outline" class="medium-icon" color="light"></ion-icon>
+          </ion-button>
         </ion-col>
         <ion-col>
-          <ion-icon name="chatbubble-ellipses-outline" class="medium-icon"></ion-icon>
+          <ion-button fill="clear" href="/mensajeria">
+            <ion-icon name="chatbubble-ellipses-outline" class="medium-icon" color="light"></ion-icon>
+          </ion-button>
         </ion-col>
         <ion-col>
-          <ion-icon name="notifications-outline" class="medium-icon"></ion-icon>
+          <ion-button fill="clear">
+            <ion-icon name="add-circle-outline" class="medium-icon" color="light"></ion-icon>
+          </ion-button>
         </ion-col>
         <ion-col>
-          <ion-icon name="person-outline" class="medium-icon"></ion-icon>
+          <ion-button fill="clear">
+            <ion-icon name="notifications-outline" class="medium-icon" color="light"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button fill="clear" href="/editar-perfil">
+            <ion-icon name="person-outline" class="medium-icon" color="light"></ion-icon>
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

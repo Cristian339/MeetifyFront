@@ -21,10 +21,21 @@ import {Router} from "@angular/router";
 })
 export class PiePaginaComponent  implements OnInit {
 
-  constructor() {
-    addIcons({chatbubbleEllipsesOutline,homeOutline,notificationsOutline,personOutline});
+  constructor(private router: Router) {
+    addIcons({chatbubbleEllipsesOutline,homeOutline,notificationsOutline,personOutline,addCircleOutline});
   }
 
   ngOnInit() {}
+
+  entrarChat() {
+      this.router.navigate(['/mensajeria']);
+  }
+
+  entrarHome() {
+    this.router.navigate(['/publicacion']);
+  }
+  editarPerfil() {
+    this.router.navigate(['/editar-perfil']);
+  }
 
 }
