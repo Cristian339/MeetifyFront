@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import {addIcons} from "ionicons";
-import {chatbubbleEllipsesOutline, homeOutline, notificationsOutline, personOutline} from "ionicons/icons";
+import {
+  addCircleOutline,
+  chatbubbleEllipsesOutline,
+  homeOutline,
+  notificationsOutline,
+  personOutline
+} from "ionicons/icons";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-pie-pagina',

@@ -9,7 +9,7 @@ import {NgOptimizedImage} from "@angular/common";
   standalone: true,
   imports: [
     IonicModule,
-    NgOptimizedImage
+
   ]
 })
 export class EditarPerfilComponent  implements OnInit {

@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonicModule, IonModal } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import {Router, RouterLink} from '@angular/router';
-import {NavbarComponent} from "../navbar/navbar.component";
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Router } from '@angular/router';
+import { LoginService } from "../services/login.service";
+import { Login } from '../modelos/Login';
+import { Registro } from '../modelos/Registro';
 
 @Component({
   selector: 'app-auth-component',
@@ -14,12 +16,19 @@ import {NavbarComponent} from "../navbar/navbar.component";
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NgOptimizedImage
   ]
 })
 export class AuthComponentComponent implements OnInit {
   @ViewChild('changePasswordModal') changePasswordModal!: IonModal;
+
   authForm: FormGroup = {} as FormGroup;
+  registroForm: FormGroup;
+  loginForm: FormGroup;
+  login: Login = new Login();
+  registro: Registro = new Registro();
+  loginViewFlag: boolean = true;
   Logeado = true;
   Registrado = false;
   Recuperado = false;
@@ -27,7 +36,21 @@ export class AuthComponentComponent implements OnInit {
   modalAbierto = false;
   mensajeModal = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router) {
+    this.registroForm = this.fb.group({
+      nombre: [this.registro.nombre, Validators.required],
+      apellidos: [this.registro.apellidos, Validators.required],
+      mail: [this.registro.mail, [Validators.required, Validators.email]],
+      fechaNacimiento: [this.registro.fechaNacimiento, Validators.required],
+      username: [this.registro.username, Validators.required],
+      password: [this.registro.password, Validators.required],
+    });
+
+    this.loginForm = this.fb.group({
+      username: [this.login.username, Validators.required],
+      password: [this.login.password, Validators.required],
+    });
+  }
 
   ngOnInit() {
     this.initializeForm();
@@ -35,10 +58,10 @@ export class AuthComponentComponent implements OnInit {
 
   initializeForm() {
     this.authForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       contrasena: ['', Validators.required],
-      firstName: [''],
-      lastName: [''],
+      nombre: [''],
+      apellidos: [''],
       codigo: [''],
       nuevaContra: ['', Validators.required],
       repitenuevaContra: ['', Validators.required]
@@ -61,6 +84,46 @@ export class AuthComponentComponent implements OnInit {
     this.authForm.get('contrasena')?.updateValueAndValidity();
     this.authForm.get('repitenuevaContra')?.updateValueAndValidity();
     this.authForm.get('codigo')?.updateValueAndValidity();
+  }
+
+  doLogin(): void {
+    if (this.loginForm.valid) {
+      this.login = { ...this.login, ...this.loginForm.value };
+      this.loginService.loguear(this.login).subscribe({
+        next: (respuesta) => {
+          const token = respuesta.token;
+          sessionStorage.setItem("authToken", token);
+          this.loginService.setAuthState(true);
+        },
+        error: (e) => console.error(e),
+        complete: () => this.router.navigate([''])
+      });
+    } else {
+      console.log('Formulario inválido. Por favor verifica los datos.');
+    }
+  }
+
+  doRegister() {
+    if (this.registroForm.valid) {
+      this.registro = { ...this.registro, ...this.registroForm.value };
+      this.loginService.registrar(this.registro).subscribe({
+        next: (respuesta) => console.info("registro exitoso"),
+        error: (e) => console.error(e),
+        complete: () => this.goLogin()
+      });
+    } else {
+      console.log('Formulario inválido. Por favor verifica los datos.');
+    }
+  }
+
+  goRegister() {
+    this.loginViewFlag = false;
+    this.ngOnInit();
+  }
+
+  goLogin() {
+    this.loginViewFlag = true;
+    this.ngOnInit();
   }
 
   toggleAuthMode(mode: string) {
@@ -97,12 +160,11 @@ export class AuthComponentComponent implements OnInit {
   }
 
   verificarCamposLogin() {
-    this.router.navigate(['/editar-perfil']);
-    const email = this.authForm.get('email')?.value;
+    const username = this.authForm.get('username')?.value;
     const contrasena = this.authForm.get('contrasena')?.value;
 
-    if (!email || !contrasena) {
-      this.mensajeModal = 'Por favor, ingrese su correo electrónico y contraseña';
+    if (!username || !contrasena) {
+      this.mensajeModal = 'Por favor, ingrese su nombre de usuario y contraseña';
       this.modalAbierto = true;
     } else {
       console.log('Inicio de sesión:', this.authForm.value);
@@ -111,16 +173,14 @@ export class AuthComponentComponent implements OnInit {
   }
 
   verificarCamposRegistro() {
-    const firstName = this.authForm.get('firstName')?.value;
-    const lastName = this.authForm.get('lastName')?.value;
-    const email = this.authForm.get('email')?.value;
-    const contrasena = this.authForm.get('contrasena')?.value;
+    const nombre = this.authForm.get('nombre')?.value;
+    const apellidos = this.authForm.get('apellidos')?.value;
     const username = this.authForm.get('username')?.value;
-    const fechaNacimiento = this.authForm.get('fecha')?.value;
+    const contrasena = this.authForm.get('contrasena')?.value;
     const nuevaContra = this.authForm.get('nuevaContra')?.value;
     const repitenuevaContra = this.authForm.get('repitenuevaContra')?.value;
 
-    if (!firstName || !lastName || !email || !contrasena || !nuevaContra || !repitenuevaContra || !username || !fechaNacimiento) {
+    if (!nombre || !apellidos || !username || !contrasena || !nuevaContra || !repitenuevaContra) {
       this.mensajeModal = 'Por favor, complete todos los campos';
       this.modalAbierto = true;
     } else if (nuevaContra !== repitenuevaContra) {
@@ -132,10 +192,10 @@ export class AuthComponentComponent implements OnInit {
   }
 
   verificarCamposRecuperacion() {
-    const email = this.authForm.get('email')?.value;
+    const username = this.authForm.get('username')?.value;
 
-    if (!email) {
-      this.mensajeModal = 'Por favor, ingrese su correo electrónico';
+    if (!username) {
+      this.mensajeModal = 'Por favor, ingrese su nombre de usuario';
       this.modalAbierto = true;
     } else {
       console.log('Recuperación de cuenta:', this.authForm.value);

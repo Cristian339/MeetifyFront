@@ -10,8 +10,8 @@ import { PublicacionComponent } from './publicacion/publicacion.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'autentificación', pathMatch: 'full' },
   { path: 'autentificación', component: AuthComponentComponent },
-  { path: '', redirectTo: 'categorias', pathMatch: 'full' },
   { path: 'mensajeria', component: MensajeriaComponent },
   { path: 'navbar', component: CabeceraComponent },
   { path: 'administración', component: AdministracionComponent },
