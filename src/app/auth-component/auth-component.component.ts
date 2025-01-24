@@ -175,7 +175,7 @@ export class AuthComponentComponent implements OnInit {
           this.router.navigate(['/publicacion']);
         },
         error: (e) => {
-          this.mensajeModal = 'Usuario o contraseña incorrectos';
+          this.mensajeModal = 'Usuario/Correo o contraseña incorrectos';
           this.modalAbierto = true;
         }
       });
