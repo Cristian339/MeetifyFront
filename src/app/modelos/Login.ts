@@ -1,5 +1,5 @@
 export class Login{
-  username?:string;
-  password?:string;
+  usuario?:string;
+  contrasenia?:string;
 
 }

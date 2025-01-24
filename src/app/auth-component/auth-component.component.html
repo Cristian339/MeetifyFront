@@ -20,9 +20,9 @@
           <ng-container *ngIf="Logeado; else otherForms">
             <!-- Inicio de sesión -->
             <div class="form-group">
-              <ion-label position="floating">Nombre de usuario</ion-label>
+              <ion-label position="floating">Usuario o Correo</ion-label>
               <ion-item class="w-100">
-                <ion-input type="text" placeholder="Introduce tu nombre de usuario" formControlName="username" class="form-control" required></ion-input>
+                <ion-input type="text" placeholder="Usuario o Correo" formControlName="username" class="form-control" required></ion-input>
               </ion-item>
             </div>
 
@@ -129,9 +129,9 @@
               <ng-container *ngIf="Recuperado; else confirmForm">
                 <!-- Recupera tu cuenta -->
                 <div class="form-group">
-                  <ion-label position="floating">Nombre de usuario</ion-label>
+                  <ion-label position="floating">Usuario o Correo</ion-label>
                   <ion-item class="w-100">
-                    <ion-input type="text" formControlName="username" class="form-control" placeholder="Introduce tu nombre de usuario" required></ion-input>
+                    <ion-input type="text" formControlName="username" class="form-control" placeholder="Introduce tu correo electronico" required></ion-input>
                   </ion-item>
                 </div>
 

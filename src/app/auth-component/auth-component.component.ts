@@ -42,13 +42,13 @@ export class AuthComponentComponent implements OnInit {
       apellidos: [this.registro.apellidos, Validators.required],
       mail: [this.registro.mail, [Validators.required, Validators.email]],
       fechaNacimiento: [this.registro.fechaNacimiento, Validators.required],
-      username: [this.registro.username, Validators.required],
-      password: [this.registro.password, Validators.required],
+      usuario: [this.registro.usuario, Validators.required],
+      contrasenia: [this.registro.contrasenia, Validators.required],
     });
 
     this.loginForm = this.fb.group({
-      username: [this.login.username, Validators.required],
-      password: [this.login.password, Validators.required],
+      usuario: [this.login.usuario, Validators.required],
+      contrasenia: [this.login.contrasenia, Validators.required],
     });
   }
 
@@ -58,8 +58,8 @@ export class AuthComponentComponent implements OnInit {
 
   initializeForm() {
     this.authForm = this.fb.group({
-      username: ['', Validators.required],
-      contrasena: ['', Validators.required],
+      usuario: ['', Validators.required],
+      contrasenia: ['', Validators.required],
       nombre: [''],
       apellidos: [''],
       codigo: [''],
@@ -68,10 +68,10 @@ export class AuthComponentComponent implements OnInit {
     });
 
     if (this.Registrado) {
-      this.authForm.get('contrasena')?.setValidators([Validators.required, Validators.minLength(6)]);
+      this.authForm.get('contrasenia')?.setValidators([Validators.required, Validators.minLength(6)]);
       this.authForm.get('repitenuevaContra')?.setValidators([Validators.required, this.matchPasswords.bind(this)]);
     } else {
-      this.authForm.get('contrasena')?.clearValidators();
+      this.authForm.get('contrasenia')?.clearValidators();
       this.authForm.get('repitenuevaContra')?.clearValidators();
     }
 
@@ -81,7 +81,7 @@ export class AuthComponentComponent implements OnInit {
       this.authForm.get('codigo')?.clearValidators();
     }
 
-    this.authForm.get('contrasena')?.updateValueAndValidity();
+    this.authForm.get('contrasenia')?.updateValueAndValidity();
     this.authForm.get('repitenuevaContra')?.updateValueAndValidity();
     this.authForm.get('codigo')?.updateValueAndValidity();
   }
@@ -160,41 +160,59 @@ export class AuthComponentComponent implements OnInit {
   }
 
   verificarCamposLogin() {
-    const username = this.authForm.get('username')?.value;
-    const contrasena = this.authForm.get('contrasena')?.value;
+    const usuario = this.authForm.get('usuario')?.value;
+    const contrasenia = this.authForm.get('contrasenia')?.value;
 
-    if (!username || !contrasena) {
-      this.mensajeModal = 'Por favor, ingrese su nombre de usuario y contraseña';
+    if (!usuario || !contrasenia) {
+      this.mensajeModal = 'Por favor, ingrese su nombre de usuario/correo y contraseña';
       this.modalAbierto = true;
     } else {
-      console.log('Inicio de sesión:', this.authForm.value);
-      this.router.navigate(['/publicacion']);
+      this.loginService.loguear({ usuario, contrasenia }).subscribe({
+        next: (respuesta) => {
+          const token = respuesta.token;
+          sessionStorage.setItem("authToken", token);
+          this.loginService.setAuthState(true);
+          this.router.navigate(['/publicacion']);
+        },
+        error: (e) => {
+          this.mensajeModal = 'Usuario o contraseña incorrectos';
+          this.modalAbierto = true;
+        }
+      });
     }
   }
 
   verificarCamposRegistro() {
     const nombre = this.authForm.get('nombre')?.value;
     const apellidos = this.authForm.get('apellidos')?.value;
-    const username = this.authForm.get('username')?.value;
-    const contrasena = this.authForm.get('contrasena')?.value;
+    const usuario = this.authForm.get('usuario')?.value;
+    const contrasenia = this.authForm.get('contrasenia')?.value;
     const nuevaContra = this.authForm.get('nuevaContra')?.value;
     const repitenuevaContra = this.authForm.get('repitenuevaContra')?.value;
+    const mail = this.authForm.get('mail')?.value;
 
-    if (!nombre || !apellidos || !username || !contrasena || !nuevaContra || !repitenuevaContra) {
+    if (!nombre || !apellidos || !usuario || !contrasenia || !nuevaContra || !repitenuevaContra || !mail) {
       this.mensajeModal = 'Por favor, complete todos los campos';
       this.modalAbierto = true;
     } else if (nuevaContra !== repitenuevaContra) {
       this.mensajeModal = 'Las contraseñas no coinciden';
       this.modalAbierto = true;
     } else {
-      console.log('Registro:', this.authForm.value);
+      this.loginService.registrar(this.registro).subscribe({
+        next: (respuesta) => console.info("registro exitoso"),
+        error: (e) => {
+          this.mensajeModal = 'El correo electrónico o nombre de usuario ya está registrado';
+          this.modalAbierto = true;
+        },
+        complete: () => this.goLogin()
+      });
     }
   }
 
   verificarCamposRecuperacion() {
-    const username = this.authForm.get('username')?.value;
+    const usuario = this.authForm.get('usuario')?.value;
 
-    if (!username) {
+    if (!usuario) {
       this.mensajeModal = 'Por favor, ingrese su nombre de usuario';
       this.modalAbierto = true;
     } else {

@@ -3,7 +3,7 @@ export class Registro{
   apellidos?:string;
   mail?:string;
   fechaNacimiento?:string;
-  username?:string;
-  password?:string;
+  usuario?:string;
+  contrasenia?:string;
 
 }
