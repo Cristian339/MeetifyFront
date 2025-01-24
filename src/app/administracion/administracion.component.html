@@ -92,24 +92,22 @@
             </ion-label>
           </ion-item>
           <p style="text-align: center; margin: 0">---------------------------</p>
-          <ion-item>
+          <ion-item (click)="Deslizar()">
             <ion-label>
               <h2>BANEO TEMPORAL</h2>
             </ion-label>
-            <ion-icon name="caret-up-outline" slot="end" style="margin-left: 1%;"></ion-icon>
+            <ion-icon name="caret-up-outline" slot="end"></ion-icon>
           </ion-item>
 
-          <!-- Deslizador para banear temporalmente -->
-          <ion-item style="text-align: center; margin-right: 5%">
+          <ion-item *ngIf="mostrarDeslizador" style="text-align: center; margin-right: 5%">
             <ion-range min="0" max="100" step="1" [(ngModel)]="diasBaneo" snaps="true">
               <ion-label slot="start" style="font-family: 'Amatic SC', sans-serif; font-size: 25px">0 días</ion-label>
               <ion-label slot="end" style="font-family: 'Amatic SC', sans-serif; font-size: 25px">{{ diasBaneo }} días</ion-label>
             </ion-range>
           </ion-item>
 
-          <!-- Botón Aceptar -->
-          <ion-item style="display: flex; justify-content: center; margin-top: 5%; margin-left: 30%">
-            <ion-button expand="full" style="background-color: #19323C; border-radius: 30px;" (click)="aceptarBaneo()">Aceptar</ion-button>
+          <ion-item *ngIf="mostrarDeslizador" style="display: flex; justify-content: center; margin-left: 3%; margin: 0 auto">
+            <ion-button expand="full" id="Aceptar" (click)="aceptarBaneo()">Aceptar</ion-button>
           </ion-item>
         </ion-list>
       </ion-content>

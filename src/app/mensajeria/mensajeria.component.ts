@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AnimationController, IonicModule} from "@ionic/angular";
 import {CommonModule} from "@angular/common";
-import {arrowBackCircle, personCircle, chatbubblesOutline, micOutline, happyOutline, cameraOutline} from "ionicons/icons";
+import {arrowBackCircle, personOutline, chatbubblesOutline, micOutline, happyOutline, cameraOutline} from "ionicons/icons";
 import {addIcons} from "ionicons";
 
 @Component({
@@ -18,7 +18,7 @@ export class MensajeriaComponent {
 
   constructor(private animationCtrl: AnimationController) {
 
-    addIcons( { arrowBackCircle, personCircle, chatbubblesOutline, micOutline, happyOutline, cameraOutline } );
+    addIcons( { arrowBackCircle, personOutline, chatbubblesOutline, micOutline, happyOutline, cameraOutline } );
   }
 
   entrarAnimacion = (baseEl: HTMLElement) => {
@@ -41,7 +41,7 @@ export class MensajeriaComponent {
       .create()
       .addElement(baseEl)
       .easing('ease-out')
-      .duration(500)
+      .duration(100)
       .addAnimation([backdropAnimation, wrapperAnimation]);
   };
 

@@ -1,139 +1,147 @@
-ion-toolbar {
-  --background: #16353F;
-  --color: #fff;
-  padding: 5%;
-  display: flex;
-  align-items: center;
-}
+@media (max-width: 600px) {
 
-ion-toolbar ion-title {
-  font-family: 'Amatic SC', cursive;
-  font-weight: 700;
-  font-size: 2rem;
-  color: white;
-}
+  ion-toolbar {
+    --background: #16353F;
+    --color: #fff;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+  }
 
-ion-toolbar ion-icon {
-  font-size: 3em;
-  margin-top: 7%;
-}
+  .header-title {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 2rem;
+    color: white;
+  }
 
-ion-toolbar ion-title, {
-  margin-top: 2%;
-  margin-left: 1%;
-}
+  ion-toolbar ion-icon {
+    font-size: 3em;
+    margin-top: 7%;
+  }
 
-ion-toolbar ion-img {
-  margin-top: 5%;
-}
+  ion-toolbar ion-title, {
+    margin-top: 2%;
+    margin-left: 1%;
+  }
 
-.logo-image {
-  width: 25%;
-  height: 25%;
-}
+  ion-toolbar ion-img {
+    margin-top: 5%;
+  }
 
-.Atras {
-  margin-top: 10%;
-}
+  .logo-image {
+    width: 25%;
+    height: 25%;
+  }
 
-/* Estilo del contenido principal */
-.admin-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5%;
-  background-color: #f8fdfc;
-  height: 100%;
-}
+  .Atras {
+    margin-top: 10%;
+  }
 
-ion-list {
-  width: 90%;
-}
+  /* Estilo del contenido principal */
+  .admin-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    background-color: #f8fdfc;
+    height: 100%;
+  }
 
-ion-item {
-  border-radius: 20%;
-  margin: 3%;
-}
+  ion-list {
+    width: 90%;
+  }
 
-.icon {
-  background-color: #5497A7;
-  padding: 2%;
-  border-radius: 50%;
-}
+  ion-item {
+    border-radius: 20%;
+    margin: 3%;
+  }
 
-ion-label {
-  font-family: 'Arial', sans-serif;
-  font-size: 50%;
-  font-weight: 500;
-}
+  .icon {
+    background-color: #5497A7;
+    padding: 2%;
+    border-radius: 50%;
+  }
 
-.logout {
-  margin-top: 5%;
-  width: 90%;
-}
+  ion-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 50%;
+    font-weight: 500;
+  }
 
-p {
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
-  color: red;
-  text-align: center;
-}
+  .logout {
+    margin-top: 5%;
+    width: 90%;
+  }
 
-.perfil {
-  font-size: 3em;
-}
+  p {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+  }
 
-.user-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 100%;
-  font-weight: 500;
-  color: #000;
-  margin-right: 10%;
-}
+  .perfil {
+    font-size: 3em;
+  }
 
-ion-item {
-  border-radius: 25%;
-  width: 100%;
-}
+  .user-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 100%;
+    font-weight: 500;
+    color: #000;
+    margin-right: 10%;
+  }
 
-.boton {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
+  ion-item {
+    border-radius: 25%;
+    width: 100%;
+  }
 
-ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
-  font-family: 'Inter', sans-serif;
-  border-radius: 50%;
-  max-width: 100%;
-  color: white;
-}
+  .boton {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 50px;
+  }
 
-ion-button.baneo {
-  --background: #e74c3c;
-  --background-hover: #c0392b;
-}
+  ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
+    font-family: 'Inter', sans-serif;
+    border-radius: 90%;
+    max-width: 100%;
+    color: white;
+  }
 
-ion-button.Ver {
-  --background: #5497A7;
-  --background-hover: #5497A7;
-}
+  ion-button.baneo {
+    --background: #e74c3c;
+  }
 
-ion-button.Desbanear {
-  --background: #19323C;
-  --background-hover: #19323C;
-}
+  ion-button.Ver {
+    --background: #5497A7;
+  }
 
-h2 {
-  font-weight: bold;
-  font-size: 30px;
-  font-family: "Amatic SC", sans-serif;
-  color: black;
-  text-align: center;
-}
+  ion-button.Desbanear {
+    --background: #19323C;
+  }
 
-ion-modal p {
-  color: black;
+  h2 {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Amatic SC", sans-serif;
+    color: black;
+    text-align: center;
+  }
+
+  ion-modal p {
+    color: black;
+  }
+
+  #Aceptar {
+    background-color: #19323C !important;
+    margin: 0 auto !important;
+    border-radius: 80px !important;
+    color: white !important;
+  }
 }
 
 

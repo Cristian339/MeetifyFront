@@ -9,9 +9,9 @@
 <div class="container auth-container">
   <div class="row justify-content-center">
     <div class="col-12 col-md-12 col-lg-12 col-sm-12 text-center">
-      <div class="auth-box" style="background-color: #ffffff; border-radius: 20px; padding: 30px; max-width: 800px; margin: auto;">
+      <div class="auth-box">
         <div class="logo">
-          <img ngSrc="assets/Meetify.svg" alt="Meetify Logo" class="img-fluid" width="260" height="260">
+          <img ngSrc="assets/Meetify.svg" alt="Meetify Logo" class="img-fluid" width="260" height="160">
         </div>
 
         <h1>{{ Logeado ? 'Inicio sesión' : Registrado ? 'Registro' : Recuperado ? 'Recupera tu cuenta' : Confirmado ? 'Confirmar tu cuenta' : 'Cambio de contraseña' }}</h1>
@@ -33,7 +33,7 @@
               </ion-item>
             </div>
 
-            <ion-button expand="block" type="submit" class="btn btn-primary w-100" (click)="verificarCamposLogin()">Iniciar sesión</ion-button>
+            <ion-button type="submit" class="InicioSesion" (click)="verificarCamposLogin()">Iniciar sesión</ion-button>
 
             <ion-modal
               trigger="open-modal"

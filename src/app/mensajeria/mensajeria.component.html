@@ -17,7 +17,7 @@
   <ion-list>
     <ion-item lines="none" id="open-modal">
       <ion-avatar slot="start">
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
       </ion-avatar>
       <ion-label>
         <h2>Pedro</h2>
@@ -30,13 +30,13 @@
           <ion-header>
             <ion-toolbar>
               <ion-avatar slot="start">
-                <ion-icon name="person-circle"></ion-icon>
+                <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
               </ion-avatar>
               <ion-label>
                 <h2>Pedro</h2>
                 <p>Conectado por última vez 11:44 AM</p>
               </ion-label>
-              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal.dismiss()"></ion-icon>
+              <ion-icon name="arrow-back-circle" slot="end" id="ModalIcon" (click)="modal.dismiss()"></ion-icon>
             </ion-toolbar>
           </ion-header>
 
@@ -72,7 +72,7 @@
 
     <ion-item lines="none" id="open-modal-2">
       <ion-avatar slot="start">
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
       </ion-avatar>
       <ion-label>
         <h2>Manuel</h2>
@@ -85,13 +85,13 @@
           <ion-header>
             <ion-toolbar>
               <ion-avatar slot="start">
-                <ion-icon name="person-circle"></ion-icon>
+                <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
               </ion-avatar>
               <ion-label>
                 <h2>Manuel</h2>
                 <p>Conectado por última vez 16:56 PM</p>
               </ion-label>
-              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal2.dismiss()"></ion-icon>
+              <ion-icon name="arrow-back-circle" slot="end" id="ModalIcon2" (click)="modal2.dismiss()"></ion-icon>
             </ion-toolbar>
           </ion-header>
 
@@ -128,7 +128,7 @@
 
     <ion-item lines="none" id="open-modal-3">
       <ion-avatar slot="start">
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
       </ion-avatar>
       <ion-label>
         <h2>Sofía</h2>
@@ -139,15 +139,15 @@
       <ion-modal #modal3 trigger="open-modal-3" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion">
         <ng-template>
           <ion-header>
-            <ion-toolbar>
+            <ion-toolbar class="modalToolbar">
               <ion-avatar slot="start">
-                <ion-icon name="person-circle"></ion-icon>
+                <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
               </ion-avatar>
               <ion-label>
                 <h2>Sofia</h2>
                 <p>Conectado por última vez 11:30 PM</p>
               </ion-label>
-              <ion-icon name="arrow-back-circle" slot="end" class="back-icon" (click)="modal3.dismiss()"></ion-icon>
+              <ion-icon name="arrow-back-circle" slot="end" id="ModalIcon3" (click)="modal3.dismiss()"></ion-icon>
             </ion-toolbar>
           </ion-header>
 
