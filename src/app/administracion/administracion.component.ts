@@ -18,6 +18,7 @@ import { FormsModule} from "@angular/forms";
 })
 export class AdministracionComponent  implements OnInit {
 
+  mostrarDeslizador: boolean = false;
   diasBaneo: number = 0;
 
   constructor() {
@@ -48,6 +49,10 @@ export class AdministracionComponent  implements OnInit {
 
   aceptarBaneo() {
     console.log("Baneo temporal de " + this.diasBaneo + " días");
+  }
+
+  Deslizar() {
+    this.mostrarDeslizador = !this.mostrarDeslizador;
   }
 
 }
