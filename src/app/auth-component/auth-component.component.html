@@ -22,7 +22,7 @@
             <div class="form-group">
               <ion-label position="floating">Usuario o Correo</ion-label>
               <ion-item class="w-100">
-                <ion-input type="text" placeholder="Usuario o Correo" formControlName="usuario" class="form-control" required></ion-input>
+                <ion-input type="text" placeholder="Usuario o Correo" formControlName="nombreUsuario" class="form-control" required></ion-input>
               </ion-item>
             </div>
 
@@ -64,42 +64,42 @@
             <ng-container *ngIf="Registrado; else recoverOrConfirmForm">
               <!-- Registro -->
               <div class="form-group">
-                <ion-label position="floating">Nombre de usuario</ion-label>
+                <ion-label position="floating">Nombre</ion-label>
                 <ion-item class="w-100">
-                  <ion-input type="text" formControlName="usuario" class="form-control" placeholder="Pon tu nombre de usuario" required></ion-input>
-                </ion-item>
-              </div>
-
-              <div class="form-group">
-                <ion-label position="floating">Nombres</ion-label>
-                <ion-item class="w-100">
-                  <ion-input type="text" formControlName="firstName" class="form-control" placeholder="Pon tu nombre" required></ion-input>
+                  <ion-input type="text" formControlName="nombre" class="form-control" placeholder="Pon tu nombre" required></ion-input>
                 </ion-item>
               </div>
 
               <div class="form-group">
                 <ion-label position="floating">Apellidos</ion-label>
                 <ion-item class="w-100">
-                  <ion-input type="text" formControlName="lastName" class="form-control" placeholder="Pon tus apellidos" required></ion-input>
+                  <ion-input type="text" formControlName="apellidos" class="form-control" placeholder="Pon tus apellidos" required></ion-input>
                 </ion-item>
               </div>
 
               <div class="form-group">
-                <ion-label position="floating">Fecha de nacimiento:</ion-label>
+                <ion-label position="floating">Correo electrónico</ion-label>
                 <ion-item class="w-100">
-                  <ion-input type="date" formControlName="fecha" class="form-control" placeholder="Pon tu fecha de nacimiento" required></ion-input>
+                  <ion-input type="email" formControlName="correoElectronico" class="form-control" placeholder="Pon tu correo" required></ion-input>
                 </ion-item>
               </div>
 
               <div class="form-group">
-                <ion-label position="floating">Correo electrónico:</ion-label>
+                <ion-label position="floating">Fecha de nacimiento</ion-label>
                 <ion-item class="w-100">
-                  <ion-input type="email" formControlName="email" class="form-control" placeholder="Pon tu correo" required></ion-input>
+                  <ion-input type="date" formControlName="fechaNacimiento" class="form-control" placeholder="Pon tu fecha de nacimiento" required></ion-input>
                 </ion-item>
               </div>
 
               <div class="form-group">
-                <ion-label position="floating">Contraseña:</ion-label>
+                <ion-label position="floating">Usuario</ion-label>
+                <ion-item class="w-100">
+                  <ion-input type="text" formControlName="nombreUsuario" class="form-control" placeholder="Pon tu nombre de usuario" required></ion-input>
+                </ion-item>
+              </div>
+
+              <div class="form-group">
+                <ion-label position="floating">Contraseña</ion-label>
                 <ion-item class="w-100">
                   <ion-input type="password" formControlName="contrasenia" class="form-control" placeholder="Pon tu contraseña" required></ion-input>
                 </ion-item>
@@ -129,9 +129,9 @@
               <ng-container *ngIf="Recuperado; else confirmForm">
                 <!-- Recupera tu cuenta -->
                 <div class="form-group">
-                  <ion-label position="floating">Usuario o Correo</ion-label>
+                  <ion-label position="floating">Correo electrónico</ion-label>
                   <ion-item class="w-100">
-                    <ion-input type="text" formControlName="usuario" class="form-control" placeholder="Introduce tu correo electronico" required></ion-input>
+                    <ion-input type="text" formControlName="correoElectronico" class="form-control" placeholder="Introduce tu correo electrónico" required></ion-input>
                   </ion-item>
                 </div>
 
@@ -161,7 +161,7 @@
                 <ng-container *ngIf="Confirmado; else changePasswordForm">
                   <!-- Confirmar tu cuenta -->
                   <div class="form-group">
-                    <ion-label position="floating">Hemos enviado un codigo a tu direccion de correo electrónico. <br>Introdúcelo para confirmar tu cuenta</ion-label>
+                    <ion-label position="floating">Hemos enviado un código a tu dirección de correo electrónico. <br>Introdúcelo para confirmar tu cuenta</ion-label>
                     <ion-item class="w-100">
                       <ion-input type="number" min="0" max="999999" formControlName="codigo" class="form-control" placeholder="Introduce el código de 6 dígitos" required></ion-input>
                     </ion-item>
@@ -192,14 +192,14 @@
                 <ng-template #changePasswordForm>
                   <!-- Cambio de contraseña -->
                   <div class="form-group">
-                    <ion-label position="floating">Nueva contraseña:</ion-label>
+                    <ion-label position="floating">Nueva contraseña</ion-label>
                     <ion-item class="w-100">
                       <ion-input type="password" formControlName="nuevaContra" class="form-control" placeholder="Introduce tu nueva contraseña" required></ion-input>
                     </ion-item>
                   </div>
 
                   <div class="form-group">
-                    <ion-label position="floating">Repite la nueva contraseña:</ion-label>
+                    <ion-label position="floating">Repite la nueva contraseña</ion-label>
                     <ion-item class="w-100">
                       <ion-input type="password" formControlName="repitenuevaContra" class="form-control" placeholder="Repite tu nueva contraseña" required></ion-input>
                     </ion-item>

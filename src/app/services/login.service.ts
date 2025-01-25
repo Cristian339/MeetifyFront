@@ -15,8 +15,6 @@ export class LoginService {
   private authState = new BehaviorSubject<boolean>(!!sessionStorage.getItem('authToken'));
   authState$ = this.authState.asObservable();
 
-
-
   constructor(private http: HttpClient) {
   }
   setAuthState(isAuthenticated: boolean): void {
@@ -29,7 +27,7 @@ export class LoginService {
   }
 
   registrar(registro: Registro): Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/auth/registro/perfil`,registro) ;
+    return this.http.post<any>(`${this.apiUrl}/auth/registro`,registro);
   }
 
 }

@@ -1,9 +1,9 @@
 export class Registro{
   nombre?:string;
   apellidos?:string;
-  mail?:string;
+  correoElectronico?:string;
   fechaNacimiento?:string;
-  usuario?:string;
+  nombreUsuario?:string;
   contrasenia?:string;
 
 }
