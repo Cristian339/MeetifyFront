@@ -17,33 +17,33 @@
     <ion-avatar class="profile-avatar">
       <img src="https://picsum.photos/500/300?random=1" alt="Foto de perfil" width="500" height="300" />
     </ion-avatar>
-    <ion-button fill="clear" color="secundario" class="change-photo">
+    <ion-button fill="clear" color="secundario" class="change-photo label-bold">
       Cambiar foto de perfil
     </ion-button>
   </div>
 
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">Nombres</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold">Nombres</ion-label>
       <ion-input placeholder="Roberto"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Apellidos</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold">Apellidos</ion-label>
       <ion-input placeholder="Rojas Quiroga"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">País</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold">País</ion-label>
       <ion-input placeholder="(opcional)"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Biografía</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold">Biografía</ion-label>
       <ion-textarea placeholder="Diseñador de páginas"></ion-textarea>
     </ion-item>
   </ion-list>
 
   <ion-list>
     <ion-item>
-      <ion-label class="ion-text-wrap">
+      <ion-label class="font-inter label-bold ion-text-wrap">
         <strong>Preferencias de categorías:</strong>
       </ion-label>
       <div class="categories">
@@ -60,16 +60,17 @@
 
   <ion-list>
     <ion-item-divider>
-      <ion-label color="medium">Información privada</ion-label>
+      <ion-label class="font-amatic private-info label-bold">Información privada</ion-label>
     </ion-item-divider>
     <ion-item>
-      <ion-label>Correo</ion-label>
+      <ion-label class="font-inter label-bold">Correo</ion-label>
       <ion-text color="medium">ejemplo&#64;gmail.com</ion-text>
+      <ion-button size="small" color="secundario" class="white-text">Cambiar</ion-button>
     </ion-item>
     <ion-item>
-      <ion-label>Género</ion-label>
+      <ion-label class="font-inter label-bold">Género</ion-label>
       <ion-text color="medium">Hombre</ion-text>
-      <ion-button size="small" color="secundario">Cambiar</ion-button>
+      <ion-button size="small" color="secundario" class="white-text">Cambiar</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

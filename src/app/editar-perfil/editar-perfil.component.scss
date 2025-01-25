@@ -1,7 +1,25 @@
+body {
+  background-color: var(--ion-color-terciario);
+}
 :host {
-  ion-toolbar {
-    --background: var(--ion-color-terciario);
-    --color: var(--ion-color-primario);
+  ion-header {
+    --background: transparent;
+    color: var(--ion-color-primario);
+
+    ion-toolbar {
+      background: var(--ion-color-terciario);
+      --color: var(--ion-color-primario);
+    }
+
+    ion-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    ion-buttons ion-button {
+      font-family: 'Inter', sans-serif;
+    }
   }
 
   .profile-container {
@@ -24,6 +42,11 @@
     }
   }
 
+  .label-bold {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+  }
+
   .categories {
     display: flex;
     flex-wrap: wrap;
@@ -40,4 +63,17 @@
       --color: var(--ion-color-cuarto-contrast);
     }
   }
+
+  .private-info {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.4rem;
+    color: black;
+    border: none;
+  }
+
+  .white-text {
+    --color: white;
+  }
+
+
 }
