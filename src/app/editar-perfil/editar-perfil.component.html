@@ -1,17 +1,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="cuarto">
+      <ion-button color="danger" aria-label="Close" href="/publicacion">
         <ion-icon slot="icon-only" name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Editar perfil</ion-title>
+    <ion-title class="font-title-size">Editar perfil</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="secundario">Hecho</ion-button>
+      <ion-button color="success" aria-label="Save" href="/publicacion">
+        <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
   <div class="profile-container">
     <ion-avatar class="profile-avatar">
@@ -24,19 +25,19 @@
 
   <ion-list>
     <ion-item>
-      <ion-label position="stacked" class="font-inter label-bold">Nombres</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold label-size">Nombres</ion-label>
       <ion-input placeholder="Roberto"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked" class="font-inter label-bold">Apellidos</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold label-size">Apellidos</ion-label>
       <ion-input placeholder="Rojas Quiroga"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked" class="font-inter label-bold">País</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold label-size">País</ion-label>
       <ion-input placeholder="(opcional)"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked" class="font-inter label-bold">Biografía</ion-label>
+      <ion-label position="stacked" class="font-inter label-bold label-size">Biografía</ion-label>
       <ion-textarea placeholder="Diseñador de páginas"></ion-textarea>
     </ion-item>
   </ion-list>
@@ -58,19 +59,17 @@
     </ion-item>
   </ion-list>
 
+  <ion-label class="font-amatic private-info label-bold font-title-size">Información privada</ion-label>
   <ion-list>
-    <ion-item-divider>
-      <ion-label class="font-amatic private-info label-bold">Información privada</ion-label>
-    </ion-item-divider>
     <ion-item>
       <ion-label class="font-inter label-bold">Correo</ion-label>
-      <ion-text color="medium">ejemplo&#64;gmail.com</ion-text>
-      <ion-button size="small" color="secundario" class="white-text">Cambiar</ion-button>
+      <ion-text color="medium" class="text-left-mail ion-padding-horizontal">ejemplo&#64;gmail.com</ion-text>
+      <ion-button slot="start" size="small" class="white-text">Cambiar</ion-button>
     </ion-item>
     <ion-item>
-      <ion-label class="font-inter label-bold">Género</ion-label>
-      <ion-text color="medium">Hombre</ion-text>
-      <ion-button size="small" color="secundario" class="white-text">Cambiar</ion-button>
+      <ion-label class=" font-inter label-bold">Género</ion-label>
+      <ion-text class="text-left-gender ion-padding-horizontal" color="medium">Hombre</ion-text>
+      <ion-button slot="start" size="small" class="white-text">Cambiar</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
