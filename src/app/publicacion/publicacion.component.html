@@ -1,4 +1,3 @@
-
 <ion-content color="terciario">
   <app-navbar></app-navbar>
   <ion-segment value="default" color="secundario" style="font-family: 'Inter', sans-serif">
@@ -10,35 +9,18 @@
     </ion-segment-button>
   </ion-segment>
 
-
-
   <ion-card style="margin-top: 20px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); font-family: 'Inter', sans-serif; position: relative;">
-
     <ion-fab style="position: absolute; top: 5px; right: 5px;">
       <ion-fab-button color="terciario" size="small" class="clear-fab">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-list side="bottom" style="left: -10px;"> <!-- Ajusta la posición hacia la izquierda -->
-        <ion-text class="report-text">
-          Reportar
-        </ion-text>
+      <ion-fab-list side="bottom" style="left: -10px;">
+        <ion-text class="report-text">Reportar</ion-text>
       </ion-fab-list>
     </ion-fab>
 
-
-
-
-
-
-
-
-
-
-
-
-
     <ion-grid style="float: left">
-      <ion-row >
+      <ion-row>
         <ion-col>
           <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
         </ion-col>
@@ -50,15 +32,12 @@
     </ion-grid>
 
     <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" style="margin-top: 10px"/>
-    <ion-title style="margin-top: 10px;" color="primario">Tarde ciclista </ion-title>
-    <ion-card-content style="margin-left: 4px">
-      Tarde de ciclismo tranquila
-    </ion-card-content>
-    <ion-text style="padding-left: 15px; display: block;color: black" >
+    <ion-title style="margin-top: 10px;" color="primario">Tarde ciclista</ion-title>
+    <ion-card-content style="margin-left: 4px">Tarde de ciclismo tranquila</ion-card-content>
+    <ion-text style="padding-left: 15px; display: block;color: black">
       <ion-icon name="calendar-outline"></ion-icon> 10/10/2025
     </ion-text>
-
-    <ion-text style="padding-left: 15px; display: block; margin-top: 5PX;color: black">
+    <ion-text style="padding-left: 15px; display: block; margin-top: 5px;color: black">
       <ion-icon name="golf-outline"></ion-icon> Calle a atrás
     </ion-text>
 
@@ -92,6 +71,37 @@
     </ion-grid>
   </ion-card>
 
+  <ion-modal
+    [isOpen]="modalAbierto"
+    (didDismiss)="cerrarModal()"
+    [initialBreakpoint]="0.25"
+    [breakpoints]="[0, 0.25, 0.5, 0.75]"
+    handleBehavior="cycle"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ mensajeModal }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding center-content">
+        <div class="ion-margin-top center-content" style="text-align: center;">
+          <ion-item>
+            <ion-label position="floating">Título de la Publicación</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contenido</ion-label>
+            <ion-textarea></ion-textarea>
+          </ion-item>
+          <ion-button expand="block" (click)="cerrarModal()">Crear Publicación</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
 
 <app-pie-pagina></app-pie-pagina>

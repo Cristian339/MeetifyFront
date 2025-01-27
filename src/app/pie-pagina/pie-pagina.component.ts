@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {IonicModule} from "@ionic/angular";
-import {addIcons} from "ionicons";
+import { IonicModule } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { ModalService } from '../services/modal.service';
+
 import {
   addCircleOutline,
   chatbubbleEllipsesOutline,
   homeOutline,
   notificationsOutline,
   personOutline
-} from "ionicons/icons";
-import {Router} from "@angular/router";
+} from 'ionicons/icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pie-pagina',
@@ -19,23 +21,15 @@ import {Router} from "@angular/router";
     IonicModule
   ]
 })
-export class PiePaginaComponent  implements OnInit {
+export class PiePaginaComponent implements OnInit {
 
-  constructor(private router: Router) {
-    addIcons({chatbubbleEllipsesOutline,homeOutline,notificationsOutline,personOutline,addCircleOutline});
+  constructor(private router: Router, private modalService: ModalService) {
+    addIcons({ chatbubbleEllipsesOutline, homeOutline, notificationsOutline, personOutline, addCircleOutline });
   }
 
   ngOnInit() {}
 
-  entrarChat() {
-      this.router.navigate(['/mensajeria']);
+  abrirModal() {
+    this.modalService.abrirModal();
   }
-
-  entrarHome() {
-    this.router.navigate(['/publicacion']);
-  }
-  editarPerfil() {
-    this.router.navigate(['/editar-perfil']);
-  }
-
 }

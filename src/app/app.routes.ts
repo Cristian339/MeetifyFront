@@ -8,6 +8,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { PiePaginaComponent } from './pie-pagina/pie-pagina.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'autentificación', pathMatch: 'full' },
@@ -19,5 +20,8 @@ export const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'pie-pagina', component: PiePaginaComponent },
   { path: 'publicacion', component: PublicacionComponent },
+  { path: 'perfil', component: PerfilComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
+
+
 ];
