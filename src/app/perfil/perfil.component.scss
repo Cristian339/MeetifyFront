@@ -1,0 +1,75 @@
+body {
+  background-color: var(--ion-color-terciario);
+}
+.perfil-content {
+  --background: #f9f9f9;
+  text-align: center;
+}
+
+.perfil-grid {
+  margin-top: 20px;
+}
+
+.perfil-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.perfil-nombre {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.perfil-usuario {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.perfil-descripcion {
+  font-size: 0.9rem;
+  color: gray;
+  margin: 5px auto;
+}
+
+/*
+.perfil-stats ion-label {
+  text-align: center;
+  font-size: 0.9rem;
+}
+*/
+
+.perfil-stats{
+  font-size: 1.5rem;
+  text-align: center;
+}
+.text-bold{
+font-weight: bold;
+}
+
+
+.perfil-reputacion {
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+.reputacion-icon {
+  color: gold;
+}
+
+.perfil-tabs {
+  margin-top: 20px;
+}
+
+.publicaciones-grid {
+  margin: 20px 0;
+}
+
+.publicacion-card {
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+}
