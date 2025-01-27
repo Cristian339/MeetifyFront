@@ -1,6 +1,4 @@
-body {
-  background-color: var(--ion-color-terciario);
-}
+
 .perfil-content {
   --background: #f9f9f9;
   text-align: center;
@@ -11,8 +9,8 @@ body {
 }
 
 .perfil-avatar {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
@@ -23,6 +21,7 @@ body {
   font-weight: bold;
   margin-top: 10px;
 }
+
 .perfil-usuario {
   font-size: 1.2rem;
   font-weight: bold;
@@ -31,29 +30,21 @@ body {
 
 .perfil-descripcion {
   font-size: 0.9rem;
-  color: gray;
+  color: var(--ion-color-primario);
   margin: 5px auto;
 }
 
-/*
-.perfil-stats ion-label {
-  text-align: center;
-  font-size: 0.9rem;
-}
-*/
-
-.perfil-stats{
+.perfil-stats {
   font-size: 1.5rem;
   text-align: center;
+  font-weight: bold;
 }
-.text-bold{
-font-weight: bold;
-}
-
 
 .perfil-reputacion {
   margin-top: 10px;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--ion-color-primario);
 }
 
 .reputacion-icon {
@@ -72,4 +63,22 @@ font-weight: bold;
   height: 150px;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.publicacion-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icon-style{
+  color: var(--ion-color-primario);
+}
+
+.perfil-detalles-titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--ion-color-primario);
+  text-decoration: underline;
+
 }

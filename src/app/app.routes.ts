@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'pie-pagina', component: PiePaginaComponent },
   { path: 'publicacion', component: PublicacionComponent },
-  { path: 'perfil', component: PerfilComponent },
+  { path: 'perfil/:id', component: PerfilComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
 
 
