@@ -116,8 +116,8 @@
   height: 25px;
 }
 .large-icon{
-  width: 155px;
-  height: 155px;
+  width: 40px;
+  height: 40px;
 }
 
 .font-inter {
@@ -126,4 +126,12 @@
 
 .font-amatic {
   font-family: 'Amatic SC', cursive;
+}
+
+
+.font-amatic-grande {
+  font-family: 'Amatic SC', cursive;
+  font-size: large;
+  color: #3F484B;
+  font-weight: bold;
 }

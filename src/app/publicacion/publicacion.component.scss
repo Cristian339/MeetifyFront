@@ -1,9 +1,7 @@
 p {
   margin: 5px 0;
 }
-*{
-  font-family: 'Inter';
-}
+
 .icon-text-container {
   display: flex;
   align-items: center;
@@ -11,4 +9,18 @@ p {
 }
 .medium-icon {
   margin-right: 8px; /* Espacio entre el icono y el texto */
+}
+
+.report-text {
+  background-color: var(--ion-color-terciario); /* Usando el color terciario de Ionic */
+  color: black;  /* Puedes ajustar el color del texto si lo deseas */
+  padding: 5px;
+  border-radius: 5px; /* Redondea las esquinas */
+}
+
+.clear-fab {
+  --background: transparent; /* Hace el fondo del botón transparente */
+  --border: none;            /* Elimina el borde */
+  --box-shadow: none;        /* Elimina la sombra del botón */
+  --color: inherit;          /* Mantiene el color del icono si es necesario */
 }

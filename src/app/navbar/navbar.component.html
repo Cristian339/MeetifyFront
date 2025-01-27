@@ -1,6 +1,5 @@
 <ion-header>
   <ion-toolbar color="primario">
-
     <ion-grid style="padding-top: 18px">
       <ion-row>
         <ion-col>
@@ -10,7 +9,15 @@
           <ion-img src="/assets/Meetify.svg" style="width: 60px;"></ion-img>
         </ion-col>
         <ion-col>
-          <ion-icon name="search-outline" style="padding-top: 20px; float: right" class="medium-icon"></ion-icon>
+          <!-- Icono de búsqueda, al hacer click ejecuta la función toggleSearchInput -->
+          <ion-icon name="search-outline" style="padding-top: 20px; float: right" class="medium-icon" (click)="toggleSearchInput()"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <!-- Input que aparece cuando isSearchVisible es true -->
+      <ion-row *ngIf="isSearchVisible" style="background-color: #F3F7F0;color: black">
+        <ion-col>
+          <ion-input placeholder="Buscar..." [(ngModel)]="searchQuery"></ion-input>
         </ion-col>
       </ion-row>
     </ion-grid>

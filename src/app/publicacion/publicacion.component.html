@@ -1,7 +1,7 @@
 
 <ion-content color="terciario">
   <app-navbar></app-navbar>
-  <ion-segment value="default" color="secundario">
+  <ion-segment value="default" color="secundario" style="font-family: 'Inter', sans-serif">
     <ion-segment-button value="default">
       <ion-label>General</ion-label>
     </ion-segment-button>
@@ -12,12 +12,35 @@
 
 
 
-  <ion-card style="margin-top: 20px;  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);">
-    <ion-icon name="ellipsis-vertical-outline" style="float: right;margin-right: 5px;margin-top: 15px" class="medium-icon"></ion-icon>
+  <ion-card style="margin-top: 20px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); font-family: 'Inter', sans-serif; position: relative;">
+
+    <ion-fab style="position: absolute; top: 5px; right: 5px;">
+      <ion-fab-button color="terciario" size="small" class="clear-fab">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="bottom" style="left: -10px;"> <!-- Ajusta la posición hacia la izquierda -->
+        <ion-text class="report-text">
+          Reportar
+        </ion-text>
+      </ion-fab-list>
+    </ion-fab>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <ion-grid style="float: left">
       <ion-row >
         <ion-col>
-          <ion-icon name="person-circle-outline" style="float: left" size="large"></ion-icon>
+          <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
         </ion-col>
         <ion-row style="display: block">
           <p style="color: #19323C">Federico</p>
@@ -26,31 +49,43 @@
       </ion-row>
     </ion-grid>
 
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" style="margin-top: 10px"/>
     <ion-title style="margin-top: 10px;" color="primario">Tarde ciclista </ion-title>
     <ion-card-content style="margin-left: 4px">
       Tarde de ciclismo tranquila
     </ion-card-content>
-    <p style="padding-left: 15px;"><ion-icon name="calendar-outline"></ion-icon>10/10/2025</p>
-    <p style="padding-left: 15px;"><ion-icon name="golf-outline"></ion-icon>Calle a atras</p>
+    <ion-text style="padding-left: 15px; display: block;color: black" >
+      <ion-icon name="calendar-outline"></ion-icon> 10/10/2025
+    </ion-text>
+
+    <ion-text style="padding-left: 15px; display: block; margin-top: 5PX;color: black">
+      <ion-icon name="golf-outline"></ion-icon> Calle a atrás
+    </ion-text>
+
     <ion-grid>
       <ion-row>
         <ion-col size="4">
           <div class="icon-text-container">
-            <ion-icon name="ribbon-outline" class="medium-icon" color="primario"></ion-icon>
-            Puntuar
+            <ion-button fill="clear" class="font-amatic-grande">
+              <ion-icon name="ribbon-outline" class="medium-icon" color="primario"></ion-icon>
+              Puntuar
+            </ion-button>
           </div>
         </ion-col>
         <ion-col size="4">
           <div class="icon-text-container">
-            <ion-icon name="people-circle-outline" class="medium-icon" color="primario"></ion-icon>
-            Unirse
+            <ion-button fill="clear" class="font-amatic-grande">
+              <ion-icon name="people-circle-outline" class="medium-icon" color="primario"></ion-icon>
+              Unirse
+            </ion-button>
           </div>
         </ion-col>
         <ion-col size="4">
           <div class="icon-text-container">
-            <ion-icon name="share-social-outline" class="medium-icon" color="primario"></ion-icon>
-            Compartir
+            <ion-button fill="clear" class="font-amatic-grande">
+              <ion-icon name="share-social-outline" class="medium-icon" color="primario"></ion-icon>
+              Compartir
+            </ion-button>
           </div>
         </ion-col>
       </ion-row>
