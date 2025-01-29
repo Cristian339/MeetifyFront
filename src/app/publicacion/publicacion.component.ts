@@ -1,21 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular/standalone';
+import { ModalService } from '../services/modal.service';
+import { PublicacionService } from '../services/publicacion.service';
+import { Publicacion } from '../modelos/Publicacion';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
-import { addIcons } from 'ionicons';
-import {
-  calendarOutline,
-  ellipsisVerticalOutline, eye,
-  golfOutline,
-  peopleCircleOutline,
-  personCircleOutline,
-  ribbonOutline,
-  shareSocialOutline
-} from 'ionicons/icons';
-import { ModalService } from '../services/modal.service';
-import {Publicacion} from "../modelos/Publicacion";
-import {PublicacionService} from "../services/publicacion.service";
-import {DatePipe, NgForOf} from "@angular/common";
+import { IonDatetime } from '@ionic/angular/standalone';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-publicacion',
@@ -23,44 +16,85 @@ import {DatePipe, NgForOf} from "@angular/common";
   styleUrls: ['./publicacion.component.scss'],
   standalone: true,
   imports: [
+    PiePaginaComponent,
     IonicModule,
     NavbarComponent,
-    PiePaginaComponent,
-    NgForOf,
     DatePipe,
-  ]
+    FormsModule,
+    NgIf,
+    NgForOf,
+  ],
 })
 export class PublicacionComponent implements OnInit {
   modalAbierto: boolean = false;
   mensajeModal: string = 'Crear una nueva publicación';
+  presentingElement!: HTMLElement | null;
+  currentDatePicker: 'start' | 'end' | null = null;
+  isLink: boolean = false;
+  publicacionNueva: Publicacion = new Publicacion();
+  categorias: string[] = ['Musica', 'Deportes', 'Tecnologia']; // Hardcoded categories
 
-  constructor(private modalService: ModalService, private publicacionService: PublicacionService) {
-    addIcons({ eye,personCircleOutline, ribbonOutline, peopleCircleOutline, shareSocialOutline, ellipsisVerticalOutline, calendarOutline, golfOutline });
-  }
-
+  constructor(
+    private modalService: ModalService,
+    private publicacionService: PublicacionService,
+    private actionSheetCtrl: ActionSheetController
+  ) {}
 
   publicaciones: Publicacion[] = [];
+
   ngOnInit() {
-    this.modalAbierto = this.modalService.isModalAbierto();
+    this.presentingElement = document.querySelector('.ion-page');
+    this.modalService.getModalStatus().subscribe((status) => {
+      this.modalAbierto = status;
+      console.log('Modal status:', status);
+    });
     this.cargarPublicaciones();
+  }
+
+  abrirModal() {
+    this.modalAbierto = true;
+    console.log('Modal abierto');
   }
 
   cerrarModal() {
     this.modalService.cerrarModal();
-    this.modalAbierto = this.modalService.isModalAbierto();
+    this.modalAbierto = false;
+    console.log('Modal cerrado');
   }
+
+  canDismiss = async () => {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: '¿Estás seguro de que quieres cerrar?',
+      buttons: [
+        {
+          text: 'Sí',
+          role: 'confirm',
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    await actionSheet.present();
+
+    const { role } = await actionSheet.onWillDismiss();
+
+    return role === 'confirm';
+  };
 
   cargarPublicaciones(): void {
     this.publicaciones = [];
     this.publicacionService.getPublicaciones().subscribe({
       next: (data) => {
         this.publicaciones = data;
-        console.info(data)
+        console.info(data);
       },
       error: (error) => console.error('Error:', error),
       complete: () => {
         console.log('Petición completada');
-      }
+      },
     });
   }
 
@@ -69,12 +103,31 @@ export class PublicacionComponent implements OnInit {
     this.publicacionService.getPublicacionesSeguidos().subscribe({
       next: (data) => {
         this.publicaciones = data;
-        console.info(data)
+        console.info(data);
       },
       error: (error) => console.error('Error:', error),
       complete: () => {
         console.log('Petición completada');
-      }
+      },
+    });
+  }
+
+  openDatePicker(type: 'start' | 'end') {
+    this.currentDatePicker = type;
+    console.log(`Seleccionar fecha y hora para ${type}`);
+  }
+
+  guardarEvento() {
+    this.publicacionService.guardarPublicacion(this.publicacionNueva).subscribe({
+      next: (data) => {
+        console.info(data);
+        this.cargarPublicaciones();
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Petición completada');
+        this.cerrarModal();
+      },
     });
   }
 }

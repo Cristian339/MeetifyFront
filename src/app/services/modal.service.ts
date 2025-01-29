@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  private modalAbierto: boolean = false;
+  private modalAbierto = new Subject<boolean>();
 
   abrirModal() {
-    this.modalAbierto = true;
-    console.log('Modal abierto');
+    this.modalAbierto.next(true);
   }
 
   cerrarModal() {
-    this.modalAbierto = false;
-    console.log('Modal cerrado');
+    this.modalAbierto.next(false);
   }
 
-  isModalAbierto(): boolean {
-    return this.modalAbierto;
+  getModalStatus() {
+    return this.modalAbierto.asObservable();
   }
 }
