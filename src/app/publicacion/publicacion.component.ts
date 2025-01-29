@@ -15,7 +15,7 @@ import {
 import { ModalService } from '../services/modal.service';
 import {Publicacion} from "../modelos/Publicacion";
 import {PublicacionService} from "../services/publicacion.service";
-import {NgForOf} from "@angular/common";
+import {DatePipe, NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-publicacion',
@@ -27,6 +27,7 @@ import {NgForOf} from "@angular/common";
     NavbarComponent,
     PiePaginaComponent,
     NgForOf,
+    DatePipe,
   ]
 })
 export class PublicacionComponent implements OnInit {

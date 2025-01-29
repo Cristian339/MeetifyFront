@@ -35,7 +35,7 @@
     <ion-title style="margin-top: 10px;" color="primario"><i>{{p.titulo}}</i></ion-title>
     <ion-card-content style="margin-left: 4px"><i>{{p.descripcion}}</i></ion-card-content>
     <ion-text style="padding-left: 15px; display: block;color: black">
-      <ion-icon name="calendar-outline"></ion-icon> Inicio: 10/10/2025 <ion-icon name="calendar-outline" style="margin-left: 10px"></ion-icon> Fin: 10/10/2025
+      <ion-icon name="calendar-outline"></ion-icon> Inicio:<i>{{ p.fechaIni | date:'yyyy-MM-dd' }}</i> <ion-icon name="calendar-outline" style="margin-left: 10px"></ion-icon> Fin: <i>{{ p.fechaFin | date:'yyyy-MM-dd' }}</i>
     </ion-text>
     <ion-text style="padding-left: 15px; display: block; margin-top: 5px;color: black">
       <ion-icon name="golf-outline"></ion-icon><i>{{p.ubicacion}}</i>
