@@ -126,7 +126,9 @@ export class PublicacionComponent implements OnInit {
       error: (error) => console.error('Error:', error),
       complete: () => {
         console.log('Petición completada');
-        this.cerrarModal();
+        this.modalAbierto = false; // Directly set modalAbierto to false
+        this.modalService.cerrarModal(); // Close the modal without confirmation
+        console.log('Modal should be closed');
       },
     });
   }

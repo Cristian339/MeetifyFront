@@ -38,6 +38,10 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 /* @import '@ionic/angular/css/palettes/dark.system.css'; */
 
+ion-content{
+  --keyboard-offset: none !important;
+}
+
 :root {
   --ion-color-primario: #19323C;
   --ion-color-primario-rgb: 25,50,60;
