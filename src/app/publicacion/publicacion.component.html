@@ -1,15 +1,15 @@
 <ion-content color="terciario">
   <app-navbar></app-navbar>
   <ion-segment value="default" color="secundario" style="font-family: 'Inter', sans-serif">
-    <ion-segment-button value="default">
+    <ion-segment-button value="default" (click)="cargarPublicaciones()">
       <ion-label>General</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="segment">
+    <ion-segment-button value="segment" (click)="cargarPublicacionesSeguidos()">
       <ion-label>Siguiendo</ion-label>
     </ion-segment-button>
   </ion-segment>
 
-  <ion-card style="margin-top: 20px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); font-family: 'Inter', sans-serif; position: relative;">
+  <ion-card *ngFor="let p of publicaciones" style="margin-top: 20px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); font-family: 'Inter', sans-serif; position: relative;">
     <ion-fab style="position: absolute; top: 5px; right: 5px;">
       <ion-fab-button color="terciario" size="small" class="clear-fab">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
@@ -25,20 +25,20 @@
           <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
         </ion-col>
         <ion-row style="display: block">
-          <p style="color: #19323C">Federico</p>
-          <p>Ciclismo</p>
+          <p style="color: #19323C"><i>{{p.nombrePerfil}}</i></p>
+          <p><i>{{p.categoria}}</i></p>
         </ion-row>
       </ion-row>
     </ion-grid>
 
     <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" style="margin-top: 10px"/>
-    <ion-title style="margin-top: 10px;" color="primario">Tarde ciclista</ion-title>
-    <ion-card-content style="margin-left: 4px">Tarde de ciclismo tranquila</ion-card-content>
+    <ion-title style="margin-top: 10px;" color="primario"><i>{{p.titulo}}</i></ion-title>
+    <ion-card-content style="margin-left: 4px"><i>{{p.descripcion}}</i></ion-card-content>
     <ion-text style="padding-left: 15px; display: block;color: black">
-      <ion-icon name="calendar-outline"></ion-icon> 10/10/2025
+      <ion-icon name="calendar-outline"></ion-icon> Inicio:<i>{{ p.fechaIni | date:'yyyy-MM-dd' }}</i> <ion-icon name="calendar-outline" style="margin-left: 10px"></ion-icon> Fin: <i>{{ p.fechaFin | date:'yyyy-MM-dd' }}</i>
     </ion-text>
     <ion-text style="padding-left: 15px; display: block; margin-top: 5px;color: black">
-      <ion-icon name="golf-outline"></ion-icon> Calle a atrás
+      <ion-icon name="golf-outline"></ion-icon><i>{{p.ubicacion}}</i>
     </ion-text>
 
     <ion-grid>
@@ -71,33 +71,75 @@
     </ion-grid>
   </ion-card>
 
-  <ion-modal
-    [isOpen]="modalAbierto"
-    (didDismiss)="cerrarModal()"
-    [initialBreakpoint]="0.25"
-    [breakpoints]="[0, 0.25, 0.5, 0.75]"
-    handleBehavior="cycle"
-  >
+  <ion-modal [isOpen]="modalAbierto" [canDismiss]="canDismiss" [presentingElement]="presentingElement" class="full-screen-modal">
     <ng-template>
       <ion-header>
-        <ion-toolbar>
-          <ion-title>{{ mensajeModal }}</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="cerrarModal()">Cerrar</ion-button>
-          </ion-buttons>
+        <ion-toolbar class="ion-color-primario">
+          <ion-title class="font-amatic-grande title-label" style="text-align: center;">AÑADIR EVENTO</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding center-content">
-        <div class="ion-margin-top center-content" style="text-align: center;">
-          <ion-item>
-            <ion-label position="floating">Título de la Publicación</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Contenido</ion-label>
-            <ion-textarea></ion-textarea>
-          </ion-item>
-          <ion-button expand="block" (click)="cerrarModal()">Crear Publicación</ion-button>
+
+      <ion-content class="ion-padding ion-color-secundario">
+        <div class="input-container ion-color-secundario">
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="Selecciona una categoria" class="font-inter" [(ngModel)]="publicacionNueva.categoria">
+                <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Título" class="font-inter" [(ngModel)]="publicacionNueva.titulo"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-textarea placeholder="Descripción" class="font-inter descripcion-textarea" [(ngModel)]="publicacionNueva.descripcion"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Ubicación" class="font-inter" [(ngModel)]="publicacionNueva.ubicacion"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-input placeholder="Inicio" class="font-inter" [(ngModel)]="publicacionNueva.fechaIni"></ion-input>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input placeholder="Fin" class="font-inter" [(ngModel)]="publicacionNueva.fechaFin"></ion-input>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+
+            <ion-item>
+              <ion-label class="font-amatic">Enlace o Imagen:</ion-label>
+              <ion-toggle [(ngModel)]="isLink"></ion-toggle>
+            </ion-item>
+
+            <ion-item *ngIf="isLink">
+              <ion-input placeholder="Enlace de img (opcional)" class="font-inter" [(ngModel)]="publicacionNueva.imageUrl"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!isLink">
+              <ion-button fill="clear" class="font-inter ion-color-secundario">
+                <ion-icon name="cloud-upload" class="medium-icon"></ion-icon>
+                Subir imagen desde local
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-button expand="full" color="cuarto" (click)="cerrarModal()" class="rounded-button">Cancelar</ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button expand="full" color="primary" class="rounded-button" (click)="guardarEvento()">Guardar</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-list>
         </div>
       </ion-content>
     </ng-template>

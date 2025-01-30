@@ -31,5 +31,6 @@ export class PiePaginaComponent implements OnInit {
 
   abrirModal() {
     this.modalService.abrirModal();
+    console.log('Modal abierto desde pie-pagina');
   }
 }
