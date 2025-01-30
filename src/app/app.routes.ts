@@ -11,8 +11,8 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'autentificación', pathMatch: 'full' },
-  { path: 'autentificación', component: AuthComponentComponent },
+  { path: '', redirectTo: 'autentificacion', pathMatch: 'full' },
+  { path: 'autentificacion', component: AuthComponentComponent },
   { path: 'mensajeria', component: MensajeriaComponent },
   { path: 'navbar', component: CabeceraComponent },
   { path: 'administración', component: AdministracionComponent },
@@ -20,8 +20,6 @@ export const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'pie-pagina', component: PiePaginaComponent },
   { path: 'publicacion', component: PublicacionComponent },
-  { path: 'perfil/:id', component: PerfilComponent },
+  { path: 'perfil', component: PerfilComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
-
-
 ];

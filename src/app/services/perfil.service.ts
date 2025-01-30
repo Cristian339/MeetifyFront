@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Perfil } from '../modelos/Perfil';
 import { environment } from '../../environments/environment';
+import {ComunService} from "./comun.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,10 @@ import { environment } from '../../environments/environment';
 export class PerfilService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private comunService:ComunService) {}
 
-  getPerfil(id: number): Observable<Perfil> {
-    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/${id}`);
+  getPerfil(): Observable<Perfil> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`,authHeader );
   }
 }

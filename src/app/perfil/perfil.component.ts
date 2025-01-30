@@ -22,23 +22,23 @@ export class PerfilComponent implements OnInit {
   perfil: Perfil | undefined;
 
   constructor(
-      private perfilService: PerfilService,
-      private route: ActivatedRoute
+    private perfilService: PerfilService,
+    private route: ActivatedRoute
   ) {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline });
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.perfilService.getPerfil(+id).subscribe({
-        next: (data: Perfil) => {
-          this.perfil = data;
-          console.log('Data:', data);
-        },
-        error: (error) => console.error('Error:', error),
-        complete: () => console.log('Request completed')
-      });
-    }
+    console.log('ngOnInit called');
+    this.perfilService.getPerfil().subscribe({
+      next: (data) => {
+        console.log('Data received:', data);
+        this.perfil = data;
+        console.log('Perfil assigned:', this.perfil);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
   }
+
 }
