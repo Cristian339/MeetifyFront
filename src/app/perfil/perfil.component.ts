@@ -5,7 +5,9 @@ import { arrowBackOutline, constructOutline, settingsOutline, starOutline, troph
 import { NgForOf, NgIf } from "@angular/common";
 import { ActivatedRoute } from '@angular/router';
 import { PerfilService } from '../services/perfil.service';
+import { PublicacionService } from '../services/publicacion.service';
 import { Perfil } from '../modelos/Perfil';
+import { Publicacion } from '../modelos/Publicacion';
 
 @Component({
   selector: 'app-perfil',
@@ -20,9 +22,11 @@ import { Perfil } from '../modelos/Perfil';
 })
 export class PerfilComponent implements OnInit {
   perfil: Perfil | undefined;
+  publicaciones: Publicacion[] = [];
 
   constructor(
     private perfilService: PerfilService,
+    private publicacionService: PublicacionService,
     private route: ActivatedRoute
   ) {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline });
@@ -39,6 +43,14 @@ export class PerfilComponent implements OnInit {
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
     });
-  }
 
+    this.publicacionService.getMisPublicaciones().subscribe({
+      next: (data) => {
+        console.log('Publicaciones received:', data);
+        this.publicaciones = data;
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
+  }
 }

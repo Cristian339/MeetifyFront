@@ -18,6 +18,11 @@ export class PublicacionService {
     return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/all`, authHeader);
   }
 
+  getMisPublicaciones(): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/all/mi`, authHeader);
+  }
+
   getPublicacionesSeguidos(): Observable<Publicacion[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/segui`, authHeader);
@@ -27,4 +32,6 @@ export class PublicacionService {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<Publicacion>(`${this.apiUrl}/publicacion/crear`, publicacion, authHeader);
   }
+
+
 }

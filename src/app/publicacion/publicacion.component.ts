@@ -9,6 +9,15 @@ import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { IonDatetime } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
+import {addIcons} from "ionicons";
+import {
+  calendarOutline,
+  ellipsisVerticalOutline, golfOutline,
+  peopleCircleOutline, personCircleOutline,
+  ribbonOutline,
+  settingsOutline,
+  shareSocialOutline
+} from "ionicons/icons";
 
 @Component({
   selector: 'app-publicacion',
@@ -38,7 +47,11 @@ export class PublicacionComponent implements OnInit {
     private modalService: ModalService,
     private publicacionService: PublicacionService,
     private actionSheetCtrl: ActionSheetController
-  ) {}
+
+  ) {
+  addIcons({ ellipsisVerticalOutline, ribbonOutline, shareSocialOutline, peopleCircleOutline,
+    personCircleOutline, golfOutline, calendarOutline});
+}
 
   publicaciones: Publicacion[] = [];
 

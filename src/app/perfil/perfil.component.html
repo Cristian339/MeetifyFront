@@ -102,25 +102,24 @@
     </ion-row>
 
     <!-- Sección de tabs y publicaciones -->
-    <ion-segment value="publicaciones" class="perfil-tabs" color="secundario">
-        <ion-segment-button value="eventos">Eventos</ion-segment-button>
-        <ion-segment-button value="etiquetado">Etiquetado</ion-segment-button>
-    </ion-segment>
+  <ion-segment value="publicaciones" class="perfil-tabs" color="secundario">
+    <ion-segment-button value="eventos">Eventos</ion-segment-button>
+    <ion-segment-button value="etiquetado">Etiquetado</ion-segment-button>
+  </ion-segment>
 
-    <ion-grid class="publicaciones-grid">
-        <ion-row>
-            <ion-col size="6" *ngFor="let post of [1, 2, 3, 4]">
-                <ion-card class="publicacion-card">
-                    <img src="https://via.placeholder.com/150" alt="Publicación" />
-                </ion-card>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-
-    <!-- Botón flotante -->
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="bottom: 70px; right: 20px;">
-        <ion-fab-button color="secundario">
-            <ion-icon  name="construct-outline"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+  <ion-grid class="publicaciones-grid">
+    <ion-row>
+      <ion-col size="6" *ngFor="let post of publicaciones">
+        <ion-card class="publicacion-card">
+          <img [src]="post.imageUrl ? post.imageUrl : 'https://picsum.photos/500/300?random=1'" alt="Publicación" />
+          <ion-card-header>
+            <ion-card-title>{{ post.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{ post.descripcion }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
