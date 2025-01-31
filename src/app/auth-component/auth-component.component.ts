@@ -157,7 +157,7 @@ export class AuthComponentComponent implements OnInit {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
           console.info("Registro exitoso");
-          this.router.navigate(['/publicacion']);
+          this.router.navigate(['/categorias']);
         },
         error: (e: any) => {
           if (e.error && e.error.message) {
