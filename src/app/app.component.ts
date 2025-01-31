@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private router: Router, private loginService: LoginService) {}
 
-  ngOnInit() {
+  /*ngOnInit() {
     this.loginService.authState$.subscribe((isAuthenticated) => {
       this.showMenuInferior = isAuthenticated;
 
@@ -21,5 +21,5 @@ export class AppComponent {
         this.router.navigate(['/autentificacion']);
       }
     });
-  }
+  }*/
 }
