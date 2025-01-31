@@ -12,14 +12,14 @@ export class AppComponent {
   showMenuInferior: boolean = true;
 
   constructor(private router: Router, private loginService: LoginService) {}
-
-  ngOnInit() {
-    this.loginService.authState$.subscribe((isAuthenticated) => {
-      this.showMenuInferior = isAuthenticated;
-
-      if (!isAuthenticated) {
-        this.router.navigate(['/autentificacion']);
-      }
-    });
-  }
+  //
+  // ngOnInit() {
+  //   this.loginService.authState$.subscribe((isAuthenticated) => {
+  //     this.showMenuInferior = isAuthenticated;
+  //
+  //     if (!isAuthenticated) {
+  //       this.router.navigate(['/autentificacion']);
+  //     }
+  //   });
+  // }
 }

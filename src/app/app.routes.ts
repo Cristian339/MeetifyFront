@@ -22,4 +22,5 @@ export const routes: Routes = [
   { path: 'publicacion', component: PublicacionComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
+  { path: 'categorias', component: CategoriasComponent },
 ];
