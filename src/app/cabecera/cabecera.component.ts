@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {arrowBackCircle } from "ionicons/icons";
-import {addIcons} from "ionicons";
-import {IonicModule} from "@ionic/angular";
+import { Component, OnInit, Input } from '@angular/core';
+import { arrowBackCircle } from "ionicons/icons";
+import { addIcons } from "ionicons";
+import { IonicModule } from "@ionic/angular";
 
 @Component({
   selector: 'app-cabecera',
@@ -12,13 +12,12 @@ import {IonicModule} from "@ionic/angular";
     IonicModule
   ]
 })
-export class CabeceraComponent  implements OnInit {
+export class CabeceraComponent implements OnInit {
+  @Input() titulo: string = 'NAVBAR';
 
   constructor() {
-    addIcons( { arrowBackCircle } );
-
+    addIcons({ arrowBackCircle });
   }
 
   ngOnInit() {}
-
 }

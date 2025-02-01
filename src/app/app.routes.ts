@@ -9,6 +9,7 @@ import { PiePaginaComponent } from './pie-pagina/pie-pagina.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import {DatosBiograficosComponent} from "./datos-biograficos/datos-biograficos.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'autentificacion', pathMatch: 'full' },
@@ -23,4 +24,6 @@ export const routes: Routes = [
   { path: 'perfil', component: PerfilComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
   { path: 'categorias', component: CategoriasComponent },
+  { path: 'sobre-ti', component: DatosBiograficosComponent },
+
 ];

@@ -17,4 +17,8 @@ export class PerfilService {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`,authHeader );
   }
+  actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
+  }
 }

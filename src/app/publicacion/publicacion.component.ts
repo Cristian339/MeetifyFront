@@ -7,7 +7,6 @@ import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { IonDatetime } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import {addIcons} from "ionicons";
 import {
@@ -36,7 +35,6 @@ import {
 })
 export class PublicacionComponent implements OnInit {
   modalAbierto: boolean = false;
-  mensajeModal: string = 'Crear una nueva publicación';
   presentingElement!: HTMLElement | null;
   currentDatePicker: 'start' | 'end' | null = null;
   isLink: boolean = false;
@@ -123,11 +121,6 @@ export class PublicacionComponent implements OnInit {
         console.log('Petición completada');
       },
     });
-  }
-
-  openDatePicker(type: 'start' | 'end') {
-    this.currentDatePicker = type;
-    console.log(`Seleccionar fecha y hora para ${type}`);
   }
 
   guardarEvento() {
