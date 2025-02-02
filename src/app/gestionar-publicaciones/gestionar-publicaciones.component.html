@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<ion-content>
+  <div class="container" *ngIf="publicacion">
+    <app-perfil [publicaciones]="publicaciones" (profileClick)="onProfileClick($event)"></app-perfil>
+    <div class="image-container">
+      <img [src]="publicacion.imageUrl" alt="Paisaje">
+      <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+    </div>
+    <h2>{{ publicacion.titulo }}</h2>
+    <div class="profile-container">
+      <img [src]="publicacion.imageUrl" alt="Perfil" class="profile-pic">
+      <ion-icon name="camera-outline" class="profile-camera"></ion-icon>
+      <div class="profile-info">
+        <h3>{{ publicacion.nombrePerfil }}</h3>
+        <p>Reputación <strong></strong></p>
+      </div>
+      <button class="follow-btn">Seguir Publicación</button>
+      <ion-icon name="ellipsis-vertical" class="more-options"></ion-icon>
+    </div>
+    <div class="stats-container">
+      <div><strong>Publicaciones</strong><br></div>
+      <div><strong>Eventos</strong><br></div>
+      <div><strong>Seguidores</strong><br></div>
+      <div><strong>Reputación</strong><br>
+      </div>
+    </div>
+    <div class="location">
+      <ion-icon name="location-outline"></ion-icon>
+      <strong> Ubicación: </strong>
+      <span>{{ publicacion.ubicacion }}</span>
+    </div>
+    <div class="categories">
+      <ion-icon name="book-outline"></ion-icon>
+      <strong> Categorías: </strong>
+      <span class="category" *ngFor="let categoria of publicacion.categoria">{{ categoria }}</span>
+    </div>
+  </div>
+</ion-content>
+<app-pie-pagina></app-pie-pagina>

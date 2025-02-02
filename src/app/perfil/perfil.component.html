@@ -107,10 +107,15 @@
     <ion-segment-button value="etiquetado">Etiquetado</ion-segment-button>
   </ion-segment>
 
+  <ion-segment value="publicaciones" class="perfil-tabs" color="secundario">
+    <ion-segment-button value="eventos">Eventos</ion-segment-button>
+    <ion-segment-button value="etiquetado">Etiquetado</ion-segment-button>
+  </ion-segment>
+
   <ion-grid class="publicaciones-grid">
     <ion-row>
       <ion-col size="6" *ngFor="let post of publicaciones">
-        <ion-card class="publicacion-card">
+        <ion-card class="publicacion-card" (click)="onProfileClick(post)">
           <img [src]="post.imageUrl ? post.imageUrl : 'https://picsum.photos/500/300?random=1'" alt="Publicación" />
           <ion-card-header>
             <ion-card-title>{{ post.titulo }}</ion-card-title>

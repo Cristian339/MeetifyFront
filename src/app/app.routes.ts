@@ -10,6 +10,8 @@ import { PublicacionComponent } from './publicacion/publicacion.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import {DatosBiograficosComponent} from "./datos-biograficos/datos-biograficos.component";
+import { GestionPublicacionComponent} from "./gestion-publicacion/gestion-publicacion.component";
+import { GestionarPublicacionesComponent} from "./gestionar-publicaciones/gestionar-publicaciones.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'autentificacion', pathMatch: 'full' },
@@ -25,5 +27,7 @@ export const routes: Routes = [
   { path: 'editar-perfil', component: EditarPerfilComponent },
   { path: 'categorias', component: CategoriasComponent },
   { path: 'sobre-ti', component: DatosBiograficosComponent },
+  { path: 'gestion-publicacion', component: GestionPublicacionComponent },
+  { path: 'gestionar-publicaciones', component: GestionarPublicacionesComponent }
 
 ];

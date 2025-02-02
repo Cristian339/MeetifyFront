@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { IonicModule } from "@ionic/angular";
 import { addIcons } from "ionicons";
 import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline } from "ionicons/icons";
 import { NgForOf, NgIf } from "@angular/common";
-import { ActivatedRoute } from '@angular/router';
+import {Router} from '@angular/router';
 import { PerfilService } from '../services/perfil.service';
 import { PublicacionService } from '../services/publicacion.service';
 import { Perfil } from '../modelos/Perfil';
@@ -22,14 +22,24 @@ import { Publicacion } from '../modelos/Publicacion';
 })
 export class PerfilComponent implements OnInit {
   perfil: Perfil | undefined;
-  publicaciones: Publicacion[] = [];
+
+  @Input() publicaciones: Publicacion[];
+  @Output() profileClick = new EventEmitter<Publicacion>();
+
+  onProfileClick(publicacion: Publicacion) {
+    this.profileClick.emit(publicacion);
+  }
 
   constructor(
     private perfilService: PerfilService,
     private publicacionService: PublicacionService,
-    private route: ActivatedRoute
+    private router: Router
   ) {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline });
+  }
+
+  verPublicacion(post: any) {
+    this.router.navigate(['/gestion-publicacion'], { state: { post } });
   }
 
   ngOnInit() {
@@ -53,4 +63,5 @@ export class PerfilComponent implements OnInit {
       complete: () => console.log('Request completed')
     });
   }
+
 }

@@ -9,7 +9,6 @@ import {NgIf} from "@angular/common";
     standalone: true,
     imports: [
         IonicModule,
-        NgIf,
     ]
 })
 export class CategoriasComponent  implements OnInit {
