@@ -6,9 +6,32 @@
           <ion-img src="/assets/Meetify.svg" style="width: 60px;"></ion-img>
         </ion-col>
         <ion-col size="5">
-          <ion-title class="font-amatic-grande" style="padding-top: 15px">Categoria</ion-title>
+          <ion-title class="font-amatic-grande2" style="padding-top: 15px">Categorias</ion-title>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-toolbar>
 </ion-header>
+
+<ion-content class="ion-padding">
+  <p>Categorías elegidas: {{ selectedCategories.length }}/10</p>
+
+  <div class="grid">
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Encuentros Sociales')}" (click)="toggleCategory('Encuentros Sociales')" style="--background: #f6929c;">Encuentros Sociales</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Juegos y Diversión')}" (click)="toggleCategory('Juegos y Diversión')" style="--background: #ed9d7a;">Juegos y Diversión</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Actividades Creativas')}" (click)="toggleCategory('Actividades Creativas')" style="--background: #f4b0a3;">Actividades Creativas</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Ejercicio en Grupo')}" (click)="toggleCategory('Ejercicio en Grupo')" style="--background: #d0f399;">Ejercicio en Grupo</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Convivencia en la Naturaleza')}" (click)="toggleCategory('Convivencia en la Naturaleza')" style="--background: #99da99;">Convivencia en la Naturaleza</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Cultura y Entretenimiento')}" (click)="toggleCategory('Cultura y Entretenimiento')" style="--background: #a8c1fd;">Cultura y Entretenimiento</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Aprendizaje y Formación')}" (click)="toggleCategory('Aprendizaje y Formación')" style="--background: #dfadfd;">Aprendizaje y Formación</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Talleres Interactivos')}" (click)="toggleCategory('Talleres Interactivos')" style="--background: #f8b2ca;">Talleres Interactivos</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Relajación y Bienestar')}" (click)="toggleCategory('Relajación y Bienestar')" style="--background: #a1f6f5;">Relajación y Bienestar</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Paseos y Excursiones')}" (click)="toggleCategory('Paseos y Excursiones')" style="--background: #f1ca74;">Paseos y Excursiones</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Charlar y Socializar')}" (click)="toggleCategory('Charlar y Socializar')" style="--background: #a0ff8d;">Charlar y Socializar</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Deportes Informales')}" (click)="toggleCategory('Deportes Informales')" style="--background: #f8d5a3;">Deportes Informales</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Tardes de Juegos')}" (click)="toggleCategory('Tardes de Juegos')" style="--background: #edb6c3;">Tardes de Juegos</ion-button>
+    <ion-button class="category" [ngClass]="{'selected': selectedCategories.includes('Encuentros Comunitarios')}" (click)="toggleCategory('Encuentros Comunitarios')" style="--background: #c7c7f5;">Encuentros Comunitarios</ion-button>
+  </div>
+
+  <ion-button expand="full" (click)="saveCategories()">Aceptar</ion-button>
+</ion-content>

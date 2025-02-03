@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Perfil } from '../modelos/Perfil';
 import { environment } from '../../environments/environment';
-import {ComunService} from "./comun.service";
+import { ComunService } from './comun.service';
+import { Publicacion } from '../modelos/Publicacion';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,23 @@ import {ComunService} from "./comun.service";
 export class PerfilService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient, private comunService:ComunService) {}
+  constructor(private httpClient: HttpClient, private comunService: ComunService) {}
 
   getPerfil(): Observable<Perfil> {
     const authHeader = this.comunService.autorizarPeticion();
-    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`,authHeader );
+    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`, authHeader);
   }
   actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
+  }
+
+  compartirPublicacion(publicacionId: number): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/publicacion/perfil/compartir/${publicacionId}`, {});
+  }
+
+  obtenerPublicacionesCompartidas(): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/perfil/compartidos`, authHeader);
   }
 }

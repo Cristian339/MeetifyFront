@@ -103,13 +103,8 @@
 
     <!-- Sección de tabs y publicaciones -->
   <ion-segment value="publicaciones" class="perfil-tabs" color="secundario">
-    <ion-segment-button value="eventos">Eventos</ion-segment-button>
-    <ion-segment-button value="etiquetado">Etiquetado</ion-segment-button>
-  </ion-segment>
-
-  <ion-segment value="publicaciones" class="perfil-tabs" color="secundario">
-    <ion-segment-button value="eventos">Eventos</ion-segment-button>
-    <ion-segment-button value="etiquetado">Etiquetado</ion-segment-button>
+    <ion-segment-button value="eventos" (click)="cargarPublicaciones()">Eventos</ion-segment-button>
+    <ion-segment-button value="etiquetado" (click)="cargarPublicacionesCompartidas()">Compartido</ion-segment-button>
   </ion-segment>
 
   <ion-grid class="publicaciones-grid">

@@ -3,7 +3,7 @@ import { IonicModule } from "@ionic/angular";
 import { addIcons } from "ionicons";
 import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline } from "ionicons/icons";
 import { NgForOf, NgIf } from "@angular/common";
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { PerfilService } from '../services/perfil.service';
 import { PublicacionService } from '../services/publicacion.service';
 import { Perfil } from '../modelos/Perfil';
@@ -23,7 +23,7 @@ import { Publicacion } from '../modelos/Publicacion';
 export class PerfilComponent implements OnInit {
   perfil: Perfil | undefined;
 
-  @Input() publicaciones: Publicacion[];
+  @Input() publicaciones: Publicacion[] | undefined;
   @Output() profileClick = new EventEmitter<Publicacion>();
 
   onProfileClick(publicacion: Publicacion) {
@@ -38,9 +38,7 @@ export class PerfilComponent implements OnInit {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline });
   }
 
-  verPublicacion(post: any) {
-    this.router.navigate(['/gestion-publicacion'], { state: { post } });
-  }
+
 
   ngOnInit() {
     console.log('ngOnInit called');
@@ -54,7 +52,25 @@ export class PerfilComponent implements OnInit {
       complete: () => console.log('Request completed')
     });
 
+
+  }
+
+
+  cargarPublicaciones(): void {
+    this.publicaciones = [];
     this.publicacionService.getMisPublicaciones().subscribe({
+      next: (data) => {
+        console.log('Publicaciones received:', data);
+        this.publicaciones = data;
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
+  }
+
+  cargarPublicacionesCompartidas(): void {
+    this.publicaciones = [];
+    this.perfilService.obtenerPublicacionesCompartidas().subscribe({
       next: (data) => {
         console.log('Publicaciones received:', data);
         this.publicaciones = data;

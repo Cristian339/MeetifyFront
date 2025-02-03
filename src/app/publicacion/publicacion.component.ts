@@ -7,6 +7,7 @@ import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { IonDatetime } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import {addIcons} from "ionicons";
 import {
@@ -17,6 +18,7 @@ import {
   settingsOutline,
   shareSocialOutline
 } from "ionicons/icons";
+import {PerfilService} from "../services/perfil.service";
 
 @Component({
   selector: 'app-publicacion',
@@ -35,6 +37,7 @@ import {
 })
 export class PublicacionComponent implements OnInit {
   modalAbierto: boolean = false;
+  mensajeModal: string = 'Crear una nueva publicación';
   presentingElement!: HTMLElement | null;
   currentDatePicker: 'start' | 'end' | null = null;
   isLink: boolean = false;
@@ -44,8 +47,8 @@ export class PublicacionComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private publicacionService: PublicacionService,
-    private actionSheetCtrl: ActionSheetController
-
+    private actionSheetCtrl: ActionSheetController,
+    private perfilService: PerfilService
   ) {
   addIcons({ ellipsisVerticalOutline, ribbonOutline, shareSocialOutline, peopleCircleOutline,
     personCircleOutline, golfOutline, calendarOutline});
@@ -138,4 +141,19 @@ export class PublicacionComponent implements OnInit {
       },
     });
   }
+
+  compartirPublicacion(publicacionId: number): void {
+    // Llamamos al servicio para compartir la publicación
+    this.perfilService.compartirPublicacion(publicacionId).subscribe({
+      next: (response) => {
+        console.log('Publicación compartida exitosamente', response);
+        // Actualiza las publicaciones si es necesario
+        this.cargarPublicaciones();
+      },
+      error: (error) => {
+        console.error('Error al compartir publicación', error);
+      }
+    });
+  }
+
 }

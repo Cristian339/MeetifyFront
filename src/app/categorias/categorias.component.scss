@@ -15,6 +15,11 @@ ion-toolbar ion-title {
   margin-left: 1%;
 }
 
+*{
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+}
+
 ion-toolbar ion-img {
   margin-top: 5%;
 }
@@ -22,4 +27,14 @@ ion-toolbar ion-img {
 .logo-image {
   width: 25%;
   height: 25%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.selected {
+  filter: brightness(0.7);
 }
