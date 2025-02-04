@@ -32,4 +32,10 @@ ion-toolbar ion-img {
   height: 25%;
   margin-left: 10px;
 }
-
+.menu-icon {
+  border: 2px solid var(--ion-color-primario);
+  border-radius: 50%;
+  padding: 5px;
+  background-color: var(--ion-color-primario);
+  color: white;
+}

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, MenuController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { menuOutline, searchOutline } from 'ionicons/icons';
+import { menuOutline, searchOutline, notificationsOutline, calendarOutline, peopleOutline, personOutline, settingsOutline, barChartOutline, createOutline } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from "@angular/forms"; // Importar CommonModule
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,23 +15,48 @@ import {FormsModule} from "@angular/forms"; // Importar CommonModule
     IonicModule,
     CommonModule,
     FormsModule,
-    // Asegúrate de agregar CommonModule aquí
   ]
 })
 export class NavbarComponent implements OnInit {
 
-  isSearchVisible: boolean = false;  // Variable que controla la visibilidad del input
-  searchQuery: string = '';          // Variable para almacenar el texto ingresado en el input
+  isSearchVisible: boolean = false;
+  searchQuery: string = '';
+  menuItems = [
+    { label: 'Notificaciones', icon: 'notifications-outline', route: '/notifications' },
+    { label: 'Eventos', icon: 'calendar-outline', route: '/events' },
+    { label: 'Grupos', icon: 'people-outline', route: '/groups' },
+    { label: 'Amigos', icon: 'person-outline', route: '/friends' },
+    { label: 'Mis actividades y configuración', icon: 'settings-outline', route: '/settings' },
+    { label: 'Mi reputación', icon: 'bar-chart-outline', route: '/reputation' },
+    { label: 'Editar perfil', icon: 'create-outline', route: '/edit-profile' }
+  ];
 
-  constructor() {
-    addIcons({ menuOutline, searchOutline });
+  constructor(private menu: MenuController, private router: Router) {
+    addIcons({
+      menuOutline,
+      searchOutline,
+      notificationsOutline,
+      calendarOutline,
+      peopleOutline,
+      personOutline,
+      settingsOutline,
+      barChartOutline,
+      createOutline
+    });
   }
 
   ngOnInit() {}
 
-  // Método para alternar la visibilidad del input
   toggleSearchInput() {
     this.isSearchVisible = !this.isSearchVisible;
   }
 
+  closeMenu() {
+    this.menu.close();
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+    this.closeMenu();
+  }
 }
