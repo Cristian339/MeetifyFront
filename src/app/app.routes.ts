@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'autentificacion', component: AuthComponentComponent },
   { path: 'mensajeria', component: MensajeriaComponent },
   { path: 'navbar', component: CabeceraComponent },
-  { path: 'administración', component: AdministracionComponent },
+  { path: 'administracion', component: AdministracionComponent },
   { path: 'bienvenidos', component: BienvenidosComponent },
   { path: 'categorias', component: CategoriasComponent },
   { path: 'pie-pagina', component: PiePaginaComponent },

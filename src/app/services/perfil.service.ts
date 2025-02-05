@@ -18,6 +18,7 @@ export class PerfilService {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`, authHeader);
   }
+
   actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
@@ -30,5 +31,20 @@ export class PerfilService {
   obtenerPublicacionesCompartidas(): Observable<Publicacion[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/perfil/compartidos`, authHeader);
+  }
+
+  getPerfilesBaneados(): Observable<Perfil[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Perfil[]>(`${this.apiUrl}/admin/baneados`, authHeader);
+  }
+
+  getPerfilesNoBaneados(): Observable<Perfil[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Perfil[]>(`${this.apiUrl}/admin/nobaneados`, authHeader);
+  }
+
+  banearPerfil(correo: string | undefined): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/admin/ban/${correo}`, authHeader);
   }
 }
