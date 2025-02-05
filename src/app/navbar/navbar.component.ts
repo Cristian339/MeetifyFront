@@ -1,7 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, MenuController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { menuOutline, searchOutline, notificationsOutline, calendarOutline, peopleOutline, personOutline, settingsOutline, barChartOutline, createOutline } from 'ionicons/icons';
+import {
+  menuOutline,
+  searchOutline,
+  notificationsOutline,
+  calendarOutline,
+  peopleOutline,
+  personOutline,
+  settingsOutline,
+  barChartOutline,
+  createOutline,
+  arrowBackCircle,
+  shareOutline,
+  arrowRedoOutline,
+  starHalfOutline,
+  lockClosedOutline
+} from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,14 +36,21 @@ export class NavbarComponent implements OnInit {
 
   isSearchVisible: boolean = false;
   searchQuery: string = '';
+  vistaActual: 'main' | 'config' = 'main';
   menuItems = [
-    { label: 'Notificaciones', icon: 'notifications-outline', route: '/notifications' },
     { label: 'Eventos', icon: 'calendar-outline', route: '/events' },
-    { label: 'Grupos', icon: 'people-outline', route: '/groups' },
-    { label: 'Amigos', icon: 'person-outline', route: '/friends' },
-    { label: 'Mis actividades y configuración', icon: 'settings-outline', route: '/settings' },
+    { label: 'Amigos', icon: 'people-outline', route: '/friends' },
+    /*{ label: 'Mis actividades y configuración', icon: 'settings-outline', route: '/settings' },*/
     { label: 'Mi reputación', icon: 'bar-chart-outline', route: '/reputation' },
-    { label: 'Editar perfil', icon: 'create-outline', route: '/edit-profile' }
+    { label: 'Editar perfil', icon: 'create-outline', route: '/editar-perfil' }
+  ];
+
+  menuActivities = [
+    { label: 'Configurar perfil', icon: 'person-outline', route: '/events' },
+    { label: 'Eventos compartidos', icon: 'share-outline', route: '/friends' },
+    { label: 'Eventos que me he unido', icon: 'arrow-redo-outline', route: '/reputation' },
+    { label: 'Reseñas que hice', icon: 'star-half-outline', route: '/editar-perfil' },
+    { label: 'Privacidad', icon: 'lock-closed-outline', route: '/editar-perfil' }
   ];
 
   constructor(private menu: MenuController, private router: Router) {
@@ -41,7 +63,12 @@ export class NavbarComponent implements OnInit {
       personOutline,
       settingsOutline,
       barChartOutline,
-      createOutline
+      createOutline,
+      arrowBackCircle,
+      shareOutline,
+      arrowRedoOutline,
+      starHalfOutline,
+      lockClosedOutline
     });
   }
 
@@ -58,5 +85,9 @@ export class NavbarComponent implements OnInit {
   navigateTo(route: string) {
     this.router.navigate([route]);
     this.closeMenu();
+  }
+
+  setVista(view: 'main'  | 'config') {
+    this.vistaActual = view;
   }
 }
