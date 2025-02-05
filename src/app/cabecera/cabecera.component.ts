@@ -4,6 +4,7 @@ import { addIcons } from "ionicons";
 import { IonicModule } from "@ionic/angular";
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-cabecera',
   templateUrl: './cabecera.component.html',
@@ -17,6 +18,7 @@ export class CabeceraComponent implements OnInit {
   @Input() titulo: string = 'NAVBAR';
   @Input() backRoute: string | undefined;
 
+
   constructor(private router: Router) {
     addIcons({ arrowBackCircle });
   }
@@ -25,6 +27,7 @@ export class CabeceraComponent implements OnInit {
       this.router.navigate([this.backRoute]);
     }
   }
+
 
   ngOnInit() {}
 }

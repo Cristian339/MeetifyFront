@@ -1,37 +1,75 @@
 import { Component, OnInit } from '@angular/core';
-import {IonicModule, ModalController} from "@ionic/angular";
-import { settingsOutline, banOutline, arrowBackCircle, personCircleOutline, caretUpOutline} from "ionicons/icons";
-import {addIcons} from "ionicons";
-import { CommonModule} from "@angular/common";
-import { FormsModule} from "@angular/forms";
+import { IonicModule, ModalController } from "@ionic/angular";
+import { settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline } from "ionicons/icons";
+import { addIcons } from "ionicons";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { PerfilService } from "../services/perfil.service";
+import { Perfil } from "../modelos/Perfil";
+import { DatePipe, NgForOf, NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-administracion',
-    templateUrl: './administracion.component.html',
-    styleUrls: ['./administracion.component.scss'],
-    standalone: true,
-    imports: [
-        IonicModule,
-        CommonModule,
-        FormsModule
-    ]
+  selector: 'app-administracion',
+  templateUrl: './administracion.component.html',
+  styleUrls: ['./administracion.component.scss'],
+  standalone: true,
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule
+  ]
 })
-export class AdministracionComponent  implements OnInit {
+export class AdministracionComponent implements OnInit {
 
   mostrarDeslizador: boolean = false;
   diasBaneo: number = 0;
-
-  constructor() {
-
-    addIcons( { settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline } );
-  }
-
-  ngOnInit() {}
+  perfiles: Perfil[] = [];
+  correoBan: string = '';
 
   vistaActual: 'admin' | 'users' | 'baneados' = 'admin';
 
+  constructor(private perfilService: PerfilService) {
+    addIcons({ settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline });
+  }
+
+  ngOnInit() { }
+
+  cargarBaneados(): void {
+    this.perfiles = [];
+    this.perfilService.getPerfilesBaneados().subscribe({
+      next: (data) => {
+        this.perfiles = data;
+        console.info(data);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Petición completada');
+      },
+    });
+  }
+
+  cargarNoBaneados(): void {
+    this.perfiles = [];
+    this.perfilService.getPerfilesNoBaneados().subscribe({
+      next: (data) => {
+        this.perfiles = data;
+        console.info(data);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Petición completada');
+      },
+    });
+  }
+
   viajarA(view: 'admin' | 'users' | 'baneados') {
     this.vistaActual = view;
+
+    if (view === 'users') {
+      this.cargarNoBaneados();  // Cargar usuarios no baneados
+    } else if (view === 'baneados') {
+      this.cargarBaneados();  // Cargar usuarios baneados
+    }
   }
 
   cambiarTitulo(): string {
@@ -41,7 +79,7 @@ export class AdministracionComponent  implements OnInit {
       case 'users':
         return 'Usuarios';
       case 'baneados':
-        return 'Lista de Baneados';
+        return 'Lista de baneados';
       default:
         return '';
     }
@@ -55,5 +93,16 @@ export class AdministracionComponent  implements OnInit {
     this.mostrarDeslizador = !this.mostrarDeslizador;
   }
 
-}
 
+  banearUsuario(correo: string | undefined) {
+    this.perfilService.banearPerfil(correo).subscribe({
+      next: (data) => {
+        console.log("Usuario baneado correctamente");
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Usuario baneado exitosamente');
+      },
+    });
+  }
+}

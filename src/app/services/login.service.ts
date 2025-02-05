@@ -30,4 +30,6 @@ export class LoginService {
     return this.http.post<any>(`${this.apiUrl}/auth/registro`,registro);
   }
 
+
+
 }

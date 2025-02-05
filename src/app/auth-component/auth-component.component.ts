@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from "../services/login.service";
 import { Login } from '../modelos/Login';
 import { Registro } from '../modelos/Registro';
+import {PerfilService} from "../services/perfil.service";
 
 @Component({
   selector: 'app-auth-component',
@@ -34,7 +35,7 @@ export class AuthComponentComponent implements OnInit {
   modalAbierto = false;
   mensajeModal = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService, private perfilService : PerfilService) {
     this.registroForm = this.fb.group({
       nombre: [this.registro.nombre, Validators.required],
       apellidos: [this.registro.apellidos, Validators.required],
@@ -116,8 +117,16 @@ export class AuthComponentComponent implements OnInit {
       }
     } else {
       console.log('Formulario no válido');
+      this.authForm.updateValueAndValidity();
+
     }
   }
+
+
+
+
+
+
 
   verificarCamposLogin() {
     const nombreUsuario = this.authForm.get('nombreUsuario')?.value;
@@ -132,7 +141,14 @@ export class AuthComponentComponent implements OnInit {
           const token = respuesta.token;
           sessionStorage.setItem("authToken", token);
           this.loginService.setAuthState(true);
-          this.router.navigate(['/publicacion']);
+          const rol = respuesta.rol;
+          console.log(rol);
+          if(rol === "PERFIL"){
+            this.router.navigate(['/publicacion']);
+          }else if(rol === "ADMIN"){
+            this.router.navigate(['/administracion']);
+          }
+
         },
         error: (e) => {
           this.mensajeModal = 'Usuario/Correo o contraseña incorrectos';
@@ -141,6 +157,9 @@ export class AuthComponentComponent implements OnInit {
       });
     }
   }
+
+
+
 
   verificarCamposRegistro() {
     const nombre = this.authForm.get('nombre')?.value;
