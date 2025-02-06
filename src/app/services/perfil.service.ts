@@ -27,7 +27,7 @@ export class PerfilService {
 
   compartirPublicacion(publicacionId: number | undefined): Observable<any> {
     const authHeader = this.comunService.autorizarPeticion();
-    return this.httpClient.post(`${this.apiUrl}/publicacion/perfil/compartir/${publicacionId}`, authHeader);
+    return this.httpClient.post(`${this.apiUrl}/publicacion/perfil/compartir/${publicacionId}`, {},authHeader );
   }
 
   obtenerPublicacionesCompartidas(): Observable<Publicacion[]> {
