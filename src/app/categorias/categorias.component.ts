@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import {IonicModule, ToastController} from '@ionic/angular';
-import {NgClass} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { IonicModule, ToastController } from '@ionic/angular';
+import { NgClass } from "@angular/common";
 import { CommonModule } from '@angular/common';
-import {Router} from "@angular/router";
-import {CategoriasService} from "../services/categorias.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { CategoriasService } from "../services/categorias.service";
+
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
@@ -14,14 +15,23 @@ import {CategoriasService} from "../services/categorias.service";
     CommonModule
   ]
 })
-export class CategoriasComponent {
+export class CategoriasComponent implements OnInit {
   selectedCategories: string[] = [];
+  correoElectronico: string = '';
 
   constructor(
     private toastController: ToastController,
     private router: Router,
-    private categoriasService: CategoriasService  // Inyectar el servicio
+    private activatedRoute: ActivatedRoute, // Inyectamos ActivatedRoute
+    private categoriasService: CategoriasService  // Inyectamos el servicio de categorías
   ) {}
+
+  ngOnInit() {
+    // Accedemos al correo electrónico de los queryParams
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.correoElectronico = params['correoElectronico'] || ''; // Obtenemos el correo electrónico
+    });
+  }
 
   toggleCategory(category: string) {
     if (this.selectedCategories.includes(category)) {
@@ -33,9 +43,10 @@ export class CategoriasComponent {
 
   async saveCategories() {
     console.log('Categorías seleccionadas:', this.selectedCategories);
+    console.log('Correo electrónico:', this.correoElectronico);
 
-    // Llamar al servicio para enviar las categorías seleccionadas al backend
-    this.categoriasService.actualizarCategorias(this.selectedCategories).subscribe({
+    // Llamar al servicio para enviar las categorías seleccionadas al backend, junto con el correo electrónico
+    this.categoriasService.actualizarCategorias(this.selectedCategories, this.correoElectronico).subscribe({
       next: async () => {
         const toast = await this.toastController.create({
           message: 'Categorías guardadas!',
@@ -43,7 +54,7 @@ export class CategoriasComponent {
           position: 'bottom'
         });
         toast.present();
-        this.router.navigate(['/publicacion']);
+        this.router.navigate(['/autentificacion']);
       },
       error: async (err) => {
         const toast = await this.toastController.create({
