@@ -1,6 +1,6 @@
 export class DatosBiograficos {
   pais?: string;
   genero?: string;
-  imagenUrl?: string;
+  imagenUrlPerfil?: string;
   biografia?: string;
 }

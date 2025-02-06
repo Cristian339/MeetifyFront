@@ -2,7 +2,8 @@ export class Publicacion {
   id?: number;
   nombrePerfil?: string;
   categoria?: string;
-  imageUrl?: string;
+  imagenUrlPub?: string;
+  imagenUrlPerfil?: string;
   titulo?: string;
   descripcion?: string;
   ubicacion?: string;
@@ -14,7 +15,8 @@ export class Publicacion {
       this.id = data.id;
       this.nombrePerfil = data.nombrePerfil;
       this.categoria = data.categoria;
-      this.imageUrl = data.imageUrl;
+      this.imagenUrlPub = data.imagenUrlPub;
+      this.imagenUrlPerfil = data.imagenUrlPerfil;
       this.titulo = data.titulo;
       this.descripcion = data.descripcion;
       this.ubicacion = data.ubicacion;

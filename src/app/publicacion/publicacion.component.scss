@@ -76,3 +76,27 @@ p {
 .descripcion-textarea {
   height: 150px;
 }
+
+.circular-image {
+  width: 55px; /* Adjust the size to match the icon */
+  height: 55px; /* Adjust the size to match the icon */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.centered-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #19323C;
+}
+
+.nombre-perfil {
+  font-size: 1.2rem; /* Adjust the font size as needed */
+  color: #19323C;
+}
+
+.categoria {
+  font-size: 0.8rem; /* Adjust the font size as needed */
+  color: #19323C;
+}

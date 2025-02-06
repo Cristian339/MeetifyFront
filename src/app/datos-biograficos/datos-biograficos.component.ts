@@ -23,7 +23,7 @@ import { DatosBiograficos } from "../modelos/DatosBiograficos";
 })
 export class DatosBiograficosComponent implements OnInit {
   imagePreview: string | null = null;
-  imageURL: string = '';
+  imagenUrlPerfil: string = '';
   pais: string = '';
   genero: string = '';
   biografia: string = '';
@@ -64,7 +64,7 @@ export class DatosBiograficosComponent implements OnInit {
   }
 
   updateImagePreview() {
-    this.imagePreview = this.imageURL;
+    this.imagePreview = this.imagenUrlPerfil;
   }
 
   toggleURLInput() {
@@ -79,7 +79,7 @@ export class DatosBiograficosComponent implements OnInit {
     const datosBiograficos: DatosBiograficos = {
       pais: this.pais,
       genero: this.genero,
-      imagenUrl: this.imagePreview ?? undefined,
+      imagenUrlPerfil: this.imagePreview ?? undefined,
       biografia: this.biografia
     };
 

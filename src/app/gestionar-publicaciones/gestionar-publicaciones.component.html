@@ -3,12 +3,12 @@
   <div class="container" *ngIf="publicacion">
     <app-perfil [publicaciones]="publicaciones" (profileClick)="onProfileClick($event)"></app-perfil>
     <div class="image-container">
-      <img [src]="publicacion.imageUrl" alt="Paisaje">
+      <img [src]="publicacion.imagenUrlPub" alt="Paisaje">
       <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
     </div>
     <h2>{{ publicacion.titulo }}</h2>
     <div class="profile-container">
-      <img [src]="publicacion.imageUrl" alt="Perfil" class="profile-pic">
+      <img [src]="publicacion.imagenUrlPub" alt="Perfil" class="profile-pic">
       <ion-icon name="camera-outline" class="profile-camera"></ion-icon>
       <div class="profile-info">
         <h3>{{ publicacion.nombrePerfil }}</h3>
