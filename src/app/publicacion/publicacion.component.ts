@@ -5,7 +5,7 @@ import { PublicacionService } from '../services/publicacion.service';
 import { Publicacion } from '../modelos/Publicacion';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
-import { IonicModule } from '@ionic/angular';
+import {IonicModule, ToastController} from '@ionic/angular';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { IonDatetime } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
@@ -50,7 +50,8 @@ export class PublicacionComponent implements OnInit {
     private modalService: ModalService,
     private publicacionService: PublicacionService,
     private actionSheetCtrl: ActionSheetController,
-    private perfilService: PerfilService
+    private perfilService: PerfilService,
+    private toastController: ToastController
   ) {
   addIcons({ ellipsisVerticalOutline, ribbonOutline, shareSocialOutline, peopleCircleOutline,
     personCircleOutline, golfOutline, calendarOutline});
@@ -162,16 +163,30 @@ export class PublicacionComponent implements OnInit {
     // Llamamos al servicio para compartir la publicación
     console.log(publicacionId);
     this.perfilService.compartirPublicacion(publicacionId).subscribe({
-      next: (response) => {
+      next: async (response) => {
         console.log('Publicación compartida exitosamente', response);
+
+        // Mostrar el toast después de la respuesta exitosa
+        const toast = await this.toastController.create({
+          message: '¡Publicación compartida exitosamente!',
+          duration: 2000, // Duración del toast en milisegundos
+          position: 'bottom' // Posición del toast
+        });
+        toast.present();
       },
       error: (error) => {
         console.error('Error al compartir publicación', error);
+
+        // Mostrar el toast en caso de error
+        this.toastController.create({
+          message: 'Hubo un error al compartir la publicación.',
+          duration: 2000,
+          position: 'bottom'
+        }).then(toast => toast.present());
       },
       complete: () => {
         console.log('Petición completada');
       },
     });
   }
-
 }
