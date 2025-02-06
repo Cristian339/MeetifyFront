@@ -61,7 +61,7 @@
         </ion-col>
         <ion-col size="4">
           <div class="icon-text-container">
-            <ion-button fill="clear" class="font-amatic-grande">
+            <ion-button fill="clear" class="font-amatic-grande" (click)="compartirPublicacion(p.id)">
               <ion-icon name="share-social-outline" class="medium-icon" color="primario"></ion-icon>
               Compartir
             </ion-button>
@@ -83,8 +83,8 @@
         <div class="input-container ion-color-secundario">
           <ion-list>
             <ion-item>
-              <ion-select placeholder="Selecciona una categoria" class="font-inter" [(ngModel)]="publicacionNueva.categoria">
-                <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
+              <ion-select placeholder="Selecciona una categoria" class="font-inter" [(ngModel)]="publicacionNueva.categoria" (click)="cargarCategorias()">
+                <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{ categoria.nombre }}</ion-select-option>
               </ion-select>
             </ion-item>
 

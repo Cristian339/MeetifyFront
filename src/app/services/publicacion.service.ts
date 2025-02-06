@@ -48,4 +48,9 @@ export class PublicacionService {
     return this.httpClient.get<Publicacion>(`${this.apiUrl}/publicacion/${idPub}`, authHeader);
   }
 
+  obtenerPublicacionesPorCorreo(correo: string): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/admin/publicaciones/${correo}`, authHeader);
+  }
+
 }

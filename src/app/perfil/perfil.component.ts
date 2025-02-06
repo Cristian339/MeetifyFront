@@ -8,6 +8,7 @@ import { PerfilService } from '../services/perfil.service';
 import { PublicacionService } from '../services/publicacion.service';
 import { Perfil } from '../modelos/Perfil';
 import { Publicacion } from '../modelos/Publicacion';
+import {Categoria} from "../modelos/Categoria";
 
 @Component({
   selector: 'app-perfil',
@@ -22,6 +23,7 @@ import { Publicacion } from '../modelos/Publicacion';
 })
 export class PerfilComponent implements OnInit {
   perfil: Perfil | undefined;
+  categorias: Categoria[] = [];
 
   @Input() publicaciones: Publicacion[] | undefined;
   @Output() profileClick = new EventEmitter<Publicacion>();
@@ -51,7 +53,15 @@ export class PerfilComponent implements OnInit {
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
     });
-
+    this.perfilService.categoriasPerfil().subscribe({
+      next: (data) => {
+        console.log('Data received:', data);
+        this.categorias = data;
+        console.log('Perfil assigned:', this.perfil);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
 
   }
 
@@ -78,6 +88,20 @@ export class PerfilComponent implements OnInit {
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
     });
+  }
+
+  cargarCategorias(): void{
+    this.categorias = [];
+    this.perfilService.categoriasPerfil().subscribe(({
+      next: (data) => {
+        this.categorias = data;
+        console.info(data);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Petición completada');
+      },
+    }))
   }
 
 }
