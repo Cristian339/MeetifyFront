@@ -56,6 +56,7 @@ export class AuthComponentComponent implements OnInit {
   }
 
   initializeForm() {
+
     this.authForm = this.fb.group({
       nombreUsuario: ['', Validators.required],
       contrasenia: ['', Validators.required],

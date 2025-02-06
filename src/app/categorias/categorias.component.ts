@@ -41,6 +41,7 @@ export class CategoriasComponent implements OnInit {
     }
   }
 
+  // Categorias.component.ts
   async saveCategories() {
     console.log('Categorías seleccionadas:', this.selectedCategories);
     console.log('Correo electrónico:', this.correoElectronico);
@@ -54,7 +55,9 @@ export class CategoriasComponent implements OnInit {
           position: 'bottom'
         });
         toast.present();
-        this.router.navigate(['/autentificacion']);
+        // Redirigimos a la página /sobre-ti pasando el correo como queryParam
+        //this.router.navigate(['/sobre-ti'], { queryParams: { correoElectronico: this.correoElectronico } });
+        this.router.navigate(['']);
       },
       error: async (err) => {
         const toast = await this.toastController.create({
@@ -66,4 +69,5 @@ export class CategoriasComponent implements OnInit {
       }
     });
   }
+
 }

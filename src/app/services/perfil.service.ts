@@ -20,9 +20,15 @@ export class PerfilService {
     return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`, authHeader);
   }
 
-  actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
-    const authHeader = this.comunService.autorizarPeticion();
-    return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
+  // actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
+  //   const authHeader = this.comunService.autorizarPeticion();
+  //   return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
+  // }
+
+
+  actualizarDatosBiografia(datosBiografia: Perfil, correoElectronico: string): Observable<Perfil> {
+    const urlConCorreo = `${this.apiUrl}/biografia/actualizar/${correoElectronico}`;
+    return this.httpClient.post<Perfil>(urlConCorreo,datosBiografia);
   }
 
   compartirPublicacion(publicacionId: number | undefined): Observable<any> {

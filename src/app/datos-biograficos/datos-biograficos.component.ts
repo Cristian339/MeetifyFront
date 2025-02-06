@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IonicModule } from "@ionic/angular";
 import { CabeceraComponent } from "../cabecera/cabecera.component";
 import { NgIf } from "@angular/common";
@@ -28,17 +28,25 @@ export class DatosBiograficosComponent implements OnInit {
   genero: string = '';
   biografia: string = '';
   showURLInput: boolean = false;
+  correoElectronico: string = ''; // Variable para almacenar el correo
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   constructor(
     private perfilService: PerfilService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute // Inyectamos ActivatedRoute
   ) {
     addIcons({ globeOutline, cameraOutline, linkOutline, createOutline, transgenderOutline });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Accedemos al correo electrónico desde los queryParams
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.correoElectronico = params['correoElectronico'] || ''; // Obtenemos el correo electrónico
+    });
+    console.log(this.correoElectronico);
+  }
 
   openFileInput() {
     this.fileInput.nativeElement.click();
@@ -66,7 +74,7 @@ export class DatosBiograficosComponent implements OnInit {
     }
   }
 
-// En tu componente
+  // Usamos el correo electrónico al guardar los datos biográficos
   guardarDatosBiograficos() {
     const datosBiograficos: DatosBiograficos = {
       pais: this.pais,
@@ -75,17 +83,18 @@ export class DatosBiograficosComponent implements OnInit {
       biografia: this.biografia
     };
 
-    // Mostrar los datos del perfil en la consola
+    // Mostramos los datos en la consola (puedes enviarlos al backend)
     console.log('Datos Biográficos:', datosBiograficos);
+    console.log('Correo electrónico:', this.correoElectronico);
 
-    this.perfilService.actualizarDatosBiografia(datosBiograficos).subscribe({
+    this.perfilService.actualizarDatosBiografia(datosBiograficos,this.correoElectronico).subscribe({
       next: (data: any) => {
         console.info(data);
       },
       error: (error: any) => console.error('Error:', error),
       complete: () => {
         console.log('Petición completada');
-        this.router.navigate(['/publicacion']);
+        this.router.navigate(['']);
       },
     });
   }
