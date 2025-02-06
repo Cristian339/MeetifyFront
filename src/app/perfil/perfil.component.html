@@ -21,7 +21,7 @@
         <ion-row class="perfil-row">
             <ion-col size="12" class="perfil-header">
                 <ion-avatar class="perfil-avatar">
-                    <img [src]="perfil.imagenUrl ? perfil.imagenUrl : 'https://picsum.photos/500/300?random=1'" alt="Foto de perfil" />
+                    <img [src]="perfil.imagenUrlPerfil ? perfil.imagenUrlPerfil : 'https://picsum.photos/500/300?random=1'" alt="Foto de perfil" />
                 </ion-avatar>
                 <ion-label class="perfil-usuario font-inter">{{ perfil.nombreUsuario }}</ion-label>
             </ion-col>
@@ -111,7 +111,7 @@
     <ion-row>
       <ion-col size="6" *ngFor="let post of publicaciones">
         <ion-card class="publicacion-card" (click)="onProfileClick(post)">
-          <img [src]="post.imageUrl ? post.imageUrl : 'https://picsum.photos/500/300?random=1'" alt="Publicación" />
+          <img [src]="post.imagenUrlPub ? post.imagenUrlPub : 'https://picsum.photos/500/300?random=1'" alt="Publicación" />
           <ion-card-header>
             <ion-card-title>{{ post.titulo }}</ion-card-title>
           </ion-card-header>

@@ -8,5 +8,5 @@ export class Perfil {
   biografia?: string;
   pais?: string;
   fechaNacimiento?: string; // asumiendo LocalDate
-  imagenUrl?: string;
+  imagenUrlPerfil?: string;
 }

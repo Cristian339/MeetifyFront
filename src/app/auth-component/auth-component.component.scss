@@ -5,20 +5,22 @@
   justify-content: center;
   padding: 20px;
   margin-bottom: 5%;
+  overflow-y: auto; /* Ensure vertical scrolling */
 
   .auth-box {
     background-color: #ffffff;
     border-radius: 20px;
     padding: 30px;
-    max-width: 800px;
+    max-width: 800px; /* Increase max-width for wider containers */
+    width: 100%;
     margin: auto;
-    margin: -10%;
   }
 
   .logo {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px; /* Add margin to ensure visibility */
   }
 
   .logo img {
@@ -50,7 +52,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px; /* Increase max-width for wider containers */
 
     ion-input {
       --color: #333;
@@ -62,7 +64,9 @@
   .InicioSesion {
     background-color: #19323C;
     border-radius: 50px;
-    margin-left: 30%;
+    width: 100%;
+    max-width: 300px; /* Center the button */
+    margin: 0 auto; /* Center the button */
   }
 
   boton {
@@ -119,6 +123,11 @@
 
     .switch-auth, .forgot-password {
       font-size: 1.2rem;
+    }
+
+    .InicioSesion {
+      margin-left: 0;
+      width: 100%;
     }
   }
 
