@@ -1,4 +1,5 @@
 export class Publicacion {
+  id?: number;
   nombrePerfil?: string;
   categoria?: string;
   imagenUrlPub?: string;
@@ -11,6 +12,7 @@ export class Publicacion {
 
   constructor(data?: Partial<Publicacion>) {
     if (data) {
+      this.id = data.id;
       this.nombrePerfil = data.nombrePerfil;
       this.categoria = data.categoria;
       this.imagenUrlPub = data.imagenUrlPub;

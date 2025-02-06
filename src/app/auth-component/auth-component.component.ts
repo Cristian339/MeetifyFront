@@ -176,7 +176,8 @@ export class AuthComponentComponent implements OnInit {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
           console.info("Registro exitoso");
-          this.router.navigate(['/categorias']);
+          // Pasamos el correo a CategoriasComponent mediante queryParams
+          this.router.navigate(['/categorias'], { queryParams: { correoElectronico } });
         },
         error: (e: any) => {
           if (e.error && e.error.message) {
@@ -189,6 +190,7 @@ export class AuthComponentComponent implements OnInit {
       });
     }
   }
+
 
   verificarCamposRecuperacion() {
     const correoElectronico = this.authForm.get('correoElectronico')?.value;

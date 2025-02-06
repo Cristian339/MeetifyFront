@@ -100,6 +100,15 @@
             </ion-label>
         </ion-col>
     </ion-row>
+  <ion-row class="perfil-info font-inter">
+    <ion-col>
+      <ion-list *ngFor="let c of categorias">
+        <ion-item>
+          <ion-text><i>{{c.nombre}}</i></ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 
     <!-- Sección de tabs y publicaciones -->
   <ion-segment value="publicaciones" class="perfil-tabs" color="secundario">

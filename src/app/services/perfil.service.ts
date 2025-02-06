@@ -5,6 +5,7 @@ import { Perfil } from '../modelos/Perfil';
 import { environment } from '../../environments/environment';
 import { ComunService } from './comun.service';
 import { Publicacion } from '../modelos/Publicacion';
+import {Categoria} from "../modelos/Categoria";
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,9 @@ export class PerfilService {
     return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
   }
 
-  compartirPublicacion(publicacionId: number): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/publicacion/perfil/compartir/${publicacionId}`, {});
+  compartirPublicacion(publicacionId: number | undefined): Observable<any> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post(`${this.apiUrl}/publicacion/perfil/compartir/${publicacionId}`, {},authHeader );
   }
 
   obtenerPublicacionesCompartidas(): Observable<Publicacion[]> {
@@ -46,5 +48,11 @@ export class PerfilService {
   banearPerfil(correo: string | undefined): Observable<void> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<void>(`${this.apiUrl}/admin/ban/${correo}`, authHeader);
+  }
+
+
+  categoriasPerfil(): Observable<Categoria[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/categorias`, authHeader);
   }
 }

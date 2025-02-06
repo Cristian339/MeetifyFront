@@ -19,6 +19,8 @@ import {
   shareSocialOutline
 } from "ionicons/icons";
 import {PerfilService} from "../services/perfil.service";
+import {Categoria} from "../modelos/Categoria";
+import {getTokenAtPosition} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
 
 @Component({
   selector: 'app-publicacion',
@@ -42,7 +44,7 @@ export class PublicacionComponent implements OnInit {
   currentDatePicker: 'start' | 'end' | null = null;
   isLink: boolean = false;
   publicacionNueva: Publicacion = new Publicacion();
-  categorias: string[] = ['Musica', 'Deportes', 'Tecnologia']; // Hardcoded categories
+  categorias: Categoria[] = []; // Hardcoded categories
 
   constructor(
     private modalService: ModalService,
@@ -112,6 +114,20 @@ export class PublicacionComponent implements OnInit {
     });
   }
 
+  cargarCategorias(): void{
+    this.categorias = [];
+    this.perfilService.categoriasPerfil().subscribe(({
+      next: (data) => {
+        this.categorias = data;
+        console.info(data);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Petición completada');
+      },
+    }))
+  }
+
   cargarPublicacionesSeguidos(): void {
     this.publicaciones = [];
     this.publicacionService.getPublicacionesSeguidos().subscribe({
@@ -142,17 +158,19 @@ export class PublicacionComponent implements OnInit {
     });
   }
 
-  compartirPublicacion(publicacionId: number): void {
+  compartirPublicacion(publicacionId: number | undefined): void {
     // Llamamos al servicio para compartir la publicación
+    console.log(publicacionId);
     this.perfilService.compartirPublicacion(publicacionId).subscribe({
       next: (response) => {
         console.log('Publicación compartida exitosamente', response);
-        // Actualiza las publicaciones si es necesario
-        this.cargarPublicaciones();
       },
       error: (error) => {
         console.error('Error al compartir publicación', error);
-      }
+      },
+      complete: () => {
+        console.log('Petición completada');
+      },
     });
   }
 

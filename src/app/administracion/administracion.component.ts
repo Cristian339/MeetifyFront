@@ -7,6 +7,8 @@ import { FormsModule } from "@angular/forms";
 import { PerfilService } from "../services/perfil.service";
 import { Perfil } from "../modelos/Perfil";
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
+import {Publicacion} from "../modelos/Publicacion";
+import {PublicacionService} from "../services/publicacion.service";
 
 @Component({
   selector: 'app-administracion',
@@ -25,10 +27,12 @@ export class AdministracionComponent implements OnInit {
   diasBaneo: number = 0;
   perfiles: Perfil[] = [];
   correoBan: string = '';
+  publicaciones: Publicacion[] = [];
+  modalVisible = false;
 
   vistaActual: 'admin' | 'users' | 'baneados' = 'admin';
 
-  constructor(private perfilService: PerfilService) {
+  constructor(private perfilService: PerfilService, private publicacionService: PublicacionService) {
     addIcons({ settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline });
   }
 
@@ -104,5 +108,27 @@ export class AdministracionComponent implements OnInit {
         console.log('Usuario baneado exitosamente');
       },
     });
+  }
+
+  verPublicaciones(correo: string | undefined) {
+    this.publicaciones = [];
+
+    console.log(correo);
+    if (correo) {
+      this.publicacionService.obtenerPublicacionesPorCorreo(correo).subscribe({
+        next: (data: Publicacion[]) => {
+          this.publicaciones = data;
+
+        },
+        error: (error) => console.error('Error al obtener publicaciones:', error),
+        complete: () => {
+          this.modalVisible = true;
+        },
+      });
+    }
+  }
+
+  cerrarModal() {
+    this.modalVisible = false;
   }
 }
