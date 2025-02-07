@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { ComunService } from './comun.service';
 import { Publicacion } from '../modelos/Publicacion';
 import {Categoria} from "../modelos/Categoria";
+import {SeguidorDTO} from "../modelos/SeguidorDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,30 @@ export class PerfilService {
   categoriasPerfil(): Observable<Categoria[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/categorias`, authHeader);
+  }
+
+  obtenerSeguidores(): Observable<SeguidorDTO[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidores`, authHeader);
+  }
+
+  obtenerSeguidos(): Observable<SeguidorDTO[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidos`, authHeader);
+  }
+
+  obtenerAmigos(): Observable<SeguidorDTO[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/amigos`, authHeader);
+  }
+
+  seguirUsuario(idUsuarioASeguir: number): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/seguidores/seguir/${idUsuarioASeguir}`, {}, authHeader);
+  }
+
+  dejarUsuario(idUsuarioADejarDeSeguir: number): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/seguidores/dejar-de-seguir/${idUsuarioADejarDeSeguir}`, {}, authHeader);
   }
 }

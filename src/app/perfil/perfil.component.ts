@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { IonicModule } from "@ionic/angular";
 import { addIcons } from "ionicons";
-import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline } from "ionicons/icons";
+import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline, personOutline } from "ionicons/icons";
 import { NgForOf, NgIf } from "@angular/common";
 import {ActivatedRoute, Router} from '@angular/router';
 import { PerfilService } from '../services/perfil.service';
@@ -9,6 +9,9 @@ import { PublicacionService } from '../services/publicacion.service';
 import { Perfil } from '../modelos/Perfil';
 import { Publicacion } from '../modelos/Publicacion';
 import {Categoria} from "../modelos/Categoria";
+import {SeguidorDTO} from "../modelos/SeguidorDTO";
+import {FormsModule} from "@angular/forms";
+import { TipoRelacion } from '../modelos/TipoRelacion';
 
 @Component({
   selector: 'app-perfil',
@@ -18,26 +21,34 @@ import {Categoria} from "../modelos/Categoria";
   imports: [
     IonicModule,
     NgForOf,
-    NgIf
+    NgIf,
+    FormsModule
   ]
 })
 export class PerfilComponent implements OnInit {
+
+
   perfil: Perfil | undefined;
   categorias: Categoria[] = [];
+  seguidores: SeguidorDTO[] = [];
+  seguidos: SeguidorDTO[] = [];
+  filteredSeguidores: SeguidorDTO[] = [];
+  filteredSeguidos: SeguidorDTO[] = [];
+  seguidoresCount: number = 0;
+  seguidosCount: number = 0;
+  publicacionesCount: number = 0;
+  searchTerm: string = '';
+  searchTermSeguidores: string = '';
 
   @Input() publicaciones: Publicacion[] | undefined;
   @Output() profileClick = new EventEmitter<Publicacion>();
-
-  onProfileClick(publicacion: Publicacion) {
-    this.profileClick.emit(publicacion);
-  }
 
   constructor(
     private perfilService: PerfilService,
     private publicacionService: PublicacionService,
     private router: Router
   ) {
-    addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline });
+    addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline, personOutline });
   }
 
 
@@ -62,9 +73,30 @@ export class PerfilComponent implements OnInit {
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
     });
-
+    this.cargarSeguidores();
+    this.cargarPublicaciones()
+    this.cargarSeguidos();
+    this.cargarSeguidores5();
+    this.cargarSeguidos5();
   }
 
+  verPubli(publicacion: Publicacion) {
+    this.router.navigate(['/gestionar-publicaciones'], { state: { publicacion } });
+  }
+
+  cargarSeguidores5() {
+    this.perfilService.obtenerSeguidores().subscribe((seguidores: SeguidorDTO[]) => {
+      this.seguidores = seguidores;
+      this.seguidoresCount = seguidores.length;
+    });
+  }
+
+  cargarSeguidos5() {
+    this.perfilService.obtenerSeguidos().subscribe((seguidos: SeguidorDTO[]) => {
+      this.seguidos = seguidos;
+      this.seguidosCount = seguidos.length;
+    });
+  }
 
   cargarPublicaciones(): void {
     this.publicaciones = [];
@@ -78,6 +110,40 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  cargarSeguidores() {
+    this.perfilService.obtenerSeguidores().subscribe((seguidores: SeguidorDTO[]) => {
+      this.seguidores = seguidores.map(seguidor => ({
+        ...seguidor,
+        tipoRelacion: this.getTipoRelacion(seguidor)
+      }));
+      this.filteredSeguidores = this.seguidores;
+      this.seguidoresCount = seguidores.length;
+    });
+  }
+
+  cargarSeguidos() {
+    this.perfilService.obtenerSeguidos().subscribe((seguidos: SeguidorDTO[]) => {
+      this.seguidos = seguidos.map(seguido => ({
+        ...seguido,
+        tipoRelacion: this.getTipoRelacion(seguido)
+      }));
+      this.filteredSeguidos = this.seguidos;
+      this.seguidosCount = seguidos.length;
+    });
+  }
+
+  filterSeguidores() {
+    this.filteredSeguidores = this.seguidores.filter(seg =>
+      seg.nombre?.toLowerCase().includes(this.searchTermSeguidores.toLowerCase())
+    );
+  }
+
+  filterSeguidos() {
+    this.filteredSeguidos = this.seguidos.filter(seg =>
+      seg.nombre?.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
   cargarPublicacionesCompartidas(): void {
     this.publicaciones = [];
     this.perfilService.obtenerPublicacionesCompartidas().subscribe({
@@ -88,6 +154,21 @@ export class PerfilComponent implements OnInit {
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
     });
+  }
+
+  getTipoRelacion(usuario: SeguidorDTO): TipoRelacion {
+    const esSeguidor = this.seguidores.some(seguidor => seguidor.id === usuario.id);
+    const esSeguido = this.seguidos.some(seguido => seguido.id === usuario.id);
+
+    if (esSeguidor && esSeguido) {
+      return TipoRelacion.AMIGO;
+    } else if (esSeguidor) {
+      return TipoRelacion.SEGUIDOR;
+    } else if (esSeguido) {
+      return TipoRelacion.SEGUIDO;
+    } else {
+      return TipoRelacion.SEGUIDOR;
+    }
   }
 
   cargarCategorias(): void{
