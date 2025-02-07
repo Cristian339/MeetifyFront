@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-img src="/assets/Meetify.svg" class="logo-image" slot="start"></ion-img>
+    </ion-buttons>
+    <ion-title class="header-title">Puntuaciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="arrow-back-circle" slot="end" routerLink="/publicacion"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-container">
+  <div class="rating-container">
+    <h2 class="title">AYÚDANOS A SABER CUÁNTO TE GUSTÓ:</h2>
+
+    <div class="group-card">
+      <div class="group-info">
+        <div class="group-avatar">
+          <img [src]="publicacion.imageUrlPub" alt="Publicación" class="group-image"/>
+        </div>
+        <div class="group-details">
+          <h3>{{ publicacion.titulo }}</h3>
+          <p>Creado por: <strong>{{ publicacion.nombrePerfil }}</strong></p>
+        </div>
+      </div>
+
+      <img [src]="publicacion.imageUrlPub" alt="Publicación" class="cover-image" />
+
+      <div class="buttons">
+        <ion-button class="category-button" fill="outline">{{ publicacion.categoria }}</ion-button>
+      </div>
+    </div>
+
+    <div class="rating-section">
+      <p>Valoración:</p>
+      <div class="Puntuacion">
+        <div class="stars">⭐⭐☆☆☆</div>
+        <span class="score">40 / 50 PTS</span>
+      </div>
+    </div>
+
+    <div class="reason-section">
+      <p id="Razon">Razón de la puntuación:</p>
+      <ion-textarea class="reason-textarea" placeholder="No me gusta su logo por ejemplo"></ion-textarea>
+      <p class="optional-text">La razón de la puntuación es OPCIONAL</p>
+    </div>
+
+    <ion-button expand="block" class="submit-button">Puntuar</ion-button>
+  </div>
+</ion-content>

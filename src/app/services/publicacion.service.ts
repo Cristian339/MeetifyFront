@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Publicacion } from '../modelos/Publicacion';
 import { ComunService } from './comun.service';
+import {UsuarioDTO} from "../modelos/UsuarioDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,21 @@ export class PublicacionService {
   obtenerPublicacionesPorCorreo(correo: string): Observable<Publicacion[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/admin/publicaciones/${correo}`, authHeader);
+  }
+
+  unirsePublicacion(idPublicacion: number): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/publicacion/unirse/${idPublicacion}`, {}, authHeader);
+  }
+
+  obtenerUsuariosUnidos(idPublicacion: number): Observable<UsuarioDTO[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<UsuarioDTO[]>(`${this.apiUrl}/publicacion/usuarios-unidos/${idPublicacion}`, authHeader);
+  }
+
+  salirPublicacion(idPublicacion: number): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.delete<void>(`${this.apiUrl}/publicacion/salir/${idPublicacion}`, authHeader);
   }
 
 }

@@ -22,8 +22,8 @@
     <ion-grid style="float: left">
       <ion-row>
         <ion-col>
-          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
-            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
+          <ng-container *ngIf="p.imageUrlPerfil; else defaultIcon">
+            <img [src]="p.imageUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
           </ng-container>
           <ng-template #defaultIcon>
             <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
@@ -36,7 +36,7 @@
       </ion-row>
     </ion-grid>
 
-    <img alt="Silhouette of mountains" [src]="p.imagenUrlPub ? p.imagenUrlPub : 'https://ionicframework.com/docs/img/demos/card-media.png'" style="margin-top: 10px"/>
+    <img alt="Silhouette of mountains" [src]="p.imageUrlPub ? p.imageUrlPub : 'https://ionicframework.com/docs/img/demos/card-media.png'" style="margin-top: 10px"/>
     <ion-title style="margin-top: 10px;" color="primario"><i>{{p.titulo}}</i></ion-title>
     <ion-card-content style="margin-left: 4px"><i>{{p.descripcion}}</i></ion-card-content>
     <ion-text style="padding-left: 15px; display: block;color: black">
@@ -51,24 +51,30 @@
         <ion-col size="4">
           <div class="icon-text-container">
             <ion-button fill="clear" class="font-amatic-grande">
+              <ion-button fill="clear" class="font-amatic-grande" (click)="puntuarEvento(p)">
               <ion-icon name="ribbon-outline" class="medium-icon" color="primario"></ion-icon>
               Puntuar
+              </ion-button>
             </ion-button>
           </div>
         </ion-col>
         <ion-col size="4">
           <div class="icon-text-container">
             <ion-button fill="clear" class="font-amatic-grande">
+              <ion-button fill="clear" class="font-amatic-grande" (click)="unirseEvento(p)">
               <ion-icon name="people-circle-outline" class="medium-icon" color="primario"></ion-icon>
               Unirse
+              </ion-button>
             </ion-button>
           </div>
         </ion-col>
         <ion-col size="4">
           <div class="icon-text-container">
+            <ion-button fill="clear" class="font-amatic-grande">
             <ion-button fill="clear" class="font-amatic-grande" (click)="compartirPublicacion(p.id)">
               <ion-icon name="share-social-outline" class="medium-icon" color="primario"></ion-icon>
               Compartir
+            </ion-button>
             </ion-button>
           </div>
         </ion-col>
@@ -124,7 +130,7 @@
             </ion-item>
 
             <ion-item *ngIf="isLink">
-              <ion-input placeholder="Enlace de img (opcional)" class="font-inter" [(ngModel)]="publicacionNueva.imagenUrlPub"></ion-input>
+              <ion-input placeholder="Enlace de img (opcional)" class="font-inter" [(ngModel)]="publicacionNueva.imageUrlPub"></ion-input>
             </ion-item>
             <ion-item *ngIf="!isLink">
               <ion-button fill="clear" class="font-inter ion-color-secundario">

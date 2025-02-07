@@ -7,7 +7,6 @@ import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import { PiePaginaComponent } from '../pie-pagina/pie-pagina.component';
 import {IonicModule, ToastController} from '@ionic/angular';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { IonDatetime } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import {addIcons} from "ionicons";
 import {
@@ -21,6 +20,7 @@ import {
 import {PerfilService} from "../services/perfil.service";
 import {Categoria} from "../modelos/Categoria";
 import {getTokenAtPosition} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-publicacion',
@@ -51,7 +51,8 @@ export class PublicacionComponent implements OnInit {
     private publicacionService: PublicacionService,
     private actionSheetCtrl: ActionSheetController,
     private perfilService: PerfilService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
   ) {
   addIcons({ ellipsisVerticalOutline, ribbonOutline, shareSocialOutline, peopleCircleOutline,
     personCircleOutline, golfOutline, calendarOutline});
@@ -71,6 +72,14 @@ export class PublicacionComponent implements OnInit {
   abrirModal() {
     this.modalAbierto = true;
     console.log('Modal abierto');
+  }
+
+  unirseEvento(publicacion: Publicacion) {
+    this.router.navigate(['/unirse-evento'], { state: { publicacion } });
+  }
+
+  puntuarEvento(publicacion: Publicacion) {
+    this.router.navigate(['/puntuar'], { state: { publicacion } });
   }
 
   cerrarModal() {

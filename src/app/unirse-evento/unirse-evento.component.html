@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-img src="/assets/Meetify.svg" class="logo-image" slot="start"></ion-img>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="arrow-back-circle" slot="end" routerLink="/publicacion"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="event-card">
+    <div class="image-placeholder">
+      <img [src]="publicacion?.imageUrlPub" alt="Publicación" class="event-image"/>
+    </div>
+    <ion-card-header>
+      <ion-button expand="block" style="color: white" class="event-title">{{ publicacion?.titulo }}</ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="creator info-item">
+        <ion-avatar>
+          <ion-icon name="person-circle-outline" size="large" class="info-icon"></ion-icon>
+        </ion-avatar>
+        <p class="creator-text">Creado por: <strong>{{ publicacion?.nombrePerfil }}</strong></p>
+      </div>
+      <hr>
+      <div class="description-container">
+        <p class="description-title">Descripción:</p>
+        <p class="desc-text">{{ publicacion?.descripcion }}</p>
+      </div>
+      <hr>
+      <div class="info-item">
+        <p class="info-title">Fechas de Inicio a Fín:</p>
+        <p class="info-text">{{ publicacion?.fechaIni }} - {{publicacion?.fechaFin}}</p>
+      </div>
+      <hr>
+      <div class="info-item">
+        <ion-icon name="location-outline" class="info-icon"></ion-icon>
+        <p class="info-title">Ubicación:</p>
+        <p class="info-text">{{ publicacion?.ubicacion }}</p>
+      </div>
+      <hr>
+      <div class="info-item">
+        <p class="info-title">Categorías:</p>
+        <ion-chip color="primary" class="category-chip" >{{ publicacion?.categoria }}</ion-chip>
+      </div>
+      <hr>
+    </ion-card-content>
+  </ion-card>
+  <ion-button class="join-button" style="text-align: center" (click)="unirseEvento()">Unirme</ion-button>
+</ion-content>

@@ -1,39 +1,175 @@
-<app-navbar></app-navbar>
-<ion-content>
-  <div class="container" *ngIf="publicacion">
-    <app-perfil [publicaciones]="publicaciones" (profileClick)="onProfileClick($event)"></app-perfil>
-    <div class="image-container">
-      <img [src]="publicacion.imagenUrlPub" alt="Paisaje">
-      <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
-    </div>
-    <h2>{{ publicacion.titulo }}</h2>
-    <div class="profile-container">
-      <img [src]="publicacion.imagenUrlPub" alt="Perfil" class="profile-pic">
-      <ion-icon name="camera-outline" class="profile-camera"></ion-icon>
-      <div class="profile-info">
-        <h3>{{ publicacion.nombrePerfil }}</h3>
-        <p>Reputación <strong></strong></p>
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar color="primario">
+        <ion-title slot="start" style="font-family: 'Amatic SC', cursive; font-size: 30px;">Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div style="text-align: center; font-family: 'Amatic SC', cursive;">
+        <button style="font-size: 30px; width: 100%; background: none; border: none; color: black;" id="open-modal-editar" (click)="closeMenu()">Editar</button>
+        <hr style="border: none; border-top: 1px solid black; margin: 10px 0;">
+        <button style="font-size: 30px; width: 100%; background: none; border: none; color: red; cursor: pointer;" id="open-modal-elimiacion" (click)="closeMenu()">Eliminar</button>
+
+        <ion-modal #modalEliminar trigger="open-modal-elimiacion" (didDismiss)="cerrarDeleteModal()" [presentingElement]="presentingElement" [breakpoints]="[0, 0.25, 1]" [initialBreakpoint]="0.25" [backdropDismiss]="true">
+          <ng-template #modalEliminar>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title style="color: white; font-size: 25px">Confirmar Eliminación</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="cerrarDeleteModal()">Cerrar</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <p>¿Estás seguro de que deseas eliminar esta publicación?</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-button expand="block" color="danger" (click)="eliminarPublicacion()">Eliminar</ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button expand="block" (click)="cerrarDeleteModal()">Cancelar</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+
+        <ion-modal #modalEditar trigger="open-modal-editar" (didDismiss)="cerrarEditModal()" [presentingElement]="presentingElement" class="full-screen-modal">
+          <ng-template #modalEditar>
+            <ion-header>
+              <ion-toolbar class="ion-color-primario">
+                <ion-title class="font-amatic-grande title-label" style="text-align: center; font-size: 35px">EDITAR EVENTO</ion-title>
+              </ion-toolbar>
+            </ion-header>
+
+            <ion-content class="ion-padding ion-color-secundario">
+              <div class="input-container ion-color-secundario">
+                <ion-list>
+                  <ion-item>
+                    <ion-select placeholder="Selecciona una categoria" class="font-inter" [(ngModel)]="publicacionNew.categoria">
+                      <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-input placeholder="Título" class="font-inter" [(ngModel)]="publicacionNew.titulo"></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-textarea placeholder="Descripción" class="font-inter descripcion-textarea" [(ngModel)]="publicacionNew.descripcion"></ion-textarea>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-input placeholder="Ubicación" class="font-inter" [(ngModel)]="publicacionNew.ubicacion"></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-input placeholder="Inicio" type="date" class="font-inter" [(ngModel)]="publicacionNew.inicio"></ion-input>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-input placeholder="Fin" type="date" class="font-inter" [(ngModel)]="publicacionNew.fin"></ion-input>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label class="font-amatic" color="primario">Enlace o Imagen:</ion-label>
+                    <ion-toggle [(ngModel)]="isLink"></ion-toggle>
+                  </ion-item>
+
+                  <ion-item *ngIf="isLink">
+                    <ion-input placeholder="Enlace de img (opcional)" class="font-inter" [(ngModel)]="publicacionNew.enlaceImagen"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!isLink">
+                    <ion-button fill="clear" class="font-inter ion-color-secundario">
+                      <ion-icon name="cloud-upload" class="medium-icon"></ion-icon>
+                      Subir imagen desde local
+                    </ion-button>
+                  </ion-item>
+                  <ion-item>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          <ion-button expand="full" color="cuarto" (click)="cerrarEditModal()" class="rounded-button">Cancelar</ion-button>
+                        </ion-col>
+                        <ion-col>
+                          <ion-button expand="full" color="primario" class="rounded-button" (click)="actualizarPublicacion()">Guardar</ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
       </div>
-      <button class="follow-btn">Seguir Publicación</button>
-      <ion-icon name="ellipsis-vertical" class="more-options"></ion-icon>
-    </div>
-    <div class="stats-container">
-      <div><strong>Publicaciones</strong><br></div>
-      <div><strong>Eventos</strong><br></div>
-      <div><strong>Seguidores</strong><br></div>
-      <div><strong>Reputación</strong><br>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar color="primario">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto" style="padding-left: 40px;">
+              <ion-img src="/assets/Meetify.svg" style="width: 60px; margin-left: 120%"></ion-img>
+            </ion-col>
+            <ion-col size="auto" slot="end">
+              <ion-icon name="search-outline" style="padding-top: 20px; float: right;" class="medium-icon"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="container" *ngIf="publicacion">
+        <div class="image-container">
+          <img [src]="publicacion.imageUrlPub" alt="Imagen">
+          <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+        </div>
+        <h2>{{ publicacion.titulo }}</h2>
+        <div class="profile-container">
+          <img [src]="publicacion.imageUrlPerfil" alt="Perfil" class="profile-pic">
+          <ion-icon name="camera-outline" class="profile-camera"></ion-icon>
+          <div class="profile-info">
+            <h3>{{ publicacion.nombrePerfil }}</h3>
+            <p>Reputación <strong></strong></p>
+          </div>
+          <button class="follow-btn" *ngIf="usuarioUnido">Seguir Publicación</button>
+          <ion-icon name="ellipsis-vertical" class="more-options"></ion-icon>
+          <ion-button *ngIf="mostrarBotonSalir" color="danger" (click)="salirPublicacion(publicacion)" class="salir-btn">
+            Salir de la publicación
+          </ion-button>
+        </div>
+        <div class="stats-container">
+          <div><strong>Publicaciones</strong><br></div>
+          <div><strong>Eventos</strong><br></div>
+          <div><strong>Seguidores</strong><br></div>
+          <div><strong>Reputación</strong><br>
+          </div>
+        </div>
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <strong> Ubicación: </strong>
+          <span>{{ publicacion.ubicacion }}</span>
+        </div>
+        <div class="categories">
+          <ion-icon name="book-outline"></ion-icon>
+          <strong> Categorías: </strong>
+          <span class="category">{{ publicacion.categoria }}</span>
+        </div>
       </div>
-    </div>
-    <div class="location">
-      <ion-icon name="location-outline"></ion-icon>
-      <strong> Ubicación: </strong>
-      <span>{{ publicacion.ubicacion }}</span>
-    </div>
-    <div class="categories">
-      <ion-icon name="book-outline"></ion-icon>
-      <strong> Categorías: </strong>
-      <span class="category" *ngFor="let categoria of publicacion.categoria">{{ categoria }}</span>
-    </div>
+    </ion-content>
+    <app-pie-pagina></app-pie-pagina>
   </div>
-</ion-content>
-<app-pie-pagina></app-pie-pagina>
+</ion-app>
