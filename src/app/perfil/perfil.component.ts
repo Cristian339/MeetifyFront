@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { IonicModule } from "@ionic/angular";
 import { addIcons } from "ionicons";
-import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline } from "ionicons/icons";
+import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline, personOutline } from "ionicons/icons";
 import { NgForOf, NgIf } from "@angular/common";
 import {ActivatedRoute, Router} from '@angular/router';
 import { PerfilService } from '../services/perfil.service';
