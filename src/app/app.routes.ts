@@ -14,6 +14,7 @@ import { GestionPublicacionComponent} from "./gestion-publicacion/gestion-public
 import { GestionarPublicacionesComponent} from "./gestionar-publicaciones/gestionar-publicaciones.component";
 import { UnirseEventoComponent} from "./unirse-evento/unirse-evento.component";
 import{ PuntuarComponent} from "./puntuar/puntuar.component";
+import {UsuPubliComponent} from "./usu-publi/usu-publi.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'autentificacion', pathMatch: 'full' },
@@ -30,6 +31,9 @@ export const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'sobre-ti', component: DatosBiograficosComponent },
   { path: 'gestion-publicacion', component: GestionPublicacionComponent },
+  { path: 'gestionar-publicaciones', component: GestionarPublicacionesComponent },
+  { path: 'usu-publi/:correo', component: UsuPubliComponent },
+
   { path: 'gestionar-publicaciones', component: GestionarPublicacionesComponent },
   { path: 'unirse-evento', component: UnirseEventoComponent },
   { path: 'puntuar', component: PuntuarComponent}
