@@ -40,21 +40,16 @@
             </ion-toolbar>
           </ion-header>
 
-          <ion-content>
-            <div class="chat-container">
-              <div class="date-label">25 de Noviembre del 2020</div>
-              <div class="message message-sent">Hola que tal?</div>
-              <div class="message message-received">Bien gracias y tú?</div>
-              <div class="message message-sent">Estoy muy bien, ¿qué haces?</div>
-              <div class="date-label">Ayer</div>
-              <div class="message message-received">Perdón la demora, estaba ocupado</div>
-              <div class="message message-received">¿Qué tal estuvo tu día?</div>
-              <div class="date-label">Justo Ahora</div>
-              <div class="message message-sent">
-                Pero estaba trabajando y ahora salí, estoy cansado, pero bien gracias por preguntar.
-              </div>
-            </div>
-          </ion-content>
+            <ion-content>
+                <div class="chat-container">
+                    <div *ngFor="let message of messages">
+                        <div class="date-label">{{ message.fechaEnviado }}</div>
+                        <div [ngClass]="{'message-sent': message.usuarioEmisor.id === 1, 'message-received': message.usuarioEmisor.id !== 1}">
+                            {{ message.contenido }}
+                        </div>
+                    </div>
+                </div>
+            </ion-content>
 
           <ion-footer style="background-color: #FFFFFF">
             <ion-toolbar style="background-color: #FFFFFF">
