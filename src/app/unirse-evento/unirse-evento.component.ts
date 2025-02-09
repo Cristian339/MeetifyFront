@@ -36,8 +36,14 @@ export class UnirseEventoComponent implements OnInit {
   ngOnInit() {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state) {
-      this.publicacion = navigation.extras.state['publicacion'];
-      console.log('Publicación cargada:', this.publicacion);
+      const id = navigation.extras.state['id'];
+      if (id) {
+        this.cargarPublicacion(id);
+        console.log('ID de la publicación cargada:', id);
+      } else {
+        this.publicacion = navigation.extras.state['publicacion'];
+        console.log('Publicación cargada:', this.publicacion);
+      }
     }
   }
 
@@ -45,7 +51,7 @@ export class UnirseEventoComponent implements OnInit {
     if (this.publicacion?.id) {
       this.publicacionService.unirsePublicacion(this.publicacion.id).subscribe(() => {
         console.log('Unido a la publicación con éxito');
-        this.router.navigate(['/gestionar-publicaciones'], { state: { publicacion: this.publicacion, desdeUnirse: true } });
+        this.router.navigate(['/evento-miembro'], { state: { publicacion: this.publicacion, desdeUnirse: true } });
       }, (error: HttpErrorResponse) => {
         console.error('Error al unirse a la publicación:', error);
         if (error.status === 500) {
@@ -55,5 +61,17 @@ export class UnirseEventoComponent implements OnInit {
         }
       });
     }
+  }
+
+  cargarPublicacion(idPub: number) {
+    this.publicacionService.obtenerPublicacionPorId(idPub).subscribe(
+      (data: Publicacion) => {
+        this.publicacion = data;
+        console.log('Publicación cargada:', this.publicacion);
+      },
+      error => {
+        console.error('Error al cargar la publicación:', error);
+      }
+    );
   }
 }

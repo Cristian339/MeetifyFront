@@ -74,8 +74,8 @@
 
   .salir-btn {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 20%;
+    right: 1%;
     z-index: 1;
   }
 
@@ -101,8 +101,7 @@
     text-align: left;
     font-family: 'Inter', sans-serif;
   }
-  .follow-btn {
-    background: #19323C;
+  .salir-btn {
     color: white;
     padding: 5px 15px;
     border-radius: 15px;

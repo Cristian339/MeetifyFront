@@ -22,8 +22,8 @@
     <ion-grid style="float: left">
       <ion-row>
         <ion-col>
-          <ng-container *ngIf="p.imageUrlPerfil; else defaultIcon">
-            <img [src]="p.imageUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
+          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
+            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
           </ng-container>
           <ng-template #defaultIcon>
             <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
@@ -36,7 +36,7 @@
       </ion-row>
     </ion-grid>
 
-    <img alt="Silhouette of mountains" [src]="p.imageUrlPub ? p.imageUrlPub : 'https://ionicframework.com/docs/img/demos/card-media.png'" style="margin-top: 10px"/>
+    <img alt="Publicación" [src]="p.imagenUrlPub ? p.imagenUrlPub : 'https://ionicframework.com/docs/img/demos/card-media.png'" style="margin-top: 10px"/>
     <ion-title style="margin-top: 10px;" color="primario"><i>{{p.titulo}}</i></ion-title>
     <ion-card-content style="margin-left: 4px"><i>{{p.descripcion}}</i></ion-card-content>
     <ion-text style="padding-left: 15px; display: block;color: black">
@@ -130,7 +130,7 @@
             </ion-item>
 
             <ion-item *ngIf="isLink">
-              <ion-input placeholder="Enlace de img (opcional)" class="font-inter" [(ngModel)]="publicacionNueva.imageUrlPub"></ion-input>
+              <ion-input placeholder="Enlace de img (opcional)" class="font-inter" [(ngModel)]="publicacionNueva.imagenUrlPub"></ion-input>
             </ion-item>
             <ion-item *ngIf="!isLink">
               <ion-button fill="clear" class="font-inter ion-color-secundario">

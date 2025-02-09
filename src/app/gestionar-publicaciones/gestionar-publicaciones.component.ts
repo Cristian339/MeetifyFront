@@ -9,6 +9,7 @@ import { CommonModule } from "@angular/common";
 import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {ModalService} from "../services/modal.service";
+import {UsuarioDTO} from "../modelos/UsuarioDTO";
 
 @Component({
   selector: 'app-gestionar-publicaciones',
@@ -25,6 +26,8 @@ import {ModalService} from "../services/modal.service";
 
 export class GestionarPublicacionesComponent implements OnInit {
 
+  seguidores: UsuarioDTO[] = [];
+  numeroSeguidores: number = 0;
   publicacionNew: any = {
     categoria: '',
     titulo: '',
@@ -36,6 +39,7 @@ export class GestionarPublicacionesComponent implements OnInit {
   };
 
   publicacion!: Publicacion;
+  eliminarPubDTO: any = {};
   usuarioUnido: boolean = false;
   publicacionNueva: any = {};
   categorias: string[] = ['Naturaleza', 'Viajes', 'Gastronomía', 'Arte', 'Tecnología'];
@@ -56,24 +60,15 @@ export class GestionarPublicacionesComponent implements OnInit {
       const id = navigation.extras.state['id'];
       if (id) {
         this.cargarPublicacion(id);
+        this.cargarSeguidores5(id);
         console.log('ID de la publicación cargada:', id);
       } else {
         this.publicacion = navigation.extras.state['publicacion'];
         console.log('Publicación cargada:', this.publicacion);
+        if (this.publicacion && this.publicacion.id) {
+          this.cargarSeguidores5(this.publicacion.id);
+        }
       }
-    }
-  }
-
-  salirPublicacion(publicacion: Publicacion) {
-    if (publicacion.id !== undefined) {
-      this.publicacionService.salirPublicacion(publicacion.id).subscribe(() => {
-        console.log('Salido de la publicación con éxito');
-        this.router.navigate(['/gestionar-publicaciones']);
-      }, (error) => {
-        console.error('Error al salir de la publicación:', error);
-      });
-    } else {
-      console.error('El id de la publicación no está definido');
     }
   }
 
@@ -128,31 +123,43 @@ export class GestionarPublicacionesComponent implements OnInit {
   }
 
   eliminarPublicacion() {
-    if (this.publicacion && this.publicacion.id !== undefined) {
-      this.publicacionService.eliminarPublicacion(this.publicacion.id).subscribe(
-        () => {
-          console.log('Publicación eliminada');
-          this.cerrarDeleteModal();
-          this.router.navigate(['/perfil']);
-        },
-        error => {
-          console.error('Error al eliminar la publicación:', error);
-        }
-      );
-    } else {
-      console.error('No hay datos de la publicación para eliminar o el id no está definido');
+    if (!this.publicacion?.id) {
+      console.error('Error: No hay datos de la publicación para eliminar o el ID no está definido');
+      return;
     }
+
+
+    this.publicacionService.eliminarPublicacion(this.publicacion.id).subscribe({
+      next: () => {
+        console.log('Publicación eliminada');
+        this.cerrarDeleteModal();
+        this.router.navigate(['/perfil']);
+      },
+      error: (error: any) => {
+        console.error('Error al eliminar la publicación:', error);
+        alert('No se pudo eliminar la publicación. ' + (error?.error || 'Inténtalo nuevamente.'));
+      }
+    });
   }
 
-  cargarPublicacion(idPub: number) {
-    this.publicacionService.obtenerPublicacionPorId(idPub).subscribe(
-      (data: Publicacion) => {
+
+  cargarPublicacion(id: number) {
+    this.publicacionService.obtenerPublicacionPorId(id).subscribe({
+      next: (data: Publicacion) => {
         this.publicacion = data;
         console.log('Publicación cargada:', this.publicacion);
       },
-      error => {
+      error: (error: any) => {
         console.error('Error al cargar la publicación:', error);
+        alert('No se pudo cargar la publicación. ' + (error?.error || 'Inténtalo nuevamente.'));
       }
-    );
+    });
+  }
+
+  cargarSeguidores5(idPublicacion: number) {
+    this.publicacionService.obtenerUsuariosUnidos(idPublicacion).subscribe((seguidores: UsuarioDTO[]) => {
+      this.seguidores = seguidores;
+      this.numeroSeguidores = seguidores.length;
+    });
   }
 }

@@ -34,9 +34,9 @@ export class PublicacionService {
     return this.httpClient.post<Publicacion>(`${this.apiUrl}/publicacion/crear`, publicacion, authHeader);
   }
 
-  eliminarPublicacion(idPub: number): Observable<string> {
+  eliminarPublicacion(id: number): Observable<any> {
     const authHeader = this.comunService.autorizarPeticion();
-    return this.httpClient.delete<string>(`${this.apiUrl}/publicacion/${idPub}`, authHeader);
+    return this.httpClient.delete<any>(`${this.apiUrl}/publicacion/${id}`, authHeader);
   }
 
   actualizarPublicacion(idPub: number, publicacionDTO: Publicacion): Observable<Publicacion> {
