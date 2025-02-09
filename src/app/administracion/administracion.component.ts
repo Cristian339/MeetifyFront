@@ -9,6 +9,7 @@ import { Perfil } from "../modelos/Perfil";
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import {Publicacion} from "../modelos/Publicacion";
 import {PublicacionService} from "../services/publicacion.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-administracion',
@@ -32,7 +33,7 @@ export class AdministracionComponent implements OnInit {
 
   vistaActual: 'admin' | 'users' | 'baneados' = 'admin';
 
-  constructor(private perfilService: PerfilService, private publicacionService: PublicacionService) {
+  constructor(private perfilService: PerfilService, private router : Router) {
     addIcons({ settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline });
   }
 
@@ -110,21 +111,27 @@ export class AdministracionComponent implements OnInit {
     });
   }
 
+  // verPublicaciones(correo: string | undefined) {
+  //   this.publicaciones = [];
+  //
+  //   console.log(correo);
+  //   if (correo) {
+  //     this.publicacionService.obtenerPublicacionesPorCorreo(correo).subscribe({
+  //       next: (data: Publicacion[]) => {
+  //         this.publicaciones = data;
+  //
+  //       },
+  //       error: (error) => console.error('Error al obtener publicaciones:', error),
+  //       complete: () => {
+  //         this.modalVisible = true;
+  //       },
+  //     });
+  //   }
+  // }
+
   verPublicaciones(correo: string | undefined) {
-    this.publicaciones = [];
-
-    console.log(correo);
     if (correo) {
-      this.publicacionService.obtenerPublicacionesPorCorreo(correo).subscribe({
-        next: (data: Publicacion[]) => {
-          this.publicaciones = data;
-
-        },
-        error: (error) => console.error('Error al obtener publicaciones:', error),
-        complete: () => {
-          this.modalVisible = true;
-        },
-      });
+      this.router.navigate(['/usu-publi', correo]); // Redirige con el correo como parámetro
     }
   }
 
