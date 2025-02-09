@@ -5,4 +5,5 @@ export class SeguidorDTO {
   nombre?: string;
   tipoRelacion?: TipoRelacion;
   buttonDisabled?: boolean;
+  imagenUrlPerfil?: string;
 }
