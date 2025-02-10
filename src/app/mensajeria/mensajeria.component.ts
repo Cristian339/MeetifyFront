@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AnimationController, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { arrowBackCircle, personOutline, chatbubblesOutline, sendOutline } from 'ionicons/icons';
+import { arrowBackCircle, personOutline, chatbubblesOutline, sendOutline, addCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { WebSocketService } from '../services/websocket.service';
-import { PerfilService } from '../services/perfil.service';
-import { SeguidorDTO } from '../modelos/SeguidorDTO';
+import { MensajeService } from '../services/mensaje.service';
+import { Conversacion } from '../modelos/Conversacion';
+import { Mensaje } from '../modelos/Mensaje';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-mensajeria',
@@ -25,85 +25,86 @@ import { HttpClient } from '@angular/common/http';
   ]
 })
 export class MensajeriaComponent implements OnInit, OnDestroy {
-  messages: { [key: string]: any[] } = {};
+  messages: { [key: string]: Mensaje[] } = {};
   newMessage: string = '';
-  roomId: string = '';
-  seguidos: SeguidorDTO[] = [];
-  filteredSeguidos: SeguidorDTO[] = [];
-  seguidosCount: number = 0;
-  currentSeguidor: SeguidorDTO | null = null;
+  conversacionId: string = '';
+  conversaciones: Conversacion[] = [];
+  currentConversacion: Conversacion | null = null;
   private messageSubscription: Subscription | null = null;
+  currentUserId: number = 1; // Replace with the actual current user ID
 
   constructor(
     private animationCtrl: AnimationController,
     private webSocketService: WebSocketService,
-    private perfilService: PerfilService,
-    private http: HttpClient
+    private mensajeService: MensajeService
   ) {
-    addIcons({ arrowBackCircle, personOutline, chatbubblesOutline, sendOutline });
+    addIcons({ arrowBackCircle, personOutline, chatbubblesOutline, sendOutline, addCircleOutline });
   }
 
   ngOnInit() {
-    this.cargarSeguidos();
+    this.cargarConversaciones();
   }
 
   ngOnDestroy() {
     this.disconnectWebSocket();
   }
 
-  cargarSeguidos() {
-    this.perfilService.obtenerSeguidores().subscribe((seguidos: SeguidorDTO[]) => {
-      this.seguidos = seguidos.map(seguido => ({
-        ...seguido,
-        buttonDisabled: false
-      }));
-      this.filteredSeguidos = this.seguidos;
-      this.seguidosCount = seguidos.length;
+  cargarConversaciones() {
+    const idPerfil = this.currentUserId; // Replace with actual profile ID
+    this.mensajeService.getConversacionesByIdPerfil(idPerfil).subscribe((conversaciones: Conversacion[]) => {
+      this.conversaciones = conversaciones;
     });
   }
 
-  abrirChat(seguidorId: number) {
+  abrirChat(conversacion: Conversacion) {
     this.disconnectWebSocket();
-    this.currentSeguidor = this.seguidos.find(seguidor => seguidor.id === seguidorId) || null;
-    const seguidorUserId = seguidorId; // ID of the selected seguidor
+    this.currentConversacion = conversacion;
+    this.conversacionId = conversacion.id.toString(); // Use a unique identifier for the conversation
 
-    this.roomId = `room-${seguidorUserId}`; // Generate unique roomId based on seguidor ID
-
-    // Fetch previous messages for the room
-    this.http.get<any[]>(`/api/mensajes/room/${this.roomId}`).subscribe(messages => {
-      this.messages[this.roomId] = messages;
+    // Fetch previous messages for the conversation
+    this.mensajeService.obtenerMensajesPorConversacionId(Number(this.conversacionId)).subscribe(messages => {
+      this.messages[this.conversacionId] = messages;
     });
 
-    if (!this.messages[this.roomId]) {
-      this.messages[this.roomId] = [];
+    if (!this.messages[this.conversacionId]) {
+      this.messages[this.conversacionId] = [];
     }
-    this.webSocketService.connect(this.roomId);
+    this.webSocketService.connect(this.conversacionId);
     this.messageSubscription = this.webSocketService.getMessages().pipe(
-      filter(message => message.roomId === this.roomId)
-    ).subscribe((message) => {
-      this.messages[this.roomId].push(message);
+      filter(message => message.conversacionId === this.conversacionId)
+    ).subscribe((message: Mensaje) => {
+      this.messages[this.conversacionId].push(message);
     });
+  }
+
+  iniciarNuevaConversacion() {
+    this.currentConversacion = null;
+    this.conversacionId = 'new';
+    this.messages[this.conversacionId] = [];
   }
 
   enviarMensaje() {
     if (this.newMessage.trim() === '') {
       return;
     }
-    const seguidorId = this.currentSeguidor?.id; // Obtener el ID del seguidor actual
+    const receptorId = this.currentConversacion?.usuario2Id; // Obtener el ID del receptor actual
 
-    if (!seguidorId) {
-      console.error('Seguidor ID is not defined');
+    if (!receptorId) {
+      console.error('Receptor ID is not defined');
       return;
     }
 
-    const message = {
+    const message: Mensaje = {
       contenido: this.newMessage,
-      roomId: this.roomId,
-      usuarioEmisor: { id: seguidorId }, // ID del usuario emisor
-      usuarioReceptor: { id: seguidorId } // ID del usuario receptor
+      usuarioEmisor: { id: this.currentUserId }, // ID del usuario emisor (current user)
+      usuarioReceptor: { id: receptorId }, // ID del usuario receptor (selected receptor)
+      conversacionId: this.conversacionId,
+      fechaEnviado: new Date().toISOString(),
+      horaEnviado: new Date().toISOString()
     };
+
     this.webSocketService.enviarMensaje(message).subscribe((response: any) => {
-      this.roomId = response.roomId; // Use the roomId returned from the backend
+      this.conversacionId = response.conversacionId; // Use the conversacionId returned from the backend
       this.newMessage = '';
     });
   }
@@ -114,7 +115,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
       this.messageSubscription = null;
     }
     this.webSocketService.disconnect();
-    this.roomId = '';
+    this.conversacionId = '';
   }
 
   formatDate(dateString: string): string {
