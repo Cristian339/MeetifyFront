@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IonicModule } from "@ionic/angular";
 import { CabeceraComponent } from "../cabecera/cabecera.component";
-import { NgIf } from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { addIcons } from "ionicons";
 import { globeOutline, cameraOutline, linkOutline, createOutline, transgenderOutline } from "ionicons/icons";
@@ -18,7 +18,8 @@ import { DatosBiograficos } from "../modelos/DatosBiograficos";
     IonicModule,
     CabeceraComponent,
     NgIf,
-    FormsModule
+    FormsModule,
+    NgOptimizedImage
   ]
 })
 export class DatosBiograficosComponent implements OnInit {

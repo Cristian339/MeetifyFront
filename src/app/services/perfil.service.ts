@@ -58,6 +58,13 @@ export class PerfilService {
   }
 
 
+  borrarCuenta(contrasenia: string | undefined): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/publicacion/perfil/eliminar/${contrasenia}`, {} ,authHeader);
+  }
+
+
+
   categoriasPerfil(): Observable<Categoria[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/categorias`, authHeader);

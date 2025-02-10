@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicModule, MenuController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicModule, MenuController, IonModal } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
   menuOutline,
@@ -20,6 +20,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from "../services/login.service";
+import { PerfilService } from "../services/perfil.service";
 
 @Component({
   selector: 'app-navbar',
@@ -33,6 +35,10 @@ import { Router } from '@angular/router';
   ]
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild('modalConfirm') modalConfirm: IonModal | undefined;
+  @ViewChild('modalPassword') modalPassword: IonModal | undefined;
+
+  password: string = '';
 
   isSearchVisible: boolean = false;
   searchQuery: string = '';
@@ -40,7 +46,6 @@ export class NavbarComponent implements OnInit {
   menuItems = [
     { label: 'Eventos', icon: 'calendar-outline', route: '/events' },
     { label: 'Amigos', icon: 'people-outline', route: '/friends' },
-    /*{ label: 'Mis actividades y configuración', icon: 'settings-outline', route: '/settings' },*/
     { label: 'Mi reputación', icon: 'bar-chart-outline', route: '/reputation' },
     { label: 'Editar perfil', icon: 'create-outline', route: '/editar-perfil' }
   ];
@@ -50,10 +55,10 @@ export class NavbarComponent implements OnInit {
     { label: 'Eventos compartidos', icon: 'share-outline', route: '/friends' },
     { label: 'Eventos que me he unido', icon: 'arrow-redo-outline', route: '/reputation' },
     { label: 'Reseñas que hice', icon: 'star-half-outline', route: '/editar-perfil' },
-    { label: 'Privacidad', icon: 'lock-closed-outline', route: '/editar-perfil' }
+    { label: 'Privacidad', icon: 'lock-closed-outline', route: '/editar-perfil' },
   ];
 
-  constructor(private menu: MenuController, private router: Router) {
+  constructor(private menu: MenuController, private router: Router, private loginService: LoginService, private perfilService: PerfilService) {
     addIcons({
       menuOutline,
       searchOutline,
@@ -87,7 +92,46 @@ export class NavbarComponent implements OnInit {
     this.closeMenu();
   }
 
-  setVista(view: 'main'  | 'config') {
+  setVista(view: 'main' | 'config') {
     this.vistaActual = view;
+  }
+
+  doLogout() {
+    sessionStorage.clear();
+    this.loginService.setAuthState(false);
+    this.router.navigate(['']);
+  }
+
+  // Abre el primer modal (confirmación de eliminación)
+  openConfirmModal() {
+    if (this.modalConfirm) {
+      this.modalConfirm.present();
+    }
+  }
+
+  // Cierra el primer modal y abre el segundo (solicitud de contraseña)
+  confirmDelete() {
+    if (this.modalConfirm) {
+      this.modalConfirm.dismiss();  // Cierra el modal de confirmación
+    }
+    if (this.modalPassword) {
+      this.modalPassword.present(); // Abre el modal de contraseña
+    }
+  }
+
+
+
+  borrarCuenta(contrasenia: string){
+    console.log(contrasenia)
+    this.perfilService.borrarCuenta(contrasenia).subscribe({
+      next: () => {
+        this.router.navigate(['']);
+        this.modalPassword?.dismiss()
+      },
+      error: () => {
+        console.log("contraseña incorrecta")
+      }
+
+    })
   }
 }

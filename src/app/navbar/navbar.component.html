@@ -57,9 +57,73 @@
           <ion-icon [name]="item.icon" slot="start" class="menu-icon"></ion-icon>
           <ion-label>{{ item.label }}</ion-label>
         </ion-item>
+
+        <ion-item style="text-align: center">
+          <ion-label color="cuarto" (click)="doLogout()">Cerrar Sesion</ion-label>
+        </ion-item>
+        <ion-item style="text-align: center">
+          <ion-label color="cuarto" (click)="openConfirmModal()">Eliminar Cuenta</ion-label>
+        </ion-item>
       </ion-list>
     </div>
   </ion-content>
 </ion-menu>
+
+<!-- Primer Modal: Confirmación de eliminar cuenta -->
+<ion-modal #modalConfirm trigger="open-modal">
+  <ng-template>
+    <ion-content style="--background: #19323C">
+      <ion-toolbar>
+        <ion-title>Confirmación</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="modalConfirm.dismiss()" style="font-family: 'Inter', sans-serif;">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+
+      <!-- Mensaje de confirmación -->
+      <div style="text-align: center; margin-top: 20px; font-size: 38px; font-family: 'Amatic SC', sans-serif; color: white">
+        <p>¿Seguro que quieres eliminar tu cuenta?</p>
+      </div>
+
+      <!-- Botones "Sí" y "No" -->
+      <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <ion-button color="danger" (click)="confirmDelete()" style="margin-right: 10px; padding: 10px">Sí</ion-button>
+        <ion-button color="medium" (click)="modalConfirm.dismiss()">No</ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Segundo Modal: Pedir contraseña -->
+<ion-modal #modalPassword>
+  <ng-template>
+    <ion-content>
+      <ion-toolbar>
+        <ion-title>Confirmar contraseña</ion-title>
+      </ion-toolbar>
+
+      <!-- Mensaje de solicitud de contraseña -->
+      <div style="text-align: center; margin-top: 20px; font-size: 18px;">
+        <p>Por favor, ingresa tu contraseña para confirmar la eliminación.</p>
+      </div>
+
+      <!-- Campo de entrada para la contraseña -->
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+      <!-- Botones de acción -->
+      <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <ion-button color="danger" (click)="borrarCuenta(password)" style="margin-right: 10px;">Eliminar</ion-button>
+        <ion-button color="medium" (click)="modalPassword.dismiss()">Cancelar</ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+
 
 <ion-router-outlet id="main-content"></ion-router-outlet>

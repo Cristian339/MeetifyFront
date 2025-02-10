@@ -56,8 +56,8 @@ export class CategoriasComponent implements OnInit {
         });
         toast.present();
         // Redirigimos a la página /sobre-ti pasando el correo como queryParam
-        //this.router.navigate(['/sobre-ti'], { queryParams: { correoElectronico: this.correoElectronico } });
-        this.router.navigate(['']);
+        this.router.navigate(['/sobre-ti'], { queryParams: { correoElectronico: this.correoElectronico } });
+        //this.router.navigate(['']);
       },
       error: async (err) => {
         const toast = await this.toastController.create({

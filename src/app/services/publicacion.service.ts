@@ -34,6 +34,12 @@ export class PublicacionService {
     return this.httpClient.post<Publicacion>(`${this.apiUrl}/publicacion/crear`, publicacion, authHeader);
   }
 
+  eliminarPublicacion2(id: number | undefined): Observable<any> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<any>(`${this.apiUrl}/publicacion/del/${id}`, authHeader);
+  }
+
+
   eliminarPublicacion(id: number): Observable<any> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.delete<any>(`${this.apiUrl}/publicacion/${id}`, authHeader);
