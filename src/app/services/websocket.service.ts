@@ -25,10 +25,10 @@ export class WebSocketService {
     };
   }
 
-  connect(conversacionId: string) {
+  connect(roomId: string) {
     this.stompClient.onConnect = () => {
       console.log('Connected to WebSocket');
-      this.stompClient.subscribe(`/topic/mensajes/${conversacionId}`, (message: Message) => {
+      this.stompClient.subscribe(`/topic/mensajes/${roomId}`, (message: Message) => {
         this.messageSubject.next(JSON.parse(message.body));
       });
     };
@@ -47,7 +47,7 @@ export class WebSocketService {
         destination: `/app/enviarMensaje`,
         body: JSON.stringify(message)
       });
-      observer.next({ conversacionId: message.conversacionId });
+      observer.next({ roomId: message.roomId });
       observer.complete();
     });
   }

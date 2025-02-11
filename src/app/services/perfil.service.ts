@@ -7,6 +7,7 @@ import { ComunService } from './comun.service';
 import { Publicacion } from '../modelos/Publicacion';
 import {Categoria} from "../modelos/Categoria";
 import {SeguidorDTO} from "../modelos/SeguidorDTO";
+import {PerfilID} from "../modelos/PerfilID";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,13 @@ export class PerfilService {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`, authHeader);
   }
+
+  getIDPerfil(): Observable<PerfilID> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<PerfilID>(`${this.apiUrl}/publicacion/perfil/mi-id`, authHeader);
+  }
+
+
 
   // actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
   //   const authHeader = this.comunService.autorizarPeticion();
