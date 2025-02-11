@@ -94,4 +94,10 @@ export class PerfilService {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<void>(`${this.apiUrl}/seguidores/dejar-de-seguir/${idUsuarioADejarDeSeguir}`, {}, authHeader);
   }
+
+  actualizarPerfil(perfilDTO: Perfil): Observable<Perfil> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.put<Perfil>(`${this.apiUrl}/publicacion/perfil/actualizar`, perfilDTO, authHeader);
+  }
+
 }

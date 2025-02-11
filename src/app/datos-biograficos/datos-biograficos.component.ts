@@ -19,7 +19,6 @@ import { DatosBiograficos } from "../modelos/DatosBiograficos";
     CabeceraComponent,
     NgIf,
     FormsModule,
-    NgOptimizedImage
   ]
 })
 export class DatosBiograficosComponent implements OnInit {
