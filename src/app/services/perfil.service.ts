@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Perfil } from '../modelos/Perfil';
@@ -98,6 +98,28 @@ export class PerfilService {
   actualizarPerfil(perfilDTO: Perfil): Observable<Perfil> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.put<Perfil>(`${this.apiUrl}/publicacion/perfil/actualizar`, perfilDTO, authHeader);
+  }
+
+  anadirCategoriaExistenteAPerfil(categoriaDTO: Categoria): Observable<Categoria> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<Categoria>(`${this.apiUrl}/publicacion/perfil/anadir-categoria`, categoriaDTO, authHeader);
+  }
+
+  eliminarCategoriaPreferenteDePerfil(categoriaDTO: Categoria): Observable<string> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.delete<string>(`${this.apiUrl}/publicacion/perfil/eliminar`, {
+      headers: authHeader.headers,
+      body: categoriaDTO,
+    });
+  }
+
+  verTodasLasCategorias(): Observable<Categoria[]> {
+    return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/todas`);
+  }
+
+  verCategoriasElegidasPorPerfil(token: string): Observable<Categoria[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/elegidas`, authHeader);
   }
 
 }

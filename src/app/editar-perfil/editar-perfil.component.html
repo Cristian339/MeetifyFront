@@ -53,12 +53,11 @@
       </ion-label>
       <div class="categories-container">
         <div class="categories">
-          <ion-chip color="primario">Juegos</ion-chip>
-          <ion-chip color="primario">Entretenimiento</ion-chip>
-          <ion-chip color="primario">Películas</ion-chip>
-          <ion-chip color="primario">Música</ion-chip>
-          <ion-button size="small" color="cuarto" class="add-categories">
-            Agregar y/o quitar más
+          <ion-button size="small" color="success" class="add-categories" id="open-modal-categorias">
+            Agregar Categoria
+          </ion-button>
+          <ion-button size="small" color="cuarto" class="add-categories" id="delete-modal-categorias">
+             Quitar Categoria
           </ion-button>
         </div>
       </div>
@@ -109,6 +108,48 @@
         <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" />
       </ion-item>
       <ion-button class="btnmodal" (click)="guardarImagen()">Guardar</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #modalCategorias trigger="open-modal-categorias" [initialBreakpoint]="0.5" [breakpoints]="[0, 1, 0.5, 0.75]">
+  <ng-template>
+    <ion-content>
+      <ion-searchbar
+        placeholder="Search"
+        [(ngModel)]="searchTermCategorias"
+        (ionInput)="filterCategorias()"
+        (click)="modalCategorias.setCurrentBreakpoint(0.75)">
+      </ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let categoria of filteredCategorias">
+          <ion-label>
+            <h2>{{ categoria.nombre }}</h2>
+          </ion-label>
+          <ion-button color="primary" slot="end" [disabled]="isButtonDisabled(categoria)" (click)="anadirCategoria(categoria)">Añadir</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #modalCategorias trigger="delete-modal-categorias" [initialBreakpoint]="0.5" [breakpoints]="[0, 1, 0.5, 0.75]">
+  <ng-template>
+    <ion-content>
+      <ion-searchbar
+        placeholder="Search"
+        [(ngModel)]="searchTermCategorias"
+        (ionInput)="filterCategorias2()"
+        (click)="modalCategorias.setCurrentBreakpoint(0.75)">
+      </ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let categoria of filteredCategorias">
+          <ion-label>
+            <h2>{{ categoria.nombre }}</h2>
+          </ion-label>
+          <ion-button color="danger" slot="end" [disabled]="isButtonDisabled2(categoria)" (click)="eliminarCategoria(categoria)">Eliminar</ion-button>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ng-template>
 </ion-modal>
