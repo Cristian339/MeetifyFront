@@ -1,76 +1,76 @@
-<ion-app>
-  <ion-menu contentId="main-content" type="overlay">
-    <ion-header>
-      <ion-toolbar color="primario">
-        <ion-title slot="start" style="font-family: 'Amatic SC', cursive; font-size: 30px;">Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <div style="text-align: center; font-family: 'Amatic SC', cursive;">
-        <button style="font-size: 30px; width: 100%; background: none; border: none; color: black;" id="open-modal-editar" (click)="closeMenu()" routerLink="/puntuar">Puntuar</button>
-        <hr style="border: none; border-top: 1px solid black; margin: 10px 0;">
-        <button style="font-size: 30px; width: 100%; background: none; border: none; color: red; cursor: pointer;" id="open-modal-elimiacion" (click)="closeMenu()">Denunciar</button>
-      </div>
-    </ion-content>
-  </ion-menu>
-  <div class="ion-page" id="main-content">
-    <ion-header>
-      <ion-toolbar color="primario">
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="auto" style="padding-left: 40px;">
-              <ion-img src="/assets/Meetify.svg" style="width: 60px; margin-left: 120%"></ion-img>
-            </ion-col>
-            <ion-col size="auto" slot="end">
-              <ion-icon name="search-outline" style="padding-top: 20px; float: right;" class="medium-icon"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <div class="container" *ngIf="publicacion">
-        <div class="image-container">
-          <img [src]="publicacion.imagenUrlPub" alt="Imagen">
-          <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
-        </div>
-        <h2>{{ publicacion.titulo }}</h2>
-        <div class="profile-container">
-          <img [src]="publicacion.imagenUrlPerfil" alt="Perfil" class="profile-pic">
-          <ion-icon name="camera-outline" class="profile-camera"></ion-icon>
-          <div class="profile-info">
-            <h3>{{ publicacion.nombrePerfil }}</h3>
-            <p>Reputación <strong></strong></p>
-          </div>
-          <ion-button color="danger" class="salir-btn" (click)="salirPublicacion(publicacion)">
-            Salir del evento
-          </ion-button>
-        </div>
-        <div class="stats-container">
-          <div><strong>Publicaciones</strong><br></div>
-          <div><strong>Eventos</strong><br></div>
-          <div>
-            <strong>Seguidores</strong><br>
-            <span>{{ numeroSeguidores }}</span>
-          </div>
-          <div><strong>Reputación</strong><br>
-          </div>
-        </div>
-        <div class="location">
-          <ion-icon name="location-outline"></ion-icon>
-          <strong> Ubicación: </strong>
-          <span>{{ publicacion.ubicacion }}</span>
-        </div>
-        <div class="categories">
-          <ion-icon name="book-outline"></ion-icon>
-          <strong> Categorías: </strong>
-          <span class="category">{{ publicacion.categoria }}</span>
-        </div>
-      </div>
-    </ion-content>
-    <app-pie-pagina></app-pie-pagina>
-  </div>
-</ion-app>
+<!--<ion-app>-->
+<!--  <ion-menu contentId="main-content" type="overlay">-->
+<!--    <ion-header>-->
+<!--      <ion-toolbar color="primario">-->
+<!--        <ion-title slot="start" style="font-family: 'Amatic SC', cursive; font-size: 30px;">Menu</ion-title>-->
+<!--      </ion-toolbar>-->
+<!--    </ion-header>-->
+<!--    <ion-content class="ion-padding">-->
+<!--      <div style="text-align: center; font-family: 'Amatic SC', cursive;">-->
+<!--        <button style="font-size: 30px; width: 100%; background: none; border: none; color: black;" id="open-modal-editar" (click)="closeMenu()" routerLink="/puntuar">Puntuar</button>-->
+<!--        <hr style="border: none; border-top: 1px solid black; margin: 10px 0;">-->
+<!--        <button style="font-size: 30px; width: 100%; background: none; border: none; color: red; cursor: pointer;" id="open-modal-elimiacion" (click)="closeMenu()">Denunciar</button>-->
+<!--      </div>-->
+<!--    </ion-content>-->
+<!--  </ion-menu>-->
+<!--  <div class="ion-page" id="main-content">-->
+<!--    <ion-header>-->
+<!--      <ion-toolbar color="primario">-->
+<!--        <ion-buttons slot="start">-->
+<!--          <ion-menu-button></ion-menu-button>-->
+<!--        </ion-buttons>-->
+<!--        <ion-grid>-->
+<!--          <ion-row>-->
+<!--            <ion-col size="auto" style="padding-left: 40px;">-->
+<!--              <ion-img src="/assets/Meetify.svg" style="width: 60px; margin-left: 120%"></ion-img>-->
+<!--            </ion-col>-->
+<!--            <ion-col size="auto" slot="end">-->
+<!--              <ion-icon name="search-outline" style="padding-top: 20px; float: right;" class="medium-icon"></ion-icon>-->
+<!--            </ion-col>-->
+<!--          </ion-row>-->
+<!--        </ion-grid>-->
+<!--      </ion-toolbar>-->
+<!--    </ion-header>-->
+<!--    <ion-content class="ion-padding">-->
+<!--      <div class="container" *ngIf="publicacion">-->
+<!--        <div class="image-container">-->
+<!--          <img [src]="publicacion.imagenUrlPub" alt="Imagen">-->
+<!--          <ion-icon name="camera-outline" class="camera-icon"></ion-icon>-->
+<!--        </div>-->
+<!--        <h2>{{ publicacion.titulo }}</h2>-->
+<!--        <div class="profile-container">-->
+<!--          <img [src]="publicacion.imagenUrlPerfil" alt="Perfil" class="profile-pic">-->
+<!--          <ion-icon name="camera-outline" class="profile-camera"></ion-icon>-->
+<!--          <div class="profile-info">-->
+<!--            <h3>{{ publicacion.nombrePerfil }}</h3>-->
+<!--            <p>Reputación <strong></strong></p>-->
+<!--          </div>-->
+<!--          <ion-button color="danger" class="salir-btn" (click)="salirPublicacion(publicacion)">-->
+<!--            Salir del evento-->
+<!--          </ion-button>-->
+<!--        </div>-->
+<!--        <div class="stats-container">-->
+<!--          <div><strong>Publicaciones</strong><br></div>-->
+<!--          <div><strong>Eventos</strong><br></div>-->
+<!--          <div>-->
+<!--            <strong>Seguidores</strong><br>-->
+<!--            <span>{{ numeroSeguidores }}</span>-->
+<!--          </div>-->
+<!--          <div><strong>Reputación</strong><br>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="location">-->
+<!--          <ion-icon name="location-outline"></ion-icon>-->
+<!--          <strong> Ubicación: </strong>-->
+<!--          <span>{{ publicacion.ubicacion }}</span>-->
+<!--        </div>-->
+<!--        <div class="categories">-->
+<!--          <ion-icon name="book-outline"></ion-icon>-->
+<!--          <strong> Categorías: </strong>-->
+<!--          <span class="category">{{ publicacion.categoria }}</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ion-content>-->
+<!--    <app-pie-pagina></app-pie-pagina>-->
+<!--  </div>-->
+<!--</ion-app>-->

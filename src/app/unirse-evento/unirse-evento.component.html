@@ -1,52 +1,67 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-img src="/assets/Meetify.svg" class="logo-image" slot="start"></ion-img>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-icon name="arrow-back-circle" slot="end" routerLink="/publicacion"></ion-icon>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar color="primario">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto" style="padding-left: 40px;">
+              <ion-img src="/assets/Meetify.svg" style="width: 60px; margin-left: 120%"></ion-img>
+            </ion-col>
+            <ion-col size="auto" slot="end">
+              <ion-buttons slot="end">
+                <ion-icon name="arrow-back-circle" slot="end" routerLink="/publicacion"></ion-icon>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
-  <ion-card class="event-card" *ngIf="publicacion">
-    <div class="image-placeholder">
-      <img [src]="publicacion.imagenUrlPub" alt="Publicación" class="event-image"/>
-    </div>
-    <ion-card-header>
-      <ion-button expand="block" style="color: white" class="event-title">{{ publicacion.titulo }}</ion-button>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="creator info-item">
-        <ion-avatar>
-          <ion-icon name="person-circle-outline" size="large" class="info-icon"></ion-icon>
-        </ion-avatar>
-        <p class="creator-text">Creado por: <strong>{{ publicacion.nombrePerfil }}</strong></p>
+    <ion-content class="ion-padding">
+      <div class="container" *ngIf="publicacion">
+        <div class="image-container">
+          <img [src]="publicacion.imagenUrlPub" alt="Imagen">
+          <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+        </div>
+        <h2>{{ publicacion.titulo }}</h2>
+
+        <div class="profile-container">
+          <img [src]="publicacion.imagenUrlPerfil" alt="Perfil" class="profile-pic">
+          <ion-icon name="camera-outline" class="profile-camera"></ion-icon>
+          <div class="profile-info">
+            <h3>{{ publicacion.nombrePerfil }}</h3>
+            <p>Reputación <strong></strong></p>
+          </div>
+          <ion-button (click)="unirseEvento()" *ngIf="!dentro">
+            Seguir Evento
+          </ion-button>
+          <ion-button color="danger" (click)="salirPublicacion(publicacion)" *ngIf="dentro">
+            Salir del evento
+          </ion-button>
+
+        </div>
+        <div class="stats-container">
+          <div><strong>Reputación</strong><br></div>
+        </div>
+
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <strong> Ubicación: </strong>
+          <span>{{ publicacion.ubicacion }}</span>
+        </div>
+
+        <div class="categories">
+          <ion-icon name="book-outline"></ion-icon>
+          <strong> Categorías: </strong>
+          <span class="category">{{ publicacion.categoria }}</span>
+        </div>
       </div>
-      <hr>
-      <div class="description-container">
-        <p class="description-title">Descripción:</p>
-        <p class="desc-text">{{ publicacion.descripcion }}</p>
-      </div>
-      <hr>
-      <div class="info-item">
-        <p class="info-title">Fechas de Inicio a Fín:</p>
-        <p class="info-text">{{ publicacion.fechaIni }} - {{ publicacion.fechaFin }}</p>
-      </div>
-      <hr>
-      <div class="info-item">
-        <ion-icon name="location-outline" class="info-icon"></ion-icon>
-        <p class="info-title">Ubicación:</p>
-        <p class="info-text">{{ publicacion.ubicacion }}</p>
-      </div>
-      <hr>
-      <div class="info-item">
-        <p class="info-title">Categorías:</p>
-        <ion-chip color="primary" class="category-chip">{{ publicacion.categoria }}</ion-chip>
-      </div>
-      <hr>
-    </ion-card-content>
-  </ion-card>
-  <ion-button class="join-button" style="text-align: center" (click)="unirseEvento()">Unirme</ion-button>
-</ion-content>
+    </ion-content>
+    <app-pie-pagina></app-pie-pagina>
+  </div>
+
+
+</ion-app>

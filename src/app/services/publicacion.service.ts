@@ -70,9 +70,20 @@ export class PublicacionService {
     return this.httpClient.get<UsuarioDTO[]>(`${this.apiUrl}/publicacion/usuarios-unidos/${idPublicacion}`, authHeader);
   }
 
-  salirPublicacion(idPublicacion: number): Observable<void> {
+  salirPublicacion(idPublicacion: number): Observable<boolean> {
     const authHeader = this.comunService.autorizarPeticion();
-    return this.httpClient.delete<void>(`${this.apiUrl}/publicacion/salir/${idPublicacion}`, authHeader);
+    return this.httpClient.delete<boolean>(`${this.apiUrl}/publicacion/salir/${idPublicacion}`, authHeader);
+  }
+
+
+  obtenerCreador(id: number | undefined): Observable<boolean>{
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/creador/${id}`, authHeader);
+  }
+
+  dentroOFuera(id: number | undefined): Observable<boolean>{
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/dentro/${id}`, authHeader);
   }
 
 }

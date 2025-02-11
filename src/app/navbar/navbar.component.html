@@ -75,9 +75,6 @@
     <ion-content style="--background: #19323C">
       <ion-toolbar>
         <ion-title>Confirmación</ion-title>
-        <ion-buttons slot="end">
-          <ion-button color="light" (click)="modalConfirm.dismiss()" style="font-family: 'Inter', sans-serif;">Cerrar</ion-button>
-        </ion-buttons>
       </ion-toolbar>
 
       <!-- Mensaje de confirmación -->
@@ -86,8 +83,8 @@
       </div>
 
       <!-- Botones "Sí" y "No" -->
-      <div style="display: flex; justify-content: center; margin-top: 20px;">
-        <ion-button color="danger" (click)="confirmDelete()" style="margin-right: 10px; padding: 10px">Sí</ion-button>
+      <div style="display: flex; justify-content: center;">
+        <ion-button color="danger" (click)="confirmDelete()">Sí</ion-button>
         <ion-button color="medium" (click)="modalConfirm.dismiss()">No</ion-button>
       </div>
     </ion-content>
@@ -97,20 +94,19 @@
 <!-- Segundo Modal: Pedir contraseña -->
 <ion-modal #modalPassword>
   <ng-template>
-    <ion-content>
+    <ion-content style="--background: #19323C">
       <ion-toolbar>
         <ion-title>Confirmar contraseña</ion-title>
       </ion-toolbar>
 
       <!-- Mensaje de solicitud de contraseña -->
-      <div style="text-align: center; margin-top: 20px; font-size: 18px;">
+      <div style="text-align: center; margin-top: 20px; font-size: 18px;color: white">
         <p>Por favor, ingresa tu contraseña para confirmar la eliminación.</p>
       </div>
 
       <!-- Campo de entrada para la contraseña -->
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-item style="border-radius: 10px">
+        <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña"></ion-input>
       </ion-item>
 
       <!-- Botones de acción -->

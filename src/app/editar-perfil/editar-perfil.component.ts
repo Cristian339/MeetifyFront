@@ -147,7 +147,9 @@ export class EditarPerfilComponent implements OnInit {
   }
 
   filterCategorias2() {
+
     this.filteredCategorias = this.categoriasElegidas.filter(categoria =>
+      // @ts-ignore
       categoria.nombre.toLowerCase().includes(this.searchTermCategorias.toLowerCase())
     );
   }
@@ -155,6 +157,7 @@ export class EditarPerfilComponent implements OnInit {
   anadirCategoria(categoria: Categoria) {
     if (categoria.id !== undefined) {
       this.perfilService.anadirCategoriaExistenteAPerfil(categoria).subscribe(
+        // @ts-ignore
         () => this.buttonDisabledState[categoria.id] = true,
         error => console.error('Error adding category:', error)
       );
