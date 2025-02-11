@@ -2,7 +2,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {IonicModule, IonMenu, ModalController} from "@ionic/angular";
 import { PiePaginaComponent } from "../pie-pagina/pie-pagina.component";
 import { addIcons } from "ionicons";
-import { cameraOutline, locationOutline, star, starOutline, bookOutline, ellipsisVertical, menuOutline, searchOutline } from "ionicons/icons";
+import {
+  cameraOutline,
+  locationOutline,
+  star,
+  starOutline,
+  bookOutline,
+  ellipsisVertical,
+  menuOutline,
+  searchOutline,
+  createOutline
+} from "ionicons/icons";
 import { PublicacionService } from '../services/publicacion.service';
 import { Publicacion } from '../modelos/Publicacion';
 import { CommonModule } from "@angular/common";
@@ -10,6 +20,8 @@ import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {ModalService} from "../services/modal.service";
 import {UsuarioDTO} from "../modelos/UsuarioDTO";
+import {PerfilService} from "../services/perfil.service";
+import {Categoria} from "../modelos/Categoria";
 
 @Component({
   selector: 'app-gestionar-publicaciones',
@@ -25,6 +37,9 @@ import {UsuarioDTO} from "../modelos/UsuarioDTO";
 })
 
 export class GestionarPublicacionesComponent implements OnInit {
+
+
+
 
   seguidores: UsuarioDTO[] = [];
   numeroSeguidores: number = 0;
@@ -42,16 +57,21 @@ export class GestionarPublicacionesComponent implements OnInit {
   eliminarPubDTO: any = {};
   usuarioUnido: boolean = false;
   publicacionNueva: any = {};
-  categorias: string[] = ['Naturaleza', 'Viajes', 'Gastronomía', 'Arte', 'Tecnología'];
+  categorias: Categoria[] = [];
   isLink: boolean = false;
   presentingElement: any;
   mostrarBotonSalir: boolean = false;
 
+  modalOpciones = false;
+  modalEditar= false;
+  modalEliminar= false;
+
   constructor(
     private modalController: ModalController,
     private publicacionService: PublicacionService,
-    private router : Router) {
-    addIcons({ cameraOutline, star, starOutline, locationOutline, bookOutline, ellipsisVertical, menuOutline, searchOutline });
+    private router : Router,
+    private perfilService : PerfilService) {
+    addIcons({ createOutline,cameraOutline, star, starOutline, locationOutline, bookOutline, ellipsisVertical, menuOutline, searchOutline });
   }
 
   ngOnInit() {
@@ -70,10 +90,32 @@ export class GestionarPublicacionesComponent implements OnInit {
         }
       }
     }
+    this.cargarCategorias();
   }
 
-  unirUsuario() {
-    this.usuarioUnido = true;
+
+
+
+
+
+  abrirOpcionesModal() {
+    this.modalOpciones = true;
+  }
+
+  abrirEditarModal() {
+    this.modalEditar = true;
+  }
+
+  abrirEliminarModal() {
+    this.modalEliminar = true;
+  }
+
+  cerrarOpcionesModal() {
+    this.modalOpciones = false;
+  }
+
+  cerrarEditarModal() {
+    this.modalEditar = false;
   }
 
   guardarEvento() {
@@ -107,19 +149,17 @@ export class GestionarPublicacionesComponent implements OnInit {
   }
 
   actualizarPublicacion() {
-    if (this.publicacionNew && this.publicacionNew.id !== undefined) {
-      this.publicacionService.actualizarPublicacion(this.publicacionNew.id, this.publicacionNew).subscribe(
-        response => {
-          console.log('Publicación actualizada:', response);
-          this.cerrarEditModal();
-        },
-        error => {
-          console.error('Error al actualizar la publicación:', error);
-        }
-      );
-    } else {
-      console.error('No hay datos de la publicación para actualizar o el id no está definido');
-    }
+
+    this.publicacionService.actualizarPublicacion(this.publicacion.id, this.publicacion).subscribe({
+      next: () => {
+        console.log("Se actualizaron los datos");
+        this.cerrarEditarModal();
+      },
+      error: () => {
+        console.log("error modificando");
+      }
+    });
+
   }
 
   eliminarPublicacion() {
@@ -161,5 +201,20 @@ export class GestionarPublicacionesComponent implements OnInit {
       this.seguidores = seguidores;
       this.numeroSeguidores = seguidores.length;
     });
+  }
+
+
+  cargarCategorias(): void{
+    this.categorias = [];
+    this.perfilService.categoriasPerfil().subscribe(({
+      next: (data) => {
+        this.categorias = data;
+        console.info(data);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Petición completada');
+      },
+    }))
   }
 }

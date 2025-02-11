@@ -45,7 +45,7 @@ export class PublicacionService {
     return this.httpClient.delete<any>(`${this.apiUrl}/publicacion/${id}`, authHeader);
   }
 
-  actualizarPublicacion(idPub: number, publicacionDTO: Publicacion): Observable<Publicacion> {
+  actualizarPublicacion(idPub: number | undefined, publicacionDTO: Publicacion): Observable<Publicacion> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.put<Publicacion>(`${this.apiUrl}/publicacion/${idPub}`, publicacionDTO, authHeader);
   }
