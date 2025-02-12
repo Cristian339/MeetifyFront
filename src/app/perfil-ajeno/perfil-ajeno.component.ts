@@ -35,7 +35,7 @@ import {FormsModule} from "@angular/forms";
 })
 export class PerfilAjenoComponent  implements OnInit {
 
-
+  botonS : boolean = true;
   perfil: Perfil | undefined;
   categorias: Categoria[] = [];
   seguidores: SeguidorDTO[] = [];
@@ -48,6 +48,21 @@ export class PerfilAjenoComponent  implements OnInit {
   searchTerm: string = '';
   searchTermSeguidores: string = '';
   deshabilitarBoton: boolean = false;
+  idPerfil:number | undefined = 0;
+
+  // vaciarDatos(){
+  //   this.publicaciones = [];
+  //   this.categorias = [];
+  //   this.seguidores = [];
+  //   this.seguidos = [];
+  //   this.filteredSeguidores = [];
+  //   this.filteredSeguidos = [];
+  //   this.seguidosCount = 0;
+  //   this.seguidoresCount = 0;
+  //   this.searchTerm = '';
+  //   this.searchTermSeguidores = '';
+  //   console.log("vaciao")
+  // }
 
   @Input() publicaciones: Publicacion[] | undefined;
   @Output() profileClick = new EventEmitter<Publicacion>();
@@ -64,7 +79,17 @@ export class PerfilAjenoComponent  implements OnInit {
 
 
   ngOnInit() {
-
+    this.publicaciones = [];
+    this.categorias = [];
+    this.seguidores = [];
+    this.seguidos = [];
+    this.filteredSeguidores = [];
+    this.filteredSeguidos = [];
+    this.seguidosCount = 0;
+    this.seguidoresCount = 0;
+    this.searchTerm = '';
+    this.searchTermSeguidores = '';
+    this.idPerfil= 0;
 
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
@@ -87,6 +112,7 @@ export class PerfilAjenoComponent  implements OnInit {
             error: (error) => console.error('Error:', error),
             complete: () => console.log('Request completed')
           });
+          this.idPerfil = id;
     });
     this.cargarSeguidores();
     this.cargarPublicaciones()
@@ -109,14 +135,14 @@ export class PerfilAjenoComponent  implements OnInit {
   }
 
   cargarSeguidores5() {
-    this.perfilService.obtenerSeguidores().subscribe((seguidores: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidoresOtro(this.idPerfil).subscribe((seguidores: SeguidorDTO[]) => {
       this.seguidores = seguidores;
       this.seguidoresCount = seguidores.length;
     });
   }
 
   cargarSeguidos5() {
-    this.perfilService.obtenerSeguidos().subscribe((seguidos: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidosOtro(this.idPerfil).subscribe((seguidos: SeguidorDTO[]) => {
       this.seguidos = seguidos;
       this.seguidosCount = seguidos.length;
     });
@@ -124,7 +150,7 @@ export class PerfilAjenoComponent  implements OnInit {
 
   cargarPublicaciones(): void {
     this.publicaciones = [];
-    this.publicacionService.getMisPublicaciones().subscribe({
+    this.publicacionService.getPublicacionesOtro(this.idPerfil).subscribe({
       next: (data) => {
         console.log('Publicaciones received:', data);
         this.publicaciones = data;
@@ -136,7 +162,7 @@ export class PerfilAjenoComponent  implements OnInit {
   }
 
   cargarSeguidores() {
-    this.perfilService.obtenerSeguidores().subscribe((seguidores: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidoresOtro(this.idPerfil).subscribe((seguidores: SeguidorDTO[]) => {
       this.seguidores = seguidores.map(seguidor => ({
         ...seguidor,
         tipoRelacion: this.getTipoRelacion(seguidor),
@@ -148,7 +174,7 @@ export class PerfilAjenoComponent  implements OnInit {
   }
 
   cargarSeguidos() {
-    this.perfilService.obtenerSeguidos().subscribe((seguidos: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidosOtro(this.idPerfil).subscribe((seguidos: SeguidorDTO[]) => {
       this.seguidos = seguidos.map(seguido => ({
         ...seguido,
         tipoRelacion: this.getTipoRelacion(seguido),
@@ -173,7 +199,7 @@ export class PerfilAjenoComponent  implements OnInit {
 
   cargarPublicacionesCompartidas(): void {
     this.publicaciones = [];
-    this.perfilService.obtenerPublicacionesCompartidas().subscribe({
+    this.perfilService.obtenerPublicacionesCompartidasOtro(this.idPerfil).subscribe({
       next: (data) => {
         console.log('Publicaciones received:', data);
         this.publicaciones = data;
@@ -198,13 +224,13 @@ export class PerfilAjenoComponent  implements OnInit {
     }
   }
 
-  dejarDeSeguir(idUsuarioADejarDeSeguir: number): void {
-    this.perfilService.dejarUsuario(idUsuarioADejarDeSeguir).subscribe({
+  dejarDeSeguir(idPerfil: number | undefined): void {
+    this.perfilService.dejarUsuario(this.idPerfil).subscribe({
       next: () => {
-        console.log(`Dejaste de seguir al usuario con ID: ${idUsuarioADejarDeSeguir}`);
-        const seguido = this.filteredSeguidos.find(s => s.id === idUsuarioADejarDeSeguir);
+        console.log(`Dejaste de seguir al usuario con ID: ${this.idPerfil}`);
+        const seguido = this.filteredSeguidos.find(s => s.id === this.idPerfil);
         if (seguido) {
-          const seguidor = this.filteredSeguidores.find(s => s.id === idUsuarioADejarDeSeguir);
+          const seguidor = this.filteredSeguidores.find(s => s.id === this.idPerfil);
           if (seguidor) {
             seguidor.buttonDisabled = false;
           }
@@ -215,17 +241,14 @@ export class PerfilAjenoComponent  implements OnInit {
     });
   }
 
-  seguirUsuario(seguidor: any): void {
-    seguidor.buttonDisabled = true;
-    this.perfilService.seguirUsuario(seguidor.id).subscribe({
+  seguirUsuario(idPerfil: number | undefined): void {
+    this.perfilService.seguirUsuario(this.idPerfil).subscribe({
       next: () => {
-        console.log(`Ahora sigues al usuario con ID: ${seguidor.id}`);
-        seguidor.seguido = true;
+        console.log(`Ahora sigues al usuario con ID: ${this.idPerfil}`);
         this.cargarSeguidos();
       },
       error: (error) => {
         console.error('Error al seguir al usuario:', error);
-        seguidor.buttonDisabled = false;
       }
     });
   }
@@ -242,6 +265,16 @@ export class PerfilAjenoComponent  implements OnInit {
         console.log('Petición completada');
       },
     }))
+  }
+
+  setBoton(){
+    if (this.botonS){
+      this.botonS = false;
+      this.seguirUsuario(this.idPerfil);
+    }else {
+      this.botonS = true;
+      this.dejarDeSeguir(this.idPerfil);
+    }
   }
 
 }

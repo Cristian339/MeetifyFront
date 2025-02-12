@@ -50,6 +50,12 @@ export class PerfilService {
     return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/perfil/compartidos`, authHeader);
   }
 
+
+  obtenerPublicacionesCompartidasOtro(id : number | undefined): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/perfil/compartidos-otro/${id}`, authHeader);
+  }
+
   getPerfilesBaneados(): Observable<Perfil[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Perfil[]>(`${this.apiUrl}/admin/baneados`, authHeader);
@@ -88,9 +94,19 @@ export class PerfilService {
     return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidores`, authHeader);
   }
 
+  obtenerSeguidoresOtro(id : number | undefined): Observable<SeguidorDTO[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidores-otro/${id}`, authHeader);
+  }
+
   obtenerSeguidos(): Observable<SeguidorDTO[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidos`, authHeader);
+  }
+
+  obtenerSeguidosOtro(id : number | undefined): Observable<SeguidorDTO[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidos-otro/${id}`, authHeader);
   }
 
   obtenerAmigos(): Observable<SeguidorDTO[]> {
@@ -98,12 +114,12 @@ export class PerfilService {
     return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/amigos`, authHeader);
   }
 
-  seguirUsuario(idUsuarioASeguir: number): Observable<void> {
+  seguirUsuario(idUsuarioASeguir: number | undefined): Observable<void> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<void>(`${this.apiUrl}/seguidores/seguir/${idUsuarioASeguir}`, {}, authHeader);
   }
 
-  dejarUsuario(idUsuarioADejarDeSeguir: number): Observable<void> {
+  dejarUsuario(idUsuarioADejarDeSeguir: number | undefined): Observable<void> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<void>(`${this.apiUrl}/seguidores/dejar-de-seguir/${idUsuarioADejarDeSeguir}`, {}, authHeader);
   }

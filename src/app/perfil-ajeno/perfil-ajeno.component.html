@@ -5,6 +5,7 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title class="font-title-size centered-title" color="primario">Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -33,8 +34,8 @@
 
     <ion-row>
       <ion-col>
-        <ion-button class="seguir-boton" color="primario">Seguir</ion-button>
-        <ion-button class="seguir-boton" color="cuarto">Dejar de seguir</ion-button>
+        <ion-button class="seguir-boton" color="primario" *ngIf="botonS" (click)="setBoton()">Seguir</ion-button>
+        <ion-button class="seguir-boton" color="cuarto" *ngIf="!botonS" (click)="setBoton()">Dejar de seguir</ion-button>
       </ion-col>
     </ion-row>
 
@@ -59,7 +60,7 @@
                 <h2>{{ seguidor.nombre }}</h2>
                 <p>Seguidor</p>
               </ion-label>
-              <ion-button color="primary" slot="end" [disabled]="seguidor.buttonDisabled" (click)="seguidor.id !== undefined && seguirUsuario(seguidor)">Seguir Usuario</ion-button>
+              <ion-button color="primary" slot="end" [disabled]="seguidor.buttonDisabled" (click)="seguidor.id !== undefined && seguirUsuario(this.idPerfil)">Seguir Usuario</ion-button>
               <ion-button color="success" slot="end">Ver perfil</ion-button>
             </ion-item>
           </ion-list>
@@ -85,7 +86,7 @@
                 <h2>{{ seguido.nombre }}</h2>
                 <p>Seguido</p>
               </ion-label>
-              <ion-button color="danger" slot="end" (click)="seguido.id !== undefined && dejarDeSeguir(seguido.id)">Dejar de seguir</ion-button>
+              <ion-button color="danger" slot="end" (click)="seguido.id !== undefined && dejarDeSeguir(this.idPerfil)">Dejar de seguir</ion-button>
               <ion-button color="success" slot="end">Ver perfil</ion-button>
             </ion-item>
           </ion-list>
