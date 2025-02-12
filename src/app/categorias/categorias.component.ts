@@ -28,8 +28,17 @@ export class CategoriasComponent implements OnInit {
 
   ngOnInit() {
     // Accedemos al correo electrónico de los queryParams
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(async params => {
       this.correoElectronico = params['correoElectronico'] || ''; // Obtenemos el correo electrónico
+
+      const toast = await this.toastController.create({
+        message: 'Enhorabuena, tu correo electrónico ha sido verificado correctamente',
+        duration: 5000,
+        color: 'success',
+        position: 'bottom',
+        cssClass: 'toast'
+      });
+      toast.present();
     });
   }
 

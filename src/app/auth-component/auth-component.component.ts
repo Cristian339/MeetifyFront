@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicModule, IonModal } from '@ionic/angular';
+import { IonicModule, IonModal, ToastController } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { Router } from '@angular/router';
@@ -35,7 +35,7 @@ export class AuthComponentComponent implements OnInit {
   modalAbierto = false;
   mensajeModal = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService, private perfilService : PerfilService) {
+  constructor(private toastController: ToastController, private fb: FormBuilder, private router: Router, private loginService: LoginService, private perfilService : PerfilService) {
     this.registroForm = this.fb.group({
       nombre: [this.registro.nombre, Validators.required],
       apellidos: [this.registro.apellidos, Validators.required],
@@ -124,11 +124,6 @@ export class AuthComponentComponent implements OnInit {
   }
 
 
-
-
-
-
-
   verificarCamposLogin() {
     const nombreUsuario = this.authForm.get('nombreUsuario')?.value;
     const contrasenia = this.authForm.get('contrasenia')?.value;
@@ -159,8 +154,16 @@ export class AuthComponentComponent implements OnInit {
     }
   }
 
-
-
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 5000,
+      color: 'primary',
+      position: 'bottom',
+      cssClass: 'toast-inter-font'
+    });
+    await toast.present();
+  }
 
   verificarCamposRegistro() {
     const nombre = this.authForm.get('nombre')?.value;
@@ -177,8 +180,7 @@ export class AuthComponentComponent implements OnInit {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
           console.info("Registro exitoso");
-          // Pasamos el correo a CategoriasComponent mediante queryParams
-          this.router.navigate(['/categorias'], { queryParams: { correoElectronico } });
+          this.presentToast('Se ha enviado un correo electronico de verificación a tu dirección Gmail');
         },
         error: (e: any) => {
           if (e.error && e.error.message) {
