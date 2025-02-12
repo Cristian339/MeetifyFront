@@ -22,11 +22,11 @@
     <ion-grid style="float: left">
       <ion-row>
         <ion-col>
-          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
-            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
+          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon" >
+            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" (click)="entrarPerfil()"/>
           </ng-container>
           <ng-template #defaultIcon>
-            <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
+            <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large" (click)="entrarPerfil()"></ion-icon>
           </ng-template>
         </ion-col>
         <ion-row class="centered-text">

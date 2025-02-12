@@ -1,31 +1,38 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { IonicModule } from "@ionic/angular";
-import { addIcons } from "ionicons";
-import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline, personOutline } from "ionicons/icons";
-import { NgForOf, NgIf } from "@angular/common";
-import {ActivatedRoute, Router} from '@angular/router';
-import { PerfilService } from '../services/perfil.service';
-import { PublicacionService } from '../services/publicacion.service';
-import { Perfil } from '../modelos/Perfil';
-import { Publicacion } from '../modelos/Publicacion';
+import {IonicModule} from "@ionic/angular";
+import {NgForOf, NgIf} from "@angular/common";
+import {Perfil} from "../modelos/Perfil";
 import {Categoria} from "../modelos/Categoria";
 import {SeguidorDTO} from "../modelos/SeguidorDTO";
+import {Publicacion} from "../modelos/Publicacion";
+import {PerfilService} from "../services/perfil.service";
+import {PublicacionService} from "../services/publicacion.service";
+import {Router} from "@angular/router";
+import {addIcons} from "ionicons";
+import {
+  arrowBackOutline,
+  constructOutline,
+  personOutline,
+  settingsOutline,
+  starOutline,
+  trophyOutline
+} from "ionicons/icons";
+import {TipoRelacion} from "../modelos/TipoRelacion";
 import {FormsModule} from "@angular/forms";
-import { TipoRelacion } from '../modelos/TipoRelacion';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss'],
-  standalone: true,
-  imports: [
-    IonicModule,
-    NgForOf,
-    NgIf,
-    FormsModule
-  ]
+    selector: 'app-perfil-ajeno',
+    templateUrl: './perfil-ajeno.component.html',
+    styleUrls: ['./perfil-ajeno.component.scss'],
+    standalone: true,
+    imports: [
+      IonicModule,
+      NgForOf,
+      NgIf,
+      FormsModule
+    ]
 })
-export class PerfilComponent implements OnInit {
+export class PerfilAjenoComponent  implements OnInit {
 
 
   perfil: Perfil | undefined;

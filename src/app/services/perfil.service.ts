@@ -122,4 +122,9 @@ export class PerfilService {
     return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/elegidas`, authHeader);
   }
 
+  verCategoriasNoElegidasPorPerfil(): Observable<Categoria[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/noelegidas`, authHeader);
+  }
+
 }

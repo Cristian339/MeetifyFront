@@ -8,6 +8,7 @@ import { PerfilService } from "../services/perfil.service";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { Categoria } from "../modelos/Categoria";
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -42,7 +43,8 @@ export class EditarPerfilComponent implements OnInit {
   constructor(
     private perfilService: PerfilService,
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private cdr: ChangeDetectorRef
   ) {
     addIcons({ closeOutline, checkmarkOutline });
   }
@@ -56,8 +58,7 @@ export class EditarPerfilComponent implements OnInit {
     });
 
     this.cargarCategoriasElegidas();
-    this.cargarCategorias();
-    this.filterCategorias();
+    this.categoriasAelegir();
   }
 
   modificarInfoPrivadaCorreo() {
@@ -131,17 +132,15 @@ export class EditarPerfilComponent implements OnInit {
   cargarCategorias() {
     this.perfilService.verTodasLasCategorias().subscribe(categorias => {
       this.categorias = categorias;
-      this.filteredCategorias = categorias;
-      this.filterCategorias();
     });
   }
 
   cargarCategoriasElegidas() {
     this.perfilService.verCategoriasElegidasPorPerfil().subscribe(categorias => {
       this.categoriasElegidas = categorias;
-      this.filteredCategorias = categorias;
     });
   }
+
 
   filterCategorias() {
     const elegidasIds = this.categoriasElegidas.map(categoria => categoria.id);
@@ -157,36 +156,65 @@ export class EditarPerfilComponent implements OnInit {
     );
   }
 
+  // anadirCategoria(categoria: Categoria) {
+  //   if (categoria.id !== undefined) {
+  //     this.perfilService.anadirCategoriaExistenteAPerfil(categoria).subscribe(
+  //       () => this.buttonDisabledState[categoria.id!] = true,
+  //
+  //       error => console.error('Error adding category:', error)
+  //
+  //     );
+  //   } else {
+  //     console.error('Categoria id is undefined');
+  //   }
+  // }
+
   anadirCategoria(categoria: Categoria) {
-    if (categoria.id !== undefined) {
-      this.perfilService.anadirCategoriaExistenteAPerfil(categoria).subscribe(
-        () => this.buttonDisabledState[categoria.id!] = true,
-        error => console.error('Error adding category:', error)
-      );
-    } else {
-      console.error('Categoria id is undefined');
+
+    if(this.categoriasElegidas.length < 10){
+      this.perfilService.anadirCategoriaExistenteAPerfil(categoria).subscribe({
+        next: () => {
+          this.cargarCategoriasElegidas();
+          this.categoriasAelegir();
+        },
+        error: () => {
+          console.log("Error al añadir categoria");
+          this.cargarCategoriasElegidas();
+          this.categoriasAelegir();
+        },
+        complete: () =>{
+          console.log("Categoria añadida exitosamente");
+        }
+      });
     }
   }
 
   eliminarCategoria(categoria: Categoria) {
     this.perfilService.eliminarCategoriaPreferenteDePerfil(categoria).subscribe({
       next: () => {
-        this.categorias = this.categorias.filter(cat => cat !== categoria);
-        this.filteredCategorias = this.filteredCategorias.filter(cat => cat !== categoria);
+        this.cargarCategoriasElegidas();
+        this.categoriasAelegir();
 
-        this.modalCategoriasEliminar.dismiss();
-
-        // Show a success message
+        // Mostrar mensaje de éxito
         this.mostrarToast('Categoría eliminada correctamente');
       },
       error: (error) => {
-        console.error('Error eliminando la categoría:', error);
-        this.mostrarToast('Error eliminando la categoría');
+        console.log('Error eliminando la categoría:', error);
+        this.cargarCategoriasElegidas();
+        this.categoriasAelegir();
+      },
+      complete: () => {
+        console.log("Categoría eliminada exitosamente");
       }
     });
   }
 
-  isButtonDisabled(categoria: Categoria): boolean {
-    return categoria.id !== undefined ? this.buttonDisabledState[categoria.id] || false : false;
+
+
+
+  categoriasAelegir(){
+    this.perfilService.verCategoriasNoElegidasPorPerfil().subscribe(categorias => {
+      this.filteredCategorias = categorias;
+    });
   }
 }

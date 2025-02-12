@@ -61,21 +61,15 @@
           </ion-button>
         </div>
 
-        <ion-modal #modalCategoriasAgregar trigger="open-modal-categorias" [initialBreakpoint]="0.5" [breakpoints]="[0, 1, 0.5, 0.75]">
+        <ion-modal #modalCategoriasAgregar trigger="open-modal-categorias" [initialBreakpoint]="0.5" [breakpoints]="[0, 1, 0.5, 0.75]" >
           <ng-template>
             <ion-content>
-              <ion-searchbar
-                placeholder="Search"
-                [(ngModel)]="searchTermCategorias"
-                (ionInput)="filterCategorias()"
-                (click)="modalCategoriasAgregar.setCurrentBreakpoint(0.75)">
-              </ion-searchbar>
               <ion-list>
                 <ion-item *ngFor="let categoria of filteredCategorias">
                   <ion-label>
                     <h2>{{ categoria.nombre }}</h2>
                   </ion-label>
-                  <ion-button color="primary" slot="end" [disabled]="isButtonDisabled(categoria)" (click)="anadirCategoria(categoria)">Añadir</ion-button>
+                  <ion-button color="primary" slot="end" (click)="anadirCategoria(categoria)">Añadir</ion-button>
                 </ion-item>
               </ion-list>
             </ion-content>
@@ -85,18 +79,12 @@
         <ion-modal #modalCategoriasEliminar trigger="delete-modal-categorias" [initialBreakpoint]="0.5" [breakpoints]="[0, 1, 0.5, 0.75]">
           <ng-template>
             <ion-content>
-              <ion-searchbar
-                placeholder="Search"
-                [(ngModel)]="searchTermCategorias"
-                (ionInput)="filterCategorias2()"
-                (click)="modalCategoriasEliminar.setCurrentBreakpoint(0.75)">
-              </ion-searchbar>
               <ion-list>
-                <ion-item *ngFor="let categoria of filteredCategorias">
+                <ion-item *ngFor="let categoria of categoriasElegidas">
                   <ion-label>
                     <h2>{{ categoria.nombre }}</h2>
                   </ion-label>
-                  <ion-button color="danger" slot="end" [disabled]="isButtonDisabled(categoria)" (click)="eliminarCategoria(categoria)">Eliminar</ion-button>
+                  <ion-button color="danger" slot="end" (click)="eliminarCategoria(categoria)">Eliminar</ion-button>
                 </ion-item>
               </ion-list>
             </ion-content>

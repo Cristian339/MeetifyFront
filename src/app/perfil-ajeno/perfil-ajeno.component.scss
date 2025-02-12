@@ -1,0 +1,114 @@
+
+.seguir-boton {
+  color: #dee4fc;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.perfil-content {
+  --background: #f9f9f9;
+  text-align: center;
+}
+
+.perfil-grid {
+  margin-top: 20px;
+}
+
+.perfil-avatar {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.perfil-nombre {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.perfil-usuario {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.perfil-descripcion {
+  font-size: 0.9rem;
+  color: var(--ion-color-primario);
+  margin: 5px auto;
+}
+
+.perfil-stats {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.perfil-reputacion {
+  margin-top: 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--ion-color-primario);
+}
+
+.reputacion-icon {
+  color: gold;
+}
+
+.perfil-tabs {
+  margin-top: 20px;
+}
+
+.publicaciones-grid {
+  margin: 20px 0;
+}
+
+.publicacion-card {
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.publicacion-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icon-style{
+  color: var(--ion-color-primario);
+}
+
+.perfil-detalles-titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--ion-color-primario);
+  text-decoration: underline;
+
+}
+.centered-title {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.circuloPersona {
+  font-size: 1.5em;
+  background-color: #5497A7;
+  border-radius: 50%;
+  padding: 15%;
+}
+
+.category {
+  background: #007AFF;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  margin-left: 5px;
+  float: left;
+}

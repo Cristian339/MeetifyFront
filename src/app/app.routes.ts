@@ -15,6 +15,7 @@ import { GestionarPublicacionesComponent} from "./gestionar-publicaciones/gestio
 import { UnirseEventoComponent} from "./unirse-evento/unirse-evento.component";
 import{ PuntuarComponent} from "./puntuar/puntuar.component";
 import {UsuPubliComponent} from "./usu-publi/usu-publi.component";
+import {PerfilAjenoComponent} from "./perfil-ajeno/perfil-ajeno.component";
 // import { EventoMiembroComponent} from "./evento-miembro/evento-miembro.component";
 
 export const routes: Routes = [
@@ -34,7 +35,7 @@ export const routes: Routes = [
   { path: 'gestion-publicacion', component: GestionPublicacionComponent },
   { path: 'gestionar-publicaciones', component: GestionarPublicacionesComponent },
   { path: 'usu-publi/:correo', component: UsuPubliComponent },
-
+  { path: 'perfil-ajeno', component: PerfilAjenoComponent },
   { path: 'gestionar-publicaciones', component: GestionarPublicacionesComponent },
   { path: 'unirse-evento', component: UnirseEventoComponent },
   { path: 'puntuar', component: PuntuarComponent},
