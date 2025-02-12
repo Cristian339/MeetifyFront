@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Publicacion } from '../modelos/Publicacion';
 import { ComunService } from './comun.service';
 import {UsuarioDTO} from "../modelos/UsuarioDTO";
+import {Perfil} from "../modelos/Perfil";
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,11 @@ export class PublicacionService {
   dentroOFuera(id: number | undefined): Observable<boolean>{
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/dentro/${id}`, authHeader);
+  }
+
+  otroUsuario(id: number | undefined): Observable<Perfil>{
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/otro-usuario/${id}`, authHeader);
   }
 
 }

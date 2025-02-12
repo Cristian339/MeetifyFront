@@ -23,10 +23,10 @@
       <ion-row>
         <ion-col>
           <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon" >
-            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" (click)="entrarPerfil()"/>
+            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" (click)="entrarPerfil(p.id)"/>
           </ng-container>
           <ng-template #defaultIcon>
-            <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large" (click)="entrarPerfil()"></ion-icon>
+            <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large" (click)="entrarPerfil(p.id)"></ion-icon>
           </ng-template>
         </ion-col>
         <ion-row class="centered-text">

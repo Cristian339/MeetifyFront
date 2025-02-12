@@ -209,8 +209,8 @@ export class PublicacionComponent implements OnInit {
   }
 
 
-  entrarPerfil(){
-    console.log("has pulsado")
-    this.router.navigate(['/perfil-ajeno']);
+  entrarPerfil(id: number | undefined) {
+    this.router.navigate(['/perfil-ajeno'], { queryParams: { id } });
   }
+
 }
