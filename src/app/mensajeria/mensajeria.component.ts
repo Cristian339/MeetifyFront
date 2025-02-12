@@ -94,7 +94,11 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
 
     // Fetch previous messages for the room
     this.mensajeService.obtenerMensajesPorRoomId(this.roomId).subscribe(messages => {
-      this.messages[this.roomId] = messages;
+      // Sort messages by date
+      messages.sort((a, b) => new Date(a.fechaEnviado).getTime() - new Date(b.fechaEnviado).getTime());
+
+      // Group messages by date labels
+      this.messages[this.roomId] = this.groupMessagesByDate(messages);
     });
 
     if (!this.messages[this.roomId]) {
@@ -106,6 +110,42 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     ).subscribe((message) => {
       this.messages[this.roomId].push(message);
     });
+  }
+
+  groupMessagesByDate(messages: any[]): any[] {
+    const groupedMessages: any[] = [];
+    let currentDateLabel = '';
+
+    messages.forEach(message => {
+      const dateLabel = this.getDateLabel(message.fechaEnviado);
+
+      if (dateLabel !== currentDateLabel) {
+        groupedMessages.push({ dateLabel, messages: [] });
+        currentDateLabel = dateLabel;
+      }
+
+      groupedMessages[groupedMessages.length - 1].messages.push(message);
+    });
+
+    return groupedMessages;
+  }
+
+  getDateLabel(dateString: string): string {
+    const date = parseISO(dateString);
+    const now = new Date();
+    const diffInDays = (now.getTime() - date.getTime()) / (1000 * 3600 * 24);
+
+    if (diffInDays < 1) {
+      return 'Hoy';
+    } else if (diffInDays < 2) {
+      return 'Ayer';
+    } else {
+      return date.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
   }
 
   enviarMensaje() {
@@ -133,7 +173,11 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     };
 
     this.webSocketService.enviarMensaje(message).subscribe(() => {
-      this.messages[this.roomId].push(message); // Add the message to the list
+      // Add the message to the list
+      if (!this.messages[this.roomId]) {
+        this.messages[this.roomId] = [];
+      }
+      this.messages[this.roomId].push(message);
       this.newMessage = '';
     });
   }
@@ -173,17 +217,9 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     }
   }
 
-  formatTime(dateString: string | undefined): string {
-    if (!dateString) {
-      return '';
-    }
-
-    const date = new Date(dateString);
-    return date.toLocaleTimeString('es-ES', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    });
+  formatTime(timeString: string): string {
+    const [hour, minute] = timeString.split(':');
+    return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
   }
 
 

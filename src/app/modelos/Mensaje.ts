@@ -5,5 +5,5 @@ export interface Mensaje {
   horaEnviado: string;
   usuarioEmisor: { id: number };
   usuarioReceptor: { id: number };
-  conversacionId: string;
+  /*conversacionId: string;*/
 }
