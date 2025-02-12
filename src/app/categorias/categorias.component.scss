@@ -15,7 +15,7 @@ ion-toolbar ion-title {
   margin-left: 1%;
 }
 
-*{
+* {
   font-family: 'Amatic SC', cursive;
   font-weight: bold;
 }
@@ -37,6 +37,71 @@ ion-toolbar ion-img {
 
 .selected {
   filter: brightness(0.7);
+}
+
+.category-1 {
+  --background: #19323C;
+}
+
+.category-2 {
+  --background: #5497A7;
+}
+
+.category-3 {
+  --background: #1A3A4A;
+}
+
+.category-4 {
+  --background: #4A8A9A;
+}
+
+.category-5 {
+  --background: #2B4A5A;
+}
+
+.category-6 {
+  --background: #5A9BAA;
+}
+
+.category-7 {
+  --background: #3C5A6A;
+}
+
+.category-8 {
+  --background: #6BA9B8;
+}
+
+.category-9 {
+  --background: #4D6A7A;
+}
+
+.category-10 {
+  --background: #7AB8C7;
+}
+
+.category-11 {
+  --background: #5E7A8A;
+}
+
+.category-12 {
+  --background: #8AC7D6;
+}
+
+.category-13 {
+  --background: #6F8A9A;
+}
+
+.category-14 {
+  --background: #9AD6E5;
+}
+
+.size-text {
+  font-size: 1.5rem;
+}
+
+.background {
+  --background: var(--ion-color-secundario);
+  --color: white;
 }
 
 .toast .toast-message {

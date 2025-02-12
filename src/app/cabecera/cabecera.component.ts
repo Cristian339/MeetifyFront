@@ -16,15 +16,15 @@ import {Router} from "@angular/router";
 })
 export class CabeceraComponent implements OnInit {
   @Input() titulo: string = 'NAVBAR';
-  @Input() backRoute: string | undefined;
+  @Input() ruta: string | undefined;
 
 
   constructor(private router: Router) {
     addIcons({ arrowBackCircle });
   }
   navigateBack() {
-    if (this.backRoute) {
-      this.router.navigate([this.backRoute]);
+    if (this.ruta) {
+      this.router.navigate([this.ruta]);
     }
   }
 

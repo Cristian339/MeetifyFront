@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AnimationController, IonicModule } from '@ionic/angular';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
+import { AnimationController, IonContent, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { arrowBackCircle, personOutline, chatbubblesOutline, sendOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -12,6 +12,7 @@ import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { CabeceraComponent } from "../cabecera/cabecera.component";
 
 @Component({
   selector: 'app-mensajeria',
@@ -22,9 +23,11 @@ import { es } from 'date-fns/locale';
     IonicModule,
     CommonModule,
     FormsModule,
+    CabeceraComponent,
   ]
 })
-export class MensajeriaComponent implements OnInit, OnDestroy {
+export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(IonContent, { static: false }) content!: IonContent;
   messages: { [key: string]: any[] } = {};
   newMessage: string = '';
   roomId: string = '';
@@ -47,6 +50,21 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.cargarSeguidos();
     this.obtenerPerfilEmisor();
+  }
+
+  ngAfterViewInit() {
+    // Ensure automatic scroll when the chat loads
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 500);
+  }
+
+  private scrollToBottom(): void {
+    setTimeout(() => {
+      if (this.content) {
+        this.content.scrollToBottom(0); // Try 500ms for a smoother scroll
+      }
+    }, 0); // Wait 300ms before executing the scroll
   }
 
   ngOnDestroy() {
@@ -99,6 +117,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
 
       // Group messages by date labels
       this.messages[this.roomId] = this.groupMessagesByDate(messages);
+      this.scrollToBottom(); // Scroll to bottom after loading messages
     });
 
     if (!this.messages[this.roomId]) {
@@ -109,6 +128,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
       filter(message => message.roomId === this.roomId)
     ).subscribe((message) => {
       this.messages[this.roomId].push(message);
+      this.scrollToBottom(); // Scroll to bottom when a new message is received
     });
   }
 
@@ -179,6 +199,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
       }
       this.messages[this.roomId].push(message);
       this.newMessage = '';
+      this.scrollToBottom(); // Scroll to bottom after sending a message
     });
   }
 
@@ -221,7 +242,6 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     const [hour, minute] = timeString.split(':');
     return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
   }
-
 
   entrarAnimacion = (baseEl: HTMLElement) => {
     const root = baseEl.shadowRoot;

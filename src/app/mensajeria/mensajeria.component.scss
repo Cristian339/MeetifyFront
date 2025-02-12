@@ -142,4 +142,12 @@
     align-self: flex-start;
     background-color: #19323C;
   }
+
+  .message-time {
+    font-size: 0.8rem;
+    color: var(--ion-color-tercero);
+    text-align: right;
+    display: block;
+    margin-top: 5px;
+  }
 }
