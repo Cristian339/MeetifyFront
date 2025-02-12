@@ -26,7 +26,7 @@
   ion-modal ion-toolbar {
     background-color: #FFFFFF;
     --background: #FFFFFF;
-    --color: #000000; /* Ajusta el color del texto si es necesario */
+    --color: #000000; /* Adjust text color if necessary */
   }
 
   ion-modal .Perfil-imagen {
@@ -66,7 +66,6 @@
     background-color: #5497A7;
     border-radius: 50%;
     padding: 15%;
-
   }
 
   ion-item {
@@ -109,16 +108,17 @@
     flex-direction: column;
     padding: 16px;
     background-color: #f5f7f6;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     height: 100%;
     box-sizing: border-box;
   }
 
   .date-label {
+    font-weight: bold;
     text-align: center;
     font-family: 'Amatic SC', cursive;
     font-size: 1.5rem;
-    color: #8e8e8e;
+    color: #000000;
     margin: 16px 0 8px;
   }
 
@@ -129,19 +129,17 @@
     margin: 8px 0;
     font-size: 14px;
     line-height: 1.4;
+    color: white;
+    word-wrap: break-word;
   }
 
   .message-sent {
     align-self: flex-end;
     background-color: #5497A7;
-    color: white;
   }
 
   .message-received {
     align-self: flex-start;
-    background-color: #ffffff;
-    color: black;
-    border: 1px solid #ddd;
+    background-color: #19323C;
   }
 }
-

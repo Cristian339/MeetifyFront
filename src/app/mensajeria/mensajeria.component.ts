@@ -1,8 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {AnimationController, IonicModule} from "@ionic/angular";
-import {CommonModule} from "@angular/common";
-import {arrowBackCircle, personOutline, chatbubblesOutline, micOutline, happyOutline, cameraOutline} from "ionicons/icons";
-import {addIcons} from "ionicons";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AnimationController, IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { arrowBackCircle, personOutline, chatbubblesOutline, sendOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+import { WebSocketService } from '../services/websocket.service';
+import { PerfilService } from '../services/perfil.service';
+import { MensajeService } from '../services/mensaje.service';
+import { SeguidorDTO } from '../modelos/SeguidorDTO';
+import { FormsModule } from '@angular/forms';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { formatDistanceToNow, parseISO } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 @Component({
   selector: 'app-mensajeria',
@@ -12,14 +21,207 @@ import {addIcons} from "ionicons";
   imports: [
     IonicModule,
     CommonModule,
+    FormsModule,
   ]
 })
-export class MensajeriaComponent {
+export class MensajeriaComponent implements OnInit, OnDestroy {
+  messages: { [key: string]: any[] } = {};
+  newMessage: string = '';
+  roomId: string = '';
+  seguidos: SeguidorDTO[] = [];
+  filteredSeguidos: SeguidorDTO[] = [];
+  seguidosCount: number = 0;
+  currentSeguidor: SeguidorDTO | null = null;
+  private messageSubscription: Subscription | null = null;
+  private emisorId: number | null = null;
 
-  constructor(private animationCtrl: AnimationController) {
-
-    addIcons( { arrowBackCircle, personOutline, chatbubblesOutline, micOutline, happyOutline, cameraOutline } );
+  constructor(
+    private animationCtrl: AnimationController,
+    private webSocketService: WebSocketService,
+    private perfilService: PerfilService,
+    private mensajeService: MensajeService
+  ) {
+    addIcons({ arrowBackCircle, personOutline, chatbubblesOutline, sendOutline });
   }
+
+  ngOnInit() {
+    this.cargarSeguidos();
+    this.obtenerPerfilEmisor();
+  }
+
+  ngOnDestroy() {
+    this.disconnectWebSocket();
+  }
+
+  obtenerPerfilEmisor() {
+    this.perfilService.getIDPerfil().subscribe({
+      next: (perfil) => {
+        console.log('Perfil received:', perfil);
+        this.emisorId = perfil.id;
+        console.log('Emisor ID assigned:', this.emisorId);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
+  }
+
+  cargarSeguidos() {
+    this.perfilService.obtenerSeguidores().subscribe({
+      next: (seguidos) => {
+        console.log('Seguidos received:', seguidos);
+        this.seguidos = seguidos.map(seguido => ({
+          ...seguido,
+          buttonDisabled: false
+        }));
+        this.filteredSeguidos = this.seguidos;
+        this.seguidosCount = seguidos.length;
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
+  }
+
+  abrirChat(seguidorId: number) {
+    this.disconnectWebSocket();
+    this.currentSeguidor = this.seguidos.find(seguidor => seguidor.id === seguidorId) || null;
+
+    if (this.emisorId === null) {
+      console.error('Emisor ID is not defined');
+      return;
+    }
+
+    this.roomId = this.generateRoomId(this.emisorId, seguidorId);
+
+    // Fetch previous messages for the room
+    this.mensajeService.obtenerMensajesPorRoomId(this.roomId).subscribe(messages => {
+      // Sort messages by date
+      messages.sort((a, b) => new Date(a.fechaEnviado).getTime() - new Date(b.fechaEnviado).getTime());
+
+      // Group messages by date labels
+      this.messages[this.roomId] = this.groupMessagesByDate(messages);
+    });
+
+    if (!this.messages[this.roomId]) {
+      this.messages[this.roomId] = [];
+    }
+    this.webSocketService.connect(this.roomId);
+    this.messageSubscription = this.webSocketService.getMessages().pipe(
+      filter(message => message.roomId === this.roomId)
+    ).subscribe((message) => {
+      this.messages[this.roomId].push(message);
+    });
+  }
+
+  groupMessagesByDate(messages: any[]): any[] {
+    const groupedMessages: any[] = [];
+    let currentDateLabel = '';
+
+    messages.forEach(message => {
+      const dateLabel = this.getDateLabel(message.fechaEnviado);
+
+      if (dateLabel !== currentDateLabel) {
+        groupedMessages.push({ dateLabel, messages: [] });
+        currentDateLabel = dateLabel;
+      }
+
+      groupedMessages[groupedMessages.length - 1].messages.push(message);
+    });
+
+    return groupedMessages;
+  }
+
+  getDateLabel(dateString: string): string {
+    const date = parseISO(dateString);
+    const now = new Date();
+    const diffInDays = (now.getTime() - date.getTime()) / (1000 * 3600 * 24);
+
+    if (diffInDays < 1) {
+      return 'Hoy';
+    } else if (diffInDays < 2) {
+      return 'Ayer';
+    } else {
+      return date.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+  }
+
+  enviarMensaje() {
+    if (this.newMessage.trim() === '') {
+      return;
+    }
+
+    if (this.emisorId === null || this.currentSeguidor === null) {
+      console.error('Emisor ID or Seguidor ID is not defined');
+      return;
+    }
+
+    const now = new Date();
+    const message = {
+      contenido: this.newMessage,
+      fechaEnviado: now.toISOString(),
+      horaEnviado: now.toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }),
+      roomId: this.roomId,
+      usuarioEmisor: { id: this.emisorId },
+      usuarioReceptor: { id: this.currentSeguidor.id }
+    };
+
+    this.webSocketService.enviarMensaje(message).subscribe(() => {
+      // Add the message to the list
+      if (!this.messages[this.roomId]) {
+        this.messages[this.roomId] = [];
+      }
+      this.messages[this.roomId].push(message);
+      this.newMessage = '';
+    });
+  }
+
+  disconnectWebSocket() {
+    if (this.messageSubscription) {
+      this.messageSubscription.unsubscribe();
+      this.messageSubscription = null;
+    }
+    this.webSocketService.disconnect();
+    this.roomId = '';
+  }
+
+  generateRoomId(emisorId: number, receptorId: number): string {
+    return emisorId < receptorId ? `${emisorId}_${receptorId}` : `${receptorId}_${emisorId}`;
+  }
+
+  formatDate(dateString: string | undefined): string {
+    if (!dateString) {
+      return '';
+    }
+
+    const date = parseISO(dateString);
+    const now = new Date();
+    const diffInDays = (now.getTime() - date.getTime()) / (1000 * 3600 * 24);
+
+    if (diffInDays < 1) {
+      return 'Hoy';
+    } else if (diffInDays < 2) {
+      return 'Ayer';
+    } else {
+      return date.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+  }
+
+  formatTime(timeString: string): string {
+    const [hour, minute] = timeString.split(':');
+    return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
+  }
+
 
   entrarAnimacion = (baseEl: HTMLElement) => {
     const root = baseEl.shadowRoot;
@@ -48,5 +250,4 @@ export class MensajeriaComponent {
   dejarAnimacion = (baseEl: HTMLElement) => {
     return this.entrarAnimacion(baseEl).direction('reverse');
   };
-
 }

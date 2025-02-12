@@ -11,178 +11,61 @@
 </ion-header>
 
 <ion-content>
-
   <ion-searchbar placeholder="Buscar el mensaje"></ion-searchbar>
 
   <ion-list>
-    <ion-item lines="none" id="open-modal">
+    <ion-item *ngFor="let seguidor of filteredSeguidos" lines="none" (click)="abrirChat(seguidor.id!)">
       <ion-avatar slot="start">
-        <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
+        <ion-img *ngIf="seguidor.imagenUrlPerfil; else defaultIcon" [src]="seguidor.imagenUrlPerfil"></ion-img>
+        <ng-template #defaultIcon>
+          <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
+        </ng-template>
       </ion-avatar>
       <ion-label>
-        <h2>Pedro</h2>
-        <p>Hola Bro</p>
+        <h2>{{ seguidor.nombre }}</h2>
       </ion-label>
       <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
-
-      <ion-modal #modal trigger="open-modal" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-avatar slot="start">
-                <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
-              </ion-avatar>
-              <ion-label>
-                <h2>Pedro</h2>
-                <p>Conectado por última vez 11:44 AM</p>
-              </ion-label>
-              <ion-icon name="arrow-back-circle" slot="end" id="ModalIcon" (click)="modal.dismiss()"></ion-icon>
-            </ion-toolbar>
-          </ion-header>
-
-          <ion-content>
-            <div class="chat-container">
-              <div class="date-label">25 de Noviembre del 2020</div>
-              <div class="message message-sent">Hola que tal?</div>
-              <div class="message message-received">Bien gracias y tú?</div>
-              <div class="message message-sent">Estoy muy bien, ¿qué haces?</div>
-              <div class="date-label">Ayer</div>
-              <div class="message message-received">Perdón la demora, estaba ocupado</div>
-              <div class="message message-received">¿Qué tal estuvo tu día?</div>
-              <div class="date-label">Justo Ahora</div>
-              <div class="message message-sent">
-                Pero estaba trabajando y ahora salí, estoy cansado, pero bien gracias por preguntar.
-              </div>
-            </div>
-          </ion-content>
-
-          <ion-footer style="background-color: #FFFFFF">
-            <ion-toolbar style="background-color: #FFFFFF">
-              <ion-item lines="none">
-                <ion-input type="text" placeholder="Escribe un mensaje"></ion-input>
-                <ion-icon slot="end" name="mic-outline"></ion-icon>
-                <ion-icon slot="end" name="happy-outline"></ion-icon>
-                <ion-icon slot="end" name="camera-outline"></ion-icon>
-              </ion-item>
-            </ion-toolbar>
-          </ion-footer>
-        </ng-template>
-      </ion-modal>
-    </ion-item>
-
-    <ion-item lines="none" id="open-modal-2">
-      <ion-avatar slot="start">
-        <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Manuel</h2>
-        <p>códigos123</p>
-      </ion-label>
-      <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
-
-      <ion-modal #modal2 trigger="open-modal-2" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-avatar slot="start">
-                <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
-              </ion-avatar>
-              <ion-label>
-                <h2>Manuel</h2>
-                <p>Conectado por última vez 16:56 PM</p>
-              </ion-label>
-              <ion-icon name="arrow-back-circle" slot="end" id="ModalIcon2" (click)="modal2.dismiss()"></ion-icon>
-            </ion-toolbar>
-          </ion-header>
-
-          <ion-content>
-            <div class="chat-container">
-              <div class="date-label">15 de Agosto del 2024</div>
-              <div class="message message-sent">Hola que te cuentas crack</div>
-              <div class="message message-received">Bien,tú?</div>
-              <div class="message message-sent">Estoy de puta madre, ¿qué te cuentas?</div>
-              <div class="date-label">Hace 5 dias</div>
-              <div class="message message-received">Illo illo que locura de tik tok xulo</div>
-              <div class="message message-received">Mandatelo, hijo de la gran puta</div>
-              <div class="date-label">Hace 3 dias</div>
-              <div class="message message-sent">A mi me parece una puta mierda xD</div>
-              <div class="date-label">Ayer</div>
-              <div class="message message-received">Me voy a tu keli hermanito</div>
-            </div>
-          </ion-content>
-
-          <ion-footer style="background-color: #FFFFFF">
-            <ion-toolbar style="background-color: #FFFFFF">
-              <ion-item lines="none">
-                <ion-input type="text" placeholder="Escribe un mensaje"></ion-input>
-                <ion-icon slot="end" name="mic-outline"></ion-icon>
-                <ion-icon slot="end" name="happy-outline"></ion-icon>
-                <ion-icon slot="end" name="camera-outline"></ion-icon>
-              </ion-item>
-            </ion-toolbar>
-          </ion-footer>
-        </ng-template>
-      </ion-modal>
-
-    </ion-item>
-
-    <ion-item lines="none" id="open-modal-3">
-      <ion-avatar slot="start">
-        <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2>Sofía</h2>
-        <p>te espero abajo</p>
-      </ion-label>
-      <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
-
-      <ion-modal #modal3 trigger="open-modal-3" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar class="modalToolbar">
-              <ion-avatar slot="start">
-                <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
-              </ion-avatar>
-              <ion-label>
-                <h2>Sofia</h2>
-                <p>Conectado por última vez 11:30 PM</p>
-              </ion-label>
-              <ion-icon name="arrow-back-circle" slot="end" id="ModalIcon3" (click)="modal3.dismiss()"></ion-icon>
-            </ion-toolbar>
-          </ion-header>
-
-          <ion-content>
-            <div class="chat-container">
-              <div class="date-label">10 de Enero del 2025</div>
-              <div class="message message-sent">Hey, ¿qué tal todo?</div>
-              <div class="message message-received">¡Hola! Todo bien, ¿y tú?</div>
-              <div class="message message-sent">Muy bien, gracias. ¿Has visto la nueva serie de Netflix?</div>
-              <div class="message message-received">Sí, la empecé ayer. ¿Tú?</div>
-              <div class="date-label">Hace 2 días</div>
-              <div class="message message-sent">¡Sí! Está increíble, especialmente el segundo episodio.</div>
-              <div class="message message-received">Totalmente, no podía dejar de verla. ¿Ya terminaste?</div>
-              <div class="date-label">Ayer</div>
-              <div class="message message-sent">Sí, me la terminé de una sola sentada 😅</div>
-              <div class="message message-received">Jajaja, típico de ti. ¿Me recomiendas algo similar?</div>
-              <div class="date-label">Justo Ahora</div>
-              <div class="message message-sent">Claro, "Dark" es perfecta si no la has visto aún. ¡Te va a encantar!</div>
-            </div>
-          </ion-content>
-
-
-          <ion-footer style="background-color: #FFFFFF">
-            <ion-toolbar style="background-color: #FFFFFF">
-              <ion-item lines="none">
-                <ion-input type="text" placeholder="Escribe un mensaje"></ion-input>
-                <ion-icon slot="end" name="mic-outline"></ion-icon>
-                <ion-icon slot="end" name="happy-outline"></ion-icon>
-                <ion-icon slot="end" name="camera-outline"></ion-icon>
-              </ion-item>
-            </ion-toolbar>
-          </ion-footer>
-        </ng-template>
-      </ion-modal>
-
     </ion-item>
   </ion-list>
+
+  <ion-modal #modal [isOpen]="roomId !== ''" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion" (ionModalDidDismiss)="disconnectWebSocket()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-avatar slot="start">
+            <ion-img *ngIf="currentSeguidor?.imagenUrlPerfil; else defaultIcon" [src]="currentSeguidor?.imagenUrlPerfil"></ion-img>
+            <ng-template #defaultIcon>
+              <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
+            </ng-template>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ currentSeguidor?.nombre }}</h2>
+            <p>Conectado</p>
+          </ion-label>
+          <ion-icon name="arrow-back-circle" slot="end" (click)="modal.dismiss()"></ion-icon>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <div class="chat-container">
+          <div *ngFor="let group of messages[roomId]">
+            <div class="date-label">{{ group.dateLabel }}</div>
+            <div *ngFor="let message of group.messages" [ngClass]="{'message-sent': message.usuarioEmisor.id === 1, 'message-received': message.usuarioEmisor.id !== 1}" class="message">
+              {{ message.contenido }}
+              <div class="message-time">{{ formatTime(message.horaEnviado) }}</div>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+
+      <ion-footer style="background-color: #FFFFFF">
+        <ion-toolbar style="background-color: #FFFFFF">
+          <ion-item lines="none">
+            <ion-input type="text" placeholder="Escribe un mensaje" [(ngModel)]="newMessage"></ion-input>
+            <ion-icon slot="end" name="send-outline" (click)="enviarMensaje()"></ion-icon>
+          </ion-item>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 </ion-content>
