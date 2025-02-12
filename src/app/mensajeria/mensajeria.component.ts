@@ -118,12 +118,20 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
       return;
     }
 
+    const now = new Date();
     const message = {
       contenido: this.newMessage,
+      fechaEnviado: now.toISOString(),
+      horaEnviado: now.toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }),
       roomId: this.roomId,
       usuarioEmisor: { id: this.emisorId },
       usuarioReceptor: { id: this.currentSeguidor.id }
     };
+
     this.webSocketService.enviarMensaje(message).subscribe(() => {
       this.messages[this.roomId].push(message); // Add the message to the list
       this.newMessage = '';
@@ -153,11 +161,9 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     const diffInDays = (now.getTime() - date.getTime()) / (1000 * 3600 * 24);
 
     if (diffInDays < 1) {
-      return 'Ahora';
+      return 'Hoy';
     } else if (diffInDays < 2) {
       return 'Ayer';
-    } else if (diffInDays < 7) {
-      return formatDistanceToNow(date, { locale: es });
     } else {
       return date.toLocaleDateString('es-ES', {
         day: '2-digit',
@@ -166,6 +172,20 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  formatTime(dateString: string | undefined): string {
+    if (!dateString) {
+      return '';
+    }
+
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('es-ES', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+  }
+
 
   entrarAnimacion = (baseEl: HTMLElement) => {
     const root = baseEl.shadowRoot;

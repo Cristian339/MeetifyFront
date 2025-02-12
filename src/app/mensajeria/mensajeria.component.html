@@ -48,10 +48,13 @@
 
       <ion-content>
         <div class="chat-container">
-          <div *ngFor="let message of messages[roomId]">
-            <div class="date-label">{{ formatDate(message.fechaEnviado) }}</div>
-            <div [ngClass]="{'message-sent': message.usuarioEmisor.id === 1, 'message-received': message.usuarioEmisor.id !== 1}">
+          <div *ngFor="let message of messages[roomId]; let i = index">
+            <div *ngIf="i === 0 || formatDate(messages[roomId][i - 1].fechaEnviado) !== formatDate(message.fechaEnviado)" class="date-label">
+              {{ formatDate(message.fechaEnviado) }}
+            </div>
+            <div [ngClass]="{'message-sent': message.usuarioEmisor.id === 1, 'message-received': message.usuarioEmisor.id !== 1}" class="message">
               {{ message.contenido }}
+              <div class="message-time">{{ formatTime(message.fechaEnviado) }}</div>
             </div>
           </div>
         </div>
