@@ -5,13 +5,13 @@ import { arrowBackCircle, personOutline, chatbubblesOutline, sendOutline } from 
 import { addIcons } from 'ionicons';
 import { WebSocketService } from '../services/websocket.service';
 import { PerfilService } from '../services/perfil.service';
+import { MensajeService } from '../services/mensaje.service';
 import { SeguidorDTO } from '../modelos/SeguidorDTO';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-mensajeria',
@@ -39,7 +39,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     private animationCtrl: AnimationController,
     private webSocketService: WebSocketService,
     private perfilService: PerfilService,
-    private http: HttpClient
+    private mensajeService: MensajeService
   ) {
     addIcons({ arrowBackCircle, personOutline, chatbubblesOutline, sendOutline });
   }
@@ -93,7 +93,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     this.roomId = this.generateRoomId(this.emisorId, seguidorId);
 
     // Fetch previous messages for the room
-    this.http.get<any[]>(`/mensajes/room/${this.roomId}`).subscribe(messages => {
+    this.mensajeService.obtenerMensajesPorRoomId(this.roomId).subscribe(messages => {
       this.messages[this.roomId] = messages;
     });
 
