@@ -152,12 +152,9 @@
         </ion-col>
     </ion-row>
   <ion-row class="perfil-info font-inter">
-    <ion-col>
-      <ion-list *ngFor="let c of categorias">
-        <ion-item>
-          <ion-text><i>{{c.nombre}}</i></ion-text>
-        </ion-item>
-      </ion-list>
+    <ion-title style="font-size: large; margin-right: -50px">Gustos:</ion-title>
+    <ion-col *ngFor="let c of categorias">
+          <ion-text class="category"><i>{{c.nombre}}</i></ion-text>
     </ion-col>
   </ion-row>
 
@@ -172,13 +169,8 @@
       <ion-col size="6" *ngFor="let post of publicaciones">
         <ion-card class="publicacion-card" (click)="verPubli(post)">
           <img [src]="post.imagenUrlPub" alt="Publicación" />
-          <ion-card-header>
-            <ion-card-title>{{ post.titulo }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            {{ post.descripcion }}
-          </ion-card-content>
         </ion-card>
+        <ion-title style="font-family: 'Amatic SC', sans-serif; font-size: x-large">{{ post.titulo }}</ion-title>
       </ion-col>
     </ion-row>
   </ion-grid>

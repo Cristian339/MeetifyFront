@@ -82,7 +82,15 @@ export class PerfilComponent implements OnInit {
   }
 
   verPubli(publicacion: Publicacion) {
-    this.router.navigate(['/gestionar-publicaciones'], { state: { publicacion } });
+    this.publicacionService.obtenerCreador(publicacion.id).subscribe(esCreador => {
+      if (esCreador) {
+        this.router.navigate(['/gestionar-publicaciones'], { state: { publicacion } });
+      } else {
+        this.router.navigate(['/unirse-evento'], { state: { publicacion } });
+      }
+    }, error => {
+      console.error("Error al verificar el creador de la publicación", error);
+    });
   }
 
   cargarSeguidores5() {
