@@ -9,6 +9,7 @@ import {PerfilService} from "../services/perfil.service";
 import {PublicacionService} from "../services/publicacion.service";
 import {Router} from "@angular/router";
 import {addIcons} from "ionicons";
+import { ActivatedRoute } from '@angular/router';
 import {
   arrowBackOutline,
   constructOutline,
@@ -54,7 +55,8 @@ export class PerfilAjenoComponent  implements OnInit {
   constructor(
     private perfilService: PerfilService,
     private publicacionService: PublicacionService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline, personOutline });
   }
@@ -62,24 +64,29 @@ export class PerfilAjenoComponent  implements OnInit {
 
 
   ngOnInit() {
-    console.log('ngOnInit called');
-    this.perfilService.getPerfil().subscribe({
-      next: (data) => {
-        console.log('Data received:', data);
-        this.perfil = data;
-        console.log('Perfil assigned:', this.perfil);
-      },
-      error: (error) => console.error('Error:', error),
-      complete: () => console.log('Request completed')
-    });
-    this.perfilService.categoriasPerfil().subscribe({
-      next: (data) => {
-        console.log('Data received:', data);
-        this.categorias = data;
-        console.log('Perfil assigned:', this.perfil);
-      },
-      error: (error) => console.error('Error:', error),
-      complete: () => console.log('Request completed')
+
+
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      console.log('ID recibido:', id);
+          this.publicacionService.otroUsuario(id).subscribe({
+            next: (data) => {
+              console.log('Data received:', data);
+              this.perfil = data;
+              console.log('Perfil assigned:', this.perfil);
+            },
+            error: (error) => console.error('Error:', error),
+            complete: () => console.log('Request completed')
+          });
+          this.perfilService.categoriasOtroPerfil(id).subscribe({
+            next: (data) => {
+              console.log('Data received:', data);
+              this.categorias = data;
+              console.log('Perfil assigned:', this.perfil);
+            },
+            error: (error) => console.error('Error:', error),
+            complete: () => console.log('Request completed')
+          });
     });
     this.cargarSeguidores();
     this.cargarPublicaciones()

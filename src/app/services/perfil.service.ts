@@ -70,6 +70,11 @@ export class PerfilService {
     return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/categorias`, authHeader);
   }
 
+  categoriasOtroPerfil(id: number | undefined): Observable<Categoria[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/categorias-otro/${id}`, authHeader);
+  }
+
   obtenerSeguidores(): Observable<SeguidorDTO[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidores`, authHeader);
