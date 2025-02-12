@@ -93,7 +93,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     this.roomId = this.generateRoomId(this.emisorId, seguidorId);
 
     // Fetch previous messages for the room
-    this.http.get<any[]>(`/api/mensajes/room/${this.roomId}`).subscribe(messages => {
+    this.http.get<any[]>(`/mensajes/room/${this.roomId}`).subscribe(messages => {
       this.messages[this.roomId] = messages;
     });
 
@@ -125,6 +125,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
       usuarioReceptor: { id: this.currentSeguidor.id }
     };
     this.webSocketService.enviarMensaje(message).subscribe(() => {
+      this.messages[this.roomId].push(message); // Add the message to the list
       this.newMessage = '';
     });
   }
@@ -142,7 +143,11 @@ export class MensajeriaComponent implements OnInit, OnDestroy {
     return emisorId < receptorId ? `${emisorId}_${receptorId}` : `${receptorId}_${emisorId}`;
   }
 
-  formatDate(dateString: string): string {
+  formatDate(dateString: string | undefined): string {
+    if (!dateString) {
+      return '';
+    }
+
     const date = parseISO(dateString);
     const now = new Date();
     const diffInDays = (now.getTime() - date.getTime()) / (1000 * 3600 * 24);

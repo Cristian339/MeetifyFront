@@ -44,7 +44,7 @@ export class WebSocketService {
   enviarMensaje(message: any): Observable<any> {
     return new Observable(observer => {
       this.stompClient.publish({
-        destination: `/app/enviarMensaje`,
+        destination: `/app/enviarMensaje/${message.roomId}`,
         body: JSON.stringify(message)
       });
       observer.next({ roomId: message.roomId });

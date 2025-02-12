@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -41,3 +42,4 @@ export class MensajeService {
     return this.http.get<SeguidorDTO[]>(`${this.baseUrl}/seguidores`);
   }
 }
+*/
