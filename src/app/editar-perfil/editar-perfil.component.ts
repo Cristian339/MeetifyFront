@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { IonicModule, ToastController } from "@ionic/angular";
+import {IonicModule, IonModal, ToastController} from "@ionic/angular";
 import { NgForOf, NgIf } from "@angular/common";
 import { addIcons } from "ionicons";
 import { checkmarkOutline, closeOutline } from "ionicons/icons";
