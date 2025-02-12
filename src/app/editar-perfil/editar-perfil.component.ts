@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { IonicModule, ToastController } from "@ionic/angular";
+import {IonicModule, IonModal, ToastController} from "@ionic/angular";
 import { NgForOf, NgIf } from "@angular/common";
 import { addIcons } from "ionicons";
 import { checkmarkOutline, closeOutline } from "ionicons/icons";
@@ -23,6 +23,7 @@ import { Categoria } from "../modelos/Categoria";
 })
 export class EditarPerfilComponent implements OnInit {
 
+  @ViewChild('modalCategoriasEliminar') modalCategoriasEliminar!: IonModal;
   @ViewChild('fileInput') fileInput!: ElementRef;
   selectedFile: File | null = null;
   isLink: boolean = false;
@@ -54,8 +55,9 @@ export class EditarPerfilComponent implements OnInit {
       error: (error) => console.error('Error:', error)
     });
 
-    this.cargarCategorias()
-    this.cargarCategoriasElegidas()
+    this.cargarCategoriasElegidas();
+    this.cargarCategorias();
+    this.filterCategorias();
   }
 
   modificarInfoPrivadaCorreo() {
@@ -130,32 +132,35 @@ export class EditarPerfilComponent implements OnInit {
     this.perfilService.verTodasLasCategorias().subscribe(categorias => {
       this.categorias = categorias;
       this.filteredCategorias = categorias;
+      this.filterCategorias();
     });
   }
 
   cargarCategoriasElegidas() {
-    this.perfilService.verCategoriasElegidasPorPerfil('your-token-here').subscribe(categorias => {
+    this.perfilService.verCategoriasElegidasPorPerfil().subscribe(categorias => {
       this.categoriasElegidas = categorias;
       this.filteredCategorias = categorias;
     });
   }
 
   filterCategorias() {
+    const elegidasIds = this.categoriasElegidas.map(categoria => categoria.id);
     this.filteredCategorias = this.categorias.filter(categoria =>
-      categoria.nombre?.toLowerCase().includes(this.searchTermCategorias.toLowerCase())
+      categoria.nombre?.toLowerCase().includes(this.searchTermCategorias.toLowerCase()) &&
+      !elegidasIds.includes(categoria.id)
     );
   }
 
   filterCategorias2() {
     this.filteredCategorias = this.categoriasElegidas.filter(categoria =>
-      categoria.nombre.toLowerCase().includes(this.searchTermCategorias.toLowerCase())
+      categoria.nombre?.toLowerCase().includes(this.searchTermCategorias.toLowerCase())
     );
   }
 
   anadirCategoria(categoria: Categoria) {
     if (categoria.id !== undefined) {
       this.perfilService.anadirCategoriaExistenteAPerfil(categoria).subscribe(
-        () => this.buttonDisabledState[categoria.id] = true,
+        () => this.buttonDisabledState[categoria.id!] = true,
         error => console.error('Error adding category:', error)
       );
     } else {
@@ -164,16 +169,24 @@ export class EditarPerfilComponent implements OnInit {
   }
 
   eliminarCategoria(categoria: Categoria) {
-    this.perfilService.eliminarCategoriaPreferenteDePerfil(categoria).subscribe(() => {
-      this.cargarCategoriasElegidas();
+    this.perfilService.eliminarCategoriaPreferenteDePerfil(categoria).subscribe({
+      next: () => {
+        this.categorias = this.categorias.filter(cat => cat !== categoria);
+        this.filteredCategorias = this.filteredCategorias.filter(cat => cat !== categoria);
+
+        this.modalCategoriasEliminar.dismiss();
+
+        // Show a success message
+        this.mostrarToast('Categoría eliminada correctamente');
+      },
+      error: (error) => {
+        console.error('Error eliminando la categoría:', error);
+        this.mostrarToast('Error eliminando la categoría');
+      }
     });
   }
 
   isButtonDisabled(categoria: Categoria): boolean {
-    return categoria.id !== undefined ? this.buttonDisabledState[categoria.id] || false : false;
-  }
-
-  isButtonDisabled2(categoria: Categoria): boolean {
     return categoria.id !== undefined ? this.buttonDisabledState[categoria.id] || false : false;
   }
 }
