@@ -119,6 +119,7 @@ export class PerfilAjenoComponent  implements OnInit {
     this.cargarSeguidos();
     this.cargarSeguidores5();
     this.cargarSeguidos5();
+    this.comprobar();
   }
 
   verPubli(publicacion: Publicacion) {
@@ -270,11 +271,23 @@ export class PerfilAjenoComponent  implements OnInit {
   setBoton(){
     if (this.botonS){
       this.botonS = false;
-      this.seguirUsuario(this.idPerfil);
+      this.dejarDeSeguir(this.idPerfil);
     }else {
       this.botonS = true;
-      this.dejarDeSeguir(this.idPerfil);
+      this.seguirUsuario(this.idPerfil);
     }
+  }
+
+
+  comprobar(){
+    this.perfilService.comprobarSiSiguesUsuario(this.idPerfil).subscribe({
+      next:(data) => {
+        this.botonS = data;
+      },
+      error:() => {
+        console.log("No se pudo comprobar si le sigues o no")
+      }
+    })
   }
 
 }
