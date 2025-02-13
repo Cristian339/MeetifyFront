@@ -1,0 +1,27 @@
+ion-header {
+  --background: var(--ion-color-primario);
+  --color: var(--ion-color-primario-contrast);
+}
+
+.notification-item {
+  background: var(--ion-color-terciario);
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.perfil-avatar {
+  @extend .perfil-avatar;
+}
+
+.font-amatic-grande {
+  @extend .font-amatic-grande;
+}
+
+.font-amatic-grande2 {
+  @extend .font-amatic-grande2;
+}
+
+ion-text {
+  font-weight: bold;
+}
