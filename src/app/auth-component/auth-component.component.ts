@@ -157,7 +157,7 @@ export class AuthComponentComponent implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 5000,
+      duration: 1000,
       color: 'primary',
       position: 'bottom',
       cssClass: 'toast-inter-font'
@@ -179,8 +179,10 @@ export class AuthComponentComponent implements OnInit {
     } else {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
+          this.router.navigate(['/categorias'], { queryParams: { correoElectronico } });
           console.info("Registro exitoso");
           this.presentToast('Se ha enviado un correo electronico de verificación a tu dirección Gmail');
+
         },
         error: (e: any) => {
           if (e.error && e.error.message) {

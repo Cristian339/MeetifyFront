@@ -34,7 +34,7 @@ export class CategoriasComponent implements OnInit {
       const toast = await this.toastController.create({
         message: 'Enhorabuena, tu correo electrónico ha sido verificado correctamente',
         duration: 5000,
-        color: 'success',
+        color: 'primary',
         position: 'bottom',
         cssClass: 'toast'
       });
