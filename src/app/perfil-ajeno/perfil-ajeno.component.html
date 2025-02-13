@@ -34,8 +34,8 @@
 
     <ion-row>
       <ion-col>
-        <ion-button class="seguir-boton" color="primario" *ngIf="botonS" (click)="setBoton()">Seguir</ion-button>
-        <ion-button class="seguir-boton" color="cuarto" *ngIf="!botonS" (click)="setBoton()">Dejar de seguir</ion-button>
+        <ion-button class="seguir-boton" color="primario" *ngIf="!botonS" (click)="setBoton()">Seguir</ion-button>
+        <ion-button class="seguir-boton" color="cuarto" *ngIf="botonS" (click)="setBoton()">Dejar de seguir</ion-button>
       </ion-col>
     </ion-row>
 

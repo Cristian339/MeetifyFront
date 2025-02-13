@@ -125,6 +125,11 @@ export class PerfilService {
     return this.httpClient.post<void>(`${this.apiUrl}/seguidores/dejar-de-seguir/${idUsuarioADejarDeSeguir}`, {}, authHeader);
   }
 
+  comprobarSiSiguesUsuario(id: number | undefined): Observable<boolean> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<boolean>(`${this.apiUrl}/seguidores/comprobar/${id}`, authHeader);
+  }
+
   actualizarPerfil(perfilDTO: Perfil): Observable<Perfil> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.put<Perfil>(`${this.apiUrl}/publicacion/perfil/actualizar`, perfilDTO, authHeader);
