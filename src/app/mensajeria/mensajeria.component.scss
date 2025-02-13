@@ -69,9 +69,17 @@
   }
 
   ion-item {
-    --background: #F5F5F5;
-    margin: 5px 0;
-    border-radius: 10px;
+    margin: 0;
+    border-radius: 0;
+    border-top: 1px solid #ccc;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &:not(:last-child) {
+      border-bottom: none;
+    }
   }
 
   ion-modal ion-label {
@@ -135,12 +143,12 @@
 
   .message-sent {
     align-self: flex-end;
-    background-color: #5497A7;
+    background-color: #19323C;
   }
 
   .message-received {
     align-self: flex-start;
-    background-color: #19323C;
+    background-color: #5497A7;
   }
 
   .message-time {

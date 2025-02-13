@@ -20,7 +20,6 @@ import {PiePaginaComponent} from "../pie-pagina/pie-pagina.component";
     CommonModule,
     FormsModule,
     PiePaginaComponent,
-    RouterLink,
   ]
 })
 export class UnirseEventoComponent implements OnInit {
