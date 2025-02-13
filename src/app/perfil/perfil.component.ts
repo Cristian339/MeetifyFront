@@ -12,6 +12,7 @@ import {Categoria} from "../modelos/Categoria";
 import {SeguidorDTO} from "../modelos/SeguidorDTO";
 import {FormsModule} from "@angular/forms";
 import { TipoRelacion } from '../modelos/TipoRelacion';
+import {UsuarioDTO} from "../modelos/UsuarioDTO";
 
 @Component({
   selector: 'app-perfil',
@@ -27,7 +28,7 @@ import { TipoRelacion } from '../modelos/TipoRelacion';
 })
 export class PerfilComponent implements OnInit {
 
-
+  usuario: UsuarioDTO | undefined;
   perfil: Perfil | undefined;
   categorias: Categoria[] = [];
   seguidores: SeguidorDTO[] = [];
@@ -56,6 +57,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
     console.log('ngOnInit called');
+    this.cargarUsuario();
     this.perfilService.getPerfil().subscribe({
       next: (data) => {
         console.log('Data received:', data);
@@ -228,6 +230,19 @@ export class PerfilComponent implements OnInit {
         console.log('Petición completada');
       },
     }))
+  }
+
+
+  cargarUsuario() {
+    this.perfilService.getUsuario().subscribe({
+      next: (data) => {
+        console.log('Data received:', data);
+        this.usuario = data;
+        console.log('Perfil assigned:', this.usuario);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
   }
 
 }

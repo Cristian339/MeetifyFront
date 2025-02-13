@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { CabeceraComponent } from "../cabecera/cabecera.component";
+import {UltimoMensaje} from "../modelos/UltimoMensaje";
 
 @Component({
   selector: 'app-mensajeria',
@@ -30,6 +31,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(IonContent, { static: false }) content!: IonContent;
   messages: { [key: string]: any[] } = {};
   newMessage: string = '';
+  ultimoMensaje: UltimoMensaje | null = null;
   roomId: string = '';
   seguidos: SeguidorDTO[] = [];
   filteredSeguidos: SeguidorDTO[] = [];
@@ -127,9 +129,12 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.messageSubscription = this.webSocketService.getMessages().pipe(
       filter(message => message.roomId === this.roomId)
     ).subscribe((message) => {
-      this.messages[this.roomId].push(message);
+      console.log('mensajes', this.messages, 'mensaje nuevo', message);
+      this.messages[this.roomId].push({'hoy' : message});
       this.scrollToBottom(); // Scroll to bottom when a new message is received
     });
+
+    this.cargarUltimoMensaje(); // Load the last message
   }
 
   groupMessagesByDate(messages: any[]): any[] {
@@ -273,4 +278,14 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
   dejarAnimacion = (baseEl: HTMLElement) => {
     return this.entrarAnimacion(baseEl).direction('reverse');
   };
+
+  cargarUltimoMensaje() {
+    const roomId = this.generateRoomId(this.emisorId!, this.currentSeguidor!.id!);
+    this.mensajeService.obtenerUltimoMensajePorRoomId(roomId).subscribe({
+      next: (mensaje: UltimoMensaje) => {
+        this.ultimoMensaje = mensaje;
+      },
+      error: (error) => console.error('Error fetching last message:', error)
+    });
+  }
 }

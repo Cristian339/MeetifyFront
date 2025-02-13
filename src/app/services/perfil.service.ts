@@ -8,6 +8,7 @@ import { Publicacion } from '../modelos/Publicacion';
 import {Categoria} from "../modelos/Categoria";
 import {SeguidorDTO} from "../modelos/SeguidorDTO";
 import {PerfilID} from "../modelos/PerfilID";
+import {UsuarioDTO} from "../modelos/UsuarioDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -154,6 +155,11 @@ export class PerfilService {
   verCategoriasNoElegidasPorPerfil(): Observable<Categoria[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<Categoria[]>(`${this.apiUrl}/publicacion/perfil/noelegidas`, authHeader);
+  }
+
+  getUsuario(): Observable<UsuarioDTO> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<UsuarioDTO>(`${this.apiUrl}/publicacion/perfil/nombre`, authHeader);
   }
 
 }
