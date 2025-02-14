@@ -1,145 +1,229 @@
-.auth-container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  margin-bottom: 5%;
-  overflow-y: auto; /* Ensure vertical scrolling */
+@media (min-width: 600px) {
 
-  .auth-box {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 30px;
-    max-width: 800px; /* Increase max-width for wider containers */
-    width: 100%;
-    margin: auto;
-  }
-
-  .logo {
+  .auth-container {
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-bottom: 20px; /* Add margin to ensure visibility */
-  }
-
-  .logo img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    text-align: center;
-  }
-
-  h1 {
-    font-family: 'Amatic SC', cursive;
-    font-weight: 700;
-    font-size: 4.5rem;
-    color: black;
-    text-align: center;
-  }
-
-  ion-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    color: black;
-  }
-
-  ion-item {
-    --background: #5497A7;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    display: flex;
     justify-content: center;
-    width: 100%;
-    max-width: 600px; /* Increase max-width for wider containers */
+    padding: 20px;
+    margin-bottom: 5%;
+    overflow-y: auto;
 
-    ion-input {
-      --color: #333;
-      font-family: 'Inter', sans-serif;
-      color: black;
-    }
-  }
+    .auth-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  .InicioSesion {
-    background-color: #19323C;
-    border-radius: 50px;
-    width: 100%;
-    max-width: 300px; /* Center the button */
-    margin: 0 auto; /* Center the button */
-  }
+      .logo {
+        margin-right: 20px;
+      }
 
-  boton {
-    margin-top: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    --background: #19323C;
-    border-radius: 20px;
-  }
-
-  .switch-auth, .forgot-password {
-    font-family: 'Amatic SC', cursive;
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: black;
-    text-align: center;
-
-    a {
-      color: #007bff;
-      cursor: pointer;
+      .form-container {
+        flex-grow: 1;
+      }
     }
 
-    p {
-      font-family: 'Amatic SC', cursive;
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: black;
-      margin: 0;
-      margin-bottom: 10px;
+    .rounded-container {
+      background-color: white;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-  }
 
-  .switch-auth::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-    background-color: #000;
-    margin-bottom: 10px;
-  }
-
-  @media (max-width: 768px) {
     .logo img {
-      margin-top: 0;
+      width: 400px;
+      height: 400px;
     }
 
     h1 {
-      font-size: 3rem;
+      font-family: 'Amatic SC', cursive;
+      font-weight: 700;
+      font-size: 4.5rem;
+      color: black;
+      text-align: center;
+    }
+
+    ion-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: black;
     }
 
     ion-item {
+      --background: #5497A7;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
       width: 100%;
-    }
+      max-width: 600px; /* Increase max-width for wider containers */
 
-    .switch-auth, .forgot-password {
-      font-size: 1.2rem;
+      ion-input {
+        --color: #333;
+        font-family: 'Inter', sans-serif;
+        color: black;
+        height: 30px;
+        padding: 5px;
+      }
     }
 
     .InicioSesion {
-      margin-left: 0;
+      background-color: #19323C;
+      border-radius: 50px;
       width: 100%;
+      max-width: 300px; /* Center the button */
+      margin: 0 auto; /* Center the button */
+    }
+
+    boton {
+      margin-top: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      --background: #19323C;
+      border-radius: 20px;
+    }
+
+    .switch-auth, .forgot-password {
+      font-family: 'Amatic SC', cursive;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: black;
+      text-align: center;
+
+      a {
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      p {
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: black;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .switch-auth::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      margin-bottom: 10px;
     }
   }
+}
 
-  p {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: black;
-    text-align: center;
-  }
+@media (max-width: 600px) {
+  .auth-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 5%;
+    overflow-y: auto;
+    background-color: white; /* Fondo blanco para formato móvil */
 
-  .toast-inter-font .toast-message {
-    font-family: 'Inter', sans-serif;
-    color: white;
+    .auth-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .logo {
+        margin-right: 20px;
+      }
+
+      .form-container {
+        flex-grow: 1;
+      }
+    }
+
+    .logo img {
+      display: none;
+    }
+
+    h1 {
+      font-family: 'Amatic SC', cursive;
+      font-weight: 700;
+      font-size: 4.5rem;
+      color: black;
+      text-align: center;
+    }
+
+    ion-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: black;
+    }
+
+    ion-item {
+      --background: #5497A7;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      max-width: 600px; /* Increase max-width for wider containers */
+
+      ion-input {
+        --color: #333;
+        font-family: 'Inter', sans-serif;
+        color: black;
+        height: 30px;
+        padding: 5px;
+      }
+    }
+
+    .InicioSesion {
+      background-color: #19323C;
+      border-radius: 50px;
+      width: 100%;
+      max-width: 300px; /* Center the button */
+      margin: 0 auto; /* Center the button */
+    }
+
+    boton {
+      margin-top: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      --background: #19323C;
+      border-radius: 20px;
+    }
+
+    .switch-auth, .forgot-password {
+      font-family: 'Amatic SC', cursive;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: black;
+      text-align: center;
+
+      a {
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      p {
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: black;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .switch-auth::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      margin-bottom: 10px;
+    }
   }
 }
