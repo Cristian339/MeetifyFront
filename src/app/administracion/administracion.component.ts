@@ -10,6 +10,7 @@ import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import {Publicacion} from "../modelos/Publicacion";
 import {PublicacionService} from "../services/publicacion.service";
 import {Router} from "@angular/router";
+import {LoginService} from "../services/login.service";
 
 @Component({
   selector: 'app-administracion',
@@ -33,7 +34,7 @@ export class AdministracionComponent implements OnInit {
 
   vistaActual: 'admin' | 'users' | 'baneados' = 'admin';
 
-  constructor(private perfilService: PerfilService, private router : Router) {
+  constructor(private perfilService: PerfilService, private router : Router, private loginService : LoginService) {
     addIcons({ settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline });
   }
 
@@ -109,6 +110,13 @@ export class AdministracionComponent implements OnInit {
         console.log('Usuario baneado exitosamente');
       },
     });
+  }
+
+
+  doLogout() {
+    sessionStorage.clear();
+    this.loginService.setAuthState(false);
+    this.router.navigate(['']);
   }
 
   // verPublicaciones(correo: string | undefined) {

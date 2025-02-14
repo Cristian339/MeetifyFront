@@ -17,6 +17,7 @@ import{ PuntuarComponent} from "./puntuar/puntuar.component";
 import {UsuPubliComponent} from "./usu-publi/usu-publi.component";
 import {PerfilAjenoComponent} from "./perfil-ajeno/perfil-ajeno.component";
 import {NotificacionesComponent} from "./notificaciones/notificaciones.component";
+import {MensajeBanComponent} from "./mensaje-ban/mensaje-ban.component";
 // import { EventoMiembroComponent} from "./evento-miembro/evento-miembro.component";
 
 export const routes: Routes = [
@@ -41,5 +42,6 @@ export const routes: Routes = [
   { path: 'unirse-evento', component: UnirseEventoComponent },
   { path: 'puntuar', component: PuntuarComponent},
   { path: 'notificaciones', component: NotificacionesComponent},
+  { path: 'mensaje-ban', component: MensajeBanComponent},
   // { path: 'evento-miembro', component: EventoMiembroComponent}
 ];

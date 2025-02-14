@@ -139,11 +139,23 @@ export class AuthComponentComponent implements OnInit {
           this.loginService.setAuthState(true);
           const rol = respuesta.rol;
           console.log(rol);
-          if(rol === "PERFIL"){
-            this.router.navigate(['/publicacion']);
-          }else if(rol === "ADMIN"){
-            this.router.navigate(['/administracion']);
-          }
+
+
+          this.perfilService.getEstadoBaneo().subscribe({
+            next:(data) => {
+              if(!data){
+                if(rol === "PERFIL"){
+                  this.router.navigate(['/publicacion']);
+                }else if(rol === "ADMIN"){
+                  this.router.navigate(['/administracion']);
+                }
+              }else if(data){
+                this.router.navigate(['/mensaje-ban']);
+              }
+            }
+          })
+
+
 
         },
         error: (e) => {
@@ -179,7 +191,6 @@ export class AuthComponentComponent implements OnInit {
     } else {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
-          this.router.navigate(['/categorias'], { queryParams: { correoElectronico } });
           console.info("Registro exitoso");
           this.presentToast('Se ha enviado un correo electronico de verificación a tu dirección Gmail');
 

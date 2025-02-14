@@ -167,4 +167,9 @@ export class PerfilService {
     return this.httpClient.get<UsuarioDTO>(`${this.apiUrl}/publicacion/perfil/nombre`, authHeader);
   }
 
+  getEstadoBaneo(): Observable<boolean> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/perfil/baneado`, authHeader);
+  }
+
 }
