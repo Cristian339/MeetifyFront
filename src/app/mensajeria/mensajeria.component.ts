@@ -10,10 +10,10 @@ import { SeguidorDTO } from '../modelos/SeguidorDTO';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { formatDistanceToNow, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { CabeceraComponent } from "../cabecera/cabecera.component";
-import {UltimoMensaje} from "../modelos/UltimoMensaje";
+import { UltimoMensaje } from "../modelos/UltimoMensaje";
 
 @Component({
   selector: 'app-mensajeria',
@@ -129,8 +129,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.messageSubscription = this.webSocketService.getMessages().pipe(
       filter(message => message.roomId === this.roomId)
     ).subscribe((message) => {
-      console.log('mensajes', this.messages, 'mensaje nuevo', message);
-      this.messages[this.roomId].push({'hoy' : message});
+      this.addMessageToGroup(message);
       this.scrollToBottom(); // Scroll to bottom when a new message is received
     });
 
@@ -198,10 +197,7 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     // Add the message to the list immediately
-    if (!this.messages[this.roomId]) {
-      this.messages[this.roomId] = [];
-    }
-    this.messages[this.roomId].push(message);
+    this.addMessageToGroup(message);
     this.newMessage = '';
     this.scrollToBottom(); // Scroll to bottom after adding the message
 
@@ -209,6 +205,17 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.webSocketService.enviarMensaje(message).subscribe(() => {
       // Optionally handle the response from the server
     });
+  }
+
+  addMessageToGroup(message: any) {
+    const dateLabel = this.getDateLabel(message.fechaEnviado);
+    const group = this.messages[this.roomId].find((g: any) => g.dateLabel === dateLabel);
+
+    if (group) {
+      group.messages.push(message);
+    } else {
+      this.messages[this.roomId].push({ dateLabel, messages: [message] });
+    }
   }
 
   disconnectWebSocket() {
