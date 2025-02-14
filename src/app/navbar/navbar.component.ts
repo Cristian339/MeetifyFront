@@ -47,7 +47,6 @@ export class NavbarComponent implements OnInit {
     { label: 'Eventos', icon: 'calendar-outline', route: '/events' },
     { label: 'Amigos', icon: 'people-outline', route: '/friends' },
     { label: 'Mi reputación', icon: 'bar-chart-outline', route: '/reputation' },
-    { label: 'Editar perfil', icon: 'create-outline', route: '/editar-perfil' }
   ];
 
   menuActivities = [

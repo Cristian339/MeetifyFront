@@ -196,14 +196,10 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
       usuarioReceptor: { id: this.currentSeguidor.id }
     };
 
-    // Add the message to the list immediately
-    this.addMessageToGroup(message);
-    this.newMessage = '';
-    this.scrollToBottom(); // Scroll to bottom after adding the message
-
     // Send the message to the server
     this.webSocketService.enviarMensaje(message).subscribe(() => {
-      // Optionally handle the response from the server
+      // The message will be added to the list when received via WebSocket
+      this.newMessage = '';
     });
   }
 

@@ -1,27 +1,16 @@
-<!--
-<ion-header class="ion-color-primario">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="font-amatic-grande2">Notificaciones</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-cabecera [titulo]="'Notificaciones'" [ruta]="'/publicacion'"></app-cabecera>
 
-<ion-content>
+<ion-content class="notificaciones-container">
   <ion-list>
-    <ion-item *ngFor="let notificacion of notificaciones" class="notification-item">
+    <ion-item *ngFor="let notificacion of notificaciones">
       <ion-avatar slot="start">
-        <img [src]="notificacion.imagen" alt="Avatar" class="perfil-avatar">
+        <img [src]="notificacion.imagen" alt="Avatar" />
       </ion-avatar>
       <ion-label>
-        <h2 class="font-amatic-grande">{{ notificacion.nombre }}</h2>
-        <p>{{ notificacion.mensaje }}</p>
+        <h2>{{ notificacion.usuario }}</h2>
+        <p [innerHTML]="notificacion.mensaje"></p>
       </ion-label>
-      <ion-text slot="end" color="cuarto">{{ notificacion.tiempo }}</ion-text>
+      <ion-note slot="end">{{ notificacion.fecha }}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
--->

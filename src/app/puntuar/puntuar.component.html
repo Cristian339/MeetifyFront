@@ -1,51 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-img src="/assets/Meetify.svg" class="logo-image" slot="start"></ion-img>
-    </ion-buttons>
-    <ion-title class="header-title">Puntuaciones</ion-title>
-    <ion-buttons slot="end">
-      <ion-icon name="arrow-back-circle" slot="end" routerLink="/publicacion"></ion-icon>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-cabecera [titulo]="'Puntuaciones'" [ruta]="'/publicacion'"></app-cabecera>
+
+
 
 <ion-content class="content-container">
-  <div class="rating-container">
-    <h2 class="title">AYÚDANOS A SABER CUÁNTO TE GUSTÓ:</h2>
+  <ion-grid class="rating-container">
+    <ion-row>
+      <ion-col size="12">
+        <ion-title class="title">AYÚDANOS A SABER CUÁNTO TE GUSTÓ:</ion-title>
+      </ion-col>
+    </ion-row>
 
-    <div class="group-card">
-      <div class="group-info">
-        <div class="group-avatar">
-          <img [src]="publicacion.imagenUrlPub" alt="Publicación" class="group-image"/>
-        </div>
-        <div class="group-details">
-          <h3>{{ publicacion.titulo }}</h3>
-          <p>Creado por: <strong>{{ publicacion.nombrePerfil }}</strong></p>
-        </div>
-      </div>
+    <ion-row class="group-card">
+      <ion-col size="12">
+        <ion-row class="group-info">
+          <ion-col size="3" class="group-avatar">
+            <ion-img [src]="publicacion.imagenUrlPub" alt="Publicación" class="group-image"></ion-img>
+          </ion-col>
+          <ion-col size="9" class="group-details">
+            <ion-title>{{ publicacion.titulo }}</ion-title>
+            <ion-text>Creado por: <strong>{{ publicacion.nombrePerfil }}</strong></ion-text>
+          </ion-col>
+        </ion-row>
 
-      <img [src]="publicacion.imagenUrlPub" alt="Publicación" class="cover-image" />
+        <ion-img [src]="publicacion.imagenUrlPub" alt="Publicación" class="cover-image"></ion-img>
 
-      <div class="buttons">
-        <ion-button class="category-button" fill="outline">{{ publicacion.categoria }}</ion-button>
-      </div>
-    </div>
+        <ion-row class="buttons">
+          <ion-col>
+            <ion-button class="category-button" fill="outline">{{ publicacion.categoria }}</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
 
-    <div class="rating-section">
-      <p>Valoración:</p>
-      <div class="Puntuacion">
-        <div class="stars">⭐⭐☆☆☆</div>
-        <span class="score">40 / 50 PTS</span>
-      </div>
-    </div>
+    <ion-row class="rating-section">
+      <ion-col size="12">
+        <ion-text>Valoración:</ion-text>
+        <ion-row class="Puntuacion">
+          <ion-col size="6" class="stars">⭐⭐☆☆☆</ion-col>
+          <ion-col size="6" class="score">40 / 50 PTS</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
 
-    <div class="reason-section">
-      <p id="Razon">Razón de la puntuación:</p>
-      <ion-textarea class="reason-textarea" placeholder="No me gusta su logo por ejemplo"></ion-textarea>
-      <p class="optional-text">La razón de la puntuación es OPCIONAL</p>
-    </div>
+    <ion-row class="reason-section">
+      <ion-col size="12">
+        <ion-text id="Razon">Razón de la puntuación:</ion-text>
+        <ion-textarea class="reason-textarea" placeholder="No me gusta su logo por ejemplo"></ion-textarea>
+        <ion-text class="optional-text">La razón de la puntuación es OPCIONAL</ion-text>
+      </ion-col>
+    </ion-row>
 
-    <ion-button expand="block" class="submit-button">Puntuar</ion-button>
-  </div>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="block" class="submit-button">Puntuar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

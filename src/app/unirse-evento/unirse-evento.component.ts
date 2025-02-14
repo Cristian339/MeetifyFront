@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from "@ionic/angular";
 import { addIcons } from "ionicons";
-import { arrowBackCircle, personCircleOutline, locationOutline } from "ionicons/icons";
+import {arrowBackCircle, personCircleOutline, locationOutline, bookOutline} from "ionicons/icons";
 import { Publicacion } from "../modelos/Publicacion";
 import { PublicacionService } from "../services/publicacion.service";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
@@ -31,7 +31,7 @@ export class UnirseEventoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    addIcons({ arrowBackCircle, personCircleOutline, locationOutline });
+    addIcons({ arrowBackCircle, personCircleOutline, locationOutline,bookOutline });
   }
 
   ngOnInit() {
