@@ -10,7 +10,7 @@ import { Publicacion } from '../modelos/Publicacion';
   templateUrl: './puntuar.component.html',
   styleUrls: ['./puntuar.component.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule, RouterLink, CabeceraComponent]
+  imports: [IonicModule, FormsModule, CabeceraComponent]
 })
 export class PuntuarComponent implements OnInit {
   publicacion!: Publicacion;

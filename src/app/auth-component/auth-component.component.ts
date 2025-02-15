@@ -128,8 +128,14 @@ export class AuthComponentComponent implements OnInit {
     const nombreUsuario = this.authForm.get('nombreUsuario')?.value;
     const contrasenia = this.authForm.get('contrasenia')?.value;
 
-    if (!nombreUsuario || !contrasenia) {
-      this.mensajeModal = 'Por favor, ingrese su nombre de nombreUsuario/correo y contraseña';
+    if (!nombreUsuario && !contrasenia) {
+      this.mensajeModal = 'Por favor, ingrese su nombre de correo/nombre de usuario y contraseña';
+      this.modalAbierto = true;
+    } else if (!nombreUsuario) {
+      this.mensajeModal = 'Por favor, ingrese su nombre de correo/nombre de usuario';
+      this.modalAbierto = true;
+    } else if (!contrasenia) {
+      this.mensajeModal = 'Por favor, ingrese su contraseña';
       this.modalAbierto = true;
     } else {
       this.loginService.loguear({ nombreUsuario, contrasenia }).subscribe({
@@ -140,23 +146,19 @@ export class AuthComponentComponent implements OnInit {
           const rol = respuesta.rol;
           console.log(rol);
 
-
           this.perfilService.getEstadoBaneo().subscribe({
-            next:(data) => {
-              if(!data){
-                if(rol === "PERFIL"){
+            next: (data) => {
+              if (!data) {
+                if (rol === "PERFIL") {
                   this.router.navigate(['/publicacion']);
-                }else if(rol === "ADMIN"){
+                } else if (rol === "ADMIN") {
                   this.router.navigate(['/administracion']);
                 }
-              }else if(data){
+              } else if (data) {
                 this.router.navigate(['/mensaje-ban']);
               }
             }
-          })
-
-
-
+          });
         },
         error: (e) => {
           this.mensajeModal = 'Usuario/Correo o contraseña incorrectos';
@@ -185,21 +187,60 @@ export class AuthComponentComponent implements OnInit {
     const nombreUsuario = this.authForm.get('nombreUsuario')?.value;
     const contrasenia = this.authForm.get('contrasenia')?.value;
 
-    if (!nombre || !apellidos || !correoElectronico || !fechaNacimiento || !nombreUsuario || !contrasenia) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|safareyes\.es)$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
+    const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+    let errorMessages = [];
+    let missingFieldsCount = 0;
+
+    if (!nombre) {
+      errorMessages.push('Por favor, ingrese su nombre');
+      missingFieldsCount++;
+    }
+
+    if (!apellidos) {
+      errorMessages.push('Por favor, ingrese sus apellidos');
+      missingFieldsCount++;
+    }
+    if (!correoElectronico) {
+      errorMessages.push('Por favor, ingrese su correo electrónico');
+      missingFieldsCount++;
+    } else if (!emailPattern.test(correoElectronico)) {
+      errorMessages.push('Por favor, ingrese un correo electrónico válido (@gmail.com o @safareyes.es)');
+    }
+    if (!fechaNacimiento) {
+      errorMessages.push('Por favor, ingrese su fecha de nacimiento');
+      missingFieldsCount++;
+    }
+    if (!nombreUsuario) {
+      errorMessages.push('Por favor, ingrese su nombre de usuario');
+      missingFieldsCount++;
+    }
+    if (!contrasenia) {
+      errorMessages.push('Por favor, ingrese su contraseña');
+      missingFieldsCount++;
+    } else if (!passwordPattern.test(contrasenia)) {
+      errorMessages.push('La contraseña debe tener entre 8 a 30 caracteres, incluir mayúsculas, minúsculas, números y símbolos');
+    }
+
+    if (missingFieldsCount >= 2) {
       this.mensajeModal = 'Por favor, complete todos los campos';
+      this.modalAbierto = true;
+    } else if (errorMessages.length > 0) {
+      this.mensajeModal = errorMessages.join('. ');
       this.modalAbierto = true;
     } else {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
           console.info("Registro exitoso");
           this.presentToast('Se ha enviado un correo electronico de verificación a tu dirección Gmail');
-
         },
         error: (e: any) => {
           if (e.error && e.error.message) {
             this.mensajeModal = e.error.message;
           } else {
-            this.mensajeModal = 'Error en el registro';
+            this.mensajeModal = 'Nombre de usuario o correo ya en uso';
           }
           this.modalAbierto = true;
         }
@@ -210,9 +251,13 @@ export class AuthComponentComponent implements OnInit {
 
   verificarCamposRecuperacion() {
     const correoElectronico = this.authForm.get('correoElectronico')?.value;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|safareyes\.es)$/;
 
     if (!correoElectronico) {
       this.mensajeModal = 'Por favor, ingrese su correo electrónico';
+      this.modalAbierto = true;
+    } else if (!emailPattern.test(correoElectronico)) {
+      this.mensajeModal = 'Por favor, ingrese un correo electrónico válido (@gmail.com o @safareyes.es)';
       this.modalAbierto = true;
     } else {
       console.log('Recuperación de cuenta:', this.authForm.value);
@@ -226,26 +271,31 @@ export class AuthComponentComponent implements OnInit {
     if (!codigo) {
       this.mensajeModal = 'Por favor, ingrese el código de confirmación';
       this.modalAbierto = true;
+    } else if (codigo.toString().length !== 6) {
+      this.mensajeModal = 'El código de confirmación debe tener exactamente 6 dígitos';
+      this.modalAbierto = true;
     } else {
       console.log('Confirmación de cuenta:', this.authForm.value);
-      this.toggleAuthMode('nuevaContra')
+      this.toggleAuthMode('nuevaContra');
     }
   }
 
   verificarContrasenas() {
     const nuevaContra = this.authForm.get('nuevaContra')?.value;
     const repitenuevaContra = this.authForm.get('repitenuevaContra')?.value;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/;
 
     if (!nuevaContra || !repitenuevaContra) {
       this.mensajeModal = 'Por favor, ingrese ambas contraseñas';
       this.modalAbierto = true;
-    } else if (nuevaContra === repitenuevaContra) {
-      this.toggleAuthMode('login');
-    } else {
+    } else if (nuevaContra !== repitenuevaContra) {
       this.mensajeModal = 'Las contraseñas no coinciden';
       this.modalAbierto = true;
-    }
-  }
+    } else if (!passwordPattern.test(nuevaContra)) {
+      this.mensajeModal = 'La contraseña debe tener entre 8 a 30 caracteres, incluir mayúsculas, minúsculas, números y símbolos';
+      this.modalAbierto = true;
+    } else {
+    }}
 
   cerrarModal() {
     this.modalAbierto = false;

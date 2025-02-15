@@ -35,7 +35,7 @@
                 </ion-item>
               </div>
 
-              <ion-button type="submit" style="width: 55%; margin-left: 22.5%; margin-bottom: 3%; background-color: darkblue" (click)="verificarCamposLogin()">Iniciar sesión</ion-button>
+              <ion-button class="boton" type="submit" style="width: 55%; margin-left: 22.5%; margin-bottom: 3%; background-color: darkblue" (click)="verificarCamposLogin()">Iniciar sesión</ion-button>
 
               <ion-modal
                 trigger="open-modal"
@@ -107,7 +107,7 @@
                   </ion-item>
                 </div>
 
-                <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="verificarCamposRegistro()">Registrarse</ion-button>
+                <ion-button type="submit" class="boton" style="width: 55%; margin-left: 22.5%; margin-bottom: 3%; background-color: darkblue" (click)="verificarCamposRegistro()">Registrarse</ion-button>
 
                 <ion-modal
                   trigger="open-modal"
@@ -133,11 +133,11 @@
                   <div class="form-group">
                     <ion-label position="floating">Correo electrónico</ion-label>
                     <ion-item class="w-100">
-                      <ion-input type="text" formControlName="correoElectronico" class="form-control" placeholder="Introduce tu correo electrónico" required></ion-input>
+                      <ion-input type="text"  formControlName="correoElectronico" class="form-control" placeholder="Introduce tu correo electrónico" required></ion-input>
                     </ion-item>
                   </div>
 
-                  <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="verificarCamposRecuperacion()">Continuar</ion-button>
+                  <ion-button style="width: 27%; margin-left: 35%; background-color: darkblue" type="submit" class="boton" (click)="verificarCamposRecuperacion()">Continuar</ion-button>
 
                   <ion-modal
                     trigger="open-modal"
@@ -165,11 +165,11 @@
                     <div class="form-group">
                       <ion-label position="floating">Hemos enviado un código a tu dirección de correo electrónico. <br>Introdúcelo para confirmar tu cuenta</ion-label>
                       <ion-item class="w-100">
-                        <ion-input type="number" min="0" max="999999" formControlName="codigo" class="form-control" placeholder="Introduce el código de 6 dígitos" required></ion-input>
+                        <ion-input type="number" min="0" max="999999" maxlength="6" formControlName="codigo" class="form-control" placeholder="Introduce el código de 6 dígitos" required></ion-input>
                       </ion-item>
                     </div>
 
-                    <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="verificarCamposConfirmacion()">Continuar</ion-button>
+                    <ion-button style="width: 27%; margin-left: 36%; background-color: darkblue" type="submit" class="boton" (click)="verificarCamposConfirmacion()">Continuar</ion-button>
 
                     <ion-modal
                       trigger="open-modal"
@@ -207,7 +207,7 @@
                       </ion-item>
                     </div>
 
-                    <ion-button expand="block" type="submit" class="btn btn-dark w-100" (click)="verificarContrasenas()">Cambiar la contraseña</ion-button>
+                    <ion-button style="width: 50%; margin-left: 25%; margin-bottom: 3%; background-color: darkblue" type="submit" class="boton" (click)="verificarContrasenas()">Cambiar la contraseña</ion-button>
 
                     <ion-modal
                       trigger="open-modal"
