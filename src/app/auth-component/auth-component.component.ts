@@ -234,7 +234,7 @@ export class AuthComponentComponent implements OnInit {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
           console.info("Registro exitoso");
-          this.presentToast('Se ha enviado un correo electronico de verificación a tu dirección Gmail');
+          this.presentToast('Se ha enviado un correo electrónico de verificación a tu dirección Gmail');
         },
         error: (e: any) => {
           if (e.error && e.error.message) {
@@ -247,6 +247,7 @@ export class AuthComponentComponent implements OnInit {
       });
     }
   }
+
 
 
   verificarCamposRecuperacion() {

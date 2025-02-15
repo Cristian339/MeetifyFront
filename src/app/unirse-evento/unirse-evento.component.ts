@@ -9,6 +9,7 @@ import { CommonModule, NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {PiePaginaComponent} from "../pie-pagina/pie-pagina.component";
+import {CabeceraComponent} from "../cabecera/cabecera.component";
 
 @Component({
   selector: 'app-unirse-evento',
@@ -20,6 +21,7 @@ import {PiePaginaComponent} from "../pie-pagina/pie-pagina.component";
     CommonModule,
     FormsModule,
     PiePaginaComponent,
+    CabeceraComponent,
   ]
 })
 export class UnirseEventoComponent implements OnInit {

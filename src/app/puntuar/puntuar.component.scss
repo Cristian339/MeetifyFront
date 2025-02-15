@@ -1,12 +1,13 @@
 @media (max-width: 600px) {
-
-  ion-header ion-toolbar {
+  ion-header ion-toolbar,
+  ion-modal ion-toolbar {
     --background: #16353F;
     --color: #fff;
     padding: 5%;
     display: flex;
     align-items: center;
   }
+
 
   .header-title {
     font-family: 'Amatic SC', cursive;
@@ -53,22 +54,13 @@
   }
 
   .title {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: bold;
     font-family: 'Amatic SC', cursive;
   }
 
-  .group-card {
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-  }
-
+  .group-card,
   .group-info {
-    display: flex;
-    align-items: center;
     background: #ffffff;
     padding: 10px;
     border-radius: 10px;
@@ -85,6 +77,7 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--ion-color-primario);
   }
 
   .group-details {
@@ -127,33 +120,38 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  }
 
-    p {
-      text-align: left;
-      font-family: 'Inter', sans-serif;
-      font-weight: bold;
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
+  .rating-section p {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
 
-    .Puntuacion {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  .Puntuacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-    .stars {
-      font-size: 2rem;
-    }
+  .stars ion-icon {
+    font-size: 2rem;
+    cursor: pointer;
+  }
 
-    .score {
-      font-size: 1.5rem;
-      font-weight: bold;
-      background: #5497A7;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-family: 'Amatic SC', cursive;
-    }
+  .stars ion-icon.filled {
+    color: gold;
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Amatic SC', cursive;
   }
 
   .reason-section {
@@ -168,7 +166,7 @@
   }
 
   .reason-textarea {
-    background: grey;
+    background: var(--ion-color-terciario);
     border-radius: 5px;
     color: black;
   }
@@ -186,5 +184,140 @@
     border-radius: 15px;
     width: 100px;
     margin: 0 auto;
+  }
+
+  .perfil-content {
+    --background: #f9f9f9;
+    text-align: center;
+  }
+
+  .perfil-grid {
+    margin-top: 20px;
+  }
+
+  .perfil-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .perfil-nombre {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-usuario {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-descripcion {
+    font-size: 0.9rem;
+    color: var(--ion-color-primario);
+    margin: 5px auto;
+  }
+
+  .perfil-stats {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .perfil-reputacion {
+    margin-top: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+  }
+
+  .reputacion-icon {
+    color: gold;
+  }
+
+  .perfil-tabs {
+    margin-top: 20px;
+  }
+
+  .publicaciones-grid {
+    margin: 20px 0;
+  }
+
+  .publicacion-card {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .publicacion-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .icon-style {
+    color: var(--ion-color-primario);
+  }
+
+  .perfil-detalles-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+    text-decoration: underline;
+  }
+
+  .centered-title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .circuloPersona {
+    font-size: 1.5em;
+    background-color: #5497A7;
+    border-radius: 50%;
+    padding: 15%;
+  }
+
+  .category {
+    background: var(--ion-color-secundario);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-left: 5px;
+    float: left;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+    .star-icon {
+      width: 2rem; /* Default size for empty star */
+      height: 2rem; /* Default size for empty star */
+      cursor: pointer;
+    }
+    .star-icon.filled {
+      width: 2.5rem; /* Adjusted size for filled star */
+      height: 2.5rem; /* Adjusted size for filled star */
+    }
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Amatic SC', cursive;
+    color: white; /* White color for score text */
+    text-align: center;
+  }
+
+
+
+  .font-amatic {
+    font-size: 24px; /* Increased font size */
   }
 }
