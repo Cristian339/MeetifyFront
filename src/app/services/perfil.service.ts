@@ -30,16 +30,16 @@ export class PerfilService {
 
 
 
-  // actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
-  //   const authHeader = this.comunService.autorizarPeticion();
-  //   return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
-  // }
-
-
-  actualizarDatosBiografia(datosBiografia: Perfil, correoElectronico: string): Observable<Perfil> {
-    const urlConCorreo = `${this.apiUrl}/biografia/actualizar/${correoElectronico}`;
-    return this.httpClient.post<Perfil>(urlConCorreo,datosBiografia);
+  actualizarDatosBiografia(datosBiografia: Perfil): Observable<Perfil> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
   }
+
+
+  // actualizarDatosBiografia(datosBiografia: Perfil, correoElectronico: string): Observable<Perfil> {
+  //   const urlConCorreo = `${this.apiUrl}/biografia/actualizar/${correoElectronico}`;
+  //   return this.httpClient.post<Perfil>(urlConCorreo,datosBiografia);
+  // }
 
   compartirPublicacion(publicacionId: number | undefined): Observable<any> {
     const authHeader = this.comunService.autorizarPeticion();
@@ -170,6 +170,17 @@ export class PerfilService {
   getEstadoBaneo(): Observable<boolean> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/perfil/baneado`, authHeader);
+  }
+
+  getEstadoEntrada(): Observable<boolean> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/perfil/entrada`, authHeader);
+  }
+
+
+  setEstadoEntrada(): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/publicacion/perfil/entrada/hecha`, {}, authHeader);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { IonicModule } from "@ionic/angular";
 import { CabeceraComponent } from "../cabecera/cabecera.component";
 import {NgIf, NgOptimizedImage} from "@angular/common";
@@ -34,18 +34,12 @@ export class DatosBiograficosComponent implements OnInit {
 
   constructor(
     private perfilService: PerfilService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute // Inyectamos ActivatedRoute
+    private router: Router
   ) {
     addIcons({ globeOutline, cameraOutline, linkOutline, createOutline, transgenderOutline });
   }
 
   ngOnInit() {
-    // Accedemos al correo electrónico desde los queryParams
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.correoElectronico = params['correoElectronico'] || ''; // Obtenemos el correo electrónico
-    });
-    console.log(this.correoElectronico);
   }
 
   openFileInput() {
@@ -85,16 +79,23 @@ export class DatosBiograficosComponent implements OnInit {
 
     // Mostramos los datos en la consola (puedes enviarlos al backend)
     console.log('Datos Biográficos:', datosBiograficos);
-    console.log('Correo electrónico:', this.correoElectronico);
 
-    this.perfilService.actualizarDatosBiografia(datosBiograficos,this.correoElectronico).subscribe({
+    this.perfilService.actualizarDatosBiografia(datosBiograficos).subscribe({
       next: (data: any) => {
         console.info(data);
+        console.log('Petición completada');
+        this.perfilService.setEstadoEntrada().subscribe({
+          next:()=>{
+            this.router.navigate(['/publicacion']);
+          },
+          error:()=> {
+            console.log("Error al cambiar el estado");
+
+          }
+        })
       },
       error: (error: any) => console.error('Error:', error),
       complete: () => {
-        console.log('Petición completada');
-        this.router.navigate(['']);
       },
     });
   }

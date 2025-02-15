@@ -22,24 +22,10 @@ export class CategoriasComponent implements OnInit {
   constructor(
     private toastController: ToastController,
     private router: Router,
-    private activatedRoute: ActivatedRoute, // Inyectamos ActivatedRoute
-    private categoriasService: CategoriasService  // Inyectamos el servicio de categorías
+    private categoriasService: CategoriasService
   ) {}
 
   ngOnInit() {
-    // Accedemos al correo electrónico de los queryParams
-    this.activatedRoute.queryParams.subscribe(async params => {
-      this.correoElectronico = params['correoElectronico'] || ''; // Obtenemos el correo electrónico
-
-      const toast = await this.toastController.create({
-        message: 'Enhorabuena, tu correo electrónico ha sido verificado correctamente',
-        duration: 5000,
-        color: 'primary',
-        position: 'bottom',
-        cssClass: 'toast'
-      });
-      toast.present();
-    });
   }
 
   toggleCategory(category: string) {
@@ -53,10 +39,9 @@ export class CategoriasComponent implements OnInit {
   // Categorias.component.ts
   async saveCategories() {
     console.log('Categorías seleccionadas:', this.selectedCategories);
-    console.log('Correo electrónico:', this.correoElectronico);
 
     // Llamar al servicio para enviar las categorías seleccionadas al backend, junto con el correo electrónico
-    this.categoriasService.actualizarCategorias(this.selectedCategories, this.correoElectronico).subscribe({
+    this.categoriasService.actualizarCategorias(this.selectedCategories).subscribe({
       next: async () => {
         const toast = await this.toastController.create({
           message: 'Categorías guardadas!',
@@ -65,7 +50,7 @@ export class CategoriasComponent implements OnInit {
         });
         toast.present();
         // Redirigimos a la página /sobre-ti pasando el correo como queryParam
-        this.router.navigate(['/sobre-ti'], { queryParams: { correoElectronico: this.correoElectronico } });
+        this.router.navigate(['/sobre-ti']);
         //this.router.navigate(['']);
       },
       error: async (err) => {

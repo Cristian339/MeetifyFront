@@ -150,7 +150,19 @@ export class AuthComponentComponent implements OnInit {
             next: (data) => {
               if (!data) {
                 if (rol === "PERFIL") {
-                  this.router.navigate(['/publicacion']);
+
+                  this.perfilService.getEstadoEntrada().subscribe({
+                    next:(data) => {
+                      if(data){
+                        this.router.navigate(['/publicacion']);
+                      }else if (!data){
+                        this.router.navigate(['/categorias']);
+                      }
+                    },
+                    error:()=>{
+                      console.log("Error al obtener estado")
+                    }
+                  })
                 } else if (rol === "ADMIN") {
                   this.router.navigate(['/administracion']);
                 }
@@ -188,7 +200,7 @@ export class AuthComponentComponent implements OnInit {
     const contrasenia = this.authForm.get('contrasenia')?.value;
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|safareyes\.es)$/;
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
+   // const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
     const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
     let errorMessages = [];
@@ -220,9 +232,12 @@ export class AuthComponentComponent implements OnInit {
     if (!contrasenia) {
       errorMessages.push('Por favor, ingrese su contraseña');
       missingFieldsCount++;
-    } else if (!passwordPattern.test(contrasenia)) {
-      errorMessages.push('La contraseña debe tener entre 8 a 30 caracteres, incluir mayúsculas, minúsculas, números y símbolos');
     }
+
+    // else if (!passwordPattern.test(contrasenia)) {
+    //   errorMessages.push('La contraseña debe tener entre 8 a 30 caracteres, incluir mayúsculas, minúsculas, números y símbolos');
+    // }
+
 
     if (missingFieldsCount >= 2) {
       this.mensajeModal = 'Por favor, complete todos los campos';
