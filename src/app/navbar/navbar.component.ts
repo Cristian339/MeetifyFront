@@ -112,6 +112,7 @@ export class NavbarComponent implements OnInit {
 
   openBusquedaModal() {
     if (this.modalBusqueda) {
+      console.log("abierto")
       this.modalBusqueda.present();
     }
   }

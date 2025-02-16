@@ -95,7 +95,26 @@ export class PublicacionComponent implements OnInit {
 
 
   puntuarEvento(publicacion: Publicacion) {
-    this.router.navigate(['/puntuar'], { state: { publicacion } });
+
+    this.publicacionService.dentroOFuera(publicacion.id).subscribe({
+      next: async (data)=> {
+        if(data){
+          this.router.navigate(['/puntuar'], { state: { publicacion } });
+        }else if(!data){
+          const toast = await this.toastController.create({
+            message: 'Tienes que pertenecer al evento',
+            duration: 2000, // Duración del toast en milisegundos
+            position: 'bottom' // Posición del toast
+          });
+          toast.present();
+        }
+      },
+      error:()=> {
+        console.log("No se pudo puntuar")
+      }
+    })
+
+
   }
 
   cerrarModal() {
@@ -214,6 +233,7 @@ export class PublicacionComponent implements OnInit {
       },
     });
   }
+
 
 
   entrarPerfil(id: number | undefined) {
