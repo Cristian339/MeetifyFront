@@ -18,6 +18,7 @@ import {UsuPubliComponent} from "./usu-publi/usu-publi.component";
 import {PerfilAjenoComponent} from "./perfil-ajeno/perfil-ajeno.component";
 import {NotificacionesComponent} from "./notificaciones/notificaciones.component";
 import {MensajeBanComponent} from "./mensaje-ban/mensaje-ban.component";
+import {AmigosComponent} from "./amigos/amigos.component";
 import {VerEventosComponent} from "./ver-eventos/ver-eventos.component";
 import {VerPerfilesComponent} from "./ver-perfiles/ver-perfiles.component";
 import { CabeceraSinRutaComponent} from "./cabecera-sin-ruta/cabecera-sin-ruta.component";
@@ -30,6 +31,7 @@ export const routes: Routes = [
   { path: 'navbar', component: CabeceraComponent },
   { path: 'administracion', component: AdministracionComponent },
   { path: 'bienvenidos', component: BienvenidosComponent },
+  { path: 'categorias', component: CategoriasComponent },
   { path: 'pie-pagina', component: PiePaginaComponent },
   { path: 'publicacion', component: PublicacionComponent },
   { path: 'perfil', component: PerfilComponent },
@@ -45,6 +47,8 @@ export const routes: Routes = [
   { path: 'puntuar', component: PuntuarComponent},
   { path: 'notificaciones', component: NotificacionesComponent},
   { path: 'mensaje-ban', component: MensajeBanComponent},
+  { path: 'amigos', component: AmigosComponent},
+
   { path: 'cabecera' , component: CabeceraComponent},
   { path: 'cabecera-sin-ruta', component: CabeceraSinRutaComponent},
   { path: 'ver-eventos', component: VerEventosComponent},

@@ -158,4 +158,9 @@
     display: block;
     margin-top: 5px;
   }
+
+  .scrollable-content {
+    height: calc(100vh - 60px); /* Ajusta este valor dependiendo del tamaño de tu input */
+    overflow-y: auto;
+  }
 }

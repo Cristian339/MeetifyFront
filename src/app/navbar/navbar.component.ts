@@ -47,15 +47,15 @@ export class NavbarComponent implements OnInit {
   vistaActual: 'main' | 'config' = 'main';
   menuItems = [
     { label: 'Eventos', icon: 'calendar-outline', route: '/events' },
-    { label: 'Amigos', icon: 'people-outline', route: '/friends' },
+    { label: 'Amigos', icon: 'people-outline', route: '/amigos' },
     { label: 'Mi reputación', icon: 'bar-chart-outline', route: '/reputation' },
   ];
 
   menuActivities = [
-    { label: 'Configurar perfil', icon: 'person-outline', route: '/events' },
+    { label: 'Configurar perfil', icon: 'person-outline', route: '/editar-perfil' },
     { label: 'Eventos compartidos', icon: 'share-outline', route: '/friends' },
     { label: 'Eventos que me he unido', icon: 'arrow-redo-outline', route: '/reputation' },
-    { label: 'Reseñas que hice', icon: 'star-half-outline', route: '/editar-perfil' },
+    { label: 'Reseñas que hice', icon: 'star-half-outline', route: '/reputation' },
     { label: 'Privacidad', icon: 'lock-closed-outline', route: '/editar-perfil' },
   ];
 

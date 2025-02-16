@@ -134,6 +134,9 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     this.cargarUltimoMensaje(); // Load the last message
+    setTimeout(() => {
+      this.scrollToBottom(); // Ensure scroll to bottom after loading the last message
+    }, 100); // Adjust the timeout as needed
   }
 
   groupMessagesByDate(messages: any[]): any[] {
@@ -196,11 +199,16 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
       usuarioReceptor: { id: this.currentSeguidor.id }
     };
 
-    // Send the message to the server
     this.webSocketService.enviarMensaje(message).subscribe(() => {
-      // The message will be added to the list when received via WebSocket
+
       this.newMessage = '';
     });
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.enviarMensaje();
+    }
   }
 
   addMessageToGroup(message: any) {
@@ -291,4 +299,14 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
       error: (error) => console.error('Error fetching last message:', error)
     });
   }
+
+  searchTerm: string = '';
+
+  filterContacts() {
+    const searchTermLower = this.searchTerm.toLowerCase();
+    this.filteredSeguidos = this.seguidos.filter(seguidor =>
+      seguidor.nombre?.toLowerCase().includes(searchTermLower)
+    );
+  }
+
 }

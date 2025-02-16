@@ -1,30 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {IonicModule} from "@ionic/angular";
-import {NgForOf} from "@angular/common";
+import { IonicModule } from "@ionic/angular";
+import { NgForOf, NgOptimizedImage } from "@angular/common";
+import { AmigoService } from "../services/amigo.service";
+import { CabeceraComponent } from "../cabecera/cabecera.component";
 
 @Component({
   selector: 'app-amigos',
   templateUrl: './amigos.component.html',
   imports: [
     IonicModule,
-    NgForOf
+    NgForOf,
+    CabeceraComponent,
+    NgOptimizedImage
   ],
   styleUrls: ['./amigos.component.scss']
 })
 export class AmigosComponent implements OnInit {
   amigos: any[] = [];
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.fetchAmigos();
+  constructor(private http: HttpClient,
+              private amigoService: AmigoService) {
   }
 
-  fetchAmigos() {
-    this.http.get<any[]>('https://api.example.com/amigos')
-      .subscribe(data => {
+  ngOnInit() {
+    this.cargarAmigos();
+  }
+
+  cargarAmigos(): void {
+    console.log('Cargando amigos...');
+    this.amigoService.obtenerAmigos().subscribe({
+      next: (data) => {
         this.amigos = data;
-      });
+        console.info(data);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => {
+        console.log('Petición completada');
+      },
+    });
   }
 }

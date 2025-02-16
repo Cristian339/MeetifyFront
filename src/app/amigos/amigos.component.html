@@ -1,12 +1,12 @@
+<app-cabecera [titulo]="'Amigos'" [ruta]="'/publicacion'"></app-cabecera>
 <ion-content>
   <ion-list>
     <ion-item lines="none" *ngFor="let amigo of amigos" id="open-modal">
       <ion-avatar slot="start">
-        <img [src]="amigo.avatarUrl" class="circuloPersona"  alt="img-user"/>
+        <img [src]="amigo.imagenUrlPerfil" class="circuloPersona" alt="img-user"/>
       </ion-avatar>
       <ion-label>
         <h2>{{ amigo.nombre }}</h2>
-        <p>{{ amigo.mensaje }}</p>
       </ion-label>
       <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
     </ion-item>
