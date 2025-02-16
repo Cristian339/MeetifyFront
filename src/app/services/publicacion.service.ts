@@ -6,6 +6,7 @@ import { Publicacion } from '../modelos/Publicacion';
 import { ComunService } from './comun.service';
 import {UsuarioDTO} from "../modelos/UsuarioDTO";
 import {Perfil} from "../modelos/Perfil";
+import {Resenias} from "../modelos/Resenias";
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,17 @@ export class PublicacionService {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<void>(`${this.apiUrl}/publicacion/unirse/${idPublicacion}`, {}, authHeader);
   }
+
+  puntuarPublicacion(idPublicacion: number | undefined, estrellas : number | undefined): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/publicacion/${idPublicacion}/puntuar`, estrellas, authHeader);
+  }
+
+  obtenerPuntuaciones(idPublicacion: number | undefined): Observable<Resenias[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Resenias[]>(`${this.apiUrl}/publicacion/reputacion/${idPublicacion}`, authHeader);
+  }
+
 
   obtenerUsuariosUnidos(idPublicacion: number): Observable<UsuarioDTO[]> {
     const authHeader = this.comunService.autorizarPeticion();

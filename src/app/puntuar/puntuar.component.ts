@@ -33,5 +33,6 @@ export class PuntuarComponent implements OnInit {
 
   puntuar() {
     console.log('Puntuación enviada:', this.puntuacion, 'Razón:', this.razon);
+
   }
 }

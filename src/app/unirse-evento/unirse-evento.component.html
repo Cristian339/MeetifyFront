@@ -39,7 +39,65 @@
           <strong> Categorías: </strong>
           <span class="category">{{ publicacion.categoria }}</span>
         </div>
+        <div>
+          <ion-button id="open-modal" expand="block" (click)="cargarReneias(publicacion.id)">
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-text style="margin-top: 5px;margin-left: 3px" >Reseñas</ion-text>
+          </ion-button>
+        </div>
       </div>
+
+
+
+      <ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Reseñas</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="modal.dismiss()">Close</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <ion-list>
+
+
+              <ion-item *ngFor="let r of resenias">
+                <ion-avatar slot="start">
+                  <ion-img [src]="r.imagenUrlUsuario"></ion-img>
+                </ion-avatar>
+                <ion-label>
+                  <h2>{{ r.nombreUsuario }}</h2>
+
+                  <!-- Sección de valoración con estrellas -->
+                  <ion-row class="Puntuacion">
+                    <ion-col size="auto" class="stars">
+                      <ion-icon *ngFor="let star of [1, 2, 3, 4, 5]"
+                                [name]="star >= (r.estrellas ?? 0) ? 'star' : 'star-outline'"
+                                [color]="star <= (r.estrellas ?? 0) ? 'warning' : 'dark'">
+                      </ion-icon>
+                    </ion-col>
+                    <ion-col size="auto" class="score">{{ (r.estrellas ?? 0) * 5 }} / 25 PTS</ion-col>
+                  </ion-row>
+
+                  <!-- Motivo debajo de la valoración -->
+                  <div>
+                    <ion-text color="medium">Motivo: {{ r.motivo }}</ion-text>
+                  </div>
+
+                </ion-label>
+              </ion-item>
+
+
+
+
+
+
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
     </ion-content>
     <app-pie-pagina></app-pie-pagina>
   </div>

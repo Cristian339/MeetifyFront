@@ -195,3 +195,31 @@
   background: none;
   text-align: left;
 }
+
+
+.Puntuacion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars ion-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  color: black; /* Color por defecto */
+}
+
+.stars ion-icon[color="warning"] {
+  color: gold !important; /* Asegura que el color dorado se aplique */
+  background-color: gold;
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: #5497A7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Amatic SC', cursive;
+  color: white;
+}

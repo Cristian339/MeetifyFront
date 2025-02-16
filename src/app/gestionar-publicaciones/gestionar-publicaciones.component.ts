@@ -22,6 +22,7 @@ import {ModalService} from "../services/modal.service";
 import {UsuarioDTO} from "../modelos/UsuarioDTO";
 import {PerfilService} from "../services/perfil.service";
 import {Categoria} from "../modelos/Categoria";
+import {Resenias} from "../modelos/Resenias";
 
 @Component({
   selector: 'app-gestionar-publicaciones',
@@ -53,6 +54,7 @@ export class GestionarPublicacionesComponent implements OnInit {
     enlaceImagen: ''
   };
 
+  resenias: Resenias[] = [];
   publicacion!: Publicacion;
   eliminarPubDTO: any = {};
   usuarioUnido: boolean = false;
@@ -132,6 +134,18 @@ export class GestionarPublicacionesComponent implements OnInit {
     } else {
       console.error('No hay datos de la publicación nueva');
     }
+  }
+
+  cargarReneias(idPub: number | undefined){
+    this.publicacionService.obtenerPuntuaciones(idPub).subscribe({
+      next:(data)=> {
+        console.log(data);
+        this.resenias=data;
+      },
+      error:()=> {
+        console.log("Error al cargar reseñas")
+      }
+    })
   }
 
   @ViewChild(IonMenu) menu!: IonMenu;

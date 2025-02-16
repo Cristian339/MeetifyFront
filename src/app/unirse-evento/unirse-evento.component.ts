@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from "@ionic/angular";
 import { addIcons } from "ionicons";
-import {arrowBackCircle, personCircleOutline, locationOutline, bookOutline} from "ionicons/icons";
+import {arrowBackCircle, personCircleOutline, locationOutline, bookOutline, starOutline} from "ionicons/icons";
 import { Publicacion } from "../modelos/Publicacion";
 import { PublicacionService } from "../services/publicacion.service";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
@@ -10,6 +10,7 @@ import { FormsModule } from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {PiePaginaComponent} from "../pie-pagina/pie-pagina.component";
 import {CabeceraComponent} from "../cabecera/cabecera.component";
+import {Resenias} from "../modelos/Resenias";
 
 @Component({
   selector: 'app-unirse-evento',
@@ -26,6 +27,7 @@ import {CabeceraComponent} from "../cabecera/cabecera.component";
 })
 export class UnirseEventoComponent implements OnInit {
 
+  resenias: Resenias[] = [];
   publicacion: Publicacion | undefined;
   dentro : boolean = false;
   constructor(
@@ -33,10 +35,15 @@ export class UnirseEventoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    addIcons({ arrowBackCircle, personCircleOutline, locationOutline,bookOutline });
+    addIcons({ arrowBackCircle, personCircleOutline, locationOutline,bookOutline, starOutline });
   }
 
+  presentingElement!: HTMLElement | null;
+
+
+
   ngOnInit() {
+    this.presentingElement = document.querySelector('.ion-page');
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state) {
       const id = navigation.extras.state['id'];
@@ -102,5 +109,17 @@ export class UnirseEventoComponent implements OnInit {
         console.error('Error al cargar la publicación:', error);
       }
     );
+  }
+
+  cargarReneias(idPub: number | undefined){
+    this.publicacionService.obtenerPuntuaciones(idPub).subscribe({
+      next:(data)=> {
+        console.log(data);
+        this.resenias=data;
+      },
+      error:()=> {
+        console.log("Error al cargar reseñas")
+      }
+    })
   }
 }
