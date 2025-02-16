@@ -37,6 +37,7 @@ import { PerfilService } from "../services/perfil.service";
 export class NavbarComponent implements OnInit {
   @ViewChild('modalConfirm') modalConfirm: IonModal | undefined;
   @ViewChild('modalPassword') modalPassword: IonModal | undefined;
+  @ViewChild('modalBusqueda') modalBusqueda: IonModal | undefined;
 
   password: string = '';
 
@@ -105,6 +106,12 @@ export class NavbarComponent implements OnInit {
   openConfirmModal() {
     if (this.modalConfirm) {
       this.modalConfirm.present();
+    }
+  }
+
+  openBusquedaModal() {
+    if (this.modalBusqueda) {
+      this.modalBusqueda.present();
     }
   }
 

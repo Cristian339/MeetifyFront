@@ -1,0 +1,102 @@
+p {
+  margin: 5px 0;
+}
+
+.icon-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.medium-icon {
+  margin-right: 8px;
+}
+
+.report-text {
+  background-color: var(--ion-color-terciario);
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.clear-fab {
+  --background: transparent;
+  --border: none;
+  --box-shadow: none;
+  --color: inherit;
+}
+/*-------------------------------------------------------------------------------*/
+.modal-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.title-label {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.full-screen-modal {
+  --height: 100%;
+  --width: 100%;
+  --max-height: 100%;
+  --max-width: 100%;
+  --border-radius: 0;
+}
+
+.input-container {
+  padding: 16px;
+  background-color: var(--ion-color-secundario);
+  border-radius: 10px;
+}
+
+.title-label {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.input-container {
+  padding: 16px;
+  background-color: var(--ion-color-secundario);
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media (max-width: 600px) {
+  .input-container {
+    width: 95%;
+  }
+}
+.descripcion-textarea {
+  height: 150px;
+}
+
+.circular-image {
+  width: 55px; /* Adjust the size to match the icon */
+  height: 55px; /* Adjust the size to match the icon */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.centered-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #19323C;
+}
+
+.nombre-perfil {
+  font-size: 1.2rem; /* Adjust the font size as needed */
+  color: #19323C;
+}
+
+.categoria {
+  font-size: 0.8rem; /* Adjust the font size as needed */
+  color: #19323C;
+}

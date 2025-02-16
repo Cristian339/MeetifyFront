@@ -94,7 +94,18 @@ export class PerfilAjenoComponent  implements OnInit {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       console.log('ID recibido:', id);
+          //En caso que sea desde lista de eventos
           this.publicacionService.otroUsuario(id).subscribe({
+            next: (data) => {
+              console.log('Data received:', data);
+              this.perfil = data;
+              console.log('Perfil assigned:', this.perfil);
+            },
+            error: (error) => console.error('Error:', error),
+            complete: () => console.log('Request completed')
+          });
+          //En caso que sea desde lista de perfiles
+          this.perfilService.getPerfilPorId(id).subscribe({
             next: (data) => {
               console.log('Data received:', data);
               this.perfil = data;

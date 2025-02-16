@@ -3,7 +3,7 @@ import { arrowBackCircle } from "ionicons/icons";
 import { addIcons } from "ionicons";
 import { IonicModule } from "@ionic/angular";
 import {Router} from "@angular/router";
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cabecera',
@@ -19,15 +19,12 @@ export class CabeceraComponent implements OnInit {
   @Input() ruta: string | undefined;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private location : Location) {
     addIcons({ arrowBackCircle });
   }
-  navigateBack() {
-    if (this.ruta) {
-      this.router.navigate([this.ruta]);
-    }
+  volver() {
+    this.location.back();
   }
-
 
   ngOnInit() {}
 }

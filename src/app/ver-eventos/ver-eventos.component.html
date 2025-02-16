@@ -1,0 +1,73 @@
+<app-cabecera titulo="Eventos" ruta="/publicacion" class="no-margin"></app-cabecera>
+<ion-content color="terciario">
+
+  <ion-searchbar [(ngModel)]="busqueda" placeholder="Buscar eventos..." (ionInput)="filtrarPublicaciones()"></ion-searchbar>
+
+  <ion-card *ngFor="let p of publicacionesFiltradas" style="margin-top: 20px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); font-family: 'Inter', sans-serif; position: relative;">
+    <ion-fab style="position: absolute; top: 5px; right: 5px;">
+      <ion-fab-button color="terciario" size="small" class="clear-fab">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="bottom" style="left: -10px;">
+        <ion-text class="report-text">Reportar</ion-text>
+      </ion-fab-list>
+    </ion-fab>
+
+    <ion-grid style="float: left">
+      <ion-row>
+        <ion-col>
+          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
+            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" (click)="entrarPerfil(p.id)"/>
+          </ng-container>
+          <ng-template #defaultIcon>
+            <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large" (click)="entrarPerfil(p.id)"></ion-icon>
+          </ng-template>
+        </ion-col>
+        <ion-row class="centered-text">
+          <p class="nombre-perfil"><i>{{p.nombrePerfil}}</i></p>
+          <p class="categoria"><i>{{p.categoria}}</i></p>
+        </ion-row>
+      </ion-row>
+    </ion-grid>
+
+    <img alt="Imagen" [src]="p.imagenUrlPub ? p.imagenUrlPub : 'https://ionicframework.com/docs/img/demos/card-media.png'" style="margin-top: 10px"/>
+    <ion-title style="margin-top: 10px;" color="primario"><i>{{p.titulo}}</i></ion-title>
+    <ion-card-content style="margin-left: 4px"><i>{{p.descripcion}}</i></ion-card-content>
+    <ion-text style="padding-left: 15px; display: block;color: black">
+      <ion-icon name="calendar-outline"></ion-icon> Inicio:<i>{{ p.fechaIni | date:'yyyy-MM-dd' }}</i> <ion-icon name="calendar-outline" style="margin-left: 10px"></ion-icon> Fin: <i>{{ p.fechaFin | date:'yyyy-MM-dd' }}</i>
+    </ion-text>
+    <ion-text style="padding-left: 15px; display: block; margin-top: 5px;color: black">
+      <ion-icon name="golf-outline"></ion-icon><i>{{p.ubicacion}}</i>
+    </ion-text>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <div class="icon-text-container">
+            <ion-button fill="clear" class="font-amatic-grande" (click)="puntuarEvento(p)">
+              <ion-icon name="ribbon-outline" class="medium-icon" color="primario"></ion-icon>
+              Puntuar
+            </ion-button>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div class="icon-text-container">
+            <ion-button fill="clear" class="font-amatic-grande" (click)="unirseEvento(p)">
+              <ion-icon name="people-circle-outline" class="medium-icon" color="primario"></ion-icon>
+              Unirse
+            </ion-button>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div class="icon-text-container">
+            <ion-button fill="clear" class="font-amatic-grande" (click)="compartirPublicacion(p.id)">
+              <ion-icon name="share-social-outline" class="medium-icon" color="primario"></ion-icon>
+              Compartir
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

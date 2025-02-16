@@ -23,6 +23,17 @@ export class PerfilService {
     return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/mi`, authHeader);
   }
 
+
+  getPerfilPorId(id : number | undefined): Observable<Perfil> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil//otro-usuario/${id}`, authHeader);
+  }
+
+  getTodosLosPerfiles(): Observable<Perfil[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Perfil[]>(`${this.apiUrl}/publicacion/perfil/todos`, authHeader);
+  }
+
   getIDPerfil(): Observable<PerfilID> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.get<PerfilID>(`${this.apiUrl}/publicacion/perfil/mi-id`, authHeader);

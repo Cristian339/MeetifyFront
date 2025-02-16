@@ -9,19 +9,32 @@
           <ion-img src="/assets/Meetify.svg" style="width: 60px;"></ion-img>
         </ion-col>
         <ion-col>
-          <ion-icon name="search-outline" style="padding-top: 20px; float: right" class="medium-icon" (click)="toggleSearchInput()"></ion-icon>
+          <ion-icon name="search-outline" style="padding-top: 20px; float: right" class="medium-icon" (click)="openBusquedaModal()"></ion-icon>
         </ion-col>
       </ion-row>
 
-      <!-- Input que aparece cuando isSearchVisible es true -->
-      <ion-row *ngIf="isSearchVisible" style="background-color: #F3F7F0;color: black">
-        <ion-col>
-          <ion-input placeholder="Buscar..." [(ngModel)]="searchQuery"></ion-input>
-        </ion-col>
-      </ion-row>
     </ion-grid>
   </ion-toolbar>
 </ion-header>
+
+
+<ion-modal #modalBusqueda trigger="open-modal">
+  <ng-template>
+    <ion-content style="--background: #19323C">
+      <ion-toolbar>
+        <ion-title>¿Que quieres buscar?</ion-title>
+      </ion-toolbar>
+
+      <div style="display: flex; justify-content: center;margin-top: 90px">
+        <ion-button color="secundario" style="font-size: large ;font-family: 'Inter', sans-serif;height: 20px;width: 120px" href="/ver-eventos">Eventos</ion-button>
+        <ion-button color="secundario" style="font-size: large ; font-family: 'Inter', sans-serif; height: 20px;width: 120px" href="/ver-perfiles">Perfiles</ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
 
 <ion-menu side="start" menuId="first" contentId="main-content" style="height: 100%;">
   <ion-header>
