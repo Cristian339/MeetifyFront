@@ -116,6 +116,27 @@ ion-content{
   --ion-color-tint: var(--ion-color-cuarto-tint);
 }
 
+:root {
+  --ion-color-negro: #000000;
+  --ion-color-negro-rgb: 0,0,0;
+  --ion-color-negro-contrast: #ffffff;
+  --ion-color-negro-contrast-rgb: 255,255,255;
+  --ion-color-negro-shade: #0D0D0D; /* Negro ligeramente aclarado */
+  --ion-color-negro-tint: #1A1A1A; /* Negro con un leve tinte gris */
+}
+
+.ion-color-negro {
+  --ion-color-base: var(--ion-color-negro);
+  --ion-color-base-rgb: var(--ion-color-negro-rgb);
+  --ion-color-contrast: var(--ion-color-negro-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-negro-contrast-rgb);
+  --ion-color-shade: var(--ion-color-negro-shade);
+  --ion-color-tint: var(--ion-color-negro-tint);
+}
+
+.custom-toast {
+  margin-top: 20%;
+}
 
 .medium-icon{
   width: 25px;

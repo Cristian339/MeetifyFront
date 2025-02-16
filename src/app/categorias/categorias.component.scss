@@ -1,111 +1,261 @@
-ion-toolbar {
-  --background: #16353F;
-  --color: #fff;
-  padding: 5%;
-  display: flex;
-  align-items: center;
+@media (max-width: 600px) {
+
+  ion-toolbar {
+    --background: #16353F;
+    --color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  ion-toolbar ion-title {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: white;
+  }
+
+  * {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+  }
+
+  ion-toolbar ion-img {
+  }
+
+  .logo-image {
+    width: 100%;
+    height: 100%;
+    margin-top: -2%;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .selected {
+    filter: brightness(0.7);
+  }
+
+  .category-1 {
+    --background: #0F252D; /* Azul petróleo oscuro */
+    font-size: 1.2rem;
+  }
+
+  .category-2 {
+    --background: #3E6E7C; /* Azul acero apagado */
+    font-size: 1.2rem;
+  }
+
+  .category-3 {
+    --background: #19323C; /* Azul grisáceo profundo */
+    font-size: 1.2rem;
+  }
+
+  .category-4 {
+    --background: #5497A7; /* Azul océano oscuro */
+    font-size: 1.2rem;
+  }
+
+  .category-5 {
+    --background: #2A4A54; /* Verde azulado profundo */
+    font-size: 1.2rem;
+  }
+
+  .category-6 {
+    --background: #6C8C99; /* Cian grisáceo */
+    font-size: 1.2rem;
+  }
+
+  .category-7 {
+    --background: #0F252D; /* Azul petróleo oscuro */
+    font-size: 1.2rem;
+  }
+
+  .category-8 {
+    --background: #3E6E7C; /* Azul acero apagado */
+    font-size: 1.2rem;
+  }
+
+  .category-9 {
+    --background: #19323C; /* Azul grisáceo profundo */
+    font-size: 1.2rem;
+  }
+
+  .category-10 {
+    --background: #5497A7; /* Azul océano oscuro */
+    font-size: 1.2rem;
+  }
+
+  .category-11 {
+    --background: #2A4A54; /* Verde azulado profundo */
+    font-size: 1.2rem;
+  }
+
+  .category-12 {
+    --background: #6C8C99; /* Cian grisáceo */
+    font-size: 1.2rem;
+  }
+
+  .category-13 {
+    --background: #102026; /* Gris azulado oscuro */
+    font-size: 1.2rem;
+  }
+
+  .category-14 {
+    --background: #3E6E7C; /* Azul acero apagado */
+    font-size: 1.2rem;
+  }
+
+  .size-text {
+    font-size: 2rem;
+  }
+
+  .background {
+    --background: var(--ion-color-negro);
+    --color: white;
+    font-size: 1.5rem;
+    width: 40%;
+    margin-top: 10%;
+  }
+
+  .toast .toast-message {
+    font-family: 'Inter', sans-serif;
+    color: white;
+  }
 }
 
-ion-toolbar ion-title {
-  font-family: 'Amatic SC', cursive;
-  font-weight: 700;
-  font-size: 2rem;
-  color: white;
-  margin-top: 2%;
-  margin-left: 1%;
-}
+@media (min-width: 600px) {
 
-* {
-  font-family: 'Amatic SC', cursive;
-  font-weight: bold;
-}
+  ion-toolbar {
+    --background: #16353F;
+    --color: #fff;
+    display: flex;
+    align-items: center;
+  }
 
-ion-toolbar ion-img {
-  margin-top: 5%;
-}
+  ion-toolbar ion-title {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 3rem;
+    color: white;
+  }
 
-.logo-image {
-  width: 25%;
-  height: 25%;
-}
+  * {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+  }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
+  ion-toolbar ion-img {
+  }
 
-.selected {
-  filter: brightness(0.7);
-}
+  .logo-image {
+    width: 15%;
+    height: 15%;
+  }
 
-.category-1 {
-  --background: #19323C;
-}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
 
-.category-2 {
-  --background: #5497A7;
-}
+  .selected {
+    filter: brightness(0.7);
+  }
 
-.category-3 {
-  --background: #1A3A4A;
-}
+  .category-1 {
+    --background: #0F252D; /* Azul petróleo oscuro */
+    font-size: 1.75rem;
+  }
 
-.category-4 {
-  --background: #4A8A9A;
-}
+  .category-2 {
+    --background: #3E6E7C; /* Azul acero apagado */
+    font-size: 1.75rem;
+  }
 
-.category-5 {
-  --background: #2B4A5A;
-}
+  .category-3 {
+    --background: #19323C; /* Azul grisáceo profundo */
+    font-size: 1.75rem;
+  }
 
-.category-6 {
-  --background: #5A9BAA;
-}
+  .category-4 {
+    --background: #5497A7; /* Azul océano oscuro */
+    font-size: 1.75rem;
+  }
 
-.category-7 {
-  --background: #3C5A6A;
-}
+  .category-5 {
+    --background: #2A4A54; /* Verde azulado profundo */
+    font-size: 1.75rem;
+  }
 
-.category-8 {
-  --background: #6BA9B8;
-}
+  .category-6 {
+    --background: #6C8C99; /* Cian grisáceo */
+    font-size: 1.75rem;
+  }
 
-.category-9 {
-  --background: #4D6A7A;
-}
+  .category-7 {
+    --background: #0F252D; /* Azul petróleo oscuro */
+    font-size: 1.75rem;
+  }
 
-.category-10 {
-  --background: #7AB8C7;
-}
+  .category-8 {
+    --background: #3E6E7C; /* Azul acero apagado */
+    font-size: 1.75rem;
+  }
 
-.category-11 {
-  --background: #5E7A8A;
-}
+  .category-9 {
+    --background: #19323C; /* Azul grisáceo profundo */
+    font-size: 1.75rem;
+  }
 
-.category-12 {
-  --background: #8AC7D6;
-}
+  .category-10 {
+    --background: #5497A7; /* Azul océano oscuro */
+    font-size: 1.75rem;
+  }
 
-.category-13 {
-  --background: #6F8A9A;
-}
+  .category-11 {
+    --background: #2A4A54; /* Verde azulado profundo */
+    font-size: 1.75rem;
+  }
 
-.category-14 {
-  --background: #9AD6E5;
-}
+  .category-12 {
+    --background: #6C8C99; /* Cian grisáceo */
+    font-size: 1.75rem;
+  }
 
-.size-text {
-  font-size: 1.5rem;
-}
+  .category-13 {
+    --background: #102026; /* Gris azulado oscuro */
+    font-size: 1.75rem;
+    grid-column: 1 / 3;
+    width: 48.5%;
+    margin-left: 25%;
+  }
 
-.background {
-  --background: var(--ion-color-secundario);
-  --color: white;
-}
+  .category-14 {
+    --background: #3E6E7C; /* Azul acero apagado */
+    font-size: 1.75rem;
+    grid-column: 3 / 5;
+    width: 48.5%;
+    margin-left: 25%;
+  }
 
-.toast .toast-message {
-  font-family: 'Inter', sans-serif;
-  color: white;
+
+  .size-text {
+    font-size: 3rem;
+  }
+
+  .background {
+    --background: var(--ion-color-negro);
+    --color: white;
+    font-size: 2.2rem;
+    margin-top: 10%;
+  }
+
+  .toast .toast-message {
+    font-family: 'Inter', sans-serif;
+    color: white;
+  }
 }
 

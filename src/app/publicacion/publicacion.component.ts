@@ -21,6 +21,7 @@ import {PerfilService} from "../services/perfil.service";
 import {Categoria} from "../modelos/Categoria";
 import {getTokenAtPosition} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
 import {Router} from "@angular/router";
+import { ToastService} from "../services/toast.service";
 
 @Component({
   selector: 'app-publicacion',
@@ -38,6 +39,7 @@ import {Router} from "@angular/router";
   ],
 })
 export class PublicacionComponent implements OnInit {
+  isWebFormat: boolean = false;
   modalAbierto: boolean = false;
   mensajeModal: string = 'Crear una nueva publicación';
   presentingElement!: HTMLElement | null;
@@ -67,6 +69,11 @@ export class PublicacionComponent implements OnInit {
       console.log('Modal status:', status);
     });
     this.cargarPublicaciones();
+    this.isWebFormat = this.checkIfWebFormat();
+  }
+
+  checkIfWebFormat(): boolean {
+    return window.innerWidth > 600;
   }
 
   abrirModal() {

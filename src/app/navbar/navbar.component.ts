@@ -19,7 +19,7 @@ import {
 } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { LoginService } from "../services/login.service";
 import { PerfilService } from "../services/perfil.service";
 
@@ -32,6 +32,7 @@ import { PerfilService } from "../services/perfil.service";
     IonicModule,
     CommonModule,
     FormsModule,
+    RouterLink
   ]
 })
 export class NavbarComponent implements OnInit {

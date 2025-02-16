@@ -1,86 +1,5 @@
-.no-margin {
-  margin-bottom: 0 !important;
-}
-
-ion-toolbar {
-  --background: #16353F;
-  --color: #fff;
-  padding: 1%;
-  display: flex;
-  align-items: center;
-}
-
-ion-padding-icon {
-  padding-right: 4px;
-}
-
-
-.perfil-avatar-container {
-  position: relative;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.perfil-avatar-large {
-  width: 200px; /* Increase the size of the image */
-  height: 200px; /* Increase the size of the image */
-  border-radius: 50%;
-  border: 4px solid var(--ion-color-primario); /* Add border with primary color */
-}
-
-.upload-options {
-  margin-top: 1rem;
-}
-ion-icon {
-  margin-right: 8px;
-}
-
-ion-item {
-  --border-radius: 10px;
-  display: flex;
-  align-items: center;
-}
-
-ion-button {
-  font-weight: bold;
-  border-radius: 20px;
-  margin-left: 8px;
-}
-
-.ion-radio-group-horizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-ion-card.ion-color-white {
-  --background: #ffffff;
-}
-
-
-.no-border-item {
-  --border-style: none;
-}
-
-.font-amatic {
-  font-family: 'Amatic SC', cursive;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.font-inter {
-  font-family: 'Inter', sans-serif;
-}
-
-.card-color{
-  background: var(--ion-color-secundario);
-}
-
-.upload-options ion-button:first-child {
-  margin-left: 0;
-}
-
-
 @media (max-width: 600px) {
+
   .ion-radio-group-horizontal {
     flex-direction: column;
     align-items: flex-start;
@@ -88,5 +7,219 @@ ion-card.ion-color-white {
 
   .ion-radio-group-horizontal ion-item {
     width: 100%;
+  }
+
+  .perfil-avatar-large {
+    width: 150px;
+    height: 150px;
+  }
+
+  .card-color {
+    background: var(--ion-color-secundario);
+  }
+
+  ion-toolbar {
+    --background: #16353F;
+    --color: #fff;
+    padding: 1%;
+    display: flex;
+    align-items: center;
+  }
+
+  ion-padding-icon {
+    padding-right: 4px;
+  }
+
+  .perfil-avatar-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .perfil-avatar-large {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid var(--ion-color-primario);
+  }
+
+  .upload-options {
+    margin-top: 1rem;
+  }
+
+  ion-icon {
+    margin-right: 8px;
+  }
+
+  ion-item {
+    --background: #FFFFFF;
+    margin-top: 8%;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+
+    ion-input {
+      font-family: 'Inter', sans-serif;
+      color: black;
+    }
+  }
+
+  ion-button {
+    font-weight: bold;
+    border-radius: 20px;
+  }
+
+  .ion-radio-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  ion-card .ion-color-white {
+    --background: #ffffff;
+  }
+
+  .no-border-item {
+    --border-style: none;
+  }
+
+  .font-amatic {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: -3%;
+  }
+
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .card-color {
+    background: var(--ion-color-secundario);
+  }
+
+  .upload-options ion-button:first-child {
+    margin-left: 0;
+  }
+
+  .input-alto {
+    height: 150px;
+  }
+}
+
+@media (min-width: 600px) {
+  .ion-radio-group-horizontal {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .ion-radio-group-horizontal ion-item {
+    width: auto;
+  }
+
+  .upload-options ion-button {
+    margin: 0 10px; /* Ajusta el valor según el espacio deseado */
+  }
+
+  .perfil-avatar-large {
+    width: 200px;
+    height: 200px;
+  }
+
+  .card-color {
+    background: var(--ion-color-secundario);
+  }
+
+  ion-toolbar {
+    --background: #16353F;
+    --color: #fff;
+    padding: 1%;
+    display: flex;
+    align-items: center;
+  }
+
+  ion-padding-icon {
+    padding-right: 4px;
+  }
+
+  .perfil-avatar-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .perfil-avatar-large {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid var(--ion-color-primario);
+  }
+
+  .upload-options {
+    margin-top: 1rem;
+  }
+
+  ion-icon {
+    margin-right: 8px;
+  }
+
+  ion-item {
+    --background: #FFFFFF;
+    margin: 1% auto 5px auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    max-width: 600px;
+
+    ion-input {
+      font-family: 'Inter', sans-serif;
+      color: black;
+      margin: 0 auto;
+    }
+  }
+
+  ion-button {
+    font-weight: bold;
+    border-radius: 20px;
+  }
+
+  .ion-radio-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  ion-card.ion-color-white {
+    --background: #ffffff;
+  }
+
+  .no-border-item {
+    --border-style: none;
+  }
+
+  .font-amatic {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .card-color {
+    background: var(--ion-color-secundario);
+  }
+
+  .upload-options ion-button:first-child {
+    margin-left: 0;
+  }
+
+  .input-alto {
+    height: 150px;
   }
 }

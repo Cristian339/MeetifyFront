@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicModule, IonModal, ToastController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from "../services/login.service";
 import { Login } from '../modelos/Login';
 import { Registro } from '../modelos/Registro';
-import {PerfilService} from "../services/perfil.service";
+import { PerfilService } from "../services/perfil.service";
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-auth-component',
@@ -22,7 +23,6 @@ import {PerfilService} from "../services/perfil.service";
   ]
 })
 export class AuthComponentComponent implements OnInit {
-  @ViewChild('changePasswordModal') changePasswordModal!: IonModal;
   authForm: FormGroup = {} as FormGroup;
   loginForm: FormGroup;
   registroForm: FormGroup;
@@ -35,7 +35,7 @@ export class AuthComponentComponent implements OnInit {
   modalAbierto = false;
   mensajeModal = '';
 
-  constructor(private toastController: ToastController, private fb: FormBuilder, private router: Router, private loginService: LoginService, private perfilService : PerfilService) {
+  constructor(private toastService: ToastService, private fb: FormBuilder, private router: Router, private loginService: LoginService, private perfilService: PerfilService) {
     this.registroForm = this.fb.group({
       nombre: [this.registro.nombre, Validators.required],
       apellidos: [this.registro.apellidos, Validators.required],
@@ -56,7 +56,6 @@ export class AuthComponentComponent implements OnInit {
   }
 
   initializeForm() {
-
     this.authForm = this.fb.group({
       nombreUsuario: ['', Validators.required],
       contrasenia: ['', Validators.required],
@@ -119,24 +118,19 @@ export class AuthComponentComponent implements OnInit {
     } else {
       console.log('Formulario no válido');
       this.authForm.updateValueAndValidity();
-
     }
   }
-
 
   verificarCamposLogin() {
     const nombreUsuario = this.authForm.get('nombreUsuario')?.value;
     const contrasenia = this.authForm.get('contrasenia')?.value;
 
     if (!nombreUsuario && !contrasenia) {
-      this.mensajeModal = 'Por favor, ingrese su nombre de correo/nombre de usuario y contraseña';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, ingrese su nombre de correo/nombre de usuario y contraseña', 'error');
     } else if (!nombreUsuario) {
-      this.mensajeModal = 'Por favor, ingrese su nombre de correo/nombre de usuario';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, ingrese su nombre de correo/nombre de usuario', 'error');
     } else if (!contrasenia) {
-      this.mensajeModal = 'Por favor, ingrese su contraseña';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, ingrese su contraseña', 'error');
     } else {
       this.loginService.loguear({ nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
@@ -173,22 +167,10 @@ export class AuthComponentComponent implements OnInit {
           });
         },
         error: (e) => {
-          this.mensajeModal = 'Usuario/Correo o contraseña incorrectos';
-          this.modalAbierto = true;
+          this.toastService.presentToast('Usuario/Correo o contraseña incorrectos', 'error');
         }
       });
     }
-  }
-
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 1000,
-      color: 'primary',
-      position: 'bottom',
-      cssClass: 'toast-inter-font'
-    });
-    await toast.present();
   }
 
   verificarCamposRegistro() {
@@ -200,8 +182,7 @@ export class AuthComponentComponent implements OnInit {
     const contrasenia = this.authForm.get('contrasenia')?.value;
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|safareyes\.es)$/;
-   // const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
-    const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
 
     let errorMessages = [];
     let missingFieldsCount = 0;
@@ -232,6 +213,8 @@ export class AuthComponentComponent implements OnInit {
     if (!contrasenia) {
       errorMessages.push('Por favor, ingrese su contraseña');
       missingFieldsCount++;
+    } else if (!passwordPattern.test(contrasenia)) {
+      errorMessages.push('La contraseña debe tener entre 8 a 30 caracteres, incluir mayúsculas, minúsculas y números');
     }
 
     // else if (!passwordPattern.test(contrasenia)) {
@@ -240,29 +223,25 @@ export class AuthComponentComponent implements OnInit {
 
 
     if (missingFieldsCount >= 2) {
-      this.mensajeModal = 'Por favor, complete todos los campos';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, complete todos los campos', 'error');
     } else if (errorMessages.length > 0) {
-      this.mensajeModal = errorMessages.join('. ');
-      this.modalAbierto = true;
+      this.toastService.presentToast(errorMessages.join('. '), 'error');
     } else {
       this.loginService.registrar({ nombre, apellidos, correoElectronico, fechaNacimiento, nombreUsuario, contrasenia }).subscribe({
         next: (respuesta) => {
           console.info("Registro exitoso");
-          this.presentToast('Se ha enviado un correo electrónico de verificación a tu dirección Gmail');
+          this.toastService.presentToast('Se ha enviado un correo electronico de verificación a tu dirección Gmail', 'success');
         },
         error: (e: any) => {
           if (e.error && e.error.message) {
-            this.mensajeModal = e.error.message;
+            this.toastService.presentToast(e.error.message, 'error');
           } else {
-            this.mensajeModal = 'Nombre de usuario o correo ya en uso';
+            this.toastService.presentToast('Nombre de usuario o correo ya en uso', 'error');
           }
-          this.modalAbierto = true;
         }
       });
     }
   }
-
 
 
   verificarCamposRecuperacion() {
@@ -270,11 +249,9 @@ export class AuthComponentComponent implements OnInit {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|safareyes\.es)$/;
 
     if (!correoElectronico) {
-      this.mensajeModal = 'Por favor, ingrese su correo electrónico';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, ingrese su correo electrónico', 'error');
     } else if (!emailPattern.test(correoElectronico)) {
-      this.mensajeModal = 'Por favor, ingrese un correo electrónico válido (@gmail.com o @safareyes.es)';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, ingrese un correo electrónico válido (@gmail.com o @safareyes.es)', 'error');
     } else {
       console.log('Recuperación de cuenta:', this.authForm.value);
       this.toggleAuthMode('confirmar');
@@ -285,11 +262,9 @@ export class AuthComponentComponent implements OnInit {
     const codigo = this.authForm.get('codigo')?.value;
 
     if (!codigo) {
-      this.mensajeModal = 'Por favor, ingrese el código de confirmación';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, ingrese el código de confirmación', 'error');
     } else if (codigo.toString().length !== 6) {
-      this.mensajeModal = 'El código de confirmación debe tener exactamente 6 dígitos';
-      this.modalAbierto = true;
+      this.toastService.presentToast('El código de confirmación debe tener exactamente 6 dígitos', 'error');
     } else {
       console.log('Confirmación de cuenta:', this.authForm.value);
       this.toggleAuthMode('nuevaContra');
@@ -302,19 +277,12 @@ export class AuthComponentComponent implements OnInit {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/;
 
     if (!nuevaContra || !repitenuevaContra) {
-      this.mensajeModal = 'Por favor, ingrese ambas contraseñas';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Por favor, ingrese ambas contraseñas', 'error');
     } else if (nuevaContra !== repitenuevaContra) {
-      this.mensajeModal = 'Las contraseñas no coinciden';
-      this.modalAbierto = true;
+      this.toastService.presentToast('Las contraseñas no coinciden', 'error');
     } else if (!passwordPattern.test(nuevaContra)) {
-      this.mensajeModal = 'La contraseña debe tener entre 8 a 30 caracteres, incluir mayúsculas, minúsculas, números y símbolos';
-      this.modalAbierto = true;
-    } else {
-    }}
-
-  cerrarModal() {
-    this.modalAbierto = false;
+      this.toastService.presentToast('La contraseña debe tener entre 8 a 30 caracteres, incluir mayúsculas, minúsculas, números y símbolos', 'error');
+    }
   }
 
   reenviarCodigo() {

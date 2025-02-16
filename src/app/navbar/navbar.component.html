@@ -1,21 +1,60 @@
-<ion-header>
+<ion-header class="moviles">
   <ion-toolbar color="primario">
-    <ion-grid style="padding-top: 18px">
+    <ion-grid>
       <ion-row>
-        <ion-col>
-          <ion-menu-button auto-hide="false" style="padding-top: 20px;" class="medium-icon"></ion-menu-button>
+        <ion-col size="2">
+          <ion-menu-button style="width: 70px" auto-hide="false" class="medium-icon"></ion-menu-button>
         </ion-col>
-        <ion-col style="padding-left: 40px">
-          <ion-img src="/assets/Meetify.svg" style="width: 60px;"></ion-img>
+        <ion-col size="8"  class="logo-image">
+          <ion-img src="/assets/Meetify.svg" style="width: 60px; text-align: center"></ion-img>
+        </ion-col>
+        <ion-col size="2" style="text-align: right;">
+          <ion-icon name="search-outline" class="medium-icon" (click)="toggleSearchInput()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isSearchVisible" style="background-color: #F3F7F0; color: black;">
+        <ion-col>
+          <ion-input placeholder="Buscar..." [(ngModel)]="searchQuery"></ion-input>
         </ion-col>
         <ion-col>
           <ion-icon name="search-outline" style="padding-top: 20px; float: right" class="medium-icon" (click)="openBusquedaModal()"></ion-icon>
         </ion-col>
       </ion-row>
-
     </ion-grid>
   </ion-toolbar>
 </ion-header>
+
+<ion-header class="web">
+  <ion-toolbar color="primario">
+    <ion-grid>
+      <ion-row>
+        <!-- Sección izquierda: Menú y logo -->
+        <ion-col size="4" class="left-section">
+          <ion-menu-button auto-hide="false" class="medium-icon"></ion-menu-button>
+          <ion-img src="/assets/Meetify.svg" style="width: 60px" class="logo-image"></ion-img>
+          <ion-item class="search-bar">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+            <ion-input placeholder="Buscar publicación..." [(ngModel)]="searchQuery"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <!-- Sección centro: Iconos de navegación -->
+        <ion-col size="4" class="center-section">
+          <ion-icon name="home-outline" class="medium-icon" color="light" routerLink="/publicacion"></ion-icon>
+          <ion-icon name="add-circle-outline" color="light" class="large-icon" routerLink="/publicacion"></ion-icon>
+          <ion-icon name="chatbubble-ellipses-outline" class="medium-icon" color="light" routerLink="/mensajeria"></ion-icon>
+        </ion-col>
+
+        <!-- Sección derecha: Búsqueda, notificaciones y perfil -->
+        <ion-col size="4" class="right-section">
+          <ion-icon name="notifications-outline" class="medium-icon" color="light" routerLink="/notificaciones"></ion-icon>
+          <ion-icon name="person-circle-outline" class="medium-icon" color="light" routerLink="/perfil"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
 
 
 <ion-modal #modalBusqueda trigger="open-modal">
@@ -40,9 +79,9 @@
   <ion-header>
     <ion-toolbar color="primario">
       <ion-buttons slot="start">
-        <ion-img src="/assets/Meetify.svg" class="large-icon"></ion-img>
+        <ion-img src="/assets/Meetify.svg" style="width: 60px;" class="large-icon"></ion-img>
       </ion-buttons>
-      <ion-title class="header-title font-amatic-grande2">MENÚ</ion-title>
+      <ion-title class="header-title font-amatic-grande2" style="color: white; text-align: left">MENÚ</ion-title>
       <ion-buttons slot="end">
       </ion-buttons>
     </ion-toolbar>
