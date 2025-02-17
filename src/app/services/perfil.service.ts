@@ -62,6 +62,11 @@ export class PerfilService {
     return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/perfil/compartidos`, authHeader);
   }
 
+  obtenerPublicacionesDentro(): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/dentro/lista`, authHeader);
+  }
+
 
   obtenerPublicacionesCompartidasOtro(id : number | undefined): Observable<Publicacion[]> {
     const authHeader = this.comunService.autorizarPeticion();

@@ -22,6 +22,8 @@ import {AmigosComponent} from "./amigos/amigos.component";
 import {VerEventosComponent} from "./ver-eventos/ver-eventos.component";
 import {VerPerfilesComponent} from "./ver-perfiles/ver-perfiles.component";
 import { CabeceraSinRutaComponent} from "./cabecera-sin-ruta/cabecera-sin-ruta.component";
+import {CompartidosComponent} from "./compartidos/compartidos.component";
+import {EventosUnidoComponent} from "./eventos-unido/eventos-unido.component";
 // import { EventoMiembroComponent} from "./evento-miembro/evento-miembro.component";
 
 export const routes: Routes = [
@@ -53,5 +55,7 @@ export const routes: Routes = [
   { path: 'cabecera-sin-ruta', component: CabeceraSinRutaComponent},
   { path: 'ver-eventos', component: VerEventosComponent},
   { path: 'ver-perfiles', component: VerPerfilesComponent},
+  { path: 'compartidos', component: CompartidosComponent},
+  { path: 'eventos-unido', component: EventosUnidoComponent},
   // { path: 'evento-miembro', component: EventoMiembroComponent}
 ];

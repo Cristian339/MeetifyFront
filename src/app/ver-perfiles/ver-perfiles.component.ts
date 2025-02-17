@@ -6,6 +6,8 @@ import { CabeceraComponent } from "../cabecera/cabecera.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import {Router} from "@angular/router";
+import {addIcons} from "ionicons";
+import {personCircleOutline} from "ionicons/icons";
 
 @Component({
   selector: 'app-ver-perfiles',
@@ -24,7 +26,9 @@ export class VerPerfilesComponent implements OnInit {
   perfilesFiltrados: Perfil[] = [];
   busqueda: string = '';
 
-  constructor(private perfilService: PerfilService,private router : Router) {}
+  constructor(private perfilService: PerfilService,private router : Router) {
+    addIcons({personCircleOutline})
+  }
 
   ngOnInit() {
     this.cargarPerfiles();

@@ -70,13 +70,15 @@
                   <!-- Sección de valoración con estrellas -->
                   <ion-row class="Puntuacion">
                     <ion-col size="auto" class="stars">
-                      <ion-icon *ngFor="let star of [1, 2, 3, 4, 5]"
-                                [name]="star >= (r.estrellas ?? 0) ? 'star' : 'star-outline'"
-                                [color]="star <= (r.estrellas ?? 0) ? 'warning' : 'dark'">
-                      </ion-icon>
+                      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                        <img [src]="star <= (r.estrellas ?? 0) ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
+                             alt="Estrella"
+                             class="star-icon"/>
+                      </ng-container>
                     </ion-col>
                     <ion-col size="auto" class="score">{{ (r.estrellas ?? 0) * 5 }} / 25 PTS</ion-col>
                   </ion-row>
+
 
                   <!-- Motivo debajo de la valoración -->
                   <div>

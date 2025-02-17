@@ -55,8 +55,8 @@ export class NavbarComponent implements OnInit {
 
   menuActivities = [
     { label: 'Configurar perfil', icon: 'person-outline', route: '/editar-perfil' },
-    { label: 'Eventos compartidos', icon: 'share-outline', route: '/friends' },
-    { label: 'Eventos que me he unido', icon: 'arrow-redo-outline', route: '/reputation' },
+    { label: 'Eventos compartidos', icon: 'share-outline', route: '/compartidos' },
+    { label: 'Eventos que me he unido', icon: 'arrow-redo-outline', route: '/eventos-unido' },
     { label: 'Reseñas que hice', icon: 'star-half-outline', route: '/reputation' },
     { label: 'Privacidad', icon: 'lock-closed-outline', route: '/editar-perfil' },
   ];

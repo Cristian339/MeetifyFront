@@ -54,6 +54,7 @@ export class GestionarPublicacionesComponent implements OnInit {
     enlaceImagen: ''
   };
 
+  puntuacion: number = 0;
   resenias: Resenias[] = [];
   publicacion!: Publicacion;
   eliminarPubDTO: any = {};

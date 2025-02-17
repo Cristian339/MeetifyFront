@@ -424,3 +424,17 @@
   font-family: 'Amatic SC', cursive;
   color: white;
 }
+
+.stars {
+  display: flex;
+  justify-content: center;
+  .star-icon {
+    width: 2rem; /* Default size for empty star */
+    height: 2rem; /* Default size for empty star */
+    cursor: pointer;
+  }
+  .star-icon.filled {
+    width: 2.5rem; /* Adjusted size for filled star */
+    height: 2.5rem; /* Adjusted size for filled star */
+  }
+}

@@ -10,6 +10,7 @@ import { SeguidorDTO } from '../modelos/SeguidorDTO';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+// @ts-ignore
 import { parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { CabeceraComponent } from "../cabecera/cabecera.component";

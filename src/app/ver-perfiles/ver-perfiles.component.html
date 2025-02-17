@@ -6,10 +6,16 @@
   <ion-list>
     <ion-item *ngFor="let perfil of perfilesFiltrados" (click)="entrarPerfil(perfil.id)">
       <ion-avatar slot="start">
-        <img *ngIf="perfil.imagenUrlPerfil; else defaultImage" [src]="perfil.imagenUrlPerfil" alt="Perfil">
-        <ng-template #defaultImage>
-          <img src="assets/default-profile.png" alt="Perfil">
+        <ng-container *ngIf="perfil.imagenUrlPerfil; else defaultIcon" >
+          <img [src]="perfil.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px"/>
+        </ng-container>
+        <ng-template #defaultIcon>
+          <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
         </ng-template>
+<!--        <img *ngIf="perfil.imagenUrlPerfil; else defaultImage" [src]="perfil.imagenUrlPerfil" alt="Perfil">-->
+<!--        <ng-template #defaultImage>-->
+<!--          <img src="assets/default-profile.png" alt="Perfil">-->
+<!--        </ng-template>-->
       </ion-avatar>
       <ion-label>
         <h2>{{ perfil.nombre }} {{ perfil.apellidos }}</h2>
