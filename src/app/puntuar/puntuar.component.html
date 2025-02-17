@@ -34,7 +34,8 @@
             <ion-row class="Puntuacion">
               <ion-col size="12" class="stars">
                 <img *ngFor="let star of [1, 2, 3, 4, 5]"
-ll                     (click)="rate(star)"
+                     [src]="star <= puntuacion ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
+                     (click)="rate(star)"
                      [class.filled]="star <= puntuacion"
                      class="star-icon">
               </ion-col>
