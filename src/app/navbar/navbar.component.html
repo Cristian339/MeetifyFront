@@ -32,8 +32,8 @@
         <ion-col size="4" class="left-section">
           <ion-menu-button auto-hide="false" class="medium-icon"></ion-menu-button>
           <ion-img src="/assets/Meetify.svg" style="width: 60px" class="logo-image"></ion-img>
-          <ion-item class="search-bar">
-            <ion-icon name="search-outline" slot="start" (click)="openBusquedaModal()"></ion-icon>
+          <ion-item class="search-bar" (click)="openBusquedaModal()">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
             <ion-input placeholder="Buscar..."></ion-input>
           </ion-item>
         </ion-col>

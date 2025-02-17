@@ -1,4 +1,5 @@
 <app-cabecera titulo="Unirse"></app-cabecera>
+
 <ion-content class="ion-padding" style="background-color: #5497A7">
       <div class="container" *ngIf="publicacion">
         <div class="image-container">
@@ -20,8 +21,11 @@
           </ion-button>
 
         </div>
-        <div class="stats-container">
-          <div><strong>Reputación</strong><br></div>
+        <div class="stats-container font-amatic">
+          <div class="evento-stat">
+            <span></span>
+            <br><strong>Reputación</strong><br>
+          </div>
         </div>
 
         <div class="location">
@@ -38,8 +42,9 @@
 
         <div class="parent-container">
           <ion-button class="btnReseñas" id="open-modal" (click)="cargarReneias(publicacion.id)">
-            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline" class="icon-gap"></ion-icon>
             <ion-text>Reseñas</ion-text>
+            <ion-icon name="star-outline" class="icon-gap"></ion-icon>
           </ion-button>
         </div>
       </div>

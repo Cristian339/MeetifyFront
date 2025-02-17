@@ -118,6 +118,11 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
       // Sort messages by date
       messages.sort((a, b) => new Date(a.fechaEnviado).getTime() - new Date(b.fechaEnviado).getTime());
 
+      // Assign CSS class to each message
+      messages.forEach(message => {
+        message.cssClass = message.usuarioEmisor.id === this.emisorId ? 'message-sent' : 'message-received';
+      });
+
       // Group messages by date labels
       this.messages[this.roomId] = this.groupMessagesByDate(messages);
       this.scrollToBottom(); // Scroll to bottom after loading messages
@@ -221,6 +226,9 @@ export class MensajeriaComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.messages[this.roomId].push({ dateLabel, messages: [message] });
     }
+
+    // Añadir clase CSS para mensajes enviados o recibidos
+    message.cssClass = message.usuarioEmisor.id === this.emisorId ? 'message-sent' : 'message-received';
   }
 
   disconnectWebSocket() {

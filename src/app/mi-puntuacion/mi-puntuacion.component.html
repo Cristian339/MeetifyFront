@@ -1,3 +1,6 @@
+<app-cabecera ruta="/publicacion" titulo="Mi reputacion"></app-cabecera>
+
+<ion-content>
 <ion-grid *ngIf="miPuntuacion.length > 0; else noPuntuaciones">
   <ion-card *ngFor="let p of miPuntuacion">
     <ion-fab style="position: absolute; top: 5px; right: 5px;">
@@ -32,15 +35,20 @@
       <div class="right-section">
         <ion-row class="rating-section">
           <ion-col size="12">
-            <ion-text class="font-amatic">Valoración:</ion-text>
-            <ion-row class="Puntuacion">
-              <ion-col size="12" class="stars">
+            <ion-row class="rating-section">
+              <ion-col size="12" class="rating-header">
+                <ion-text class="font-amatic">Valoración:</ion-text>
+                <ion-text class="score">{{ p.estrellas * 5 }} PTS</ion-text>
+              </ion-col>
+
+              <ion-col size="12" class="stars-container">
                 <img *ngFor="let star of [1, 2, 3, 4, 5]"
+                     [src]="star <= p.estrellas ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
                      [class.filled]="star <= p.estrellas"
                      class="star-icon">
               </ion-col>
-              <ion-col size="12" class="score">{{ p.estrellas * 5 }} / 25 PTS</ion-col>
             </ion-row>
+
           </ion-col>
         </ion-row>
       </div>
@@ -53,3 +61,4 @@
     <p>¡Aún no tienes puntuaciones!</p>
   </div>
 </ng-template>
+</ion-content>

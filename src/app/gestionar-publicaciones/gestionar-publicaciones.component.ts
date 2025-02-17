@@ -23,18 +23,20 @@ import {UsuarioDTO} from "../modelos/UsuarioDTO";
 import {PerfilService} from "../services/perfil.service";
 import {Categoria} from "../modelos/Categoria";
 import {Resenias} from "../modelos/Resenias";
+import {CabeceraComponent} from "../cabecera/cabecera.component";
 
 @Component({
   selector: 'app-gestionar-publicaciones',
   templateUrl: './gestionar-publicaciones.component.html',
   styleUrls: ['./gestionar-publicaciones.component.scss'],
   standalone: true,
-  imports: [
-    IonicModule,
-    PiePaginaComponent,
-    CommonModule,
-    FormsModule,
-  ]
+    imports: [
+        IonicModule,
+        PiePaginaComponent,
+        CommonModule,
+        FormsModule,
+        CabeceraComponent,
+    ]
 })
 
 export class GestionarPublicacionesComponent implements OnInit {

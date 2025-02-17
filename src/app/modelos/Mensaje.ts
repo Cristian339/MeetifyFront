@@ -5,5 +5,6 @@ export interface Mensaje {
   horaEnviado: string;
   usuarioEmisor: { id: number };
   usuarioReceptor: { id: number };
+  cssClass?: string; // Add this line to include the cssClass property
   /*conversacionId: string;*/
 }

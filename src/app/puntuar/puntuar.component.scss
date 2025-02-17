@@ -84,15 +84,23 @@
     margin-bottom: 10px;
   }
 
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
   .category-button {
+    display: inline-block;
+    padding: 10px 20px;
     font-size: 0.8rem;
+    color: white;
+    background-color: var(--ion-color-secundario);
+    border: 2px solid var(--ion-color-primario);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-bottom: 4%;
+
+    &:hover {
+      background-color: var(--ion-color-primario);
+      color: white;
+    }
   }
 
   .rating-section {
@@ -293,8 +301,6 @@
     color: white; /* White color for score text */
     text-align: center;
   }
-
-
 
   .font-amatic {
     font-size: 24px; /* Increased font size */

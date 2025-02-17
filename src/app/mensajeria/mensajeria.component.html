@@ -1,30 +1,30 @@
 <ion-content #content scroll-y="true">
   <app-cabecera titulo="Chats" ruta="/publicacion" class="no-margin"></app-cabecera>
 
-  <ion-searchbar placeholder="Buscar contacto" [(ngModel)]="searchTerm" (ionInput)="filterContacts()"></ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let seguidor of filteredSeguidos" lines="none" (click)="abrirChat(seguidor.id!)">
-      <ion-avatar slot="start">
-        <ion-img *ngIf="seguidor.imagenUrlPerfil; else defaultIcon" [src]="seguidor.imagenUrlPerfil"></ion-img>
-        <ng-template #defaultIcon>
-          <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
-        </ng-template>
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ seguidor.nombre }}</h2>
-      </ion-label>
-      <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
-    </ion-item>
-  </ion-list>
+  <div class="centered-container">
+    <ion-searchbar placeholder="Buscar contacto" [(ngModel)]="searchTerm" (ionInput)="filterContacts()"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let seguidor of filteredSeguidos" lines="none" (click)="abrirChat(seguidor.id!)" class="custom-background">
+        <ion-avatar slot="start">
+          <ion-img *ngIf="seguidor.imagenUrlPerfil; else defaultIcon" [src]="seguidor.imagenUrlPerfil"></ion-img>
+          <ng-template #defaultIcon>
+            <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
+          </ng-template>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ seguidor.nombre }}</h2>
+        </ion-label>
+        <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
 
-  <ion-modal #modal [isOpen]="roomId !== ''" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion"
-             (ionModalDidDismiss)="disconnectWebSocket()">
+  <ion-modal #modal [isOpen]="roomId !== ''" [enterAnimation]="entrarAnimacion" [leaveAnimation]="dejarAnimacion" (ionModalDidDismiss)="disconnectWebSocket()">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-avatar slot="start">
-            <ion-img *ngIf="currentSeguidor?.imagenUrlPerfil; else defaultIcon"
-                     [src]="currentSeguidor?.imagenUrlPerfil"></ion-img>
+            <ion-img *ngIf="currentSeguidor?.imagenUrlPerfil; else defaultIcon" [src]="currentSeguidor?.imagenUrlPerfil"></ion-img>
             <ng-template #defaultIcon>
               <ion-icon class="Perfil-imagen" name="person-outline"></ion-icon>
             </ng-template>
@@ -38,25 +38,19 @@
       </ion-header>
 
       <ion-content>
-        <div class="chat-container">
-          <div *ngFor="let group of messages[roomId]">
+        <div class="chat-container" *ngFor="let group of messages[roomId]">
             <div class="date-label">{{ group.dateLabel }}</div>
-            <div *ngFor="let message of group.messages"
-                 [ngClass]="{'message-sent': message.usuarioEmisor.id === 1, 'message-received': message.usuarioEmisor.id !== 1}"
-                 class="message">
+            <div *ngFor="let message of group.messages" [ngClass]="message.cssClass" class="message">
               {{ message.contenido }}
               <div class="message-time">{{ formatTime(message.horaEnviado) }}</div>
             </div>
-          </div>
         </div>
       </ion-content>
 
       <ion-footer style="background-color: #FFFFFF">
         <ion-toolbar style="background-color: #FFFFFF">
           <ion-item lines="none">
-            <ion-input type="text" placeholder="Escribe un mensaje" [(ngModel)]="newMessage"
-                       (keydown)="onKeydown($event)"></ion-input>
-            <ion-icon slot="end" name="send-outline" (click)="enviarMensaje()"></ion-icon>
+            <ion-input type="text" placeholder="Escribe un mensaje" [(ngModel)]="newMessage" (keydown)="onKeydown($event)"></ion-input>            <ion-icon slot="end" name="send-outline" (click)="enviarMensaje()"></ion-icon>
           </ion-item>
         </ion-toolbar>
       </ion-footer>
