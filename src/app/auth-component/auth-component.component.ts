@@ -181,9 +181,7 @@ export class AuthComponentComponent implements OnInit {
     const nombreUsuario = this.authForm.get('nombreUsuario')?.value;
     const contrasenia = this.authForm.get('contrasenia')?.value;
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|safareyes\.es)$/;
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
-
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|safareyes\.es|yopmail\.com)$/;    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
     let errorMessages = [];
     let missingFieldsCount = 0;
 

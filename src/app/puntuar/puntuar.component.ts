@@ -5,7 +5,9 @@ import { Router, RouterLink } from '@angular/router';
 import { CabeceraComponent } from '../cabecera/cabecera.component';
 import { Publicacion } from '../modelos/Publicacion';
 import { NgForOf } from '@angular/common';
-import {ToastService} from "../services/toast.service";
+import { ToastService } from '../services/toast.service';
+import { PuntuacionService } from '../services/puntuacion.service';
+import { Reputacion } from '../modelos/Reputacion';
 
 @Component({
   selector: 'app-puntuar',
@@ -19,7 +21,11 @@ export class PuntuarComponent implements OnInit {
   razon: string = '';
   puntuacion: number = 0;
 
-  constructor(private router: Router, private toast: ToastService) {}
+  constructor(
+    private router: Router,
+    private toast: ToastService,
+    private puntuacionService: PuntuacionService
+  ) {}
 
   ngOnInit() {
     const navigation = this.router.getCurrentNavigation();
@@ -35,9 +41,22 @@ export class PuntuarComponent implements OnInit {
   subirValoracion() {
     if (this.puntuacion === 0) {
       this.toast.presentToast('La puntuación no puede ser cero.', 'warning');
+    } else if (this.p && this.p.id !== undefined) {
+      console.log('Puntuando publicación:', this.p.id, this.puntuacion, this.razon);
+      console.log('Publicación:', this.p);
+      console.log('Publicación:', this.razon);
+      this.puntuacionService.puntuarPublicacion(this.p.id, this.puntuacion, this.razon).subscribe({
+        next: (reputacion: Reputacion) => {
+          this.toast.presentToast('Puntuación enviada con éxito.', 'success');
+          console.log('Puntuación enviada:', reputacion);
+        },
+        error: (error) => {
+          this.toast.presentToast('Error al enviar la puntuación.', 'warning');
+          console.error('Error al enviar la puntuación:', error);
+        }
+      });
     } else {
-      console.log('Puntuación enviada:', this.puntuacion, 'Razón:', this.razon);
+      this.toast.presentToast('Publicación no encontrada.', 'warning');
     }
-
   }
 }
