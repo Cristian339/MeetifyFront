@@ -121,11 +121,6 @@ export class PerfilService {
     return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/seguidos-otro/${id}`, authHeader);
   }
 
-  obtenerAmigos(): Observable<SeguidorDTO[]> {
-    const authHeader = this.comunService.autorizarPeticion();
-    return this.httpClient.get<SeguidorDTO[]>(`${this.apiUrl}/seguidores/amigos`, authHeader);
-  }
-
   seguirUsuario(idUsuarioASeguir: number | undefined): Observable<void> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<void>(`${this.apiUrl}/seguidores/seguir/${idUsuarioASeguir}`, {}, authHeader);
