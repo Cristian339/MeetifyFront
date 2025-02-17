@@ -1,51 +1,28 @@
 @media (max-width: 600px) {
 
-  ion-toolbar {
-    --background: #16353F;
-    --color: #fff;
-    padding: 5%;
-    display: flex;
-    align-items: center;
-  }
-
-  ion-toolbar ion-title {
-    font-family: 'Amatic SC', cursive;
-    font-weight: 700;
-    font-size: 3rem;
-    color: white;
-    text-align: center;
-  }
-
-  ion-toolbar ion-icon {
-    font-size: 3em;
-  }
-
-  ion-toolbar ion-title,
-  ion-toolbar ion-buttons{
-    margin-top: 5px;
-  }
-
-  ion-toolbar ion-img {
-    margin-top: 12px;
-  }
-
-  .logo-image {
-    width: 25%;
-    height: 25%;
-    margin-left: 10px;
-  }
-
   .container {
     width: 100%;
-    background: white;
     color: black;
     text-align: center;
+  }
+
+  ion-content {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
+  .ImagenPubli {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .image-container img {
     width: 100%;
     height: 250px;
-    border-radius: 0;
+    overflow: hidden;
   }
   .camera-icon {
     position: absolute;
@@ -59,6 +36,7 @@
   h2 {
     font-family: 'Amatic SC', cursive;
     font-size: 40px;
+    text-align: center;
   }
 
   .profile-container {
@@ -71,10 +49,10 @@
   }
 
   .salir-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1;
+    background: var(--ion-color-cuarto);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
   }
 
   .more-options {
@@ -82,7 +60,7 @@
     margin-left: auto;
   }
 
-  .large-img{
+  .large-img {
     width: 60px;
     height: 60px;
   }
@@ -185,21 +163,239 @@
     top: 50%;
     transform: translateY(-50%);
   }
-}
-.action-menu {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+
+  .action-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .action-menu button {
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+  }
+
+  .parent-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btnReseñas {
+    margin-top: 8%;
+    --background: #19323C;
+  }
 }
 
-.action-menu button {
-  font-size: 18px;
-  padding: 10px;
-  border: none;
-  background: none;
-  text-align: left;
+@media (min-width: 600px)  {
+
+  .Pie{
+    display: none;
+  }
+
+  ion-content {
+    background-color: #5497A7;
+    color: grey;
+  }
+
+  .container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 7%;
+    padding-bottom: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ImagenPubli {
+    width: 100%;
+    max-height: 500px;
+    border-radius: 15px;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+  }
+  .camera-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 40px;
+    background: white;
+    border-radius: 50%;
+    padding: 5px;
+  }
+  h2 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .profile-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-left: 5%;
+    background: white;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .profile-container img {
+    font-size: 30px;
+  }
+
+  .salir-btn {
+    background: var(--ion-color-cuarto);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    margin-right: 5%;
+  }
+
+  .more-options {
+    font-size: 30px;
+    margin-left: auto;
+  }
+
+  .large-img {
+    width: 60px;
+    height: 60px;
+  }
+
+
+  .profile-pic {
+    margin-right: 5px;
+    width: 55px; /* Adjust the size to match the icon */
+    height: 55px; /* Adjust the size to match the icon */
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .profile-camera {
+    position: relative;
+    left: -15px;
+    background: white;
+    border-radius: 50%;
+    padding: 3px;
+  }
+  .profile-info {
+    flex-grow: 1;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+  }
+  .follow-btn {
+    background: #19323C;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    margin-right: 5%;
+  }
+  .stats-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+  }
+  .location, .categories {
+    text-align: left;
+    padding: 10px;
+    padding-right: 5%;
+  }
+
+  .location ion-icon, .categories ion-icon {
+    font-size: 20px;
+  }
+
+  .category {
+    background: var(--ion-color-secundario);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-left: 5px;
+  }
+
+  .more-options {
+    font-size: 30px;
+  }
+
+  .modal-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .title-label {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .full-screen-modal {
+    --height: 100%;
+    --width: 100%;
+    --max-height: 100%;
+    --max-width: 100%;
+    --border-radius: 0;
+  }
+
+  .input-container {
+    padding: 16px;
+    background-color: var(--ion-color-secundario);
+    border-radius: 10px;
+  }
+
+  .title-label {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .input-container {
+    padding: 16px;
+    background-color: var(--ion-color-secundario);
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .action-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .action-menu button {
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+  }
+
+  .parent-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btnReseñas {
+    margin-top: 8%;
+    --background: #19323C;
+  }
 }
 
 .Puntuacion {

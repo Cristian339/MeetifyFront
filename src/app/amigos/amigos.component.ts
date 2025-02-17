@@ -12,7 +12,6 @@ import { CabeceraComponent } from "../cabecera/cabecera.component";
     IonicModule,
     NgForOf,
     CabeceraComponent,
-    NgOptimizedImage
   ],
   styleUrls: ['./amigos.component.scss']
 })

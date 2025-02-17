@@ -49,11 +49,11 @@ export class PublicacionComponent implements OnInit {
   categorias: Categoria[] = []; // Hardcoded categories
 
   constructor(
+    private toast: ToastService,
     private modalService: ModalService,
     private publicacionService: PublicacionService,
     private actionSheetCtrl: ActionSheetController,
     private perfilService: PerfilService,
-    private toastController: ToastController,
     private router: Router
   ) {
   addIcons({ ellipsisVerticalOutline, ribbonOutline, shareSocialOutline, peopleCircleOutline,
@@ -95,27 +95,20 @@ export class PublicacionComponent implements OnInit {
 
 
   puntuarEvento(publicacion: Publicacion) {
-
     this.publicacionService.dentroOFuera(publicacion.id).subscribe({
-      next: async (data)=> {
-        if(data){
+      next: (data) => {
+        if (data) {
           this.router.navigate(['/puntuar'], { state: { publicacion } });
-        }else if(!data){
-          const toast = await this.toastController.create({
-            message: 'Tienes que pertenecer al evento',
-            duration: 2000, // Duración del toast en milisegundos
-            position: 'bottom' // Posición del toast
-          });
-          toast.present();
+        } else if (!data) {
+          this.toast.presentToast('Tienes que pertenecer al evento', 'warning');
         }
       },
-      error:()=> {
-        console.log("No se pudo puntuar")
-      }
-    })
-
-
+      error: () => {
+        console.log('No se pudo puntuar');
+      },
+    });
   }
+
 
   cerrarModal() {
     this.modalService.cerrarModal();
@@ -211,22 +204,13 @@ export class PublicacionComponent implements OnInit {
         console.log('Publicación compartida exitosamente', response);
 
         // Mostrar el toast después de la respuesta exitosa
-        const toast = await this.toastController.create({
-          message: '¡Publicación compartida exitosamente!',
-          duration: 2000, // Duración del toast en milisegundos
-          position: 'bottom' // Posición del toast
-        });
-        toast.present();
+        this.toast.presentToast('¡Publicación compartida exitosamente!', 'success');
       },
       error: (error) => {
         console.error('Error al compartir publicación', error);
 
         // Mostrar el toast en caso de error
-        this.toastController.create({
-          message: 'Hubo un error al compartir la publicación.',
-          duration: 2000,
-          position: 'bottom'
-        }).then(toast => toast.present());
+        this.toast.presentToast('Hubo un error al compartir la publicación.', 'error');
       },
       complete: () => {
         console.log('Petición completada');

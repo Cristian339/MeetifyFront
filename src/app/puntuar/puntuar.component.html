@@ -1,60 +1,61 @@
-<app-cabecera [titulo]="'Puntuaciones'" [ruta]="'/publicacion'"></app-cabecera>
+<app-cabecera [titulo]="'Puntuar'" [ruta]="'/publicacion'"></app-cabecera>
 
 <ion-content class="content-container">
   <ion-grid class="rating-container">
     <ion-row>
       <ion-col size="12">
-        <ion-title class="title">AYÚDANOS A SABER CUÁNTO TE GUSTÓ:</ion-title>
-    </ion-col>
-    </ion-row>
-
-    <ion-row class="group-card">
-      <ion-col size="12">
-        <ion-row class="group-info">
-          <ion-col size="3" class="group-avatar">
-            <ion-img [src]="p.imagenUrlPerfil" alt="Publicación" class="group-image primario"></ion-img>
-          </ion-col>
-          <ion-col size="9" class="group-details">
-            <ion-title class="font-amatic">{{ p.titulo }}</ion-title>
-            <ion-text class="font-inter">Creado por: <strong>{{ p.nombrePerfil }}</strong></ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-img [src]="p.imagenUrlPub" alt="Publicación" class="cover-image"></ion-img>
-
-        <ion-row class="buttons">
-          <ion-col>
-            <ion-button class="category-button" fill="outline">{{ p.categoria }}</ion-button>
-          </ion-col>
-        </ion-row>
+        <ion-title class="title">DANOS TU VALORACIÓN</ion-title>
       </ion-col>
     </ion-row>
 
-    <ion-row class="rating-section">
-      <ion-col size="12">
-        <ion-text class="font-amatic">Valoración:</ion-text>
-        <ion-row class="Puntuacion">
-          <ion-col size="12" class="stars">
-            <img *ngFor="let star of [1, 2, 3, 4, 5]"
-                 [src]="star <= puntuacion ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
-                 (click)="rate(star)"
-                 [class.filled]="star <= puntuacion"
-                 class="star-icon">
-          </ion-col>
-          <ion-col size="12" class="score">{{ puntuacion * 5 }} / 25 PTS</ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
+    <div class="flex-container">
+      <div class="group-card">
+        <div class="group-info">
+          <div class="group-avatar">
+            <img [src]="p.imagenUrlPerfil" alt="Publicación" class="group-image"/>
+          </div>
+          <div class="group-details">
+            <h3>{{ p.titulo }}</h3>
+            <p>Creado por: <strong>{{ p.nombrePerfil }}</strong></p>
+          </div>
+        </div>
 
-    <ion-row class="reason-section">
-      <ion-col size="12">
-        <ion-text id="Razon" class="font-amatic">Razón de la puntuación:</ion-text>
-        <ion-textarea class="reason-textarea" placeholder="Motivos (OPCIONAL)"></ion-textarea>
-      </ion-col>
-    </ion-row>
+        <img [src]="p.imagenUrlPub" alt="Publicación" class="cover-image" />
+
+        <div class="buttons">
+          <ion-button class="category-button" fill="outline">{{ p.categoria }}</ion-button>
+        </div>
+      </div>
+
+      <div class="right-section">
+        <ion-row class="rating-section">
+          <ion-col size="12">
+            <ion-text class="font-amatic">Valoración:</ion-text>
+            <ion-row class="Puntuacion">
+              <ion-col size="12" class="stars">
+                <img *ngFor="let star of [1, 2, 3, 4, 5]"
+                     [src]="star <= puntuacion ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
+                     (click)="rate(star)"
+                     [class.filled]="star <= puntuacion"
+                     class="star-icon">
+              </ion-col>
+              <ion-col size="12" class="score">{{ puntuacion * 5 }} / 25 PTS</ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="reason-section">
+          <ion-col size="12">
+            <ion-text id="Razon" class="font-amatic">Razón de la puntuación:</ion-text>
+            <ion-textarea class="reason-textarea" placeholder="Motivos (OPCIONAL)"></ion-textarea>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
     <ion-row>
       <ion-col size="12">
-        <ion-button expand="block" class="submit-button">Puntuar</ion-button>
+        <ion-button expand="block" class="submit-button" (click)="subirValoracion()">Puntuar</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

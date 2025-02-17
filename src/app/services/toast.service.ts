@@ -9,7 +9,7 @@ export class ToastService {
 
   async presentToast(message: string, type: 'success' | 'error' | 'warning' = 'success') {
     const colors = {
-      success: 'principal',
+      success: 'success',
       error: 'danger',
       warning: 'warning'
     };
@@ -20,7 +20,7 @@ export class ToastService {
       warning: '⚠️'
     };
 
-    const  duration: number = 3000;
+    const duration: number = 3000;
 
     const toast = await this.toastController.create({
       message: `${emojis[type]} ${message}`,

@@ -34,13 +34,16 @@
           <ion-img src="/assets/Meetify.svg" style="width: 60px" class="logo-image"></ion-img>
           <ion-item class="search-bar">
             <ion-icon name="search-outline" slot="start" (click)="openBusquedaModal()"></ion-icon>
+            <ion-input placeholder="Buscar..."></ion-input>
           </ion-item>
         </ion-col>
 
         <!-- Sección centro: Iconos de navegación -->
         <ion-col size="4" class="center-section">
           <ion-icon name="home-outline" class="medium-icon" color="light" routerLink="/publicacion"></ion-icon>
-          <ion-icon name="add-circle-outline" color="light" class="large-icon" routerLink="/publicacion"></ion-icon>
+          <ion-button fill="clear" (click)="abrirModal()">
+            <ion-icon name="add-circle-outline" color="light" class="NuevaPubli" ></ion-icon>
+          </ion-button>
           <ion-icon name="chatbubble-ellipses-outline" class="medium-icon" color="light" routerLink="/mensajeria"></ion-icon>
         </ion-col>
 
@@ -54,25 +57,20 @@
   </ion-toolbar>
 </ion-header>
 
-
-
-<ion-modal #modalBusqueda trigger="open-modal">
+<ion-modal class="modal-buscar" #modalBusqueda trigger="open-modal">
   <ng-template>
-    <ion-content style="--background: #19323C">
-      <ion-toolbar>
-        <ion-title>¿Que quieres buscar?</ion-title>
+    <ion-content>
+      <ion-toolbar style="--background: #19323C">
+        <ion-title style="text-align: center; font-size: 2rem; font-family: Amatic SC, cursive">¿Que quieres buscar?</ion-title>
       </ion-toolbar>
 
-      <div style="display: flex; justify-content: center;margin-top: 90px">
-        <ion-button color="secundario" style="font-size: large ;font-family: 'Inter', sans-serif;height: 20px;width: 120px" href="/ver-eventos">Eventos</ion-button>
-        <ion-button color="secundario" style="font-size: large ; font-family: 'Inter', sans-serif; height: 20px;width: 120px" href="/ver-perfiles">Perfiles</ion-button>
+      <div class="modal-div">
+        <ion-button class="boton-search"  href="/ver-eventos">Eventos</ion-button>
+        <ion-button class="boton-search"  href="/ver-perfiles">Perfiles</ion-button>
       </div>
     </ion-content>
   </ng-template>
 </ion-modal>
-
-
-
 
 <ion-menu side="start" menuId="first" contentId="main-content" style="height: 100%;">
   <ion-header>
@@ -80,7 +78,7 @@
       <ion-buttons slot="start">
         <ion-img src="/assets/Meetify.svg" style="width: 60px;" class="large-icon"></ion-img>
       </ion-buttons>
-      <ion-title class="header-title font-amatic-grande2" style="color: white; text-align: left">MENÚ</ion-title>
+      <ion-title class="header-title font-amatic-grande2" style="color: white; margin-left: 20%">MENÚ</ion-title>
       <ion-buttons slot="end">
       </ion-buttons>
     </ion-toolbar>

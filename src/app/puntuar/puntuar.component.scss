@@ -1,38 +1,4 @@
 @media (max-width: 600px) {
-  ion-header ion-toolbar,
-  ion-modal ion-toolbar {
-    --background: #16353F;
-    --color: #fff;
-    padding: 5%;
-    display: flex;
-    align-items: center;
-  }
-
-
-  .header-title {
-    font-family: 'Amatic SC', cursive;
-    font-weight: 700;
-    font-size: 3rem;
-    color: white;
-    text-align: center;
-    margin-left: 2.5%;
-  }
-
-  ion-modal ion-toolbar {
-    background-color: #FFFFFF;
-    --background: #FFFFFF;
-    --color: #000000;
-  }
-
-  .logo-image {
-    width: 25%;
-    height: 25%;
-    margin-left: 10px;
-  }
-
-  ion-toolbar ion-icon {
-    font-size: 3em;
-  }
 
   .content-container {
     display: flex;
@@ -45,11 +11,9 @@
   .rating-container {
     background: white;
     padding: 15px;
-    border-radius: 15px;
     width: 90%;
     max-width: 400px;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
   }
 
@@ -57,14 +21,22 @@
     font-size: 26px;
     font-weight: bold;
     font-family: 'Amatic SC', cursive;
+    margin-bottom: 2%;
   }
 
-  .group-card,
+  .group-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 4%;
+  }
+
   .group-info {
+    display: flex;
+    align-items: center;
     background: #ffffff;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
   }
 
@@ -83,13 +55,20 @@
   .group-details {
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center vertically */
     gap: 5px;
+    text-align: left; /* Align text to the left */
+  }
+
+  .group-details h3,
+  .group-details p {
+    margin: 0;
   }
 
   .group-details h3 {
     font-size: 1.2rem;
     font-weight: bold;
-    margin: 0;
+    text-align: left;
   }
 
   .group-details p {
@@ -100,7 +79,7 @@
 
   .cover-image {
     width: 100%;
-    height: auto;
+    max-height: 300px;
     border-radius: 10px;
     margin-bottom: 10px;
   }
@@ -179,7 +158,7 @@
   }
 
   .submit-button {
-    background: #19323C;
+    --background: #19323C;
     color: white;
     border-radius: 15px;
     width: 100px;
@@ -316,6 +295,329 @@
   }
 
 
+
+  .font-amatic {
+    font-size: 24px; /* Increased font size */
+  }
+}
+
+@media (min-width: 600px) {
+
+  .content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f5f5f5;
+  }
+
+  .rating-container {
+    background: white;
+    padding: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Amatic SC', cursive;
+    margin-bottom: 2%;
+    margin-top: 7%;
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 5%;
+  }
+
+  .group-card {
+    width: 100%; /* Adjust width as needed */
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 4%;
+  }
+
+  .right-section {
+    width: 100%; /* Adjust width as needed */
+  }
+
+  .rating-section,
+  .reason-section {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-top: 4%;
+  }
+
+  .group-info {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .group-avatar {
+    margin-right: 15px;
+  }
+
+  .group-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--ion-color-primario);
+  }
+
+  .group-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    gap: 5px;
+    text-align: left; /* Align text to the left */
+  }
+
+  .group-details h3,
+  .group-details p {
+    margin: 0;
+  }
+
+  .group-details h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .group-details p {
+    margin: 0;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .cover-image {
+    width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .category-button {
+    font-size: 0.8rem;
+  }
+
+  .rating-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rating-section p {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .Puntuacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stars ion-icon {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .stars ion-icon.filled {
+    color: gold;
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Amatic SC', cursive;
+  }
+
+  .reason-section {
+    margin-top: 15px;
+  }
+
+  #Razon {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .reason-textarea {
+    background: var(--ion-color-terciario);
+    border-radius: 5px;
+    color: black;
+  }
+
+  .optional-text {
+    font-size: 1rem;
+    color: white;
+    background-color: #5497A7;
+    border-radius: 20px;
+  }
+
+  .submit-button {
+    --background: #19323C;
+    color: white;
+    border-radius: 15px;
+    width: 100px;
+    margin: 0 auto;
+  }
+
+  .perfil-content {
+    --background: #f9f9f9;
+    text-align: center;
+  }
+
+  .perfil-grid {
+    margin-top: 20px;
+  }
+
+  .perfil-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .perfil-nombre {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-usuario {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-descripcion {
+    font-size: 0.9rem;
+    color: var(--ion-color-primario);
+    margin: 5px auto;
+  }
+
+  .perfil-stats {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .perfil-reputacion {
+    margin-top: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+  }
+
+  .reputacion-icon {
+    color: gold;
+  }
+
+  .perfil-tabs {
+    margin-top: 20px;
+  }
+
+  .publicaciones-grid {
+    margin: 20px 0;
+  }
+
+  .publicacion-card {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .publicacion-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .icon-style {
+    color: var(--ion-color-primario);
+  }
+
+  .perfil-detalles-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+    text-decoration: underline;
+  }
+
+  .centered-title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .circuloPersona {
+    font-size: 1.5em;
+    background-color: #5497A7;
+    border-radius: 50%;
+    padding: 15%;
+  }
+
+  .category {
+    background: var(--ion-color-secundario);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-left: 5px;
+    float: left;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+    .star-icon {
+      width: 2rem; /* Default size for empty star */
+      height: 2rem; /* Default size for empty star */
+      cursor: pointer;
+    }
+    .star-icon.filled {
+      width: 2.5rem; /* Adjusted size for filled star */
+      height: 2.5rem; /* Adjusted size for filled star */
+    }
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Amatic SC', cursive;
+    color: white; /* White color for score text */
+    text-align: center;
+  }
 
   .font-amatic {
     font-size: 24px; /* Increased font size */

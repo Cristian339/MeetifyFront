@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CabeceraComponent } from '../cabecera/cabecera.component';
 import { Publicacion } from '../modelos/Publicacion';
 import { NgForOf } from '@angular/common';
+import {ToastService} from "../services/toast.service";
 
 @Component({
   selector: 'app-puntuar',
@@ -18,7 +19,7 @@ export class PuntuarComponent implements OnInit {
   razon: string = '';
   puntuacion: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toast: ToastService) {}
 
   ngOnInit() {
     const navigation = this.router.getCurrentNavigation();
@@ -31,8 +32,12 @@ export class PuntuarComponent implements OnInit {
     this.puntuacion = star;
   }
 
-  puntuar() {
-    console.log('Puntuación enviada:', this.puntuacion, 'Razón:', this.razon);
+  subirValoracion() {
+    if (this.puntuacion === 0) {
+      this.toast.presentToast('La puntuación no puede ser cero.', 'warning');
+    } else {
+      console.log('Puntuación enviada:', this.puntuacion, 'Razón:', this.razon);
+    }
 
   }
 }

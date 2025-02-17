@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicModule, MenuController, IonModal } from '@ionic/angular';
+import {IonicModule, MenuController, IonModal, ModalController} from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
   menuOutline,
@@ -22,6 +22,8 @@ import { FormsModule } from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import { LoginService } from "../services/login.service";
 import { PerfilService } from "../services/perfil.service";
+import {PublicacionComponent} from "../publicacion/publicacion.component";
+import {ModalService} from "../services/modal.service";
 
 @Component({
   selector: 'app-navbar',
@@ -59,7 +61,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Privacidad', icon: 'lock-closed-outline', route: '/editar-perfil' },
   ];
 
-  constructor(private menu: MenuController, private router: Router, private loginService: LoginService, private perfilService: PerfilService) {
+  constructor(private modalService: ModalService, private menu: MenuController, private router: Router, private loginService: LoginService, private perfilService: PerfilService) {
     addIcons({
       menuOutline,
       searchOutline,
@@ -82,6 +84,11 @@ export class NavbarComponent implements OnInit {
 
   toggleSearchInput() {
     this.isSearchVisible = !this.isSearchVisible;
+  }
+
+  abrirModal() {
+    this.modalService.abrirModal();
+    console.log('Modal abierto desde pie-pagina');
   }
 
   closeMenu() {

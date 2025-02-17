@@ -1,12 +1,8 @@
-<ion-app>
-  <div class="ion-page" id="main-content">
-    <app-cabecera titulo="Mas información!" ruta="/publicacion" class="no-margin"></app-cabecera>
-
-
-    <ion-content class="ion-padding">
+<app-cabecera titulo="Unirse"></app-cabecera>
+<ion-content class="ion-padding" style="background-color: #5497A7">
       <div class="container" *ngIf="publicacion">
         <div class="image-container">
-          <img [src]="publicacion.imagenUrlPub" alt="Imagen">
+          <img [src]="publicacion.imagenUrlPub" alt="Imagen" class="ImagenPubli">
         </div>
         <h2>{{ publicacion.titulo }}</h2>
 
@@ -16,10 +12,10 @@
             <h3>{{ publicacion.nombrePerfil }}</h3>
             <p>Reputación <strong></strong></p>
           </div>
-          <ion-button color="primario" (click)="unirseEvento()" *ngIf="!dentro">
+          <ion-button class="follow-btn" color="primario" (click)="unirseEvento()" *ngIf="!dentro">
             Seguir Evento
           </ion-button>
-          <ion-button color="danger" (click)="salirPublicacion(publicacion)" *ngIf="dentro">
+          <ion-button class="salir-btn" color="danger" (click)="salirPublicacion(publicacion)" *ngIf="dentro">
             Salir del evento
           </ion-button>
 
@@ -39,10 +35,11 @@
           <strong> Categorías: </strong>
           <span class="category">{{ publicacion.categoria }}</span>
         </div>
-        <div>
-          <ion-button id="open-modal" expand="block" (click)="cargarReneias(publicacion.id)">
+
+        <div class="parent-container">
+          <ion-button class="btnReseñas" id="open-modal" (click)="cargarReneias(publicacion.id)">
             <ion-icon name="star-outline"></ion-icon>
-            <ion-text style="margin-top: 5px;margin-left: 3px" >Reseñas</ion-text>
+            <ion-text>Reseñas</ion-text>
           </ion-button>
         </div>
       </div>
@@ -99,8 +96,4 @@
         </ng-template>
       </ion-modal>
     </ion-content>
-    <app-pie-pagina></app-pie-pagina>
-  </div>
-
-
-</ion-app>
+    <app-pie-pagina class="Pie"></app-pie-pagina>
