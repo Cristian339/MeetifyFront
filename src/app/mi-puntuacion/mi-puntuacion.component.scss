@@ -1,0 +1,68 @@
+.star-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.star-icon {
+  width: 25px;
+  height: 25px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  .star-icon {
+    width: 2rem; /* Default size for empty star */
+    height: 2rem; /* Default size for empty star */
+    cursor: pointer;
+  }
+  .star-icon.filled {
+    width: 2.5rem; /* Adjusted size for filled star */
+    height: 2.5rem; /* Adjusted size for filled star */
+  }
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: #5497A7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Amatic SC', cursive;
+  color: white; /* White color for score text */
+  text-align: center;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  .star-icon {
+    width: 2rem; /* Default size for empty star */
+    height: 2rem; /* Default size for empty star */
+    cursor: pointer;
+  }
+  .star-icon.filled {
+    width: 2.5rem; /* Adjusted size for filled star */
+    height: 2.5rem; /* Adjusted size for filled star */
+  }
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: #5497A7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Amatic SC', cursive;
+  color: white; /* White color for score text */
+  text-align: center;
+}
+
+.font-amatic {
+  font-size: 24px; /* Increased font size */
+}

@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
   menuItems = [
     { label: 'Eventos', icon: 'calendar-outline', route: '/events' },
     { label: 'Amigos', icon: 'people-outline', route: '/amigos' },
-    { label: 'Mi reputación', icon: 'bar-chart-outline', route: '/reputation' },
+    { label: 'Mi reputación', icon: 'bar-chart-outline', route: '/mi-reputacion' },
   ];
 
   menuActivities = [
