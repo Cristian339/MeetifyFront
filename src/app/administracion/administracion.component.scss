@@ -1,44 +1,7 @@
 @media (max-width: 600px) {
 
-  ion-toolbar {
-    --background: #16353F;
-    --color: #fff;
-    padding: 5%;
-    display: flex;
-    align-items: center;
-  }
-
-  .header-title {
-    font-family: 'Amatic SC', cursive;
-    font-weight: 700;
-    font-size: 2rem;
-    color: white;
-  }
-
-  ion-toolbar ion-icon {
-    font-size: 3em;
-    margin-top: 7%;
-  }
-
-  ion-toolbar ion-title, {
-    margin-top: 2%;
-    margin-left: 1%;
-  }
-
-  ion-toolbar ion-img {
-    margin-top: 5%;
-  }
-
-  .logo-image {
-    width: 25%;
-    height: 25%;
-  }
-
-  .Atras {
-    margin-top: 10%;
-  }
-
   /* Estilo del contenido principal */
+
   .admin-panel {
     display: flex;
     flex-direction: column;
@@ -65,8 +28,7 @@
 
   ion-label {
     font-family: 'Arial', sans-serif;
-    font-size: 50%;
-    font-weight: 500;
+    font-size: 70px;
   }
 
   .logout {
@@ -100,7 +62,6 @@
 
   .boton {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     border-radius: 50px;
   }
@@ -108,7 +69,128 @@
   ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
     font-family: 'Inter', sans-serif;
     border-radius: 90%;
-    max-width: 100%;
+    color: white;
+  }
+
+  ion-button.baneo {
+    --background: #e74c3c;
+  }
+
+  ion-button.Ver {
+    --background: #5497A7;
+  }
+
+  ion-button.Desbanear {
+    --background: #19323C;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Amatic SC", sans-serif;
+    color: black;
+    text-align: center;
+  }
+
+  ion-modal p {
+    color: black;
+  }
+
+  #Aceptar {
+    background-color: #19323C !important;
+    margin: 0 auto !important;
+    border-radius: 80px !important;
+    color: white !important;
+  }
+}
+
+@media (min-width: 600px) {
+
+  /* Estilo del contenido principal */
+
+  .admin-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    background-color: #f8fdfc;
+    height: 100%;
+  }
+
+  .items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #F3F7F0;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
+  }
+
+  ion-list {
+    width: 40%;
+  }
+
+  ion-item {
+    border-radius: 20px;
+    margin: 10px 0;
+    width: 90%;
+  }
+
+  .icon {
+    background-color: #5497A7;
+    padding: 2%;
+    font-size: 2rem;
+    border-radius: 60%;
+  }
+
+  .label-large {
+    font-size: 2em;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .logout {
+    margin-top: 5%;
+    width: 90%;
+    font-size: 1.5em;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+  }
+
+  .perfil {
+    font-size: 3em;
+  }
+
+  .user-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 100%;
+    font-weight: 500;
+    color: #000;
+    margin-right: 10%;
+  }
+
+  ion-item {
+    border-radius: 25%;
+    width: 100%;
+  }
+
+  .boton {
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+  }
+
+  ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
+    font-family: 'Inter', sans-serif;
+    border-radius: 90%;
     color: white;
   }
 

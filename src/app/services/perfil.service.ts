@@ -88,6 +88,11 @@ export class PerfilService {
     return this.httpClient.post<void>(`${this.apiUrl}/admin/ban/${correo}`, authHeader);
   }
 
+  desbanearPerfil(correo: string | undefined): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/admin/desbanear/${correo}`, authHeader);
+  }
+
 
   borrarCuenta(contrasenia: string | undefined): Observable<void> {
     const authHeader = this.comunService.autorizarPeticion();

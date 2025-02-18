@@ -1,21 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-img src="/assets/icon/4.svg" class="logo-image" slot="start"></ion-img>
-    </ion-buttons>
-    <ion-title class="header-title" style="text-align: center">
-      {{ cambiarTitulo() }}
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-icon class="Atras"
-                name="arrow-back-circle"
-                slot="end"
-                (click)="viajarA('admin')"
-                *ngIf="vistaActual !== 'admin'">
-      </ion-icon>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ng-container *ngIf="vistaActual === 'admin'; else otherViews">
+  <app-cabecera-sin-ruta titulo="Administración"></app-cabecera-sin-ruta>
+</ng-container>
+<ng-template #otherViews>
+  <ng-container *ngIf="vistaActual === 'users'">
+    <app-cabecera titulo="Perfiles" ruta="/administracion" (click)="viajarA('admin')"></app-cabecera>
+  </ng-container>
+  <ng-container *ngIf="vistaActual === 'baneados'">
+    <app-cabecera titulo="Baneados" ruta="/administracion" (click)="viajarA('admin')"></app-cabecera>
+  </ng-container>
+</ng-template>
 
 <ion-content>
   <!-- Vista principal: Panel de administración -->
@@ -23,11 +16,13 @@
     <ion-list lines="none">
       <ion-item button (click)="viajarA('users')">
         <ion-icon name="settings-outline" slot="start" class="icon"></ion-icon>
-        <ion-label>Revisar perfiles</ion-label>
+        <ion-label class="label-large">Revisar perfiles</ion-label>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-item>
       <ion-item button (click)="viajarA('baneados')">
         <ion-icon name="ban-outline" slot="start" class="icon"></ion-icon>
-        <ion-label>Lista de baneos</ion-label>
+        <ion-label class="label-large">Lista de baneos</ion-label>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-item>
     </ion-list>
     <div class="logout">
@@ -37,36 +32,38 @@
 
   <!-- Vista de usuarios -->
   <div *ngIf="vistaActual === 'users'">
-    <ion-list lines="none" >
-      <ion-item *ngFor="let p of perfiles">
-        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
-        <ion-label class="user-label">
-          {{ p.nombreUsuario }}
-        </ion-label>
-        <div class="boton">
-          <ion-button fill="solid" color="danger" class="baneo" (click)="banearUsuario(p.correoElectronico)">Banear</ion-button>
-          <ion-button fill="solid" class="Ver" (click)="verPublicaciones(p.correoElectronico)">Ver</ion-button>
-        </div>
-      </ion-item>
-    </ion-list>
+    <div class="items-container">
+      <ion-list lines="none">
+        <ion-item *ngFor="let p of perfiles" class="itemUsuario">
+          <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+          <ion-label class="user-label">
+            {{ p.nombreUsuario }}
+          </ion-label>
+          <div class="boton">
+            <ion-button fill="solid" color="danger" class="baneo" (click)="banearUsuario(p.correoElectronico)">Banear</ion-button>
+            <ion-button fill="solid" class="Ver" (click)="verPublicaciones(p.correoElectronico)">Ver</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 
   <!-- Vista de baneados -->
   <div *ngIf="vistaActual === 'baneados'">
-    <ion-list lines="none" >
-      <ion-item *ngFor="let p of perfiles">
-        <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
-        <ion-label class="user-label" >
-          {{p.nombreUsuario}} <br />
-          <span style="font-size: medium; font-family: 'Amatic SC', sans-serif; color: red;">Falta: 3 días</span>
-        </ion-label>
-        <div class="boton">
-          <ion-button fill="solid" class="Desbanear" (click)="banearUsuario(p.correoElectronico)">Desbanear</ion-button>
-          <ion-button fill="solid" class="Ver">Ver</ion-button>
-        </div>
-      </ion-item>
-    </ion-list>
+    <div class="items-container">
+      <ion-list lines="none">
+        <ion-item *ngFor="let p of perfiles" class="itemBaneo">
+          <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+          <ion-label class="user-label">
+            {{ p.nombreUsuario }} <br />
+            <span style="font-size: medium; font-family: 'Amatic SC', sans-serif; color: red;">Falta: 3 días</span>
+          </ion-label>
+          <div class="boton">
+            <ion-button fill="solid" class="Desbanear" (click)="desbanearUsuario(p.correoElectronico)">Desbanear</ion-button>
+            <ion-button fill="solid" class="Ver">Ver</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
-
-
 </ion-content>
