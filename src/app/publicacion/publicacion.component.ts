@@ -63,6 +63,7 @@ export class PublicacionComponent implements OnInit {
   publicaciones: Publicacion[] = [];
 
   ngOnInit() {
+
     this.presentingElement = document.querySelector('.ion-page');
     this.modalService.getModalStatus().subscribe((status) => {
       this.modalAbierto = status;

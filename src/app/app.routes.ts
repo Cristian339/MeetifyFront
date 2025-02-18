@@ -25,6 +25,7 @@ import { CabeceraSinRutaComponent} from "./cabecera-sin-ruta/cabecera-sin-ruta.c
 import {CompartidosComponent} from "./compartidos/compartidos.component";
 import {EventosUnidoComponent} from "./eventos-unido/eventos-unido.component";
 import {MiPuntuacionComponent} from "./mi-puntuacion/mi-puntuacion.component";
+import {MisReseniasComponent} from "./mis-resenias/mis-resenias.component";
 // import { EventoMiembroComponent} from "./evento-miembro/evento-miembro.component";
 
 export const routes: Routes = [
@@ -59,5 +60,7 @@ export const routes: Routes = [
   { path: 'compartidos', component: CompartidosComponent},
   { path: 'eventos-unido', component: EventosUnidoComponent},
   { path: 'mi-reputacion', component: MiPuntuacionComponent},
+  { path: 'mis-resenias', component: MisReseniasComponent},
+
   // { path: 'evento-miembro', component: EventoMiembroComponent}
 ];

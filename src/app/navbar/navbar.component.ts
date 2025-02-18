@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Configurar perfil', icon: 'person-outline', route: '/editar-perfil' },
     { label: 'Eventos compartidos', icon: 'share-outline', route: '/compartidos' },
     { label: 'Eventos que me he unido', icon: 'arrow-redo-outline', route: '/eventos-unido' },
-    { label: 'Reseñas que hice', icon: 'star-half-outline', route: '/reputation' },
+    { label: 'Reseñas que hice', icon: 'star-half-outline', route: '/mis-resenias' },
     { label: 'Privacidad', icon: 'lock-closed-outline', route: '/editar-perfil' },
   ];
 
@@ -107,6 +107,7 @@ export class NavbarComponent implements OnInit {
   doLogout() {
     sessionStorage.clear();
     this.loginService.setAuthState(false);
+    this.closeMenu();
     this.router.navigate(['']);
   }
 

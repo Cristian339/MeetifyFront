@@ -1,0 +1,44 @@
+.Puntuacion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars ion-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  color: black; /* Color por defecto */
+}
+
+.stars ion-icon[color="warning"] {
+  color: gold !important; /* Asegura que el color dorado se aplique */
+  background-color: gold;
+}
+
+.icon-gap {
+  margin: 5px;
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: #5497A7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Amatic SC', cursive;
+  color: white;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  .star-icon {
+    width: 2rem; /* Default size for empty star */
+    height: 2rem; /* Default size for empty star */
+    cursor: pointer;
+  }
+  .star-icon.filled {
+    width: 2.5rem; /* Adjusted size for filled star */
+    height: 2.5rem; /* Adjusted size for filled star */
+  }
+}
