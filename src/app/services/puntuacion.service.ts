@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { ComunService } from './comun.service';
 import {Reputacion} from "../modelos/Reputacion";
 import { MiPuntuacion } from '../modelos/MiPuntuacion';
+import {PuntuacionTotal} from "../modelos/PuntuacionTotal";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class PuntuacionService {
   miReputacion(): Observable<MiPuntuacion[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.http.get<MiPuntuacion[]>(`${this.apiUrl}/publicacion/reputacion/mi-reputacion`, authHeader);
+  }
+
+  obtenerPuntuacionTotal(): Observable<PuntuacionTotal> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.http.get<PuntuacionTotal>(`${this.apiUrl}/publicacion/puntuacion-total`,authHeader);
   }
 
 }

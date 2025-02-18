@@ -13,6 +13,8 @@ import {SeguidorDTO} from "../modelos/SeguidorDTO";
 import {FormsModule} from "@angular/forms";
 import { TipoRelacion } from '../modelos/TipoRelacion';
 import {UsuarioDTO} from "../modelos/UsuarioDTO";
+import {PuntuacionTotal} from "../modelos/PuntuacionTotal";
+import {PuntuacionService} from "../services/puntuacion.service";
 
 @Component({
   selector: 'app-perfil',
@@ -41,6 +43,7 @@ export class PerfilComponent implements OnInit {
   searchTerm: string = '';
   searchTermSeguidores: string = '';
   deshabilitarBoton: boolean = false;
+  puntajeTotal: number | undefined;
 
   @Input() publicaciones: Publicacion[] | undefined;
   @Output() profileClick = new EventEmitter<Publicacion>();
@@ -48,6 +51,7 @@ export class PerfilComponent implements OnInit {
   constructor(
     private perfilService: PerfilService,
     private publicacionService: PublicacionService,
+    private puntuacionService: PuntuacionService,
     private router: Router
   ) {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline, personOutline });
@@ -81,6 +85,8 @@ export class PerfilComponent implements OnInit {
     this.cargarSeguidos();
     this.cargarSeguidores5();
     this.cargarSeguidos5();
+    this.cargarPuntuacionTotal();
+
   }
 
   verPubli(publicacion: Publicacion) {
@@ -247,6 +253,19 @@ export class PerfilComponent implements OnInit {
 
   entrarPerfil(id: number | undefined) {
     this.router.navigate(['/perfil-ajeno'], { queryParams: { id } });
+  }
+
+  cargarPuntuacionTotal() {
+    this.puntuacionService.obtenerPuntuacionTotal().subscribe({
+      next: (data: PuntuacionTotal) => {
+        console.log('Puntuaciones recibidas:', data);
+        this.puntajeTotal = data.puntuacionTotal ?? 0;
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+        this.puntajeTotal = 0;
+      }
+    });
   }
 
 }

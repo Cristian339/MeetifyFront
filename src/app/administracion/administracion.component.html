@@ -35,7 +35,12 @@
     <div class="items-container">
       <ion-list lines="none">
         <ion-item *ngFor="let p of perfiles" class="itemUsuario">
-          <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
+            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
+          </ng-container>
+          <ng-template #defaultIcon>
+            <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+          </ng-template>
           <ion-label class="user-label">
             {{ p.nombreUsuario }}
           </ion-label>
@@ -53,7 +58,12 @@
     <div class="items-container">
       <ion-list lines="none">
         <ion-item *ngFor="let p of perfiles" class="itemBaneo">
-          <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
+            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
+          </ng-container>
+          <ng-template #defaultIcon>
+            <ion-icon name="person-circle-outline" slot="start" class="perfil"></ion-icon>
+          </ng-template>
           <ion-label class="user-label">
             {{ p.nombreUsuario }} <br />
             <span style="font-size: medium; font-family: 'Amatic SC', sans-serif; color: red;">Falta: 3 días</span>
