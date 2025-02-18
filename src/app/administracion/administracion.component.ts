@@ -25,7 +25,6 @@ import {CabeceraSinRutaComponent} from "../cabecera-sin-ruta/cabecera-sin-ruta.c
     CommonModule,
     FormsModule,
     CabeceraSinRutaComponent,
-    CabeceraComponent
   ]
 })
 export class AdministracionComponent implements OnInit {
@@ -43,7 +42,8 @@ export class AdministracionComponent implements OnInit {
     addIcons({ settingsOutline, banOutline, personCircleOutline, arrowBackCircle, caretUpOutline, arrowForwardOutline });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   cargarBaneados(): void {
     this.perfiles = [];
@@ -52,14 +52,13 @@ export class AdministracionComponent implements OnInit {
         this.perfiles = data;
         if (this.perfiles.length === 0) {
           this.toast.presentToast('No hay usuarios baneados.', 'warning');
-        } else {
-          this.vistaActual = 'baneados';
         }
+        this.vistaActual = 'baneados';
         console.info(data);
       },
       error: (error) => {
         console.error('Error:', error);
-        this.toast.presentToast('Error al cargar usuarios baneados.', 'error');
+        this.toast.presentToast('No hay usuarios baneados actualmente.', 'warning');
       },
       complete: () => {
         console.log('Petición completada');
@@ -72,6 +71,7 @@ export class AdministracionComponent implements OnInit {
     this.perfilService.getPerfilesNoBaneados().subscribe({
       next: (data) => {
         this.perfiles = data;
+        this.vistaActual = 'users';
         console.info(data);
       },
       error: (error) => {

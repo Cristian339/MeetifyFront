@@ -192,11 +192,91 @@
     margin-top: 8%;
     --background: #19323C;
   }
+
+  .review-item {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .review-item:hover {
+    transform: scale(1.02);
+  }
+
+  .review-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 3px solid #5497A7;
+  }
+
+  .review-avatar ion-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .review-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 5%;
+    flex-grow: 1;
+  }
+
+  .review-name {
+    font-family: 'Amatic SC', cursive;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+  }
+
+  .review-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+
+  .review-stars {
+    display: flex;
+    gap: 5px;
+  }
+
+  .star-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: 'Amatic SC', cursive;
+    color: white;
+    text-align: center;
+    max-width: fit-content;
+  }
+
+
+  ion-text {
+    margin-top: 5px;
+  }
 }
 
-@media (min-width: 600px)  {
+@media (min-width: 600px) {
 
-  .Pie{
+  .Pie {
     display: none;
   }
 
@@ -398,49 +478,129 @@
     margin-top: 8%;
     --background: #19323C;
   }
-}
 
-.Puntuacion {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  .Puntuacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-.stars ion-icon {
-  font-size: 2rem;
-  cursor: pointer;
-  color: black; /* Color por defecto */
-}
-
-.stars ion-icon[color="warning"] {
-  color: gold !important; /* Asegura que el color dorado se aplique */
-  background-color: gold;
-}
-
-.icon-gap {
-  margin: 5px;
-}
-
-.score {
-  font-size: 1.5rem;
-  font-weight: bold;
-  background: #5497A7;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-family: 'Amatic SC', cursive;
-  color: white;
-}
-
-.stars {
-  display: flex;
-  justify-content: center;
-  .star-icon {
-    width: 2rem; /* Default size for empty star */
-    height: 2rem; /* Default size for empty star */
+  .stars ion-icon {
+    font-size: 2rem;
     cursor: pointer;
+    color: black; /* Color por defecto */
   }
-  .star-icon.filled {
-    width: 2.5rem; /* Adjusted size for filled star */
-    height: 2.5rem; /* Adjusted size for filled star */
+
+  .stars ion-icon[color="warning"] {
+    color: gold !important; /* Asegura que el color dorado se aplique */
+    background-color: gold;
   }
+
+  .icon-gap {
+    margin: 5px;
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Amatic SC', cursive;
+    color: white;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+
+    .star-icon {
+      width: 2rem; /* Default size for empty star */
+      height: 2rem; /* Default size for empty star */
+      cursor: pointer;
+    }
+
+    .star-icon.filled {
+      width: 2.5rem; /* Adjusted size for filled star */
+      height: 2.5rem; /* Adjusted size for filled star */
+    }
+
+  }
+
+  .review-item {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .review-item:hover {
+    transform: scale(1.02);
+  }
+
+  .review-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 3px solid #5497A7;
+  }
+
+  .review-avatar ion-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .review-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  .review-name {
+    font-family: 'Amatic SC', cursive;
+    font-size: 35px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .review-rating {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align elements to the left */
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .review-stars {
+    display: flex;
+    gap: 5px;
+  }
+
+  .star-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: 'Amatic SC', cursive;
+    color: white;
+    text-align: center;
+    max-width: fit-content;
+  }
+
 }

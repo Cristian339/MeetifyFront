@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { PublicacionService } from '../services/publicacion.service';
 import { Publicacion } from '../modelos/Publicacion';
 import {IonicModule} from "@ionic/angular";
-import {DatePipe, NgForOf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {CabeceraComponent} from "../cabecera/cabecera.component";
+import { addIcons} from "ionicons";
+import { personCircleOutline, calendarOutline, golfOutline,  } from "ionicons/icons";
 
 @Component({
   selector: 'app-usu-publi',
@@ -11,7 +14,9 @@ import {DatePipe, NgForOf} from "@angular/common";
   imports: [
     IonicModule,
     NgForOf,
-    DatePipe
+    DatePipe,
+    CabeceraComponent,
+    NgIf
   ],
   styleUrls: ['./usu-publi.component.scss']
 })
@@ -21,8 +26,11 @@ export class UsuPubliComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private publicacionService: PublicacionService
-  ) {}
+  ) {
+    addIcons({ personCircleOutline, calendarOutline, golfOutline });
+  }
 
   ngOnInit() {
     this.correo = this.route.snapshot.paramMap.get('correo') || '';
@@ -53,5 +61,9 @@ export class UsuPubliComponent implements OnInit {
         console.error('Error al eliminar publicación:', error);
       }
     });
+  }
+
+  entrarPerfil(id: number | undefined) {
+    this.router.navigate(['/perfil-ajeno'], { queryParams: { id } });
   }
 }

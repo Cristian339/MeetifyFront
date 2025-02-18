@@ -11,13 +11,20 @@
     height: 100%;
   }
 
-  ion-list {
+  .list-admin{
     width: 90%;
+    margin-top: 5%;
+    background-color: #f8fdfc;
+  }
+
+  .listas {
+    margin-top: 10%;
+    background-color: #f8fdfc;
   }
 
   ion-item {
     border-radius: 20%;
-    margin: 3%;
+    background-color: #f8fdfc;
   }
 
   .icon {
@@ -60,6 +67,14 @@
     width: 100%;
   }
 
+  .perfil {
+    width: 30px;
+    height: 30px;
+    border-radius: 80%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+
   .boton {
     display: flex;
     align-items: center;
@@ -102,6 +117,31 @@
     border-radius: 80px !important;
     color: white !important;
   }
+
+  .itemUsuario, .itemBaneo {
+    display: flex;
+    align-items: center;
+  }
+
+  .perfil {
+    margin-right: 10px;
+  }
+
+  .user-label {
+    flex: 1;
+  }
+
+  .tiempo-restante {
+    font-size: medium;
+    font-family: 'Amatic SC', sans-serif;
+    color: red;
+  }
+
+  .segment {
+    --background: #d3d3d3; /* Gris */
+    --color-checked: #000000; /* Negro */
+    --color: #000000; /* Negro */
+  }
 }
 
 @media (min-width: 600px) {
@@ -125,19 +165,53 @@
     height: 100vh;
     width: 100%;
     border-radius: 20px;
-    background-color: #F3F7F0;
+    background-color: #f8fdfc;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
   }
 
-  ion-list {
+  .list-admin{
     width: 40%;
+    background-color: #f8fdfc;
   }
 
-  ion-item {
-    border-radius: 20px;
+  .item-admin {
     margin: 10px 0;
     width: 90%;
+  }
+
+  .itemBaneo {
+    display: flex;
+    align-items: center;
+    background-color: #f8fdfc;
+    margin-bottom: 5px;
+  }
+
+  .itemUsuario {
+    display: flex;
+    align-items: center;
+    background-color: #f8fdfc;
+    margin-bottom: 10px;
+  }
+
+  .perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  .user-label {
+    flex: 1;
+    font-size: 30px;
+  }
+
+  .listas {
+    width: 80%;
+    background-color: #f8fdfc;
+    border-radius: 20px;
+    margin-bottom: 30%;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
   }
 
   .icon {
@@ -166,12 +240,12 @@
   }
 
   .perfil {
-    font-size: 3em;
+    font-size: 4em;
   }
 
   .user-label {
     font-family: 'Inter', sans-serif;
-    font-size: 100%;
+    font-size: 20px;
     font-weight: 500;
     color: #000;
     margin-right: 10%;
@@ -192,6 +266,7 @@
     font-family: 'Inter', sans-serif;
     border-radius: 90%;
     color: white;
+    font-size: 20px;
   }
 
   ion-button.baneo {
@@ -200,6 +275,7 @@
 
   ion-button.Ver {
     --background: #5497A7;
+    margin-right: 70px;
   }
 
   ion-button.Desbanear {
@@ -224,9 +300,16 @@
     border-radius: 80px !important;
     color: white !important;
   }
+
+  .tiempo-restante {
+    font-size: 20px;
+    font-family: 'Amatic SC', sans-serif;
+    color: red;
+  }
+
+  .segment {
+    --background: #d3d3d3; /* Gris */
+    --color-checked: #000000; /* Negro */
+    --color: #000000; /* Negro */
+  }
 }
-
-
-
-
-
