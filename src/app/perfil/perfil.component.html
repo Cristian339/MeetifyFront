@@ -48,14 +48,19 @@
             <ion-list>
               <ion-item *ngFor="let seguidor of filteredSeguidores">
                 <ion-avatar slot="start">
-                  <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
+                  <ng-container *ngIf="seguidor.imagenUrlPerfil; else defaultIcon" >
+                    <img [src]="seguidor.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px"/>
+                  </ng-container>
+                  <ng-template #defaultIcon>
+                    <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
+                  </ng-template>
                 </ion-avatar>
                 <ion-label>
                   <h2>{{ seguidor.nombre }}</h2>
                   <p>Seguidor</p>
                 </ion-label>
-                <ion-button color="primary" slot="end" [disabled]="seguidor.buttonDisabled" (click)="seguidor.id !== undefined && seguirUsuario(seguidor)">Seguir Usuario</ion-button>
-                <ion-button color="success" slot="end">Ver perfil</ion-button>
+                <ion-button color="primario" slot="end" [disabled]="seguidor.buttonDisabled" (click)="seguidor.id !== undefined && seguirUsuario(seguidor)">Seguir Usuario</ion-button>
+                <ion-button color="secundario" slot="end" (click)="entrarPerfil(seguidor.id)">Ver perfil</ion-button>
               </ion-item>
             </ion-list>
           </ion-content>
@@ -74,14 +79,19 @@
             <ion-list>
               <ion-item *ngFor="let seguido of filteredSeguidos">
                 <ion-avatar slot="start">
-                  <ion-icon name="person-outline" class="circuloPersona"></ion-icon>
+                  <ng-container *ngIf="seguido.imagenUrlPerfil; else defaultIcon" >
+                    <img [src]="seguido.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px"/>
+                  </ng-container>
+                  <ng-template #defaultIcon>
+                    <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
+                  </ng-template>
                 </ion-avatar>
                 <ion-label>
                   <h2>{{ seguido.nombre }}</h2>
                   <p>Seguido</p>
                 </ion-label>
                 <ion-button color="danger" slot="end" (click)="seguido.id !== undefined && dejarDeSeguir(seguido.id)">Dejar de seguir</ion-button>
-                <ion-button color="success" slot="end">Ver perfil</ion-button>
+                <ion-button color="secundario" slot="end" (click)="entrarPerfil(seguido.id)">Ver perfil</ion-button>
               </ion-item>
             </ion-list>
           </ion-content>

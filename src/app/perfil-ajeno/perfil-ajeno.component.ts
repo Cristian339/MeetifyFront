@@ -133,6 +133,37 @@ export class PerfilAjenoComponent  implements OnInit {
     this.comprobar();
   }
 
+
+  recargar(){
+    //En caso que sea desde lista de perfiles
+    this.perfilService.getPerfilPorId(this.idPerfil).subscribe({
+      next: (data) => {
+        console.log('Data received:', data);
+        this.perfil = data;
+        console.log('Perfil assigned:', this.perfil);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+    });
+    this.perfilService.categoriasOtroPerfil(this.idPerfil).subscribe({
+      next: (data) => {
+        console.log('Data received:', data);
+        this.categorias = data;
+        console.log('Perfil assigned:', this.perfil);
+      },
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Request completed')
+
+
+    });
+    this.cargarSeguidores();
+    this.cargarPublicaciones()
+    this.cargarSeguidos();
+    this.cargarSeguidores5();
+    this.cargarSeguidos5();
+    this.comprobar();
+  }
+
   verPubli(publicacion: Publicacion) {
     this.publicacionService.obtenerCreador(publicacion.id).subscribe(esCreador => {
       console.log(esCreador)
@@ -299,6 +330,11 @@ export class PerfilAjenoComponent  implements OnInit {
         console.log("No se pudo comprobar si le sigues o no")
       }
     })
+  }
+
+  entrarPerfil(id: number | undefined) {
+    this.idPerfil = id;
+    this.recargar();
   }
 
 }

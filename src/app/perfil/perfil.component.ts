@@ -245,4 +245,8 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  entrarPerfil(id: number | undefined) {
+    this.router.navigate(['/perfil-ajeno'], { queryParams: { id } });
+  }
+
 }
