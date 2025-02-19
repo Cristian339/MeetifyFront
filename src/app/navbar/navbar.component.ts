@@ -105,9 +105,9 @@ export class NavbarComponent implements OnInit {
   }
 
   doLogout() {
+    this.menu.close();
     sessionStorage.clear();
     this.loginService.setAuthState(false);
-    this.closeMenu();
     this.router.navigate(['']);
   }
 
