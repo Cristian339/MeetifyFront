@@ -32,6 +32,11 @@ export class PuntuacionService {
     return this.http.get<PuntuacionTotal>(`${this.apiUrl}/publicacion/puntuacion-total`,authHeader);
   }
 
+  obtenerPuntuacionTotalPorId(id : number | undefined): Observable<PuntuacionTotal> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.http.get<PuntuacionTotal>(`${this.apiUrl}/publicacion/puntuacion-total/${id}`,authHeader);
+  }
+
   obtenerMisResenias(): Observable<ReseniasMias[]> {
     const authHeader = this.comunService.autorizarPeticion();
     return this.http.get<ReseniasMias[]>(`${this.apiUrl}/publicacion/mis-resenias`,authHeader);

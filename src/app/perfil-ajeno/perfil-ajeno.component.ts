@@ -20,6 +20,8 @@ import {
 } from "ionicons/icons";
 import {TipoRelacion} from "../modelos/TipoRelacion";
 import {FormsModule} from "@angular/forms";
+import {PuntuacionTotal} from "../modelos/PuntuacionTotal";
+import {PuntuacionService} from "../services/puntuacion.service";
 
 @Component({
     selector: 'app-perfil-ajeno',
@@ -49,6 +51,7 @@ export class PerfilAjenoComponent  implements OnInit {
   searchTermSeguidores: string = '';
   deshabilitarBoton: boolean = false;
   idPerfil:number | undefined = 0;
+  puntajeTotal : number | undefined;
 
   // vaciarDatos(){
   //   this.publicaciones = [];
@@ -71,7 +74,8 @@ export class PerfilAjenoComponent  implements OnInit {
     private perfilService: PerfilService,
     private publicacionService: PublicacionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private puntuacionService: PuntuacionService
   ) {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline, personOutline });
   }
@@ -131,6 +135,7 @@ export class PerfilAjenoComponent  implements OnInit {
     this.cargarSeguidores5();
     this.cargarSeguidos5();
     this.comprobar();
+    this.cargarPuntuacionTotal();
   }
 
 
@@ -162,6 +167,7 @@ export class PerfilAjenoComponent  implements OnInit {
     this.cargarSeguidores5();
     this.cargarSeguidos5();
     this.comprobar();
+    this.cargarPuntuacionTotal();
   }
 
   verPubli(publicacion: Publicacion) {
@@ -335,6 +341,20 @@ export class PerfilAjenoComponent  implements OnInit {
   entrarPerfil(id: number | undefined) {
     this.idPerfil = id;
     this.recargar();
+  }
+
+
+  cargarPuntuacionTotal() {
+    this.puntuacionService.obtenerPuntuacionTotalPorId(this.idPerfil).subscribe({
+      next: (data: PuntuacionTotal) => {
+        console.log('Puntuaciones recibidas:', data);
+        this.puntajeTotal = data.puntuacionTotal ?? 0;
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+        this.puntajeTotal = 0;
+      }
+    });
   }
 
 }
