@@ -22,21 +22,26 @@
 
         <img [src]="p.imagenUrlPub" alt="Publicación" class="cover-image" />
 
-        <div class="category-button">{{ p.categoria }}</div>
+        <div class="category-container">
+          <span class="category-label">Categoría:  </span>
+          <div class="category-button">{{ p.categoria }}</div>
+        </div>
       </div>
 
       <div class="right-section">
         <ion-row class="rating-section">
           <ion-col size="12">
-            <ion-text class="font-amatic">Valoración:</ion-text>
             <ion-row class="Puntuacion">
               <ion-col size="12" class="stars">
+                <ion-text class="font-amatic">Valoración:</ion-text>
                 <img *ngFor="let star of [1, 2, 3, 4, 5]"
                      [src]="star <= puntuacion ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
                      (click)="rate(star)"
                      [class.filled]="star <= puntuacion"
                      class="star-icon">
               </ion-col>
+            </ion-row>
+            <ion-row>
               <ion-col size="12" class="score">{{ puntuacion * 5 }} / 25 PTS</ion-col>
             </ion-row>
           </ion-col>

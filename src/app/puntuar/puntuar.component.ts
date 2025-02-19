@@ -47,11 +47,12 @@ export class PuntuarComponent implements OnInit {
       console.log('Publicación:', this.razon);
       this.puntuacionService.puntuarPublicacion(this.p.id, this.puntuacion, this.razon).subscribe({
         next: (reputacion: Reputacion) => {
-          this.toast.presentToast('Puntuación enviada con éxito.', 'success');
+          this.toast.presentToast('Agregado correctamente, ya puedes volver al menu principal.', 'success');
           console.log('Puntuación enviada:', reputacion);
+          this.router.navigate(['/publicacion']);
         },
         error: (error) => {
-          this.toast.presentToast('Puntuación enviada con éxito.', 'success');
+          this.toast.presentToast('Agregado correctamente, ya puedes volver al menu principal.', 'success');
         }
       });
     } else {

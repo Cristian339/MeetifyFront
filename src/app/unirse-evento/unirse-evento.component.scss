@@ -199,8 +199,6 @@
     background: #fff;
     padding: 15px;
     border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
   }
 
@@ -209,11 +207,11 @@
   }
 
   .review-avatar {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 15px;
+    margin-right: 5px;
     border: 3px solid #5497A7;
   }
 
@@ -248,7 +246,6 @@
 
   .review-stars {
     display: flex;
-    gap: 5px;
   }
 
   .star-icon {
@@ -257,7 +254,7 @@
   }
 
   .score {
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     font-weight: bold;
     background: #5497A7;
     padding: 6px 12px;
@@ -268,9 +265,23 @@
     max-width: fit-content;
   }
 
-
   ion-text {
     margin-top: 5px;
+  }
+
+  .reason-section {
+  }
+
+  .reason-textarea {
+    background-color: #F3F7F0;
+    border-radius: 20px;
+  }
+
+  .Reseña {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    width: 90%;
+    margin: 0 auto;
   }
 }
 
@@ -533,9 +544,6 @@
     background: #fff;
     padding: 15px;
     border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
   }
 
   .review-item:hover {
@@ -601,6 +609,19 @@
     color: white;
     text-align: center;
     max-width: fit-content;
+  }
+
+  .reason-textarea {
+    background-color: #F3F7F0;
+    border-radius: 20px;
+  }
+
+  .Reseña {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    border-radius: 15px;
+    width: 90%;
+    margin: 0 auto;
   }
 
 }

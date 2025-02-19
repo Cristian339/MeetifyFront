@@ -1,44 +1,132 @@
-.Puntuacion {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+@media (max-width: 600px) {
 
-.stars ion-icon {
-  font-size: 2rem;
-  cursor: pointer;
-  color: black; /* Color por defecto */
-}
+  .Titulo {
+    font-family: 'Inter', sans-serif;
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+  }
 
-.stars ion-icon[color="warning"] {
-  color: gold !important; /* Asegura que el color dorado se aplique */
-  background-color: gold;
-}
+  .Puntuacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-.icon-gap {
-  margin: 5px;
-}
-
-.score {
-  font-size: 1.5rem;
-  font-weight: bold;
-  background: #5497A7;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-family: 'Amatic SC', cursive;
-  color: white;
-}
-
-.stars {
-  display: flex;
-  justify-content: center;
-  .star-icon {
-    width: 2rem; /* Default size for empty star */
-    height: 2rem; /* Default size for empty star */
+  .stars ion-icon {
+    font-size: 2rem;
     cursor: pointer;
+    color: black; /* Color por defecto */
   }
-  .star-icon.filled {
-    width: 2.5rem; /* Adjusted size for filled star */
-    height: 2.5rem; /* Adjusted size for filled star */
+
+  .stars ion-icon[color="warning"] {
+    color: gold !important; /* Asegura que el color dorado se aplique */
+    background-color: gold;
+  }
+
+  .icon-gap {
+    margin: 5px;
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Amatic SC', cursive;
+    color: white;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+
+    .star-icon {
+      width: 2rem; /* Default size for empty star */
+      height: 2rem; /* Default size for empty star */
+      cursor: pointer;
+    }
+
+    .star-icon.filled {
+      width: 2.5rem; /* Adjusted size for filled star */
+      height: 2.5rem; /* Adjusted size for filled star */
+    }
   }
 }
+
+@media (min-width: 600px) {
+
+  ion-card {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 0; /* Remove padding */
+  }
+
+  .Titulo {
+    font-family: 'Inter', cursive;
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    margin: 2%;
+  }
+
+  .publicacion-img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+  }
+
+  .Puntuacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stars ion-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    color: black; /* Color por defecto */
+  }
+
+  .stars ion-icon[color="warning"] {
+    color: gold !important; /* Asegura que el color dorado se aplique */
+    background-color: gold;
+  }
+
+  .icon-gap {
+    margin: 5px;
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #5497A7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Amatic SC', cursive;
+    color: white;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+
+    .star-icon {
+      width: 2rem; /* Default size for empty star */
+      height: 2rem; /* Default size for empty star */
+      cursor: pointer;
+    }
+
+    .star-icon.filled {
+      width: 2.5rem; /* Adjusted size for filled star */
+      height: 2.5rem; /* Adjusted size for filled star */
+    }
+  }
+
+}
+
+

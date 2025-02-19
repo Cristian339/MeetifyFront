@@ -7,6 +7,7 @@ import { CabeceraComponent } from "../cabecera/cabecera.component";
 import {Router} from "@angular/router";
 import {AmigoDTO} from "../modelos/AmigoDTO";
 
+
 @Component({
   selector: 'app-amigos',
   templateUrl: './amigos.component.html',
@@ -43,8 +44,7 @@ export class AmigosComponent implements OnInit {
     });
   }
 
-
   entrarPerfil(id: number | undefined) {
-    this.router.navigate(['/perfil-ajeno2'], { queryParams: { id } });
+    this.router.navigate(['/perfil-ajeno'], { queryParams: { id } });
   }
 }
