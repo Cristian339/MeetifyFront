@@ -31,7 +31,7 @@
           </ion-avatar>
           <ion-label>
             <h2>{{ currentSeguidor?.nombre }}</h2>
-            <p>{{ ultimoMensaje?.contenido }}</p> <!-- Display the last message here -->
+            <p>{{ ultimoMensaje?.contenido }}</p>
           </ion-label>
           <ion-icon name="arrow-back-circle" slot="end" (click)="modal.dismiss()"></ion-icon>
         </ion-toolbar>
@@ -39,18 +39,19 @@
 
       <ion-content>
         <div class="chat-container" *ngFor="let group of messages[roomId]">
-            <div class="date-label">{{ group.dateLabel }}</div>
-            <div *ngFor="let message of group.messages" [ngClass]="message.cssClass" class="message">
-              {{ message.contenido }}
-              <div class="message-time">{{ formatTime(message.horaEnviado) }}</div>
-            </div>
+          <div class="date-label">{{ group.dateLabel }}</div>
+          <div *ngFor="let message of group.messages" [ngClass]="message.cssClass" class="message">
+            {{ message.contenido }}
+            <div class="message-time">{{ formatTime(message.horaEnviado) }}</div>
+          </div>
         </div>
       </ion-content>
 
-      <ion-footer style="background-color: #FFFFFF">
-        <ion-toolbar style="background-color: #FFFFFF">
+      <ion-footer>
+        <ion-toolbar>
           <ion-item lines="none">
-            <ion-input type="text" placeholder="Escribe un mensaje" [(ngModel)]="newMessage" (keydown)="onKeydown($event)"></ion-input>            <ion-icon slot="end" name="send-outline" (click)="enviarMensaje()"></ion-icon>
+            <ion-input type="text" placeholder="Escribe un mensaje" [(ngModel)]="newMessage" (keydown)="onKeydown($event)"></ion-input>
+            <ion-icon slot="end" name="send-outline" (click)="enviarMensaje()"></ion-icon>
           </ion-item>
         </ion-toolbar>
       </ion-footer>

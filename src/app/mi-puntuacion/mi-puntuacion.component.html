@@ -3,55 +3,50 @@
 <ion-content>
   <ion-grid *ngIf="miPuntuacion.length > 0; else noPuntuaciones">
     <ion-card *ngFor="let p of miPuntuacion">
-      <ion-fab style="position: absolute; top: 5px; right: 5px;">
+
+      <ion-fab class="fab-container">
         <ion-fab-button color="terciario" size="small" class="clear-fab">
-          <ion-icon name="ellipsis-vertical-outline" id="Elipsis"></ion-icon>
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </ion-fab-button>
-        <ion-fab-list side="bottom" style="left: -10px;">
+        <ion-fab-list side="bottom">
           <ion-text class="report-text">Reportar</ion-text>
         </ion-fab-list>
       </ion-fab>
 
-      <ion-grid style="float: left">
+      <ion-grid class="profile-container">
         <ion-row>
-          <ion-col>
+          <ion-col class="profile-image">
             <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
-              <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px" />
+              <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" />
             </ng-container>
             <ng-template #defaultIcon>
-              <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
+              <ion-icon name="person-circle-outline" class="default-icon"></ion-icon>
             </ng-template>
           </ion-col>
-          <ion-row class="centered-text">
-            <p class="nombre-perfil"><i>{{p.nombreUsuario}}</i></p>
-            <p class="categoria"><i>{{p.categoria.nombre}}</i></p>
-          </ion-row>
+          <ion-col class="profile-text">
+            <p class="nombre-perfil"><i>{{ p.nombreUsuario }}</i></p>
+            <p class="categoria"><i>{{ p.categoria.nombre }}</i></p>
+          </ion-col>
         </ion-row>
       </ion-grid>
 
-      <img alt="Imagen" [src]="p.imagenUrlPub ? p.imagenUrlPub : 'https://ionicframework.com/docs/img/demos/card-media.png'" class="ImagenPub"/>
-      <ion-title class="titulo" color="primario"><i>{{p.titulo}}</i></ion-title>
+      <img [src]="p.imagenUrlPub || 'https://ionicframework.com/docs/img/demos/card-media.png'"
+           alt="Imagen" class="ImagenPub"/>
+
+      <ion-title class="titulo"><i>{{ p.titulo }}</i></ion-title>
+
       <ion-card-content class="descripcion">
-        <div class="right-section">
-          <ion-row class="rating-section">
-            <ion-col size="12">
-              <ion-row class="rating-section">
-                <ion-col size="12" class="rating-header">
-                  <ion-text class="font-amatic">Valoración:</ion-text>
-                  <ion-text class="score">{{ p.estrellas }} PTS</ion-text>
-                </ion-col>
-
-                <ion-col size="12" class="stars-container">
-                  <img *ngFor="let star of [1, 2, 3, 4, 5]"
-                       [src]="star <= (p.estrellas / 5) ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
-                       [class.filled]="star <= (p.estrellas / 5)"
-                       class="star-icon">
-                </ion-col>
-              </ion-row>
-
-            </ion-col>
-          </ion-row>
-        </div>
+        <ion-row class="rating-section">
+          <ion-col size="12" class="rating-header">
+            <ion-text class="font-amatic">Valoración:</ion-text>
+            <ion-text class="score">{{ p.estrellas }} PTS</ion-text>
+          </ion-col>
+          <ion-col size="12" class="stars-container">
+            <img *ngFor="let star of [1, 2, 3, 4, 5]"
+                 [src]="star <= (p.estrellas / 5) ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
+                 class="star-icon">
+          </ion-col>
+        </ion-row>
       </ion-card-content>
     </ion-card>
   </ion-grid>

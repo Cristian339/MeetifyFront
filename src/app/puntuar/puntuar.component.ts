@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CabeceraComponent } from '../cabecera/cabecera.component';
 import { Publicacion } from '../modelos/Publicacion';
-import { NgForOf } from '@angular/common';
+import {NgClass, NgForOf} from '@angular/common';
 import { ToastService } from '../services/toast.service';
 import { PuntuacionService } from '../services/puntuacion.service';
 import { Reputacion } from '../modelos/Reputacion';
@@ -14,7 +14,7 @@ import { Reputacion } from '../modelos/Reputacion';
   templateUrl: './puntuar.component.html',
   styleUrls: ['./puntuar.component.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule, CabeceraComponent, NgForOf]
+  imports: [IonicModule, FormsModule, CabeceraComponent, NgForOf, NgClass]
 })
 export class PuntuarComponent implements OnInit {
   p!: Publicacion;

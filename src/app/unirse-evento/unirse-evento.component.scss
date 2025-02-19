@@ -1,18 +1,198 @@
+:root {
+  --primary-color: #5497A7;
+  --secondary-color: var(--ion-color-secundario);
+  --background-white: white;
+  --font-amatic: 'Amatic SC', cursive;
+  --font-inter: 'Inter', sans-serif;
+}
+
+ion-content {
+  --padding: 0;
+  background-color: var(--primary-color);
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2% auto 3%;
+  padding-bottom: 20px;
+  background: var(--background-white);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  font: 40px var(--font-amatic);
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: var(--background-white);
+  border-radius: 10px;
+  position: relative;
+}
+
+.profile-pic, .review-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-avatar {
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--primary-color);
+  margin-right: 15px;
+}
+
+.profile-info, .review-info {
+  flex-grow: 1;
+  text-align: left;
+  font-family: var(--font-inter);
+}
+
+.follow-btn, .salir-btn {
+  border-radius: 15px;
+  color: white;
+}
+
+.follow-btn {
+  background: #19323C;
+}
+
+.salir-btn {
+  background: var(--ion-color-cuarto);
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  font-family: var(--font-inter);
+  font-size: 12px;
+}
+
+.evento-stat strong, .review-name {
+  font: bold 2rem var(--font-amatic);
+}
+
+.location, .categories {
+  text-align: left;
+  padding: 10px;
+}
+
+.location ion-icon, .categories ion-icon {
+  font-size: 20px;
+}
+
+.category {
+  background: var(--secondary-color);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  margin-left: 5px;
+}
+
+.modal-title, .title-label {
+  font: bold 2.5rem var(--font-amatic);
+  text-align: center;
+}
+
+.full-screen-modal {
+  --height: 100%;
+  --width: 100%;
+  --max-height: 100%;
+  --max-width: 100%;
+  --border-radius: 0;
+}
+
+.input-container {
+  padding: 16px;
+  background-color: var(--secondary-color);
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.action-menu {
+  display: flex;
+  flex-direction: column;
+  background: var(--background-white);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.action-menu button {
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.parent-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btnReseñas {
+  margin-top: 8%;
+  --background: #19323C;
+}
+
+.review-item {
+  display: flex;
+  align-items: center;
+  background: var(--background-white);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.review-item:hover {
+  transform: scale(1.02);
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.review-stars {
+  display: flex;
+  gap: 5px;
+}
+
+.star-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-family: var(--font-amatic);
+  color: white;
+  text-align: center;
+}
+
 @media (max-width: 600px) {
-
-  .container {
-    width: 100%;
-    color: black;
-    text-align: center;
-  }
-
-  ion-content {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-top: 0;
-    --padding-bottom: 0;
-  }
-
   .ImagenPubli {
     width: 100%;
     height: 100%;
@@ -24,277 +204,11 @@
     height: 250px;
     overflow: hidden;
   }
-
-  h2 {
-    font-family: 'Amatic SC', cursive;
-    font-size: 40px;
-    text-align: center;
-  }
-
-  .profile-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background: white;
-    border-radius: 10px;
-    position: relative;
-  }
-
-  .salir-btn {
-    background: var(--ion-color-cuarto);
-    color: white;
-    border-radius: 30px;
-  }
-
-  .more-options {
-    font-size: 30px;
-    margin-left: auto;
-  }
-
-  .large-img {
-    width: 60px;
-    height: 60px;
-  }
-
-
-  .profile-pic {
-    margin-right: 5px;
-    width: 55px; /* Adjust the size to match the icon */
-    height: 55px; /* Adjust the size to match the icon */
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .profile-camera {
-    position: relative;
-    left: -15px;
-    background: white;
-    border-radius: 50%;
-    padding: 3px;
-  }
-  .profile-info {
-    flex-grow: 1;
-    text-align: left;
-    font-family: 'Inter', sans-serif;
-  }
-  .follow-btn {
-    background: #19323C;
-    color: white;
-    border-radius: 15px;
-  }
-
-  .stats-container {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-  }
-
-  .evento-stat strong {
-    font-size: 2rem;
-    text-align: center;
-    font-weight: bold;
-    font-family: 'Amatic SC', cursive;
-  }
-
-  .location, .categories {
-    text-align: left;
-    padding: 10px;
-    padding-right: 5%;
-  }
-
-  .location ion-icon, .categories ion-icon {
-    font-size: 20px;
-  }
-
-  .category {
-    background: var(--ion-color-secundario);
-    color: white;
-    padding: 3px 10px;
-    border-radius: 15px;
-    margin-left: 5px;
-  }
-
-  .more-options {
-    font-size: 30px;
-  }
-
-  .modal-title {
-    font-size: 2rem;
-    text-align: center;
-  }
-
-  .title-label {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .full-screen-modal {
-    --height: 100%;
-    --width: 100%;
-    --max-height: 100%;
-    --max-width: 100%;
-    --border-radius: 0;
-  }
-
-  .input-container {
-    padding: 16px;
-    background-color: var(--ion-color-secundario);
-    border-radius: 10px;
-  }
-
-  .title-label {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .input-container {
-    padding: 16px;
-    background-color: var(--ion-color-secundario);
-    border-radius: 15px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .action-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-  }
-
-  .action-menu button {
-    font-size: 18px;
-    padding: 10px;
-    border: none;
-    background: none;
-    text-align: left;
-  }
-
-  .parent-container {
-    display: flex;
-    justify-content: center;
-  }
-
-  .icon-gap {
-    margin: 5px;
-  }
-
-  .btnReseñas {
-    margin-top: 8%;
-    --background: #19323C;
-  }
-
-  .review-item {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-
-  .review-item:hover {
-    transform: scale(1.02);
-  }
-
-  .review-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 15px;
-    border: 3px solid #5497A7;
-  }
-
-  .review-avatar ion-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .review-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 5%;
-    flex-grow: 1;
-  }
-
-  .review-name {
-    font-family: 'Amatic SC', cursive;
-    font-size: 35px;
-    font-weight: bold;
-    text-align: left;
-    color: #333;
-  }
-
-  .review-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 5px;
-  }
-
-  .review-stars {
-    display: flex;
-    gap: 5px;
-  }
-
-  .star-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .score {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: #5497A7;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-family: 'Amatic SC', cursive;
-    color: white;
-    text-align: center;
-    max-width: fit-content;
-  }
-
-
-  ion-text {
-    margin-top: 5px;
-  }
 }
 
 @media (min-width: 600px) {
-
   .Pie {
     display: none;
-  }
-
-  ion-content {
-    background-color: #5497A7;
-    color: grey;
-  }
-
-  .container {
-    width: 80%;
-    max-width: 800px;
-    margin: 0 auto;
-    margin-top: 2%;
-    margin-bottom: 3%;
-    padding-bottom: 20px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .ImagenPubli {
@@ -302,305 +216,4 @@
     max-height: 500px;
     border-radius: 15px;
   }
-
-  .image-container img {
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-  }
-
-  h2 {
-    font-family: 'Amatic SC', cursive;
-    font-size: 40px;
-    text-align: center;
-  }
-
-  .profile-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-left: 5%;
-    background: white;
-    border-radius: 10px;
-    position: relative;
-  }
-
-  .profile-container img {
-    font-size: 30px;
-  }
-
-  .salir-btn {
-    background: var(--ion-color-cuarto);
-    color: white;
-    border-radius: 15px;
-    margin-right: 5%;
-  }
-
-  .more-options {
-    font-size: 30px;
-    margin-left: auto;
-  }
-
-  .large-img {
-    width: 60px;
-    height: 60px;
-  }
-
-
-  .profile-pic {
-    margin-right: 5px;
-    width: 55px; /* Adjust the size to match the icon */
-    height: 55px; /* Adjust the size to match the icon */
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .profile-camera {
-    position: relative;
-    left: -15px;
-    background: white;
-    border-radius: 50%;
-    padding: 3px;
-  }
-  .profile-info {
-    flex-grow: 1;
-    text-align: left;
-    font-family: 'Inter', sans-serif;
-  }
-  .follow-btn {
-    background: #19323C;
-    color: white;
-    border-radius: 15px;
-    margin-right: 5%;
-  }
-  .stats-container {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-  }
-
-  .evento-stat strong {
-    font-size: 2rem;
-    text-align: center;
-    font-weight: bold;
-    font-family: 'Amatic SC', cursive;
-  }
-
-  .location, .categories {
-    text-align: left;
-    padding: 10px;
-    padding-right: 5%;
-  }
-
-  .location ion-icon, .categories ion-icon {
-    font-size: 20px;
-  }
-
-  .category {
-    background: var(--ion-color-secundario);
-    color: white;
-    padding: 3px 10px;
-    border-radius: 15px;
-    margin-left: 5px;
-  }
-
-  .more-options {
-    font-size: 30px;
-  }
-
-  .modal-title {
-    font-size: 2rem;
-    text-align: center;
-  }
-
-  .title-label {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .full-screen-modal {
-    --height: 100%;
-    --width: 100%;
-    --max-height: 100%;
-    --max-width: 100%;
-    --border-radius: 0;
-  }
-
-  .input-container {
-    padding: 16px;
-    background-color: var(--ion-color-secundario);
-    border-radius: 10px;
-  }
-
-  .title-label {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .input-container {
-    padding: 16px;
-    background-color: var(--ion-color-secundario);
-    border-radius: 15px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .action-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-  }
-
-  .action-menu button {
-    font-size: 18px;
-    padding: 10px;
-    border: none;
-    background: none;
-    text-align: left;
-  }
-
-  .parent-container {
-    display: flex;
-    justify-content: center;
-  }
-
-  .btnReseñas {
-    margin-top: 8%;
-    --background: #19323C;
-  }
-
-  .Puntuacion {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .stars ion-icon {
-    font-size: 2rem;
-    cursor: pointer;
-    color: black; /* Color por defecto */
-  }
-
-  .stars ion-icon[color="warning"] {
-    color: gold !important; /* Asegura que el color dorado se aplique */
-    background-color: gold;
-  }
-
-  .icon-gap {
-    margin: 5px;
-  }
-
-  .score {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: #5497A7;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-family: 'Amatic SC', cursive;
-    color: white;
-  }
-
-  .stars {
-    display: flex;
-    justify-content: center;
-
-    .star-icon {
-      width: 2rem; /* Default size for empty star */
-      height: 2rem; /* Default size for empty star */
-      cursor: pointer;
-    }
-
-    .star-icon.filled {
-      width: 2.5rem; /* Adjusted size for filled star */
-      height: 2.5rem; /* Adjusted size for filled star */
-    }
-
-  }
-
-  .review-item {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-
-  .review-item:hover {
-    transform: scale(1.02);
-  }
-
-  .review-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 15px;
-    border: 3px solid #5497A7;
-  }
-
-  .review-avatar ion-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .review-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-grow: 1;
-  }
-
-  .review-name {
-    font-family: 'Amatic SC', cursive;
-    font-size: 35px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-    text-align: left;
-  }
-
-  .review-rating {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Align elements to the left */
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-
-  .review-stars {
-    display: flex;
-    gap: 5px;
-  }
-
-  .star-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .score {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: #5497A7;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-family: 'Amatic SC', cursive;
-    color: white;
-    text-align: center;
-    max-width: fit-content;
-  }
-
 }
