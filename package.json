@@ -70,11 +70,13 @@
     "typescript": "~5.6.3"
   },
   "description": "An Ionic project",
-  "budgets": [
-    {
-      "type": "componentStyle",
-      "maximumWarning": "24kb",
-      "maximumError": "30kb"
+  "configurations": {
+    "production": {
+      "optimization": true,
+      "sourceMap": false
     }
+  },
+  "allowedCommonJsDependencies": [
+    "sockjs-client"
   ]
 }
