@@ -21,16 +21,20 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "@capacitor/android": "6.1.2",
     "@capacitor/app": "6.0.2",
     "@capacitor/core": "6.2.0",
     "@capacitor/haptics": "6.0.2",
     "@capacitor/keyboard": "6.0.3",
-    "@capacitor/status-bar": "6.0.2",
     "@ionic/angular": "^8.0.0",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/stompjs": "^7.0.0",
+    "angular-froala-wysiwyg": "^4.3.0",
     "bootstrap": "^5.3.3",
     "date-fns": "^4.1.0",
+    "express": "^4.21.1",
+    "font-awesome": "^4.7.0",
+    "http-proxy-middleware": "^3.0.3",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
@@ -68,5 +72,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.6.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project"
 }
