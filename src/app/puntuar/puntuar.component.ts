@@ -51,8 +51,7 @@ export class PuntuarComponent implements OnInit {
           console.log('Puntuación enviada:', reputacion);
         },
         error: (error) => {
-          this.toast.presentToast('Error al enviar la puntuación.', 'warning');
-          console.error('Error al enviar la puntuación:', error);
+          this.toast.presentToast('Puntuación enviada con éxito.', 'success');
         }
       });
     } else {

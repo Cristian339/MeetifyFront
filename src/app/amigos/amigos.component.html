@@ -1,7 +1,7 @@
 <app-cabecera [titulo]="'Amigos'" [ruta]="'/publicacion'"></app-cabecera>
 <ion-content>
   <ion-list>
-    <ion-item lines="none" *ngFor="let amigo of amigos" id="open-modal">
+    <ion-item lines="none" *ngFor="let amigo of amigos" id="open-modal" (click)="entrarPerfil(amigo.id)">
       <ion-avatar slot="start">
         <img [src]="amigo.imagenUrlPerfil" class="circuloPersona" alt="img-user"/>
       </ion-avatar>
