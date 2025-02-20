@@ -63,31 +63,38 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-item *ngFor="let r of resenias" class="review-item">
-            <!-- Imagen grande del usuario -->
-            <ion-avatar slot="start" class="review-avatar">
-              <ion-img [src]="r.imagenUrlUsuario"></ion-img>
-            </ion-avatar>
+          <div class="Reseña">
+            <ion-item *ngFor="let r of resenias" class="review-item">
+              <!-- Imagen grande del usuario -->
+              <ion-avatar slot="start" class="review-avatar">
+                <ion-img [src]="r.imagenUrlUsuario"></ion-img>
+              </ion-avatar>
 
-            <!-- Contenedor de información (nombre + estrellas + puntuación) -->
-            <div class="review-info">
-              <h2 class="review-name">{{ r.nombreUsuario }}</h2>
+              <!-- Contenedor de información (nombre + estrellas + puntuación) -->
+              <div class="review-info">
+                <h2 class="review-name">{{ r.nombreUsuario }}</h2>
 
-              <!-- Estrellas + Puntuación en una sola línea -->
-              <div class="review-rating">
-                <div class="score">{{ (r.estrellas ?? 0) * 5 }} / 25 PTS</div>
-                <div class="review-stars">
-                  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                    <img
-                      [src]="star <= (r.estrellas ?? 0) ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
-                      alt="Estrella"
-                      class="star-icon"
-                    />
-                  </ng-container>
+                <!-- Estrellas + Puntuación en una sola línea -->
+                <div class="review-rating">
+                  <div class="score">{{ (r.estrellas ?? 0) * 5 }} / 25 PTS</div>
+                  <div class="review-stars">
+                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                      <img
+                        [src]="star <= (r.estrellas ?? 0) ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
+                        alt="Estrella"
+                        class="star-icon"
+                      />
+                    </ng-container>
+                  </div>
                 </div>
+                <ion-text readonly>Motivo: {{r.motivo}}</ion-text>
               </div>
-            </div>
-          </ion-item>
+
+            </ion-item>
+
+
+          </div>
+
         </ion-list>
       </ion-content>
     </ng-template>

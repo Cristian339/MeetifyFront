@@ -1,25 +1,32 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { IonicModule } from "@ionic/angular";
-import { addIcons } from "ionicons";
-import { arrowBackOutline, constructOutline, settingsOutline, starOutline, trophyOutline, personOutline } from "ionicons/icons";
-import { NgForOf, NgIf } from "@angular/common";
-import {ActivatedRoute, Router} from '@angular/router';
-import { PerfilService } from '../services/perfil.service';
-import { PublicacionService } from '../services/publicacion.service';
-import { Perfil } from '../modelos/Perfil';
-import { Publicacion } from '../modelos/Publicacion';
+import {IonicModule} from "@ionic/angular";
+import {NgForOf, NgIf} from "@angular/common";
+import {Perfil} from "../modelos/Perfil";
 import {Categoria} from "../modelos/Categoria";
 import {SeguidorDTO} from "../modelos/SeguidorDTO";
+import {Publicacion} from "../modelos/Publicacion";
+import {PerfilService} from "../services/perfil.service";
+import {PublicacionService} from "../services/publicacion.service";
+import {Router} from "@angular/router";
+import {addIcons} from "ionicons";
+import { ActivatedRoute } from '@angular/router';
+import {
+  arrowBackOutline,
+  constructOutline,
+  personOutline,
+  settingsOutline,
+  starOutline,
+  trophyOutline
+} from "ionicons/icons";
+import {TipoRelacion} from "../modelos/TipoRelacion";
 import {FormsModule} from "@angular/forms";
-import { TipoRelacion } from '../modelos/TipoRelacion';
-import {UsuarioDTO} from "../modelos/UsuarioDTO";
 import {PuntuacionTotal} from "../modelos/PuntuacionTotal";
 import {PuntuacionService} from "../services/puntuacion.service";
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss'],
+  selector: 'app-perfil-ajeno2',
+  templateUrl: './perfil-ajeno2.component.html',
+  styleUrls: ['./perfil-ajeno2.component.scss'],
   standalone: true,
   imports: [
     IonicModule,
@@ -28,9 +35,9 @@ import {PuntuacionService} from "../services/puntuacion.service";
     FormsModule
   ]
 })
-export class PerfilComponent implements OnInit {
+export class PerfilAjeno2Component  implements OnInit {
 
-  usuario: UsuarioDTO | undefined;
+  botonS : boolean = true;
   perfil: Perfil | undefined;
   categorias: Categoria[] = [];
   seguidores: SeguidorDTO[] = [];
@@ -43,7 +50,22 @@ export class PerfilComponent implements OnInit {
   searchTerm: string = '';
   searchTermSeguidores: string = '';
   deshabilitarBoton: boolean = false;
-  puntajeTotal: number | undefined;
+  idPerfil:number | undefined = 0;
+  puntajeTotal : number | undefined;
+
+  // vaciarDatos(){
+  //   this.publicaciones = [];
+  //   this.categorias = [];
+  //   this.seguidores = [];
+  //   this.seguidos = [];
+  //   this.filteredSeguidores = [];
+  //   this.filteredSeguidos = [];
+  //   this.seguidosCount = 0;
+  //   this.seguidoresCount = 0;
+  //   this.searchTerm = '';
+  //   this.searchTermSeguidores = '';
+  //   console.log("vaciao")
+  // }
 
   @Input() publicaciones: Publicacion[] | undefined;
   @Output() profileClick = new EventEmitter<Publicacion>();
@@ -51,8 +73,9 @@ export class PerfilComponent implements OnInit {
   constructor(
     private perfilService: PerfilService,
     private publicacionService: PublicacionService,
-    private puntuacionService: PuntuacionService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private puntuacionService: PuntuacionService
   ) {
     addIcons({ settingsOutline, arrowBackOutline, constructOutline, starOutline, trophyOutline, personOutline });
   }
@@ -60,18 +83,78 @@ export class PerfilComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('ngOnInit called');
-    this.cargarUsuario();
-    this.perfilService.getPerfil().subscribe({
+    this.publicaciones = [];
+    this.categorias = [];
+    this.seguidores = [];
+    this.seguidos = [];
+    this.filteredSeguidores = [];
+    this.filteredSeguidos = [];
+    this.seguidosCount = 0;
+    this.seguidoresCount = 0;
+    this.searchTerm = '';
+    this.searchTermSeguidores = '';
+    this.idPerfil= 0;
+
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      console.log('ID recibido:', id);
+      //En caso que sea desde lista de eventos
+      this.perfilService.getPerfilPorId(id).subscribe({
+        next: (data) => {
+          console.log('Data received:', data);
+          this.perfil = data;
+          console.log('Perfil assigned:', this.perfil);
+          this.idPerfil = this.perfil.id;
+          this.cargarSeguidores();
+          this.cargarPublicaciones()
+          this.cargarSeguidos();
+          this.cargarSeguidores5();
+          this.cargarSeguidos5();
+          this.comprobar();
+          this.cargarPuntuacionTotal();
+        },
+        error: (error) => console.error('Error:', error),
+        complete: () => console.log('Request completed')
+      });
+
+
+      //En caso que sea desde lista de perfiles
+      this.perfilService.categoriasOtroPerfil(this.idPerfil).subscribe({
+        next: (data) => {
+          console.log('Data received:', data);
+          this.categorias = data;
+          console.log('Perfil assigned:', this.perfil);
+
+        },
+        error: (error) => console.error('Error:', error),
+        complete: () => console.log('Request completed')
+      });
+
+
+    });
+
+  }
+
+
+  recargar(){
+    //En caso que sea desde lista de perfiles
+    this.perfilService.getPerfilPorId(this.idPerfil).subscribe({
       next: (data) => {
         console.log('Data received:', data);
         this.perfil = data;
         console.log('Perfil assigned:', this.perfil);
+        this.cargarSeguidores();
+        this.cargarPublicaciones()
+        this.cargarSeguidos();
+        this.cargarSeguidores5();
+        this.cargarSeguidos5();
+        this.comprobar();
+        this.cargarPuntuacionTotal();
       },
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
     });
-    this.perfilService.categoriasPerfil().subscribe({
+    this.perfilService.categoriasOtroPerfil(this.idPerfil).subscribe({
       next: (data) => {
         console.log('Data received:', data);
         this.categorias = data;
@@ -79,14 +162,9 @@ export class PerfilComponent implements OnInit {
       },
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
-    });
-    this.cargarSeguidores();
-    this.cargarPublicaciones()
-    this.cargarSeguidos();
-    this.cargarSeguidores5();
-    this.cargarSeguidos5();
-    this.cargarPuntuacionTotal();
 
+
+    });
   }
 
   verPubli(publicacion: Publicacion) {
@@ -103,14 +181,14 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarSeguidores5() {
-    this.perfilService.obtenerSeguidores().subscribe((seguidores: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidoresOtro(this.idPerfil).subscribe((seguidores: SeguidorDTO[]) => {
       this.seguidores = seguidores;
       this.seguidoresCount = seguidores.length;
     });
   }
 
   cargarSeguidos5() {
-    this.perfilService.obtenerSeguidos().subscribe((seguidos: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidosOtro(this.idPerfil).subscribe((seguidos: SeguidorDTO[]) => {
       this.seguidos = seguidos;
       this.seguidosCount = seguidos.length;
     });
@@ -118,7 +196,7 @@ export class PerfilComponent implements OnInit {
 
   cargarPublicaciones(): void {
     this.publicaciones = [];
-    this.publicacionService.getMisPublicaciones().subscribe({
+    this.publicacionService.getPublicacionesOtro(this.idPerfil).subscribe({
       next: (data) => {
         console.log('Publicaciones received:', data);
         this.publicaciones = data;
@@ -130,7 +208,7 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarSeguidores() {
-    this.perfilService.obtenerSeguidores().subscribe((seguidores: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidoresOtro(this.idPerfil).subscribe((seguidores: SeguidorDTO[]) => {
       this.seguidores = seguidores.map(seguidor => ({
         ...seguidor,
         tipoRelacion: this.getTipoRelacion(seguidor),
@@ -142,7 +220,7 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarSeguidos() {
-    this.perfilService.obtenerSeguidos().subscribe((seguidos: SeguidorDTO[]) => {
+    this.perfilService.obtenerSeguidosOtro(this.idPerfil).subscribe((seguidos: SeguidorDTO[]) => {
       this.seguidos = seguidos.map(seguido => ({
         ...seguido,
         tipoRelacion: this.getTipoRelacion(seguido),
@@ -167,7 +245,7 @@ export class PerfilComponent implements OnInit {
 
   cargarPublicacionesCompartidas(): void {
     this.publicaciones = [];
-    this.perfilService.obtenerPublicacionesCompartidas().subscribe({
+    this.perfilService.obtenerPublicacionesCompartidasOtro(this.idPerfil).subscribe({
       next: (data) => {
         console.log('Publicaciones received:', data);
         this.publicaciones = data;
@@ -192,13 +270,13 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  dejarDeSeguir(idUsuarioADejarDeSeguir: number): void {
-    this.perfilService.dejarUsuario(idUsuarioADejarDeSeguir).subscribe({
+  dejarDeSeguir(idPerfil: number | undefined): void {
+    this.perfilService.dejarUsuario(this.idPerfil).subscribe({
       next: () => {
-        console.log(`Dejaste de seguir al usuario con ID: ${idUsuarioADejarDeSeguir}`);
-        const seguido = this.filteredSeguidos.find(s => s.id === idUsuarioADejarDeSeguir);
+        console.log(`Dejaste de seguir al usuario con ID: ${this.idPerfil}`);
+        const seguido = this.filteredSeguidos.find(s => s.id === this.idPerfil);
         if (seguido) {
-          const seguidor = this.filteredSeguidores.find(s => s.id === idUsuarioADejarDeSeguir);
+          const seguidor = this.filteredSeguidores.find(s => s.id === this.idPerfil);
           if (seguidor) {
             seguidor.buttonDisabled = false;
           }
@@ -209,17 +287,14 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  seguirUsuario(seguidor: any): void {
-    seguidor.buttonDisabled = true;
-    this.perfilService.seguirUsuario(seguidor.id).subscribe({
+  seguirUsuario(idPerfil: number | undefined): void {
+    this.perfilService.seguirUsuario(this.idPerfil).subscribe({
       next: () => {
-        console.log(`Ahora sigues al usuario con ID: ${seguidor.id}`);
-        seguidor.seguido = true;
+        console.log(`Ahora sigues al usuario con ID: ${this.idPerfil}`);
         this.cargarSeguidos();
       },
       error: (error) => {
         console.error('Error al seguir al usuario:', error);
-        seguidor.buttonDisabled = false;
       }
     });
   }
@@ -238,25 +313,36 @@ export class PerfilComponent implements OnInit {
     }))
   }
 
+  setBoton(){
+    if (this.botonS){
+      this.botonS = false;
+      this.dejarDeSeguir(this.idPerfil);
+    }else {
+      this.botonS = true;
+      this.seguirUsuario(this.idPerfil);
+    }
+  }
 
-  cargarUsuario() {
-    this.perfilService.getUsuario().subscribe({
-      next: (data) => {
-        console.log('Data received:', data);
-        this.usuario = data;
-        console.log('Perfil assigned:', this.usuario);
+
+  comprobar(){
+    this.perfilService.comprobarSiSiguesUsuario(this.idPerfil).subscribe({
+      next:(data) => {
+        this.botonS = data;
       },
-      error: (error) => console.error('Error:', error),
-      complete: () => console.log('Request completed')
-    });
+      error:() => {
+        console.log("No se pudo comprobar si le sigues o no")
+      }
+    })
   }
 
   entrarPerfil(id: number | undefined) {
-    this.router.navigate(['/perfil-ajeno2'], { queryParams: { id } });
+    this.idPerfil = id;
+    this.recargar();
   }
 
+
   cargarPuntuacionTotal() {
-    this.puntuacionService.obtenerPuntuacionTotal().subscribe({
+    this.puntuacionService.obtenerPuntuacionTotalPorId(this.idPerfil).subscribe({
       next: (data: PuntuacionTotal) => {
         console.log('Puntuaciones recibidas:', data);
         this.puntajeTotal = data.puntuacionTotal ?? 0;

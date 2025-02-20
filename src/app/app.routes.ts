@@ -26,6 +26,7 @@ import {CompartidosComponent} from "./compartidos/compartidos.component";
 import {EventosUnidoComponent} from "./eventos-unido/eventos-unido.component";
 import {MiPuntuacionComponent} from "./mi-puntuacion/mi-puntuacion.component";
 import {MisReseniasComponent} from "./mis-resenias/mis-resenias.component";
+import {PerfilAjeno2Component} from "./perfil-ajeno2/perfil-ajeno2.component";
 // import { EventoMiembroComponent} from "./evento-miembro/evento-miembro.component";
 
 export const routes: Routes = [
@@ -46,6 +47,7 @@ export const routes: Routes = [
   { path: 'gestionar-publicaciones', component: GestionarPublicacionesComponent },
   { path: 'usu-publi/:correo', component: UsuPubliComponent },
   { path: 'perfil-ajeno', component: PerfilAjenoComponent },
+  { path: 'perfil-ajeno2', component: PerfilAjeno2Component },
   { path: 'gestionar-publicaciones', component: GestionarPublicacionesComponent },
   { path: 'unirse-evento', component: UnirseEventoComponent },
   { path: 'puntuar', component: PuntuarComponent},

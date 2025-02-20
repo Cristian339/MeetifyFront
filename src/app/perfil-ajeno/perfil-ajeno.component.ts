@@ -104,38 +104,34 @@ export class PerfilAjenoComponent  implements OnInit {
               console.log('Data received:', data);
               this.perfil = data;
               console.log('Perfil assigned:', this.perfil);
+              console.log('Perfil assigned:', this.perfil.id);
+              this.idPerfil = this.perfil.id;
+              this.cargarSeguidores();
+              this.cargarPublicaciones()
+              this.cargarSeguidos();
+              this.cargarSeguidores5();
+              this.cargarSeguidos5();
+              this.comprobar();
+              this.cargarPuntuacionTotal();
             },
             error: (error) => console.error('Error:', error),
             complete: () => console.log('Request completed')
           });
           //En caso que sea desde lista de perfiles
-          this.perfilService.getPerfilPorId(id).subscribe({
-            next: (data) => {
-              console.log('Data received:', data);
-              this.perfil = data;
-              console.log('Perfil assigned:', this.perfil);
-            },
-            error: (error) => console.error('Error:', error),
-            complete: () => console.log('Request completed')
-          });
-          this.perfilService.categoriasOtroPerfil(id).subscribe({
+          this.perfilService.categoriasOtroPerfil(this.idPerfil).subscribe({
             next: (data) => {
               console.log('Data received:', data);
               this.categorias = data;
               console.log('Perfil assigned:', this.perfil);
+
             },
             error: (error) => console.error('Error:', error),
             complete: () => console.log('Request completed')
           });
-          this.idPerfil = id;
+
+
     });
-    this.cargarSeguidores();
-    this.cargarPublicaciones()
-    this.cargarSeguidos();
-    this.cargarSeguidores5();
-    this.cargarSeguidos5();
-    this.comprobar();
-    this.cargarPuntuacionTotal();
+
   }
 
 
@@ -146,6 +142,13 @@ export class PerfilAjenoComponent  implements OnInit {
         console.log('Data received:', data);
         this.perfil = data;
         console.log('Perfil assigned:', this.perfil);
+        this.cargarSeguidores();
+        this.cargarPublicaciones()
+        this.cargarSeguidos();
+        this.cargarSeguidores5();
+        this.cargarSeguidos5();
+        this.comprobar();
+        this.cargarPuntuacionTotal();
       },
       error: (error) => console.error('Error:', error),
       complete: () => console.log('Request completed')
@@ -161,13 +164,6 @@ export class PerfilAjenoComponent  implements OnInit {
 
 
     });
-    this.cargarSeguidores();
-    this.cargarPublicaciones()
-    this.cargarSeguidos();
-    this.cargarSeguidores5();
-    this.cargarSeguidos5();
-    this.comprobar();
-    this.cargarPuntuacionTotal();
   }
 
   verPubli(publicacion: Publicacion) {

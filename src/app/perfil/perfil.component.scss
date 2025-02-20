@@ -56,6 +56,24 @@
     margin-top: 20px;
   }
 
+  .perfil-info-item {
+    margin: 5px;
+    font-size: 15px;
+  }
+
+  .perfil-info-item.genero {
+    text-align: left;
+  }
+
+  .genero {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .perfil-info-item.fecha {
+    text-align: left;
+  }
+
   .publicaciones-grid {
     margin: 20px 0;
   }
@@ -70,6 +88,16 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .title-container {
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Amatic SC', cursive;
+  }
+
+  .publicacion-card ion-title {
+    font-size: 10px;
   }
 
   .icon-style{
@@ -116,6 +144,19 @@
     margin-top: 20px;
   }
 
+  .perfil-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1%;
+  }
+
+  .perfil-info-item {
+    flex: 1;
+    margin: 5px;
+  }
+
   .perfil-avatar {
     width: 150px;
     height: 150px;
@@ -137,7 +178,7 @@
   }
 
   .perfil-descripcion {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: var(--ion-color-primario);
     margin: 5px auto;
   }
@@ -209,5 +250,11 @@
     border-radius: 15px;
     margin-left: 5px;
     float: left;
+  }
+
+  .title-container {
+    text-align: center;
+    margin-top: 25px;
+    font-family: 'Amatic SC', cursive;
   }
 }

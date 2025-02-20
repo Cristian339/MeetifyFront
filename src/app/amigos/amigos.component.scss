@@ -1,5 +1,314 @@
-.circuloPersona {
-  border-radius: 50%;
-  background-color: #f0f0f0;
-  padding: 10px;
+@media (max-width: 600px) {
+
+  /* Estilo del contenido principal */
+
+  .admin-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    background-color: #f8fdfc;
+    height: 100%;
+  }
+
+  .list-admin{
+    width: 90%;
+    margin-top: 5%;
+    background-color: #f8fdfc;
+  }
+
+  .listas {
+    margin-top: 10%;
+    background-color: #f8fdfc;
+  }
+
+  ion-item {
+    border-radius: 20%;
+    background-color: #f8fdfc;
+  }
+
+  .icon {
+    background-color: #5497A7;
+    padding: 2%;
+    border-radius: 50%;
+  }
+
+  ion-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 70px;
+  }
+
+  .logout {
+    margin-top: 5%;
+    width: 90%;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+  }
+
+  .perfil {
+    font-size: 3em;
+  }
+
+  .user-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 100%;
+    font-weight: 500;
+    color: #000;
+    margin-right: 10%;
+  }
+
+  ion-item {
+    border-radius: 25%;
+    width: 100%;
+  }
+
+  .perfil {
+    width: 30px;
+    height: 30px;
+    border-radius: 80%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+
+  .boton {
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+  }
+
+  ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
+    font-family: 'Inter', sans-serif;
+    border-radius: 90%;
+    color: white;
+  }
+
+  ion-button.baneo {
+    --background: #e74c3c;
+  }
+
+  ion-button.Ver {
+    --background: #5497A7;
+  }
+
+  ion-button.Desbanear {
+    --background: #19323C;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Amatic SC", sans-serif;
+    color: black;
+    text-align: center;
+  }
+
+  ion-modal p {
+    color: black;
+  }
+
+  #Aceptar {
+    background-color: #19323C !important;
+    margin: 0 auto !important;
+    border-radius: 80px !important;
+    color: white !important;
+  }
+
+  .itemUsuario, .itemBaneo {
+    display: flex;
+    align-items: center;
+  }
+
+  .perfil {
+    margin-right: 10px;
+  }
+
+  .user-label {
+    flex: 1;
+  }
+
+  .tiempo-restante {
+    font-size: medium;
+    font-family: 'Amatic SC', sans-serif;
+    color: red;
+  }
+
+  .segment {
+    --background: #d3d3d3; /* Gris */
+    --color-checked: #000000; /* Negro */
+    --color: #000000; /* Negro */
+  }
+}
+
+@media (min-width: 600px) {
+
+  /* Estilo del contenido principal */
+
+  .admin-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+    background-color: #f8fdfc;
+    height: 100%;
+  }
+
+  .items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #f8fdfc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
+  }
+
+  .list-admin{
+    width: 40%;
+    background-color: #f8fdfc;
+  }
+
+  .item-admin {
+    margin: 10px 0;
+    width: 90%;
+  }
+
+  .itemBaneo {
+    display: flex;
+    align-items: center;
+    background-color: #f8fdfc;
+    margin-bottom: 5px;
+  }
+
+  .itemUsuario {
+    display: flex;
+    align-items: center;
+    background-color: #f8fdfc;
+  }
+
+  .perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  .user-label {
+    flex: 1;
+    font-size: 30px;
+  }
+
+  .listas {
+    width: 80%;
+    background-color: #f8fdfc;
+    border-radius: 20px;
+    margin-bottom: 30%;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
+  }
+
+  .icon {
+    background-color: #5497A7;
+    padding: 2%;
+    font-size: 2rem;
+    border-radius: 60%;
+  }
+
+  .label-large {
+    font-size: 2em;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .logout {
+    margin-top: 5%;
+    width: 90%;
+    font-size: 1.5em;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+  }
+
+  .perfil {
+    font-size: 4em;
+  }
+
+  .user-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    margin-right: 10%;
+  }
+
+  ion-item {
+    border-radius: 25%;
+    width: 100%;
+  }
+
+  .boton {
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+  }
+
+  ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
+    font-family: 'Inter', sans-serif;
+    border-radius: 90%;
+    color: white;
+    font-size: 20px;
+  }
+
+  ion-button.baneo {
+    --background: #e74c3c;
+  }
+
+  ion-button.Ver {
+    --background: #5497A7;
+    margin-right: 70px;
+  }
+
+  ion-button.Desbanear {
+    --background: #19323C;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Amatic SC", sans-serif;
+    color: black;
+    text-align: center;
+  }
+
+  ion-modal p {
+    color: black;
+  }
+
+  #Aceptar {
+    background-color: #19323C !important;
+    margin: 0 auto !important;
+    border-radius: 80px !important;
+    color: white !important;
+  }
+
+  .tiempo-restante {
+    font-size: 20px;
+    font-family: 'Amatic SC', sans-serif;
+    color: red;
+  }
+
+  .segment {
+    --background: #d3d3d3; /* Gris */
+    --color-checked: #000000; /* Negro */
+    --color: #000000; /* Negro */
+  }
 }

@@ -4,6 +4,9 @@ import { IonicModule } from "@ionic/angular";
 import { NgForOf, NgOptimizedImage } from "@angular/common";
 import { AmigoService } from "../services/amigo.service";
 import { CabeceraComponent } from "../cabecera/cabecera.component";
+import {Router} from "@angular/router";
+import {AmigoDTO} from "../modelos/AmigoDTO";
+
 
 @Component({
   selector: 'app-amigos',
@@ -16,10 +19,11 @@ import { CabeceraComponent } from "../cabecera/cabecera.component";
   styleUrls: ['./amigos.component.scss']
 })
 export class AmigosComponent implements OnInit {
-  amigos: any[] = [];
+  amigos: AmigoDTO[] = [];
 
   constructor(private http: HttpClient,
-              private amigoService: AmigoService) {
+              private amigoService: AmigoService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -38,5 +42,9 @@ export class AmigosComponent implements OnInit {
         console.log('Petición completada');
       },
     });
+  }
+
+  entrarPerfil(id: number | undefined) {
+    this.router.navigate(['/perfil-ajeno'], { queryParams: { id } });
   }
 }
