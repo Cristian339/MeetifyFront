@@ -58,6 +58,6 @@ export class VerPerfilesComponent implements OnInit {
 
 
   entrarPerfil(id: number | undefined) {
-    this.router.navigate(['/perfil-ajeno'], { queryParams: { id } });
+    this.router.navigate(['/perfil-ajeno2'], { queryParams: { id } });
   }
 }
