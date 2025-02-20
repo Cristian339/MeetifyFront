@@ -81,14 +81,5 @@
       "maximumWarning": "4kB",
       "maximumError": "6kB"
     }
-  ],
-  "architect": {
-    "build": {
-      "options": {
-        "allowedCommonJsDependencies": [
-          "sockjs-client"
-        ]
-      }
-    }
-  }
+  ]
 }
