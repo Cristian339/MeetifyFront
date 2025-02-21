@@ -26,7 +26,7 @@ export class PerfilService {
 
   getPerfilPorId(id : number | undefined): Observable<Perfil> {
     const authHeader = this.comunService.autorizarPeticion();
-    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil//otro-usuario/${id}`, authHeader);
+    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/perfil/otro-usuario/${id}`, authHeader);
   }
 
   getTodosLosPerfiles(): Observable<Perfil[]> {
@@ -45,12 +45,6 @@ export class PerfilService {
     const authHeader = this.comunService.autorizarPeticion();
     return this.httpClient.post<Perfil>(`${this.apiUrl}/biografia/actualizar`, datosBiografia, authHeader);
   }
-
-
-  // actualizarDatosBiografia(datosBiografia: Perfil, correoElectronico: string): Observable<Perfil> {
-  //   const urlConCorreo = `${this.apiUrl}/biografia/actualizar/${correoElectronico}`;
-  //   return this.httpClient.post<Perfil>(urlConCorreo,datosBiografia);
-  // }
 
   compartirPublicacion(publicacionId: number | undefined): Observable<any> {
     const authHeader = this.comunService.autorizarPeticion();
