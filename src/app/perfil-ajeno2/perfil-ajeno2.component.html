@@ -96,7 +96,6 @@
                 <h2>{{ seguido.nombre }}</h2>
                 <p>Seguido</p>
               </ion-label>
-              <ion-button color="danger" slot="end" (click)="seguido.id !== undefined && dejarDeSeguir(this.idPerfil)">Dejar de seguir</ion-button>
               <ion-button color="secundario" slot="end" (click)="entrarPerfil(seguido.id)">Ver perfil</ion-button>
             </ion-item>
           </ion-list>
