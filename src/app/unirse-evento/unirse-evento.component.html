@@ -87,14 +87,12 @@
                     </ng-container>
                   </div>
                 </div>
+                <ion-text readonly>Motivo: {{r.motivo}}</ion-text>
               </div>
+
             </ion-item>
 
-            <ion-row class="reason-section" *ngFor="let r of resenias">
-              <ion-col size="12">
-                <ion-textarea class="reason-textarea" placeholder="Motivos (OPCIONAL)" readonly>{{r.motivo}}</ion-textarea>
-              </ion-col>
-            </ion-row>
+
           </div>
 
         </ion-list>
