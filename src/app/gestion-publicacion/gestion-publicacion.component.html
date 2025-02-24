@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicación</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@latest/css/ionic.bundle.css">
+</head>
+<body>
+<ion-app>
+  <ion-content style="background-color: black">
+    <div class="container" style="background-color: black">
+      <div class="header-icons">
+        <ion-icon name="arrow-back" routerLink="/perfil"></ion-icon>
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </div>
+      <div class="image-container" routerLink="/gestionar-publicaciones">
+        <img [src]="post?.imagenUrlPub ?? 'assets/shapes.svg'" alt="Atardecer">
+      </div>
+      <div class="time-box">
+        <p>{{ post?.fechaIni }} - {{ post?.fechaFin }}</p>
+      </div>
+      <div class="text-box">
+        <strong>{{ post?.titulo }}</strong>
+        <p>{{ post?.descripcion }}</p>
+      </div>
+      <div class="footer">
+        <div><ion-icon name="heart-outline"></ion-icon> Me gusta</div>
+        <div><ion-icon name="chatbubble-outline"></ion-icon> Comentar</div>
+        <div><ion-icon name="share-outline"></ion-icon>Compartir</div>
+      </div>
+    </div>
+  </ion-content>
+</ion-app>
+</body>
+</html>

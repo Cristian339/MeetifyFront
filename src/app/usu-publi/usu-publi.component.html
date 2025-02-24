@@ -1,0 +1,47 @@
+<app-cabecera titulo="Publicaciones de: {{correo}}"></app-cabecera>
+
+<ion-content>
+  <ion-card *ngFor="let p of publicaciones" class="card-evento">
+
+    <ion-grid class="profile-container">
+      <ion-row>
+        <ion-col class="profile-image">
+          <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
+            <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" (click)="entrarPerfil(p.id)"/>
+          </ng-container>
+          <ng-template #defaultIcon>
+            <ion-icon name="person-circle-outline" class="Perfil" (click)="entrarPerfil(p.id)"></ion-icon>
+          </ng-template>
+        </ion-col>
+        <ion-col class="profile-text">
+          <p class="nombre-perfil"><i>{{ p.nombrePerfil }}</i></p>
+          <p class="categoria"><i>{{ p.categoria }}</i></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <img [src]="p.imagenUrlPub || 'https://ionicframework.com/docs/img/demos/card-media.png'"
+         alt="Imagen" class="ImagenPub"/>
+
+    <ion-title class="titulo"><i>{{ p.titulo }}</i></ion-title>
+    <ion-card-content class="descripcion"><i>{{ p.descripcion }}</i></ion-card-content>
+
+    <ion-text class="info-text">
+      <ion-icon name="calendar-outline" class="icono"></ion-icon><i class="fecha"> Inicio: {{ p.fechaIni | date:'yyyy-MM-dd' }}</i>
+      <ion-icon name="calendar-outline" class="icono"></ion-icon><i class="fecha"> Fin: {{ p.fechaFin | date:'yyyy-MM-dd' }}</i>
+    </ion-text>
+
+    <ion-text class="info-text">
+      <ion-icon name="golf-outline" class="icono"></ion-icon><i class="fecha">{{p.ubicacion}}</i>
+    </ion-text>
+
+    <ion-grid class="button-container">
+      <ion-row>
+        <ion-col size="12" class="text-center">
+          <ion-button fill="solid" color="danger" (click)="eliminarPublicacion(p.id)">Eliminar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+</ion-content>

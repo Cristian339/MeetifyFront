@@ -1,0 +1,59 @@
+<app-cabecera ruta="/publicacion" titulo="Mi reputacion"></app-cabecera>
+
+<ion-content>
+  <ion-grid *ngIf="miPuntuacion.length > 0; else noPuntuaciones">
+    <ion-card *ngFor="let p of miPuntuacion">
+
+      <ion-fab class="fab-container">
+        <ion-fab-button color="terciario" size="small" class="clear-fab">
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="bottom">
+          <ion-text class="report-text">Reportar</ion-text>
+        </ion-fab-list>
+      </ion-fab>
+
+      <ion-grid class="profile-container">
+        <ion-row>
+          <ion-col class="profile-image">
+            <ng-container *ngIf="p.imagenUrlPerfil; else defaultIcon">
+              <img [src]="p.imagenUrlPerfil" alt="Profile Image" class="circular-image" />
+            </ng-container>
+            <ng-template #defaultIcon>
+              <ion-icon name="person-circle-outline" class="default-icon"></ion-icon>
+            </ng-template>
+          </ion-col>
+          <ion-col class="profile-text">
+            <p class="nombre-perfil"><i>{{ p.nombreUsuario }}</i></p>
+            <p class="categoria"><i>{{ p.categoria.nombre }}</i></p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <img [src]="p.imagenUrlPub || 'https://ionicframework.com/docs/img/demos/card-media.png'"
+           alt="Imagen" class="ImagenPub"/>
+
+      <ion-title class="titulo"><i>{{ p.titulo }}</i></ion-title>
+
+      <ion-card-content class="descripcion">
+        <ion-row class="rating-section">
+          <ion-col size="12" class="rating-header">
+            <ion-text class="font-amatic">Valoración:</ion-text>
+            <ion-text class="score">{{ p.estrellas }} PTS</ion-text>
+          </ion-col>
+          <ion-col size="12" class="stars-container">
+            <img *ngFor="let star of [1, 2, 3, 4, 5]"
+                 [src]="star <= (p.estrellas / 5) ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
+                 class="star-icon">
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+
+  <ng-template #noPuntuaciones>
+    <div class="no-publicaciones-container">
+      <p>¡Aún no tienes puntuaciones!</p>
+    </div>
+  </ng-template>
+</ion-content>

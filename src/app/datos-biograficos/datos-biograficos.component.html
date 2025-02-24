@@ -1,0 +1,61 @@
+<app-cabecera-sin-ruta titulo="Datos Biográficos"></app-cabecera-sin-ruta>
+
+<ion-content class="ion-padding ion-text-center ion-color-terciario">
+  <ion-card class="ion-padding card-color">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" class="ion-text-center">
+          <div class="perfil-avatar-container">
+            <img *ngIf="imagePreview" [src]="imagePreview" alt="Foto de perfil" class="perfil-avatar-large" />
+            <ion-icon *ngIf="!imagePreview" name="person-circle-outline" class="perfil-avatar-large"></ion-icon>
+            <div class="upload-options">
+              <ion-button  (click)="openFileInput()" class="font-inter" color="cuarto" *ngIf="!showURLInput">
+                <ion-icon name="camera-outline"></ion-icon>Subir Archivo</ion-button>
+              <ion-button  (click)="toggleURLInput()" class="font-inter" color="cuarto">
+                <ion-icon name="link-outline"></ion-icon>Usar URL</ion-button>
+              <input type="file" hidden (change)="onFileSelected($event)" #fileInput />
+              <ion-item *ngIf="showURLInput" style="margin-top: 2%">
+                <ion-label position="floating" class="font-amatic">URL de la imagen</ion-label>
+                <ion-input [(ngModel)]="imagenUrlPerfil" (ionChange)="updateImagePreview()" class="font-inter"></ion-input>
+              </ion-item>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div class="form-group">
+        <ion-item style="display: flex; align-items: center;">
+          <ion-icon name="globe-outline" slot="start" style="margin-right: 8px;"></ion-icon>
+          <ion-select [(ngModel)]="pais" class="form-control" placeholder="Introduce tu país" required slot="start">
+            <ion-select-option *ngFor="let pais of paises" [value]="pais">{{ pais }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="form-group">
+        <ion-item style="display: flex; align-items: center;">
+          <ion-icon name="transgender-outline" slot="start" style="margin-right: 8px;"></ion-icon>
+          <ion-select [(ngModel)]="genero" class="form-control" placeholder="Introduce tu género" required slot="start">
+            <ion-select-option value="Hombre">Hombre</ion-select-option>
+            <ion-select-option value="Mujer">Mujer</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <ion-item style="display: flex; flex-direction: column; align-items: flex-start;">
+        <ion-icon name="create-outline" slot="start" style="align-self: flex-start; margin-bottom: 8px;"></ion-icon>
+        <ion-textarea [(ngModel)]="biografia" type="text" class="form-control input-alto" placeholder="Mete tu biografía" required></ion-textarea>
+      </ion-item>
+
+
+      <ion-row class="ion-justify-content-center ion-margin-top">
+        <ion-col size="auto">
+          <ion-button expand="block" class="font-inter" href="/publicacion" color="primario">Rellenar Después</ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button expand="block" (click)="guardarDatosBiograficos()" class="ion-color-primario font-inter" color="primario">Finalizar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

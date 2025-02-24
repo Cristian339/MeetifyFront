@@ -1,0 +1,16 @@
+<app-cabecera [titulo]="'Notificaciones'" [ruta]="'/publicacion'"></app-cabecera>
+
+<ion-content class="notificaciones-container">
+  <ion-list>
+    <ion-item *ngFor="let notificacion of notificaciones">
+      <ion-avatar slot="start">
+        <img [src]="notificacion.imagen" alt="Avatar" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ notificacion.usuario }}</h2>
+        <p [innerHTML]="notificacion.mensaje"></p>
+      </ion-label>
+      <ion-note slot="end">{{ notificacion.fecha }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

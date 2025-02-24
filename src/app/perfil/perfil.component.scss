@@ -1,0 +1,260 @@
+@media (max-width: 600px) {
+
+  .perfil-content {
+    --background: #f9f9f9;
+    text-align: center;
+  }
+
+  .perfil-grid {
+    margin-top: 20px;
+  }
+
+  .perfil-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .perfil-nombre {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-usuario {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-descripcion {
+    font-size: 0.9rem;
+    color: var(--ion-color-primario);
+    margin: 5px auto;
+  }
+
+  .perfil-stats {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .perfil-reputacion {
+    margin-top: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+  }
+
+  .reputacion-icon {
+    color: gold;
+  }
+
+  .perfil-tabs {
+    margin-top: 20px;
+  }
+
+  .perfil-info-item {
+    margin: 5px;
+    font-size: 15px;
+  }
+
+  .perfil-info-item.genero {
+    text-align: left;
+  }
+
+  .genero {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .perfil-info-item.fecha {
+    text-align: left;
+  }
+
+  .publicaciones-grid {
+    margin: 20px 0;
+  }
+
+  .publicacion-card {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .publicacion-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .title-container {
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Amatic SC', cursive;
+  }
+
+  .publicacion-card ion-title {
+    font-size: 10px;
+  }
+
+  .icon-style{
+    color: var(--ion-color-primario);
+  }
+
+  .perfil-detalles-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+    text-decoration: underline;
+
+  }
+  .centered-title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .circuloPersona {
+    font-size: 1.5em;
+    background-color: #5497A7;
+    border-radius: 50%;
+    padding: 15%;
+  }
+
+  .category {
+    background: var(--ion-color-secundario);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-left: 5px;
+    float: left;
+  }
+}
+
+@media (min-width: 600px) {
+
+  .perfil-content {
+    --background: #f9f9f9;
+    text-align: center;
+  }
+
+  .perfil-grid {
+    margin-top: 20px;
+  }
+
+  .perfil-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1%;
+  }
+
+  .perfil-info-item {
+    flex: 1;
+    margin: 5px;
+  }
+
+  .perfil-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .perfil-nombre {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-usuario {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .perfil-descripcion {
+    font-size: 1.2rem;
+    color: var(--ion-color-primario);
+    margin: 5px auto;
+  }
+
+  .perfil-stats {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .perfil-reputacion {
+    margin-top: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+  }
+
+  .reputacion-icon {
+    color: gold;
+  }
+
+  .perfil-tabs {
+    margin-top: 20px;
+  }
+
+  .publicaciones-grid {
+    margin: 20px 0;
+  }
+
+  .publicacion-card {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .publicacion-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .icon-style{
+    color: var(--ion-color-primario);
+  }
+
+  .perfil-detalles-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primario);
+    text-decoration: underline;
+
+  }
+  .centered-title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .circuloPersona {
+    font-size: 1.5em;
+    background-color: #5497A7;
+    border-radius: 50%;
+    padding: 15%;
+  }
+
+  .category {
+    background: var(--ion-color-secundario);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-left: 5px;
+    float: left;
+  }
+
+  .title-container {
+    text-align: center;
+    margin-top: 25px;
+    font-family: 'Amatic SC', cursive;
+  }
+}

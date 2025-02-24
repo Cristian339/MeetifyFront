@@ -1,0 +1,44 @@
+<app-cabecera ruta="/publicacion" titulo="Mis Reseñas"></app-cabecera>
+
+<ion-content>
+  <ion-list>
+    <ion-card class="card" *ngFor="let r of resenias">
+      <ion-card-header>
+        <ion-title class="Titulo">{{ r.titulo }}</ion-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Imagen principal -->
+        <img [src]="r.imagenUrlPub" class="publicacion-img"/>
+
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <ion-img [src]="r.imagenUrlUsuario"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ r.nombreUsuario }}</h2>
+
+            <!-- Sección de valoración con estrellas -->
+            <ion-row class="Puntuacion">
+              <ion-col size="auto" class="stars">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <img
+                    [src]="star <= (r.estrellas ?? 0) ? 'assets/icon/EstrellaRellena.svg' : 'assets/icon/EstrellaVacia.svg'"
+                    alt="Estrella"
+                    class="star-icon"
+                  />
+                </ng-container>
+              </ion-col>
+              <ion-col size="auto" class="score">
+                {{ (r.estrellas ?? 0) * 5 }} / 25 PTS
+              </ion-col>
+            </ion-row>
+
+            <!-- Motivo debajo de la valoración -->
+            <ion-text color="medium">Motivo: {{ r.motivo }}</ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

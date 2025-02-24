@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meetify - Inicio de Sesión</title>
+</head>
+<body style="background-color: #cce7ff;">
+<div class="container auth-container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-12 col-lg-12 col-sm-12 text-center">
+      <div class="rounded-container">
+        <div class="auth-box d-flex">
+          <div class="logo">
+            <img ngSrc="assets/Meetify.svg" alt="Meetify Logo" width="500" height="500">
+          </div>
+          <div class="form-container">
+
+            <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+              <ng-container *ngIf="Logeado; else otherForms">
+                <!-- Inicio de sesión -->
+
+                <h1>Inicio de Sesión</h1>
+                <div class="form-group">
+                  <ion-label position="floating">Usuario</ion-label>
+                  <ion-item class="w-100">
+                    <ion-input type="text" placeholder="Usuario o Correo" formControlName="nombreUsuario" class="form-control" required></ion-input>
+                  </ion-item>
+                </div>
+
+                <div class="form-group">
+                  <ion-label position="floating">Contraseña</ion-label>
+                  <ion-item class="w-100">
+                    <ion-input type="password" placeholder="Introduce tu contraseña" formControlName="contrasenia" class="form-control" required></ion-input>
+                  </ion-item>
+                </div>
+
+                <ion-button class="boton" type="submit" style="width: 55%; margin-left: 22.5%; margin-bottom: 3%; background-color: darkblue" (click)="verificarCamposLogin()">Iniciar sesión</ion-button>
+
+                <div class="forgot-password mt-3">
+                  <p>¿Olvidaste tu contraseña? <a (click)="toggleAuthMode('recuperacion')">RECUPERALA</a></p>
+                </div>
+                <div class="switch-auth mt-3">
+                  <p>¿No tienes cuenta? <a (click)="toggleAuthMode('registro')">REGÍSTRATE</a></p>
+                </div>
+              </ng-container>
+
+              <ng-template #otherForms>
+                <ng-container *ngIf="Registrado; else recoverOrConfirmForm">
+                  <!-- Registro -->
+
+                  <h1>Registrate</h1>
+                  <div class="form-group">
+                    <ion-label position="floating">Nombre</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="text" formControlName="nombre" class="form-control" placeholder="Pon tu nombre" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="form-group">
+                    <ion-label position="floating">Apellidos</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="text" formControlName="apellidos" class="form-control" placeholder="Pon tus apellidos" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="form-group">
+                    <ion-label position="floating">Correo electrónico</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="email" formControlName="correoElectronico" class="form-control" placeholder="Pon tu correo" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="form-group">
+                    <ion-label position="floating">Fecha de nacimiento</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="date" formControlName="fechaNacimiento" class="form-control" placeholder="Pon tu fecha de nacimiento" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="form-group">
+                    <ion-label position="floating">Usuario</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="text" formControlName="nombreUsuario" class="form-control" placeholder="Pon tu nombre de usuario" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="form-group">
+                    <ion-label position="floating">Contraseña</ion-label>
+                    <ion-item class="w-100">
+                      <ion-input type="password" formControlName="contrasenia" class="form-control" placeholder="Pon tu contraseña" required></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <ion-button type="submit" class="boton" style="width: 55%; margin-left: 22.5%; margin-bottom: 3%; background-color: darkblue" (click)="verificarCamposRegistro()">Registrarse</ion-button>
+
+                  <div class="forgot-password mt-3">
+                    <p>¿Ya tienes cuenta? <a (click)="toggleAuthMode('login')">LOGUEATE</a></p>
+                  </div>
+
+                </ng-container>
+
+                <ng-template #recoverOrConfirmForm>
+                  <ng-container *ngIf="Recuperado; else confirmForm">
+                    <!-- Recupera tu cuenta -->
+
+                    <h1>Recupera tu cuenta</h1>
+                    <div class="form-group">
+                      <ion-label position="floating">Correo electrónico</ion-label>
+                      <ion-item class="w-100">
+                        <ion-input type="text"  formControlName="correoElectronico" class="form-control" placeholder="Introduce tu correo electrónico" required></ion-input>
+                      </ion-item>
+                    </div>
+
+                    <ion-button style="width: 27%; margin-left: 35%; background-color: darkblue" type="submit" class="boton" (click)="verificarCamposRecuperacion()">Continuar</ion-button>
+
+                    <p style="color: black">* Recibirás un correo con un número PIN que tendrás que poner</p>
+                  </ng-container>
+
+                  <ng-template #confirmForm>
+                    <ng-container *ngIf="Confirmado; else changePasswordForm">
+                      <!-- Confirmar tu cuenta -->
+
+                      <h1>Confirmar tu cuenta</h1>
+                      <div class="form-group">
+                        <ion-label position="floating">Hemos enviado un código a tu dirección de correo electrónico. <br>Introdúcelo para confirmar tu cuenta</ion-label>
+                        <ion-item class="w-100">
+                          <ion-input type="number" min="0" max="999999" maxlength="6" formControlName="codigo" class="form-control" placeholder="Introduce el código de 6 dígitos" required></ion-input>
+                        </ion-item>
+                      </div>
+
+                      <ion-button style="width: 27%; margin-left: 36%; background-color: darkblue" type="submit" class="boton" (click)="verificarCamposConfirmacion()">Continuar</ion-button>
+
+                      <p style="color: red; text-align: center; cursor: pointer;" (click)="reenviarCodigo()">Volver a enviar código</p>
+                    </ng-container>
+
+                    <ng-template #changePasswordForm>
+                      <!-- Cambio de contraseña -->
+
+                      <h1>Cambio de contraseña</h1>
+                      <div class="form-group">
+                        <ion-label position="floating">Nueva contraseña</ion-label>
+                        <ion-item class="w-100">
+                          <ion-input type="password" formControlName="nuevaContra" class="form-control" placeholder="Introduce tu nueva contraseña" required></ion-input>
+                        </ion-item>
+                      </div>
+
+                      <div class="form-group">
+                        <ion-label position="floating">Repite la nueva contraseña</ion-label>
+                        <ion-item class="w-100">
+                          <ion-input type="password" formControlName="repitenuevaContra" class="form-control" placeholder="Repite tu nueva contraseña" required></ion-input>
+                        </ion-item>
+                      </div>
+
+                      <ion-button style="width: 50%; margin-left: 25%; margin-bottom: 3%; background-color: darkblue" type="submit" class="boton" (click)="verificarContrasenas()">Cambiar la contraseña</ion-button>
+                    </ng-template>
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

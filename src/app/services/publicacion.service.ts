@@ -1,0 +1,118 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { Publicacion } from '../modelos/Publicacion';
+import { ComunService } from './comun.service';
+import {UsuarioDTO} from "../modelos/UsuarioDTO";
+import {Perfil} from "../modelos/Perfil";
+import {Resenias} from "../modelos/Resenias";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PublicacionService {
+  private apiUrl = environment.apiUrl;
+
+  constructor(private httpClient: HttpClient, private comunService: ComunService) {}
+
+  getPublicaciones(): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/all`, authHeader);
+  }
+
+  getTodasLasPublicaciones(): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/todas`, authHeader);
+  }
+
+  getMisPublicaciones(): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/all/mi`, authHeader);
+  }
+
+
+  getPublicacionesOtro(id: number | undefined): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/all/otro/${id}`, authHeader);
+  }
+
+  getPublicacionesSeguidos(): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/publicacion/segui`, authHeader);
+  }
+
+  guardarPublicacion(publicacion: Publicacion): Observable<Publicacion> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<Publicacion>(`${this.apiUrl}/publicacion/crear`, publicacion, authHeader);
+  }
+
+  eliminarPublicacion2(id: number | undefined): Observable<any> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<any>(`${this.apiUrl}/publicacion/del/${id}`, authHeader);
+  }
+
+
+  eliminarPublicacion(id: number): Observable<any> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.delete<any>(`${this.apiUrl}/publicacion/${id}`, authHeader);
+  }
+
+  actualizarPublicacion(idPub: number | undefined, publicacionDTO: Publicacion): Observable<Publicacion> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.put<Publicacion>(`${this.apiUrl}/publicacion/${idPub}`, publicacionDTO, authHeader);
+  }
+
+  obtenerPublicacionPorId(idPub: number): Observable<Publicacion> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion>(`${this.apiUrl}/publicacion/${idPub}`, authHeader);
+  }
+
+  obtenerPublicacionesPorCorreo(correo: string): Observable<Publicacion[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Publicacion[]>(`${this.apiUrl}/admin/publicaciones/${correo}`, authHeader);
+  }
+
+  unirsePublicacion(idPublicacion: number): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/publicacion/unirse/${idPublicacion}`, {}, authHeader);
+  }
+
+  puntuarPublicacion(idPublicacion: number | undefined, estrellas : number | undefined): Observable<void> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.post<void>(`${this.apiUrl}/publicacion/${idPublicacion}/puntuar`, estrellas, authHeader);
+  }
+
+  obtenerPuntuaciones(idPublicacion: number | undefined): Observable<Resenias[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Resenias[]>(`${this.apiUrl}/publicacion/reputacion/${idPublicacion}`, authHeader);
+  }
+
+
+  obtenerUsuariosUnidos(idPublicacion: number): Observable<UsuarioDTO[]> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<UsuarioDTO[]>(`${this.apiUrl}/publicacion/usuarios-unidos/${idPublicacion}`, authHeader);
+  }
+
+  salirPublicacion(idPublicacion: number): Observable<boolean> {
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.delete<boolean>(`${this.apiUrl}/publicacion/salir/${idPublicacion}`, authHeader);
+  }
+
+
+  obtenerCreador(id: number | undefined): Observable<boolean>{
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/creador/${id}`, authHeader);
+  }
+
+  dentroOFuera(id: number | undefined): Observable<boolean>{
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<boolean>(`${this.apiUrl}/publicacion/dentro/${id}`, authHeader);
+  }
+
+  otroUsuario(id: number | undefined): Observable<Perfil>{
+    const authHeader = this.comunService.autorizarPeticion();
+    return this.httpClient.get<Perfil>(`${this.apiUrl}/publicacion/otro-usuario/${id}`, authHeader);
+  }
+
+}

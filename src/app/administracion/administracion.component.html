@@ -1,0 +1,66 @@
+<ng-container *ngIf="vistaActual === 'admin'; else otherViews">
+  <app-cabecera-sin-ruta titulo="Administración"></app-cabecera-sin-ruta>
+</ng-container>
+<ng-template #otherViews>
+  <ng-container *ngIf="vistaActual === 'users'">
+    <app-cabecera-sin-ruta titulo="Administración"></app-cabecera-sin-ruta>
+  </ng-container>
+  <ng-container *ngIf="vistaActual === 'baneados'">
+    <app-cabecera-sin-ruta titulo="Administración"></app-cabecera-sin-ruta>
+  </ng-container>
+</ng-template>
+
+<ion-segment value="default" class="segment" color="secundario">
+  <ion-segment-button value="default" (click)="cargarNoBaneados()">
+    <ion-label>Revisar Perfiles</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="segment" (click)="cargarBaneados()">
+    <ion-label>Lista de Baneos</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-content>
+  <!-- Vista principal: Panel de administración -->
+  <div class="admin-panel" *ngIf="vistaActual === 'admin'">
+    <div class="logout">
+      <p (click)="doLogout()">Cerrar Sesión</p>
+    </div>
+  </div>
+
+  <!-- Vista de usuarios -->
+  <div *ngIf="vistaActual === 'users'">
+    <div class="items-container">
+      <ion-list lines="none" class="listas">
+        <ion-item *ngFor="let p of perfiles" class="itemUsuario">
+          <img [src]="p.imagenUrlPerfil" alt="Imagen de perfil" slot="start" class="perfil">
+          <ion-label class="user-label">
+            {{ p.nombreUsuario }}
+          </ion-label>
+          <div class="boton">
+            <ion-button fill="solid" color="danger" class="baneo" (click)="banearUsuario(p.correoElectronico)">Banear</ion-button>
+            <ion-button fill="solid" class="Ver" (click)="verPublicaciones(p.correoElectronico)">Ver</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <!-- Vista de baneados -->
+  <div *ngIf="vistaActual === 'baneados'">
+    <div class="items-container">
+      <ion-list lines="none" class="listas">
+        <ion-item *ngFor="let p of perfiles" class="itemBaneo">
+          <img [src]="p.imagenUrlPerfil" alt="Imagen de perfil" slot="start" class="perfil">
+          <ion-label class="user-label">
+            {{ p.nombreUsuario }} <br />
+            <span class="tiempo-restante">BANEADO</span>
+          </ion-label>
+          <div class="boton">
+            <ion-button fill="solid" class="Desbanear" (click)="desbanearUsuario(p.correoElectronico)">Desbanear</ion-button>
+            <ion-button fill="solid" class="Ver" (click)="verPublicaciones(p.correoElectronico)">Ver</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,33 @@
+ion-content {
+  --background: var(--ion-color-primario);
+}
+
+*{
+  font-family: "Amatic SC", sans-serif;
+}
+
+.ban-box {
+  background: var(--ion-color-cuarto);
+  color: var(--ion-color-cuarto-contrast);
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.ion-height-full {
+  height: 100vh; /* Hace que el grid ocupe toda la pantalla */
+}
+
+ion-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure the grid takes the full height of the viewport */
+}
+
+ion-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensure the row takes the full width of the grid */
+}

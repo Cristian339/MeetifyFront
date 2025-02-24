@@ -1,0 +1,75 @@
+ion-menu {
+  height: 100%;
+}
+
+ion-toolbar {
+  --background: #16353F;
+  --color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+ion-icon {
+  padding-top: 13px;
+}
+
+ion-title {
+  font-family: 'Amatic SC', cursive;
+  font-weight: 700;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+}
+
+ion-title,
+ion-buttons {
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  ion-toolbar {
+    padding: 1.5%;
+  }
+
+  ion-title {
+    font-size: 3rem;
+  }
+
+  ion-icon {
+    font-size: 1.8em;
+    padding-top: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  ion-toolbar {
+    padding: 2%;
+  }
+
+  ion-title {
+    font-size: 3rem;
+  }
+
+  ion-icon {
+    font-size: 1.6em;
+    padding-top: 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  ion-toolbar {
+    padding: 2.5%;
+  }
+
+  ion-title {
+    font-size: 3rem;
+  }
+
+  ion-icon {
+    font-size: 1.4em;
+  }
+
+  header-title {
+    font-size: 2rem;
+  }
+}

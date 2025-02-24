@@ -1,0 +1,19 @@
+<app-cabecera [titulo]="'Amigos'" [ruta]="'/publicacion'"></app-cabecera>
+
+<ion-content>
+
+  <div class="items-container">
+    <ion-list lines="none" class="listas">
+      <ion-item *ngFor="let amigo of amigos" class="itemUsuario">
+        <img [src]="amigo.imagenUrlPerfil" alt="Imagen de perfil" slot="start" class="perfil">
+        <ion-label class="user-label">
+          {{ amigo.nombre }}
+        </ion-label>
+        <div class="boton">
+          <ion-button fill="solid" class="Ver" (click)="entrarPerfil(amigo.id)">Ver</ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

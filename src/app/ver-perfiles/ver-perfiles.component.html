@@ -1,0 +1,27 @@
+<app-cabecera titulo="Perfiles" ruta="/publicacion" class="no-margin"></app-cabecera>
+
+<ion-content color="terciario">
+  <ion-searchbar [(ngModel)]="busqueda" placeholder="Buscar perfiles..." (ionInput)="filtrarPerfiles()"></ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let perfil of perfilesFiltrados" (click)="entrarPerfil(perfil.id)">
+      <ion-avatar slot="start">
+        <ng-container *ngIf="perfil.imagenUrlPerfil; else defaultIcon" >
+          <img [src]="perfil.imagenUrlPerfil" alt="Profile Image" class="circular-image" style="margin-top: 5px"/>
+        </ng-container>
+        <ng-template #defaultIcon>
+          <ion-icon name="person-circle-outline" style="margin-top: 5px" size="large"></ion-icon>
+        </ng-template>
+<!--        <img *ngIf="perfil.imagenUrlPerfil; else defaultImage" [src]="perfil.imagenUrlPerfil" alt="Perfil">-->
+<!--        <ng-template #defaultImage>-->
+<!--          <img src="assets/default-profile.png" alt="Perfil">-->
+<!--        </ng-template>-->
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ perfil.nombre }} {{ perfil.apellidos }}</h2>
+        <p>&#64;{{ perfil.nombreUsuario }}</p>
+        <p>Puntaje: {{ perfil.puntajeTotal }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

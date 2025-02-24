@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primario">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="auto" class="logo-image">
+          <ion-img src="/assets/Meetify.svg" style="width: 60px;"></ion-img>
+        </ion-col>
+        <ion-title class="font-amatic-grande2" style="text-align: center;">Categorias</ion-title>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center size-text">
+  <p>Categorías elegidas: {{ selectedCategories.length }}/10</p>
+
+  <div class="grid">
+    <ion-button class="category category-1" [ngClass]="{'selected': selectedCategories.includes('Encuentros Sociales')}" (click)="toggleCategory('Encuentros Sociales')">Encuentros Sociales</ion-button>
+    <ion-button class="category category-2" [ngClass]="{'selected': selectedCategories.includes('Juegos y Diversión')}" (click)="toggleCategory('Juegos y Diversión')">Juegos y Diversión</ion-button>
+    <ion-button class="category category-3" [ngClass]="{'selected': selectedCategories.includes('Actividades Creativas')}" (click)="toggleCategory('Actividades Creativas')">Actividades Creativas</ion-button>
+    <ion-button class="category category-4" [ngClass]="{'selected': selectedCategories.includes('Ejercicio en Grupo')}" (click)="toggleCategory('Ejercicio en Grupo')">Ejercicio en Grupo</ion-button>
+    <ion-button class="category category-5" [ngClass]="{'selected': selectedCategories.includes('Convivencia en la Naturaleza')}" (click)="toggleCategory('Convivencia en la Naturaleza')">Convivencia en la Naturaleza</ion-button>
+    <ion-button class="category category-6" [ngClass]="{'selected': selectedCategories.includes('Cultura y Entretenimiento')}" (click)="toggleCategory('Cultura y Entretenimiento')">Cultura y Entretenimiento</ion-button>
+    <ion-button class="category category-7" [ngClass]="{'selected': selectedCategories.includes('Aprendizaje y Formación')}" (click)="toggleCategory('Aprendizaje y Formación')">Aprendizaje y Formación</ion-button>
+    <ion-button class="category category-8" [ngClass]="{'selected': selectedCategories.includes('Talleres Interactivos')}" (click)="toggleCategory('Talleres Interactivos')">Talleres Interactivos</ion-button>
+    <ion-button class="category category-9" [ngClass]="{'selected': selectedCategories.includes('Relajación y Bienestar')}" (click)="toggleCategory('Relajación y Bienestar')">Relajación y Bienestar</ion-button>
+    <ion-button class="category category-10" [ngClass]="{'selected': selectedCategories.includes('Paseos y Excursiones')}" (click)="toggleCategory('Paseos y Excursiones')">Paseos y Excursiones</ion-button>
+    <ion-button class="category category-11" [ngClass]="{'selected': selectedCategories.includes('Charlar y Socializar')}" (click)="toggleCategory('Charlar y Socializar')">Charlar y Socializar</ion-button>
+    <ion-button class="category category-12" [ngClass]="{'selected': selectedCategories.includes('Deportes Informales')}" (click)="toggleCategory('Deportes Informales')">Deportes Informales</ion-button>
+
+    <!-- Última fila con categoría 13 y 14 posicionadas correctamente -->
+    <ion-button class="category category-13" [ngClass]="{'selected': selectedCategories.includes('Tardes de Juegos')}" (click)="toggleCategory('Tardes de Juegos')">Tardes de Juegos</ion-button>
+    <ion-button class="category category-14" [ngClass]="{'selected': selectedCategories.includes('Encuentros Comunitarios')}" (click)="toggleCategory('Encuentros Comunitarios')">Encuentros Comunitarios</ion-button>
+  </div>
+
+
+  <ion-button class="background" (click)="saveCategories()">Aceptar</ion-button>
+</ion-content>

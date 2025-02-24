@@ -1,0 +1,233 @@
+@media (min-width: 600px) {
+
+  .auth-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 5%;
+    overflow-y: auto;
+
+    .auth-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .logo {
+        margin-right: 20px;
+      }
+
+      .form-container {
+        flex-grow: 1;
+      }
+    }
+
+    .rounded-container {
+      background-color: white;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo img {
+      width: 400px;
+      height: 400px;
+    }
+
+    h1 {
+      font-family: 'Amatic SC', cursive;
+      font-weight: 700;
+      font-size: 4.5rem;
+      color: black;
+      text-align: center;
+    }
+
+    ion-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: black;
+    }
+
+    ion-item {
+      --background: #5497A7;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      max-width: 600px;
+
+      ion-input {
+        font-family: 'Inter', sans-serif;
+        color: black;
+      }
+
+    }
+
+    .InicioSesion {
+      background-color: #19323C;
+      border-radius: 50px;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .boton {
+      margin-top: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      --background: #19323C;
+      border-radius: 20px;
+    }
+
+    .switch-auth, .forgot-password {
+      font-family: 'Amatic SC', cursive;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: black;
+      text-align: center;
+
+      a {
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      p {
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: black;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .switch-auth::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 5%;
+    overflow-y: auto;
+    background-color: white;
+    flex-direction: column;
+
+    .auth-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .logo {
+        order: -1;
+      }
+
+      .form-container {
+        flex-grow: 1;
+        order: 1;
+      }
+    }
+
+    .logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      margin-top: 10%;
+    }
+
+    h1 {
+      font-family: 'Amatic SC', cursive;
+      font-weight: 700;
+      font-size: 3.5rem;
+      color: black;
+      text-align: center;
+    }
+
+    ion-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: black;
+    }
+
+    ion-item {
+      --background: #5497A7;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      max-width: 600px; /* Increase max-width for wider containers */
+
+      ion-input {
+        --color: #333;
+        font-family: 'Inter', sans-serif;
+        color: black;
+        height: 30px;
+        padding: 5px;
+      }
+    }
+
+    .InicioSesion {
+      background-color: #19323C;
+      border-radius: 50px;
+      width: 100%;
+      max-width: 300px; /* Center the button */
+      margin: 0 auto; /* Center the button */
+    }
+
+    .boton {
+      margin-top: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.99rem;
+      --background: #19323C;
+      border-radius: 20px;
+    }
+
+    .switch-auth, .forgot-password {
+      font-family: 'Amatic SC', cursive;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: black;
+      text-align: center;
+
+      a {
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      p {
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: black;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .switch-auth::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      margin-bottom: 10px;
+    }
+  }
+}
