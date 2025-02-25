@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {ComunService} from "./comun.service";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriasService {
 
-  // Aquí la URL base para la API
-  private apiUrl = 'http://localhost:8080/publicacion/perfil/actualizar-categorias'; // URL del backend
+private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private comunService: ComunService) {}
 
