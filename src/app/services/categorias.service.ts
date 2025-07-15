@@ -9,7 +9,7 @@ import {ComunService} from "./comun.service";
 export class CategoriasService {
 
   // Aquí la URL base para la API
-  private apiUrl = 'https://meetifyback.onrender.com/publicacion/perfil/actualizar-categorias'; // URL del backend
+  private apiUrl = 'http://localhost:4200/api/publicacion/perfil/actualizar-categorias'; // URL del backend
 
   constructor(private http: HttpClient, private comunService: ComunService) {}
 

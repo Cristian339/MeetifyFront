@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://meetifyback.onrender.com',
+  apiUrl: 'http://localhost:4200/api',
+  /*apiUrl: 'https://meetifyback.onrender.com',*/
   // apiUrl: 'http://localhost:3000/api', // Esto permite que las solicitudes pasen por el proxy
 };
 
