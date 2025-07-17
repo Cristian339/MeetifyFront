@@ -1,6 +1,17 @@
 @media (max-width: 600px) {
-
   /* Estilo del contenido principal */
+  ion-content {
+    --background: #f8fdfc;
+  }
+
+  .items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #f8fdfc;
+  }
 
   .admin-panel {
     display: flex;
@@ -18,13 +29,16 @@
   }
 
   .listas {
-    margin-top: 10%;
+    width: 100%;
+    margin-top: 5%;
     background-color: #f8fdfc;
   }
 
   ion-item {
-    border-radius: 20%;
+    border-radius: 10px;
     background-color: #f8fdfc;
+    margin-bottom: 5px;
+    width: 100%;
   }
 
   .icon {
@@ -35,7 +49,7 @@
 
   ion-label {
     font-family: 'Arial', sans-serif;
-    font-size: 70px;
+    font-size: 16px;
   }
 
   .logout {
@@ -51,40 +65,32 @@
   }
 
   .perfil {
-    font-size: 3em;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
   }
 
   .user-label {
     font-family: 'Inter', sans-serif;
-    font-size: 100%;
+    font-size: 14px;
     font-weight: 500;
     color: #000;
-    margin-right: 10%;
-  }
-
-  ion-item {
-    border-radius: 25%;
-    width: 100%;
-  }
-
-  .perfil {
-    width: 30px;
-    height: 30px;
-    border-radius: 80%;
-    margin-right: 10px;
-    object-fit: cover;
+    flex: 1;
   }
 
   .boton {
     display: flex;
     align-items: center;
-    border-radius: 50px;
   }
 
   ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
     font-family: 'Inter', sans-serif;
-    border-radius: 90%;
+    border-radius: 20px;
     color: white;
+    font-size: 12px;
+    height: 30px;
   }
 
   ion-button.baneo {
@@ -101,7 +107,7 @@
 
   h2 {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 20px;
     font-family: "Amatic SC", sans-serif;
     color: black;
     text-align: center;
@@ -123,14 +129,6 @@
     align-items: center;
   }
 
-  .perfil {
-    margin-right: 10px;
-  }
-
-  .user-label {
-    flex: 1;
-  }
-
   .tiempo-restante {
     font-size: medium;
     font-family: 'Amatic SC', sans-serif;
@@ -145,8 +143,10 @@
 }
 
 @media (min-width: 600px) {
-
   /* Estilo del contenido principal */
+  ion-content {
+    --background: #f8fdfc;
+  }
 
   .admin-panel {
     display: flex;
@@ -161,13 +161,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
     width: 100%;
-    border-radius: 20px;
     background-color: #f8fdfc;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
   }
 
   .list-admin{
@@ -196,21 +192,24 @@
   .perfil {
     width: 40px;
     height: 40px;
-    border-radius: 100%;
+    border-radius: 50%;
     margin-right: 10px;
+    object-fit: cover;
   }
 
   .user-label {
     flex: 1;
-    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
   }
 
   .listas {
     width: 80%;
     background-color: #f8fdfc;
     border-radius: 20px;
-    margin-bottom: 30%;
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .icon {
@@ -238,34 +237,23 @@
     text-align: center;
   }
 
-  .perfil {
-    font-size: 4em;
-  }
-
-  .user-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-    color: #000;
-    margin-right: 10%;
-  }
-
   ion-item {
-    border-radius: 25%;
+    border-radius: 10px;
     width: 100%;
+    margin-bottom: 10px;
+    background-color: #f8fdfc;
   }
 
   .boton {
     display: flex;
     align-items: center;
-    border-radius: 50px;
   }
 
   ion-button.baneo, ion-button.Ver, ion-button.Desbanear {
     font-family: 'Inter', sans-serif;
-    border-radius: 90%;
+    border-radius: 20px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
   }
 
   ion-button.baneo {
@@ -274,7 +262,6 @@
 
   ion-button.Ver {
     --background: #5497A7;
-    margin-right: 70px;
   }
 
   ion-button.Desbanear {
