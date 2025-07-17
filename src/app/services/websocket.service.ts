@@ -12,7 +12,7 @@ export class WebSocketService {
 
   constructor() {
     this.stompClient = new Client({
-      webSocketFactory: () => new SockJS('https://meetifyback.onrender.com/gs-guide-websocket'),
+      webSocketFactory: () => new SockJS('meetifyback-production.up.railway.app/gs-guide-websocket'),
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
